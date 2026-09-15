@@ -2188,6 +2188,129 @@ body:before{
 .customer-public-bio{margin-top:16px;color:#8e8999;font-size:8px;line-height:1.6}
 .customer-socials{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.customer-socials a{color:#ddd;text-decoration:none;padding:7px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.025);font-size:7px;font-weight:800}
 .customer-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.customer-detail{padding:11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025)}.customer-detail label{display:block;color:#625c69;font-size:6px;font-weight:900;letter-spacing:1px}.customer-detail span{display:block;margin-top:5px;color:#eee;font-size:8px;font-weight:800;word-break:break-word}
+
+/* =========================================================
+   EXTRA USER CONTROL + WEBSITE ANALYTICS
+   Existing admin/customer UI is intentionally preserved.
+========================================================= */
+.user-status{
+    display:inline-flex;
+    margin-top:5px;
+    padding:3px 7px;
+    border-radius:999px;
+    font-size:5px;
+    font-weight:900;
+    letter-spacing:.7px;
+}
+.user-status.active{
+    color:#86efac;
+    background:rgba(52,211,153,.08);
+    border:1px solid rgba(52,211,153,.18)
+}
+.user-status.banned{
+    color:#fb7185;
+    background:rgba(251,113,133,.08);
+    border:1px solid rgba(251,113,133,.18)
+}
+.customer-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:17px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+}
+.customer-action-btn{
+    height:38px;
+    padding:0 13px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:#fff;
+    font-size:7px;
+    font-weight:900;
+    cursor:pointer;
+}
+.customer-action-btn.ban{
+    color:#fb7185;
+    border-color:rgba(251,113,133,.3)
+}
+.customer-action-btn.unban{
+    color:#86efac;
+    border-color:rgba(52,211,153,.3)
+}
+.customer-action-btn:hover{
+    transform:translateY(-1px);
+    background:rgba(168,85,247,.08)
+}
+.analytics-panel{margin-top:16px}
+.analytics-toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px 17px;
+    border-bottom:1px solid var(--line)
+}
+.analytics-note{color:#625c69;font-size:6px}
+.analytics-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.5fr) minmax(250px,.8fr);
+    gap:16px;
+    padding:17px
+}
+.analytics-chart{
+    min-height:250px;
+    display:flex;
+    align-items:flex-end;
+    gap:9px;
+    padding:18px 8px 8px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:rgba(255,255,255,.018)
+}
+.analytics-bar-wrap{
+    flex:1;
+    min-width:0;
+    height:205px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    gap:7px
+}
+.analytics-bar{
+    width:min(34px,70%);
+    min-height:3px;
+    border-radius:7px 7px 2px 2px;
+    background:linear-gradient(180deg,#a855f7,#7c3aed);
+    box-shadow:0 0 18px rgba(168,85,247,.15)
+}
+.analytics-bar-label{color:#625c69;font-size:5px;white-space:nowrap}
+.analytics-bar-value{color:#c4b5fd;font-size:6px;font-weight:900}
+.analytics-list{display:grid;gap:8px}
+.analytics-list-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:10px 11px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:rgba(255,255,255,.02)
+}
+.analytics-list-row span:first-child{
+    color:#aaa1b3;
+    font-size:7px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+.analytics-list-row b{color:#e9d5ff;font-family:Orbitron;font-size:7px}
+@media(max-width:900px){
+    .analytics-grid{grid-template-columns:1fr}
+}
+
 .rank-admin-list{display:grid;gap:10px}.rank-admin-row{display:grid;grid-template-columns:minmax(120px,1fr) 100px minmax(160px,1.5fr) 58px;gap:8px;align-items:center;padding:11px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025)}
 .rank-admin-row input{width:100%;height:36px;padding:0 9px;border:1px solid var(--line);border-radius:8px;background:#0a0810;color:#fff;outline:none;font-size:8px}.rank-admin-row input:focus{border-color:#8b5cf6}.rank-save{height:36px;border-radius:8px;background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;font-size:7px;font-weight:900;cursor:pointer}.rank-save:disabled{opacity:.55}
 @media(max-width:850px){.user-row{grid-template-columns:48px 1fr 85px 65px}.user-bio{display:none}.user-points{text-align:left}}
@@ -2745,6 +2868,84 @@ body:before{
 
                     </div>
 
+                    <div class="stat">
+                        <div class="stat-label">REGISTERED USERS</div>
+                        <div class="stat-value" id="totalUsers">0</div>
+                        <div class="stat-sub">Customer accounts</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-label">TODAY PAGE VIEWS</div>
+                        <div class="stat-value" id="todayPageViews">0</div>
+                        <div class="stat-sub">Website traffic</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-label">7D UNIQUE VISITORS</div>
+                        <div class="stat-value" id="sevenDayVisitors">0</div>
+                        <div class="stat-sub">Unique sessions</div>
+                    </div>
+
+                </div>
+
+                <!-- WEBSITE ANALYTICS -->
+
+                <div class="panel analytics-panel">
+
+                    <div class="analytics-toolbar">
+                        <div>
+                            <div class="panel-title">
+                                WEBSITE ANALYTICS
+                            </div>
+                            <div class="analytics-note">
+                                7-day traffic • page views • unique sessions • top pages
+                            </div>
+                        </div>
+
+                        <button
+                            class="ghost-btn"
+                            type="button"
+                            onclick="loadAnalytics()"
+                        >
+                            ↻ REFRESH
+                        </button>
+                    </div>
+
+                    <div class="analytics-grid">
+
+                        <div>
+                            <div
+                                class="analytics-chart"
+                                id="analyticsChart"
+                            >
+                                <div style="width:100%;text-align:center;color:#625c69;font-size:8px">
+                                    Analytics setup required...
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+
+                            <div
+                                class="panel-title"
+                                style="margin:3px 0 10px"
+                            >
+                                TOP PAGES • 7 DAYS
+                            </div>
+
+                            <div
+                                class="analytics-list"
+                                id="topPagesList"
+                            >
+                                <div style="padding:20px;text-align:center;color:#625c69;font-size:8px">
+                                    No analytics data yet.
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
 
@@ -2995,6 +3196,10 @@ body:before{
                         <div class="detail-box">
                             <div class="detail-label">AMOUNT</div>
                             <div class="detail-value" id="detailPrice">-</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">PAYMENT ACCOUNT</div>
+                            <div class="detail-value" id="detailPaymentAccount">—</div>
                         </div>
                         <div class="detail-box full">
                             <div class="detail-label">PAYMENT SLIP</div>
@@ -4034,6 +4239,47 @@ body:before{
                 <label>PROFILE ID</label>
                 <span id="customerId">—</span>
             </div>
+
+            <div class="customer-detail">
+                <label>EMAIL</label>
+                <span id="customerEmail">—</span>
+            </div>
+
+            <div class="customer-detail">
+                <label>ACCOUNT STATUS</label>
+                <span id="customerStatus">ACTIVE</span>
+            </div>
+
+            <div class="customer-detail">
+                <label>ORDERS</label>
+                <span id="customerOrderCount">0</span>
+            </div>
+
+            <div class="customer-detail">
+                <label>TOTAL ORDER VALUE</label>
+                <span id="customerOrderValue">LKR 0</span>
+            </div>
+
+        </div>
+
+        <div class="customer-actions">
+
+            <button
+                class="customer-action-btn"
+                type="button"
+                onclick="refreshActiveCustomer()"
+            >
+                ↻ REFRESH
+            </button>
+
+            <button
+                class="customer-action-btn ban"
+                type="button"
+                id="customerBanBtn"
+                onclick="toggleCustomerBan()"
+            >
+                🚫 BAN USER
+            </button>
 
         </div>
 
@@ -5393,6 +5639,17 @@ async function loadStats(){
             }
         );
 
+    const u =
+        await supabaseClient
+        .from('profiles')
+        .select(
+            'id',
+            {
+                count:'exact',
+                head:true
+            }
+        );
+
 
     document
     .getElementById(
@@ -5424,6 +5681,18 @@ async function loadStats(){
     )
     .textContent =
         s.count ?? 0;
+
+    const totalUsersEl =
+        document.getElementById(
+            'totalUsers'
+        );
+
+    if(totalUsersEl){
+        totalUsersEl.textContent =
+            u.count ?? 0;
+    }
+
+    await loadAnalytics();
 
 }
 
@@ -5553,6 +5822,17 @@ function openOrderDetail(id){
         product;
     document.getElementById('detailPrice').textContent =
         order.price == null ? '-' : 'LKR ' + Number(order.price).toLocaleString();
+
+    const paymentAccountEl =
+        document.getElementById(
+            'detailPaymentAccount'
+        );
+
+    if(paymentAccountEl){
+        paymentAccountEl.textContent =
+            order.payment_account ||
+            '—';
+    }
 
     const img = document.getElementById('detailSlip');
     img.src = slip;
@@ -6018,10 +6298,12 @@ async function loadCustomerUsers(){
             id,
             username,
             full_name,
+            email,
             bio,
             avatar_url,
             points,
             badge,
+            is_banned,
             created_at,
             tiktok_username,
             facebook_url,
@@ -6182,6 +6464,10 @@ function renderCustomerUsers(){
                                 )}
                             </small>
 
+                            <span class="user-status ${member.is_banned ? 'banned' : 'active'}">
+                                ${member.is_banned ? 'BANNED' : 'ACTIVE'}
+                            </span>
+
                         </div>
 
 
@@ -6315,6 +6601,35 @@ function openCustomerModal(id){
     ).textContent =
         member.id || '—';
 
+    const emailEl = document.getElementById('customerEmail');
+    if(emailEl){
+        emailEl.textContent =
+            member.email ||
+            'Email not available';
+    }
+
+    const statusEl = document.getElementById('customerStatus');
+    if(statusEl){
+        statusEl.textContent =
+            member.is_banned ? 'BANNED' : 'ACTIVE';
+    }
+
+    const banBtn = document.getElementById('customerBanBtn');
+    if(banBtn){
+        banBtn.textContent =
+            member.is_banned ? '✓ UNBAN USER' : '🚫 BAN USER';
+        banBtn.className =
+            'customer-action-btn ' +
+            (member.is_banned ? 'unban' : 'ban');
+    }
+
+    const orderCountEl = document.getElementById('customerOrderCount');
+    const orderValueEl = document.getElementById('customerOrderValue');
+    if(orderCountEl) orderCountEl.textContent = 'Loading...';
+    if(orderValueEl) orderValueEl.textContent = 'Loading...';
+
+    loadCustomerOrderSummary(member.id);
+
 
     const socials =
         document.getElementById(
@@ -6409,6 +6724,473 @@ function closeCustomerModal(){
         )
         .classList
         .remove('show');
+
+}
+
+
+
+async function loadCustomerOrderSummary(userId){
+
+    const countEl =
+        document.getElementById(
+            'customerOrderCount'
+        );
+
+    const valueEl =
+        document.getElementById(
+            'customerOrderValue'
+        );
+
+    if(!countEl || !valueEl || !userId) return;
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from('orders')
+        .select(
+            'id,price,status,created_at'
+        )
+        .eq(
+            'user_id',
+            userId
+        )
+        .order(
+            'created_at',
+            {
+                ascending:false
+            }
+        )
+        .limit(500);
+
+    if(error){
+        countEl.textContent = '—';
+        valueEl.textContent = 'Unavailable';
+        return;
+    }
+
+    const rows = data || [];
+
+    const total =
+        rows.reduce(
+            (sum,row) =>
+                sum +
+                (Number(row.price) || 0),
+            0
+        );
+
+    countEl.textContent =
+        String(rows.length);
+
+    valueEl.textContent =
+        'LKR ' +
+        total.toLocaleString('en-LK');
+
+}
+
+
+async function toggleCustomerBan(){
+
+    const id =
+        document.getElementById(
+            'customerId'
+        )?.textContent;
+
+    if(!id || id === '—') return;
+
+    const member =
+        customerUsersCache.find(
+            x =>
+                String(x.id) ===
+                String(id)
+        );
+
+    if(!member) return;
+
+    const next =
+        !Boolean(
+            member.is_banned
+        );
+
+    const action =
+        next ? 'BAN' : 'UNBAN';
+
+    if(
+        !confirm(
+            `${action} this user?\n\n` +
+            `${member.full_name || member.username || id}`
+        )
+    ){
+        return;
+    }
+
+    const {
+        error
+    } =
+        await supabaseClient
+        .from('profiles')
+        .update({
+            is_banned: next,
+            banned_at:
+                next
+                ? new Date().toISOString()
+                : null
+        })
+        .eq(
+            'id',
+            member.id
+        );
+
+    if(error){
+
+        toast(
+            'User status update failed: ' +
+            error.message
+        );
+
+        return;
+    }
+
+    member.is_banned = next;
+
+    const statusEl =
+        document.getElementById(
+            'customerStatus'
+        );
+
+    if(statusEl){
+        statusEl.textContent =
+            next ? 'BANNED' : 'ACTIVE';
+    }
+
+    const banBtn =
+        document.getElementById(
+            'customerBanBtn'
+        );
+
+    if(banBtn){
+        banBtn.textContent =
+            next
+            ? '✓ UNBAN USER'
+            : '🚫 BAN USER';
+
+        banBtn.className =
+            'customer-action-btn ' +
+            (next ? 'unban' : 'ban');
+    }
+
+    toast(
+        next
+        ? 'User banned.'
+        : 'User unbanned.'
+    );
+
+    renderCustomerUsers();
+
+}
+
+
+async function refreshActiveCustomer(){
+
+    const id =
+        document.getElementById(
+            'customerId'
+        )?.textContent;
+
+    await loadCustomerUsers();
+
+    if(id && id !== '—'){
+        openCustomerModal(id);
+    }
+
+}
+
+
+async function loadAnalytics(){
+
+    const chart =
+        document.getElementById(
+            'analyticsChart'
+        );
+
+    const list =
+        document.getElementById(
+            'topPagesList'
+        );
+
+    if(!chart || !list) return;
+
+    const since =
+        new Date(
+            Date.now() -
+            7 * 24 * 60 * 60 * 1000
+        )
+        .toISOString();
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from('site_analytics')
+        .select(
+            'page_path,event_type,session_id,created_at'
+        )
+        .eq(
+            'event_type',
+            'page_view'
+        )
+        .gte(
+            'created_at',
+            since
+        )
+        .order(
+            'created_at',
+            {
+                ascending:true
+            }
+        )
+        .limit(10000);
+
+    if(error){
+
+        chart.innerHTML = `
+            <div style="width:100%;text-align:center;color:#fb7185;font-size:8px">
+                ANALYTICS DATABASE NOT READY
+                <br>
+                <small>
+                    Create the site_analytics table and tracker first.
+                </small>
+            </div>
+        `;
+
+        list.innerHTML = `
+            <div style="padding:20px;text-align:center;color:#fb7185;font-size:8px">
+                Analytics setup required.
+            </div>
+        `;
+
+        const todayEl =
+            document.getElementById(
+                'todayPageViews'
+            );
+
+        const uniqueEl =
+            document.getElementById(
+                'sevenDayVisitors'
+            );
+
+        if(todayEl) todayEl.textContent = '0';
+        if(uniqueEl) uniqueEl.textContent = '0';
+
+        return;
+    }
+
+    const rows =
+        data || [];
+
+    const days = [];
+    const dayMap = {};
+
+    for(
+        let i = 6;
+        i >= 0;
+        i--
+    ){
+
+        const d =
+            new Date(
+                Date.now() -
+                i * 24 * 60 * 60 * 1000
+            );
+
+        const key =
+            d.toISOString()
+            .slice(
+                0,
+                10
+            );
+
+        days.push({
+            key:key,
+            label:d.toLocaleDateString(
+                'en-LK',
+                {
+                    weekday:'short'
+                }
+            )
+        });
+
+        dayMap[key] = 0;
+    }
+
+    const pages = {};
+
+    rows.forEach(
+        row => {
+
+            const key =
+                new Date(
+                    row.created_at
+                )
+                .toISOString()
+                .slice(
+                    0,
+                    10
+                );
+
+            if(
+                dayMap[key] !== undefined
+            ){
+                dayMap[key]++;
+            }
+
+            const page =
+                row.page_path ||
+                '/';
+
+            pages[page] =
+                (pages[page] || 0) +
+                1;
+
+        }
+    );
+
+    const max =
+        Math.max(
+            1,
+            ...days.map(
+                d =>
+                    dayMap[d.key]
+            )
+        );
+
+    chart.innerHTML =
+        days.map(
+            d => {
+
+                const value =
+                    dayMap[d.key];
+
+                const height =
+                    Math.max(
+                        3,
+                        Math.round(
+                            (
+                                value /
+                                max
+                            ) *
+                            180
+                        )
+                    );
+
+                return `
+                    <div class="analytics-bar-wrap">
+                        <div class="analytics-bar-value">
+                            ${value}
+                        </div>
+                        <div
+                            class="analytics-bar"
+                            style="height:${height}px"
+                        ></div>
+                        <div class="analytics-bar-label">
+                            ${d.label}
+                        </div>
+                    </div>
+                `;
+
+            }
+        )
+        .join('');
+
+    const topPages =
+        Object.entries(
+            pages
+        )
+        .sort(
+            (a,b) =>
+                b[1] - a[1]
+        )
+        .slice(
+            0,
+            8
+        );
+
+    list.innerHTML =
+        topPages.length
+        ?
+        topPages.map(
+            ([page,count]) => `
+                <div class="analytics-list-row">
+                    <span>
+                        ${esc(page)}
+                    </span>
+                    <b>
+                        ${count}
+                    </b>
+                </div>
+            `
+        ).join('')
+        :
+        `
+            <div style="padding:20px;text-align:center;color:#625c69;font-size:8px">
+                No page views yet.
+            </div>
+        `;
+
+    const todayKey =
+        new Date()
+        .toISOString()
+        .slice(
+            0,
+            10
+        );
+
+    const todayViews =
+        rows.filter(
+            row =>
+                new Date(
+                    row.created_at
+                )
+                .toISOString()
+                .slice(
+                    0,
+                    10
+                ) ===
+                todayKey
+        )
+        .length;
+
+    const uniqueVisitors =
+        new Set(
+            rows
+            .map(
+                row =>
+                    row.session_id
+            )
+            .filter(Boolean)
+        ).size;
+
+    const todayEl =
+        document.getElementById(
+            'todayPageViews'
+        );
+
+    const uniqueEl =
+        document.getElementById(
+            'sevenDayVisitors'
+        );
+
+    if(todayEl){
+        todayEl.textContent =
+            todayViews;
+    }
+
+    if(uniqueEl){
+        uniqueEl.textContent =
+            uniqueVisitors;
+    }
 
 }
 
