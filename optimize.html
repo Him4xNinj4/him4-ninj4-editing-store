@@ -1059,26 +1059,36 @@ footer{
             </h2>
 
 
-            <div class="bank-box">
+            <label class="input-label">
+                SELECT PAYMENT ACCOUNT
+            </label>
+
+            <select id="paymentAccount" onchange="updateBankDetails()">
+                <option value="">-- Select Payment Account --</option>
+                <option value="ninj4">NINJ4 — Commercial Bank</option>
+                <option value="him4">HIM4 — Bank of Ceylon (BOC)</option>
+            </select>
+
+            <div class="bank-box" id="bankDetails" style="display:none;">
 
                 <div>
                     Bank :
-                    <span>Commercial Bank</span>
+                    <span id="bankName">---</span>
                 </div>
 
                 <div>
                     Account Name :
-                    <span>K.A.S.KARUNARATHNA</span>
+                    <span id="bankAccountName">---</span>
                 </div>
 
                 <div>
                     Account Number :
-                    <span>8031209744</span>
+                    <span id="bankAccountNumber">---</span>
                 </div>
 
                 <div>
                     Branch :
-                    <span>Katubedda branch</span>
+                    <span id="bankBranch">---</span>
                 </div>
 
             </div>
@@ -1273,6 +1283,18 @@ footer{
         <div class="receipt-row">
 
             <span class="label">
+                PAYMENT ACCOUNT
+            </span>
+
+            <span class="value" id="receiptPaymentAccount">
+                ---
+            </span>
+
+        </div>
+
+        <div class="receipt-row">
+
+            <span class="label">
                 PAYMENT
             </span>
 
@@ -1430,6 +1452,53 @@ const prices = {
     }
 
 };
+
+
+/* =========================
+   PAYMENT ACCOUNT
+========================= */
+
+const bankAccounts = {
+    ninj4: {
+        label: "NINJ4 — Commercial Bank",
+        bank: "Commercial Bank",
+        name: "K.A.S.KARUNARATHNA",
+        number: "8031209744",
+        branch: "Katubedda branch"
+    },
+    him4: {
+        label: "HIM4 — Bank of Ceylon (BOC)",
+        bank: "Bank of Ceylon (BOC)",
+        name: "SMCI RANJITH",
+        number: "96553543",
+        branch: "Hatton"
+    }
+};
+
+function updateBankDetails(){
+
+    const selected =
+        document.getElementById("paymentAccount").value;
+
+    const box =
+        document.getElementById("bankDetails");
+
+    if(!selected || !bankAccounts[selected]){
+
+        box.style.display = "none";
+        return;
+
+    }
+
+    const account = bankAccounts[selected];
+
+    document.getElementById("bankName").innerText = account.bank;
+    document.getElementById("bankAccountName").innerText = account.name;
+    document.getElementById("bankAccountNumber").innerText = account.number;
+    document.getElementById("bankBranch").innerText = account.branch;
+
+    box.style.display = "block";
+}
 
 
 /* =========================
@@ -1651,6 +1720,9 @@ function submitOrder(){
             "slip"
         ).files.length;
 
+    const paymentAccount =
+        document.getElementById("paymentAccount").value;
+
 
     if(name === ""){
 
@@ -1678,6 +1750,17 @@ function submitOrder(){
 
         alert(
             "Please enter your email address."
+        );
+
+        return;
+
+    }
+
+
+    if(paymentAccount === ""){
+
+        alert(
+            "Please select the payment account you paid to."
         );
 
         return;
@@ -1759,6 +1842,16 @@ function submitOrder(){
         "receiptEmail"
     ).innerText = email;
 
+    const paymentAccountText =
+        document.getElementById("paymentAccount")
+        .options[
+            document.getElementById("paymentAccount").selectedIndex
+        ].text;
+
+    document.getElementById(
+        "receiptPaymentAccount"
+    ).innerText = paymentAccountText;
+
 
     /* SAVE ORDER */
 
@@ -1776,7 +1869,9 @@ function submitOrder(){
 
         whatsapp:whatsapp,
 
-        email:email
+        email:email,
+
+        paymentAccount:paymentAccountText
 
     };
 
@@ -1881,6 +1976,11 @@ function sendWhatsApp(){
 
         "Email : " +
         o.email +
+
+        "\n" +
+
+        "Payment Account : " +
+        o.paymentAccount +
 
         "\n\n" +
 
