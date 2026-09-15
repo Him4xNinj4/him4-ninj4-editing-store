@@ -150,12 +150,12 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 .form-group label{
     display:block;color:#888;font-size:9px;font-weight:bold;letter-spacing:1px;margin-bottom:6px
 }
-.form-group input,.form-group textarea{
+.form-group input,.form-group textarea,.form-group select{
     width:100%;border:1px solid #262626;outline:none;background:#111;color:#fff;
     border-radius:8px;padding:11px 12px;font-size:11px
 }
 .form-group textarea{min-height:75px;resize:vertical}
-.form-group input:focus,.form-group textarea:focus{border-color:#00ff88;box-shadow:0 0 0 3px rgba(0,255,136,.06)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#00ff88;box-shadow:0 0 0 3px rgba(0,255,136,.06)}
 .bank-box{
     margin:18px 0;padding:16px;border:1px solid rgba(0,255,136,.18);
     background:rgba(0,255,136,.035);border-radius:9px
@@ -320,12 +320,21 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
                 After verification, the actual purchased file will be delivered manually through WhatsApp.
             </div>
 
-            <div class="bank-box">
+            <div class="form-group">
+                <label>SELECT PAYMENT ACCOUNT</label>
+                <select id="paymentAccount" required onchange="updateBankDetails()">
+                    <option value="">-- Select Payment Account --</option>
+                    <option value="ninj4">NINJ4 — Commercial Bank</option>
+                    <option value="him4">HIM4 — Bank of Ceylon (BOC)</option>
+                </select>
+            </div>
+
+            <div class="bank-box" id="bankDetails" style="display:none;">
                 <div class="bank-title">BANK PAYMENT DETAILS</div>
-                <div class="bank-row"><span>Bank</span><span>Commercial Bank</span></div>
-                <div class="bank-row"><span>Account Name</span><span>K.A.S. KARUNARATHNA</span></div>
-                <div class="bank-row"><span>Account Number</span><span>8031209744</span></div>
-                <div class="bank-row"><span>Branch</span><span>Katubedda</span></div>
+                <div class="bank-row"><span>Bank</span><span id="bankName">---</span></div>
+                <div class="bank-row"><span>Account Name</span><span id="bankAccountName">---</span></div>
+                <div class="bank-row"><span>Account Number</span><span id="bankAccountNumber">---</span></div>
+                <div class="bank-row"><span>Branch</span><span id="bankBranch">---</span></div>
             </div>
 
             <form id="orderForm">
@@ -376,6 +385,7 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
             <div class="receipt-details">
                 <div class="detail-row"><span>Product</span><span id="receiptProduct">—</span></div>
                 <div class="detail-row"><span>Amount</span><span id="receiptPrice">—</span></div>
+                <div class="detail-row"><span>Payment Account</span><span id="receiptPaymentAccount">—</span></div>
                 <div class="detail-row"><span>Status</span><span style="color:#ffaa00">PENDING</span></div>
             </div>
 
@@ -447,6 +457,46 @@ const catalog = document.getElementById('catalog');
 const orderModal = document.getElementById('orderModal');
 const receiptModal = document.getElementById('receiptModal');
 const paymentSlip = document.getElementById('paymentSlip');
+
+const bankAccounts = {
+    ninj4: {
+        label: 'NINJ4 — Commercial Bank',
+        bank: 'Commercial Bank',
+        name: 'K.A.S. KARUNARATHNA',
+        number: '8031209744',
+        branch: 'Katubedda'
+    },
+    him4: {
+        label: 'HIM4 — Bank of Ceylon (BOC)',
+        bank: 'Bank of Ceylon (BOC)',
+        name: 'SMCI RANJITH',
+        number: '96553543',
+        branch: 'Hatton'
+    }
+};
+
+function updateBankDetails(){
+    const selected = document.getElementById('paymentAccount')?.value;
+    const box = document.getElementById('bankDetails');
+
+    if(!selected || !bankAccounts[selected]){
+        if(box) box.style.display = 'none';
+        return;
+    }
+
+    const account = bankAccounts[selected];
+    document.getElementById('bankName').textContent = account.bank;
+    document.getElementById('bankAccountName').textContent = account.name;
+    document.getElementById('bankAccountNumber').textContent = account.number;
+    document.getElementById('bankBranch').textContent = account.branch;
+
+    if(box) box.style.display = 'block';
+}
+
+function getSelectedPaymentAccount(){
+    const select = document.getElementById('paymentAccount');
+    return select?.value && bankAccounts[select.value] ? bankAccounts[select.value] : null;
+}
 
 function money(value){
     return 'Rs. ' + Number(value || 0).toLocaleString('en-LK');
@@ -546,6 +596,7 @@ function openOrder(id){
     document.getElementById('orderError').textContent = '';
     document.getElementById('orderForm').reset();
     document.getElementById('fileName').textContent = '';
+    updateBankDetails();
     orderModal.classList.add('show');
     document.body.style.overflow = 'hidden';
 }
@@ -604,9 +655,15 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
     const name = document.getElementById('customerName').value.trim();
     const whatsapp = document.getElementById('customerWhatsapp').value.trim();
     const email = document.getElementById('customerEmail').value.trim();
+    const paymentAccount = getSelectedPaymentAccount();
     const file = paymentSlip.files[0];
     const errorBox = document.getElementById('orderError');
     const btn = document.getElementById('submitOrderBtn');
+
+    if(!paymentAccount){
+        errorBox.textContent = 'Please select the payment account you paid to.';
+        return;
+    }
 
     if(!file){
         errorBox.textContent = 'Please upload your payment slip.';
@@ -647,6 +704,7 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
                 plan: 'ONE-TIME',
                 price: Number(selectedProduct.price || 0),
                 payment_slip_url: slipUrl,
+                payment_account: paymentAccount.label,
                 status: 'pending'
             });
 
@@ -658,6 +716,7 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
         document.getElementById('receiptOrderId').textContent = orderId;
         document.getElementById('receiptProduct').textContent = productName;
         document.getElementById('receiptPrice').textContent = productPrice;
+        document.getElementById('receiptPaymentAccount').textContent = paymentAccount.label;
 
         const message =
             `Hello HIM4 x NINJ4,%0A%0A` +
@@ -665,6 +724,7 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
             `Order ID: ${encodeURIComponent(orderId)}%0A` +
             `Product: ${encodeURIComponent(productName)}%0A` +
             `Amount: ${encodeURIComponent(productPrice)}%0A` +
+            `Payment Account: ${encodeURIComponent(paymentAccount.label)}%0A` +
             `Name: ${encodeURIComponent(name)}%0A` +
             `WhatsApp: ${encodeURIComponent(whatsapp)}%0A%0A` +
             `Please verify my payment.`;

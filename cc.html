@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Premium CC | HIM4 x NINJ4</title>
+<title>Premium Shakes | HIM4 x NINJ4</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -150,12 +150,12 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 .form-group label{
     display:block;color:#888;font-size:9px;font-weight:bold;letter-spacing:1px;margin-bottom:6px
 }
-.form-group input,.form-group textarea{
+.form-group input,.form-group textarea,.form-group select{
     width:100%;border:1px solid #262626;outline:none;background:#111;color:#fff;
     border-radius:8px;padding:11px 12px;font-size:11px
 }
 .form-group textarea{min-height:75px;resize:vertical}
-.form-group input:focus,.form-group textarea:focus{border-color:#00ff88;box-shadow:0 0 0 3px rgba(0,255,136,.06)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#00ff88;box-shadow:0 0 0 3px rgba(0,255,136,.06)}
 .bank-box{
     margin:18px 0;padding:16px;border:1px solid rgba(0,255,136,.18);
     background:rgba(0,255,136,.035);border-radius:9px
@@ -214,43 +214,31 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
     .modal{padding:10px}.modal-card{max-height:96vh}
 }
 
-/* LOGIN PROTECTION */
-.login-guard{
-    position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
-    padding:20px;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);
-}
+/* LOGIN ACCESS GUARD */
+.login-guard{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.88);backdrop-filter:blur(10px)}
 .login-guard.hidden{display:none}
-.login-guard-card{
-    width:min(430px,100%);padding:30px 24px;text-align:center;
-    background:#0b0b0b;border:1px solid #00ff88;border-radius:14px;
-    box-shadow:0 0 45px rgba(0,255,136,.12);
-}
-.login-guard-icon{font-size:38px;margin-bottom:14px}
-.login-guard-card h2{font-size:20px;letter-spacing:1px;margin-bottom:12px}
-.login-guard-card h2 span{color:#00ff88}
+.login-guard-card{width:min(460px,100%);background:#0b0b0b;border:1px solid #2a2a2a;border-radius:14px;padding:30px 24px;text-align:center;box-shadow:0 30px 100px rgba(0,0,0,.8)}
+.login-guard-icon{font-size:42px;margin-bottom:14px}
+.login-guard-card h2{font-size:20px;letter-spacing:1px;margin-bottom:12px}.login-guard-card h2 span{color:#00ff88}
 .login-guard-card p{color:#777;font-size:11px;line-height:1.8;margin-bottom:22px}
-.login-guard-btn{
-    display:block;width:100%;padding:13px;text-decoration:none;
-    background:#00ff88;color:#000;font-size:10px;font-weight:bold;letter-spacing:1px;
-}
-.login-guard-back{
-    display:block;margin-top:9px;width:100%;padding:12px;text-decoration:none;
-    border:1px solid #292929;background:#111;color:#aaa;font-size:10px;
-}
-
+.login-guard-btn{display:block;width:100%;padding:13px;border:1px solid #00ff88;background:#00ff88;color:#000;text-decoration:none;font-weight:bold;font-size:10px;letter-spacing:1px}
+.login-guard-btn:hover{box-shadow:0 0 25px rgba(0,255,136,.2)}
+.login-guard-back{display:block;margin-top:10px;padding:12px;border:1px solid #292929;color:#aaa;text-decoration:none;font-size:10px}
 </style>
 </head>
 
 <body>
-
 <!-- LOGIN REQUIRED GUARD -->
 <div class="login-guard" id="loginGuard">
     <div class="login-guard-card">
         <div class="login-guard-icon">🔐</div>
         <h2>LOGIN <span>REQUIRED</span></h2>
-        <p>You must be logged in to access Premium CC resources.<br>If you don't have an account, create one first and then login.</p>
-        <a class="login-guard-btn" href="auth.html">LOGIN / CREATE ACCOUNT</a>
-        <a class="login-guard-back" href="editing.html">← BACK TO EDITING RESOURCES</a>
+        <p>
+            You must be logged in to access Premium Shakes.<br>
+            If you don't have an account, create one first and then login.
+        </p>
+        <a href="auth.html" class="login-guard-btn">LOGIN / CREATE ACCOUNT</a>
+        <a href="editing.html" class="login-guard-back">← BACK TO EDITING RESOURCES</a>
     </div>
 </div>
 
@@ -267,17 +255,17 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 
 <header class="topbar">
     <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-    <div class="title"><span>him4@ninj4</span>:/premium-cc$</div>
+    <div class="title"><span>him4@ninj4</span>:/premium-shakes$</div>
 </header>
 
 <main class="container">
 
 <section class="header">
-    <div class="command">&gt; cd /editing-resources/premium-cc</div>
-    <h1>PREMIUM <span>CC</span></h1>
+    <div class="command">&gt; cd /editing-resources/premium-shakes</div>
+    <h1>PREMIUM <span>SHAKES</span></h1>
     <p class="description">
-        High-quality color correction presets for Free Fire edits, cinematic videos, beat syncs and gaming content.
-        Watch the preview, choose your resource and place your order.
+        High-quality shake previews for Free Fire edits, velocity edits, beat syncs and cinematic gaming videos.
+        Watch the preview, choose your shake and place your order.
     </p>
 </section>
 
@@ -286,14 +274,14 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 <section id="catalog" class="catalog">
     <div class="loading" style="grid-column:1/-1">
         <div class="spin"></div>
-        LOADING PREMIUM CC...
+        LOADING PREMIUM SHAKES...
     </div>
 </section>
 
 <section class="terminal">
-    <div class="terminal-head">HIM4 x NINJ4 // PREMIUM CC DATABASE</div>
+    <div class="terminal-head">HIM4 x NINJ4 // SHAKE DATABASE</div>
     <div class="terminal-body">
-        <div><span class="green-text">root@him4-ninj4</span>:~$ open premium-cc</div>
+        <div><span class="green-text">root@him4-ninj4</span>:~$ open shakes</div>
         <div><span class="green-text">[OK]</span> Preview database connected</div>
         <div><span class="green-text">[INFO]</span> Orders are verified manually after payment</div>
         <div><span class="green-text">[INFO]</span> Purchased files are delivered through WhatsApp</div>
@@ -305,7 +293,7 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 
 <footer>
     <div class="footer-name">HIM4 x NINJ4</div>
-    <p>PREMIUM CC // EDITING RESOURCES</p>
+    <p>PREMIUM SHAKES // EDITING RESOURCES</p>
     <p style="margin-top:10px;">© 2026 HIM4 x NINJ4</p>
 </footer>
 
@@ -313,7 +301,7 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 <div class="modal" id="orderModal">
     <div class="modal-card">
         <div class="modal-head">
-            <h3>PLACE ORDER // CC</h3>
+            <h3>PLACE ORDER // SHAKE</h3>
             <button class="modal-close" onclick="closeOrder()">✕</button>
         </div>
 
@@ -321,7 +309,7 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
             <div class="selected">
                 <img id="selectedThumb" class="selected-thumb" src="" alt="">
                 <div>
-                    <div id="selectedName" class="selected-name">Premium Resource</div>
+                    <div id="selectedName" class="selected-name">Premium Shake</div>
                     <div id="selectedPrice" class="selected-price">Rs. 0</div>
                 </div>
             </div>
@@ -332,12 +320,21 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
                 After verification, the actual purchased file will be delivered manually through WhatsApp.
             </div>
 
-            <div class="bank-box">
+            <div class="form-group">
+                <label>SELECT PAYMENT ACCOUNT</label>
+                <select id="paymentAccount" required onchange="updateBankDetails()">
+                    <option value="">-- Select Payment Account --</option>
+                    <option value="ninj4">NINJ4 — Commercial Bank</option>
+                    <option value="him4">HIM4 — Bank of Ceylon (BOC)</option>
+                </select>
+            </div>
+
+            <div class="bank-box" id="bankDetails" style="display:none;">
                 <div class="bank-title">BANK PAYMENT DETAILS</div>
-                <div class="bank-row"><span>Bank</span><span>Commercial Bank</span></div>
-                <div class="bank-row"><span>Account Name</span><span>K.A.S. KARUNARATHNA</span></div>
-                <div class="bank-row"><span>Account Number</span><span>8031209744</span></div>
-                <div class="bank-row"><span>Branch</span><span>Katubedda</span></div>
+                <div class="bank-row"><span>Bank</span><span id="bankName">---</span></div>
+                <div class="bank-row"><span>Account Name</span><span id="bankAccountName">---</span></div>
+                <div class="bank-row"><span>Account Number</span><span id="bankAccountNumber">---</span></div>
+                <div class="bank-row"><span>Branch</span><span id="bankBranch">---</span></div>
             </div>
 
             <form id="orderForm">
@@ -388,6 +385,7 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
             <div class="receipt-details">
                 <div class="detail-row"><span>Product</span><span id="receiptProduct">—</span></div>
                 <div class="detail-row"><span>Amount</span><span id="receiptPrice">—</span></div>
+                <div class="detail-row"><span>Payment Account</span><span id="receiptPaymentAccount">—</span></div>
                 <div class="detail-row"><span>Status</span><span style="color:#ffaa00">PENDING</span></div>
             </div>
 
@@ -404,6 +402,50 @@ const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+(function(){
+    const guard = document.getElementById('loginGuard');
+    if(!guard) return;
+
+    function showGuard(){
+        document.querySelectorAll('body > *:not(#loginGuard)').forEach(el => el.style.display='none');
+        guard.classList.remove('hidden');
+        document.body.style.overflow='hidden';
+    }
+
+    function hideGuard(){
+        guard.classList.add('hidden');
+        document.querySelectorAll('body > *:not(#loginGuard)').forEach(el => el.style.display='');
+        document.body.style.overflow='';
+    }
+
+    async function checkAccess(){
+        try{
+            const { data, error } = await supabaseClient.auth.getSession();
+
+            if(error || !data?.session){
+                showGuard();
+                return;
+            }
+
+            hideGuard();
+        }catch(err){
+            console.error('Login guard error:', err);
+            showGuard();
+        }
+    }
+
+    checkAccess();
+
+    supabaseClient.auth.onAuthStateChange((_event, session) => {
+        if(session){
+            hideGuard();
+        }else{
+            showGuard();
+        }
+    });
+})();
+
+
 const WHATSAPP_NUMBER = '94761024243';
 const PREVIEW_BUCKET = 'previews';
 const PAYMENT_BUCKET = 'payment-slips';
@@ -415,6 +457,46 @@ const catalog = document.getElementById('catalog');
 const orderModal = document.getElementById('orderModal');
 const receiptModal = document.getElementById('receiptModal');
 const paymentSlip = document.getElementById('paymentSlip');
+
+const bankAccounts = {
+    ninj4: {
+        label: 'NINJ4 — Commercial Bank',
+        bank: 'Commercial Bank',
+        name: 'K.A.S. KARUNARATHNA',
+        number: '8031209744',
+        branch: 'Katubedda'
+    },
+    him4: {
+        label: 'HIM4 — Bank of Ceylon (BOC)',
+        bank: 'Bank of Ceylon (BOC)',
+        name: 'SMCI RANJITH',
+        number: '96553543',
+        branch: 'Hatton'
+    }
+};
+
+function updateBankDetails(){
+    const selected = document.getElementById('paymentAccount')?.value;
+    const box = document.getElementById('bankDetails');
+
+    if(!selected || !bankAccounts[selected]){
+        if(box) box.style.display = 'none';
+        return;
+    }
+
+    const account = bankAccounts[selected];
+    document.getElementById('bankName').textContent = account.bank;
+    document.getElementById('bankAccountName').textContent = account.name;
+    document.getElementById('bankAccountNumber').textContent = account.number;
+    document.getElementById('bankBranch').textContent = account.branch;
+
+    if(box) box.style.display = 'block';
+}
+
+function getSelectedPaymentAccount(){
+    const select = document.getElementById('paymentAccount');
+    return select?.value && bankAccounts[select.value] ? bankAccounts[select.value] : null;
+}
 
 function money(value){
     return 'Rs. ' + Number(value || 0).toLocaleString('en-LK');
@@ -434,13 +516,13 @@ async function loadProducts(){
     catalog.innerHTML = `
         <div class="loading" style="grid-column:1/-1">
             <div class="spin"></div>
-            LOADING PREMIUM CC...
+            LOADING PREMIUM SHAKES...
         </div>`;
 
     const { data, error } = await supabaseClient
         .from('products')
         .select('id,name,category,description,price,thumbnail_url,preview_url,is_active')
-        .eq('category','Premium CC')
+        .eq('category','Premium Shakes')
         .eq('is_active',true)
         .order('created_at',{ascending:false});
 
@@ -449,7 +531,7 @@ async function loadProducts(){
         catalog.innerHTML = `
             <div class="empty">
                 <div class="empty-icon">⚠️</div>
-                <h2>PREMIUM CC DATABASE ERROR</h2>
+                <h2>SHAKE DATABASE ERROR</h2>
                 <p>Unable to load products right now. Please try again later.</p>
             </div>`;
         return;
@@ -464,8 +546,8 @@ function renderProducts(){
         catalog.innerHTML = `
             <div class="empty">
                 <div class="empty-icon">⚡</div>
-                <h2>NO PREMIUM CC AVAILABLE</h2>
-                <p>Premium CC resources will appear here when they are published.</p>
+                <h2>NO SHAKES AVAILABLE</h2>
+                <p>Premium Shake resources will appear here when they are published.</p>
             </div>`;
         return;
     }
@@ -488,9 +570,9 @@ function renderProducts(){
                 <div class="preview-tag">▶ PREVIEW</div>
             </div>
             <div class="product-body">
-                <div class="product-cat">${escapeHtml(product.category || 'PREMIUM CC')}</div>
+                <div class="product-cat">${escapeHtml(product.category || 'PREMIUM SHAKES')}</div>
                 <h2>${escapeHtml(product.name)}</h2>
-                <p class="product-desc">${escapeHtml(product.description || 'High-quality color correction presets for Free Fire edits, cinematic videos, beat syncs and gaming content.')}</p>
+                <p class="product-desc">${escapeHtml(product.description || 'Premium shake resource for Free Fire editing.')}</p>
                 <div class="product-foot">
                     <div class="price">${money(product.price)} <small>ONLY</small></div>
                     <button class="order-btn" onclick="openOrder(${Number(product.id)})">ORDER NOW</button>
@@ -514,6 +596,7 @@ function openOrder(id){
     document.getElementById('orderError').textContent = '';
     document.getElementById('orderForm').reset();
     document.getElementById('fileName').textContent = '';
+    updateBankDetails();
     orderModal.classList.add('show');
     document.body.style.overflow = 'hidden';
 }
@@ -572,9 +655,15 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
     const name = document.getElementById('customerName').value.trim();
     const whatsapp = document.getElementById('customerWhatsapp').value.trim();
     const email = document.getElementById('customerEmail').value.trim();
+    const paymentAccount = getSelectedPaymentAccount();
     const file = paymentSlip.files[0];
     const errorBox = document.getElementById('orderError');
     const btn = document.getElementById('submitOrderBtn');
+
+    if(!paymentAccount){
+        errorBox.textContent = 'Please select the payment account you paid to.';
+        return;
+    }
 
     if(!file){
         errorBox.textContent = 'Please upload your payment slip.';
@@ -583,6 +672,13 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
 
     if(file.size > 10 * 1024 * 1024){
         errorBox.textContent = 'Payment slip must be smaller than 10MB.';
+        return;
+    }
+
+    const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
+
+    if(authError || !user){
+        errorBox.textContent = 'Please login to your account before placing an order.';
         return;
     }
 
@@ -599,6 +695,7 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
             .from('orders')
             .insert({
                 order_id: orderId,
+                user_id: user.id,
                 customer_name: name,
                 whatsapp: whatsapp,
                 email: email,
@@ -607,6 +704,7 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
                 plan: 'ONE-TIME',
                 price: Number(selectedProduct.price || 0),
                 payment_slip_url: slipUrl,
+                payment_account: paymentAccount.label,
                 status: 'pending'
             });
 
@@ -618,6 +716,7 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
         document.getElementById('receiptOrderId').textContent = orderId;
         document.getElementById('receiptProduct').textContent = productName;
         document.getElementById('receiptPrice').textContent = productPrice;
+        document.getElementById('receiptPaymentAccount').textContent = paymentAccount.label;
 
         const message =
             `Hello HIM4 x NINJ4,%0A%0A` +
@@ -625,6 +724,7 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
             `Order ID: ${encodeURIComponent(orderId)}%0A` +
             `Product: ${encodeURIComponent(productName)}%0A` +
             `Amount: ${encodeURIComponent(productPrice)}%0A` +
+            `Payment Account: ${encodeURIComponent(paymentAccount.label)}%0A` +
             `Name: ${encodeURIComponent(name)}%0A` +
             `WhatsApp: ${encodeURIComponent(whatsapp)}%0A%0A` +
             `Please verify my payment.`;
@@ -655,39 +755,6 @@ receiptModal.addEventListener('click', e => {
 });
 
 loadProducts();
-</script>
-
-
-<script>
-(function(){
-    const guard = document.getElementById('loginGuard');
-    if(!guard) return;
-    const protectedNodes = Array.from(document.body.children).filter(el => el.id !== 'loginGuard');
-    protectedNodes.forEach(el => el.style.visibility = 'hidden');
-    document.body.style.overflow = 'hidden';
-
-    async function checkLogin(){
-        try{
-            const { data, error } = await supabaseClient.auth.getSession();
-            if(error) throw error;
-            if(data && data.session){
-                guard.classList.add('hidden');
-                protectedNodes.forEach(el => el.style.visibility = '');
-                document.body.style.overflow = '';
-            }
-        }catch(err){
-            console.error('Login guard error:', err);
-        }
-    }
-    checkLogin();
-    supabaseClient.auth.onAuthStateChange((_event, session) => {
-        if(session){
-            guard.classList.add('hidden');
-            protectedNodes.forEach(el => el.style.visibility = '');
-            document.body.style.overflow = '';
-        }
-    });
-})();
 </script>
 
 </body>
