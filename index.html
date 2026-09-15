@@ -2080,5 +2080,106 @@ document.addEventListener('DOMContentLoaded', function(){
 @media(max-width:450px){.access-box{padding:28px 18px}.access-box h2{font-size:21px}.access-box p{font-size:13px}}
 </style>
 
+
+
+
+<!-- ================= WEBSITE ANALYTICS TRACKER ================= -->
+<script>
+(function(){
+    /*
+      HIM4 × NINJ4 lightweight analytics
+      Records one page_view per page load.
+      Uses a random session ID stored in sessionStorage,
+      so the same browser tab is counted as one visitor/session.
+    */
+
+    const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+
+    function getSessionId(){
+        const key = 'him4_ninj4_analytics_session';
+
+        let id = sessionStorage.getItem(key);
+
+        if(!id){
+            id =
+                (crypto.randomUUID
+                    ? crypto.randomUUID()
+                    : 's-' +
+                      Date.now() +
+                      '-' +
+                      Math.random().toString(36).slice(2)
+                );
+
+            sessionStorage.setItem(key,id);
+        }
+
+        return id;
+    }
+
+    async function trackPageView(){
+
+        try{
+
+            const client =
+                window.supabase.createClient(
+                    SUPABASE_URL,
+                    SUPABASE_KEY
+                );
+
+            const {
+                data:{
+                    session
+                }
+            } =
+                await client.auth.getSession();
+
+            await client
+                .from('site_analytics')
+                .insert({
+                    page_path:
+                        window.location.pathname.split('/').pop() ||
+                        'index.html',
+
+                    event_type:
+                        'page_view',
+
+                    session_id:
+                        getSessionId(),
+
+                    user_id:
+                        session?.user?.id || null,
+
+                    referrer:
+                        document.referrer || null
+                });
+
+        }catch(error){
+
+            // Analytics must never break the website.
+            console.warn(
+                'Analytics tracking failed:',
+                error
+            );
+
+        }
+
+    }
+
+    if(
+        document.readyState === 'loading'
+    ){
+        document.addEventListener(
+            'DOMContentLoaded',
+            trackPageView,
+            {once:true}
+        );
+    }else{
+        trackPageView();
+    }
+
+})();
+</script>
+
 </body>
 </html>
