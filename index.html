@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HIM4 x NINJ4 | Editing Store</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:#fff;
+    font-family:"Courier New",monospace;
+    overflow-x:hidden;
+}
+
+/* ================= TOP TERMINAL ================= */
+
+.topbar{
+    height:55px;
+    display:flex;
+    align-items:center;
+    padding:0 18px;
+    background:#090909;
+    border-bottom:1px solid #1d1d1d;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.dots{
+    display:flex;
+    gap:7px;
+}
+
+.dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+}
+
+.dot:nth-child(1){background:#ff5555;}
+.dot:nth-child(2){background:#ffaa00;}
+.dot:nth-child(3){background:#00ff88;}
+
+.terminal-title{
+    margin-left:15px;
+    color:#666;
+    font-size:12px;
+}
+
+.menu{
+    margin-left:auto;
+    display:flex;
+    gap:20px;
+}
+
+.menu a{
+    color:#777;
+    text-decoration:none;
+    font-size:11px;
+}
+
+.menu a:hover{
+    color:#00ff88;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:540px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(0,0,0,.20),
+        #050505 95%
+    ),
+    url("freefire.jpg");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at center,
+        transparent 10%,
+        rgba(0,0,0,.75) 90%
+    );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    padding:25px;
+}
+
+.system{
+    color:#00ff88;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(38px,9vw,78px);
+    letter-spacing:4px;
+    line-height:1;
+}
+
+.hero h1 span{
+    color:#00ff88;
+    text-shadow:0 0 25px rgba(0,255,136,.3);
+}
+
+.subtitle{
+    margin-top:20px;
+    color:#aaa;
+    font-size:14px;
+}
+
+.cursor{
+    display:inline-block;
+    width:8px;
+    height:15px;
+    background:#00ff88;
+    margin-left:5px;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0;}
+}
+
+.hero-buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    text-decoration:none;
+    padding:13px 22px;
+    border:1px solid #00ff88;
+    color:#00ff88;
+    font-size:12px;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#00ff88;
+    color:#000;
+    box-shadow:0 0 25px rgba(0,255,136,.25);
+}
+
+.btn.secondary{
+    border-color:#333;
+    color:#aaa;
+}
+
+.btn.secondary:hover{
+    border-color:#00ff88;
+    color:#00ff88;
+    background:transparent;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+}
+
+.section{
+    padding:70px 0;
+}
+
+.section-title{
+    margin-bottom:30px;
+}
+
+.section-title .cmd{
+    color:#00ff88;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.section-title h2{
+    font-size:25px;
+}
+
+.section-title p{
+    color:#666;
+    font-size:12px;
+    margin-top:8px;
+}
+
+
+/* ================= STATS ================= */
+
+.stats{
+    margin-top:-35px;
+    position:relative;
+    z-index:5;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.stat{
+    background:#0a0a0a;
+    border:1px solid #1b1b1b;
+    padding:22px;
+    text-align:center;
+    transition:.3s;
+}
+
+.stat:hover{
+    border-color:#00ff88;
+    transform:translateY(-4px);
+}
+
+.stat-number{
+    color:#00ff88;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.stat-label{
+    color:#666;
+    font-size:10px;
+    margin-top:8px;
+}
+
+
+/* ================= CATEGORIES ================= */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.category{
+    position:relative;
+    padding:32px;
+    background:linear-gradient(145deg,#111,#080808);
+    border:1px solid #222;
+    border-radius:12px;
+    text-decoration:none;
+    color:white;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.category:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:2px;
+    background:#00ff88;
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:.3s;
+}
+
+.category:hover{
+    transform:translateY(-6px);
+    border-color:#00ff88;
+    box-shadow:0 0 35px rgba(0,255,136,.08);
+}
+
+.category:hover:before{
+    transform:scaleX(1);
+}
+
+.icon{
+    font-size:38px;
+    margin-bottom:18px;
+}
+
+.category h3{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.category p{
+    color:#777;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.open{
+    display:inline-block;
+    margin-top:20px;
+    color:#00ff88;
+    font-size:11px;
+}
+
+
+/* ================= FEATURED ================= */
+
+.resource-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.resource{
+    background:#0b0b0b;
+    border:1px solid #1c1c1c;
+    padding:22px;
+    transition:.3s;
+}
+
+.resource:hover{
+    border-color:#00ff88;
+    transform:translateY(-5px);
+}
+
+.resource-icon{
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.resource h3{
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.resource p{
+    color:#666;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.tag{
+    display:inline-block;
+    margin-top:15px;
+    border:1px solid #252525;
+    padding:5px 8px;
+    color:#00ff88;
+    font-size:9px;
+}
+
+
+/* ================= TERMINAL PANEL ================= */
+
+.console{
+    background:#080808;
+    border:1px solid #1e1e1e;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.console-head{
+    background:#101010;
+    padding:11px 15px;
+    color:#666;
+    font-size:11px;
+    border-bottom:1px solid #1d1d1d;
+}
+
+.console-body{
+    padding:22px;
+    font-size:12px;
+    line-height:2;
+}
+
+.green{
+    color:#00ff88;
+}
+
+.gray{
+    color:#666;
+}
+
+.yellow{
+    color:#ffaa00;
+}
+
+
+/* ================= WHY US ================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.feature{
+    border:1px solid #191919;
+    background:#090909;
+    padding:25px;
+}
+
+.feature h3{
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.feature p{
+    color:#666;
+    font-size:11px;
+    line-height:1.7;
+}
+
+
+/* ================= CTA ================= */
+
+.cta{
+    text-align:center;
+    border:1px solid #202020;
+    background:
+    linear-gradient(
+        135deg,
+        #0d0d0d,
+        #070707
+    );
+    padding:55px 20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.cta:before{
+    content:"HIM4 x NINJ4";
+    position:absolute;
+    font-size:100px;
+    font-weight:bold;
+    color:rgba(255,255,255,.015);
+    white-space:nowrap;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+.cta-content{
+    position:relative;
+    z-index:2;
+}
+
+.cta h2{
+    font-size:28px;
+}
+
+.cta p{
+    color:#666;
+    font-size:12px;
+    margin:12px 0 25px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid #161616;
+    padding:35px 20px;
+    text-align:center;
+    color:#444;
+    font-size:10px;
+}
+
+footer .brand{
+    color:#00ff88;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+
+/* ================= FREE FIRE ANIMATED BACKGROUND ================= */
+
+.ff-bg{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+    pointer-events:none;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 18% 28%,
+            rgba(0,255,136,.10),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 82% 68%,
+            rgba(0,255,136,.07),
+            transparent 28%
+        ),
+        #050505;
+}
+
+.ff-bg::before{
+    content:"";
+    position:absolute;
+    inset:-50%;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 42%,
+            rgba(0,255,136,.055) 49%,
+            transparent 56%
+        ),
+        linear-gradient(
+            295deg,
+            transparent 40%,
+            rgba(0,255,136,.035) 50%,
+            transparent 60%
+        );
+
+    animation:ffLightSweep 14s linear infinite;
+}
+
+.ff-grid{
+    position:absolute;
+    inset:-20%;
+
+    background-image:
+        linear-gradient(
+            rgba(0,255,136,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,255,136,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:70px 70px;
+
+    transform:
+        perspective(500px)
+        rotateX(58deg)
+        scale(1.5);
+
+    transform-origin:center bottom;
+
+    opacity:.7;
+
+    animation:ffGridMove 10s linear infinite;
+}
+
+
+/* Green glowing atmosphere */
+
+.ff-glow{
+    position:absolute;
+
+    width:360px;
+    height:360px;
+
+    border-radius:50%;
+
+    background:rgba(0,255,136,.07);
+
+    filter:blur(75px);
+
+    animation:
+        ffGlow 8s ease-in-out infinite alternate;
+}
+
+.ff-glow.one{
+    left:-140px;
+    top:18%;
+}
+
+.ff-glow.two{
+    right:-150px;
+    bottom:12%;
+    animation-delay:2s;
+}
+
+
+/* Floating particles */
+
+.ff-particles{
+    position:absolute;
+    inset:0;
+}
+
+.ff-particles i{
+    position:absolute;
+
+    bottom:-30px;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:#00ff88;
+
+    box-shadow:
+        0 0 8px rgba(0,255,136,.9);
+
+    animation:
+        ffParticle linear infinite;
+
+    opacity:0;
+}
+
+.ff-particles i:nth-child(1){
+    left:6%;
+    animation-duration:9s;
+    animation-delay:1s;
+}
+
+.ff-particles i:nth-child(2){
+    left:14%;
+    animation-duration:12s;
+    animation-delay:4s;
+}
+
+.ff-particles i:nth-child(3){
+    left:23%;
+    animation-duration:10s;
+    animation-delay:2s;
+}
+
+.ff-particles i:nth-child(4){
+    left:31%;
+    animation-duration:15s;
+    animation-delay:6s;
+}
+
+.ff-particles i:nth-child(5){
+    left:40%;
+    animation-duration:11s;
+    animation-delay:3s;
+}
+
+.ff-particles i:nth-child(6){
+    left:49%;
+    animation-duration:14s;
+    animation-delay:7s;
+}
+
+.ff-particles i:nth-child(7){
+    left:58%;
+    animation-duration:10s;
+    animation-delay:1s;
+}
+
+.ff-particles i:nth-child(8){
+    left:67%;
+    animation-duration:13s;
+    animation-delay:5s;
+}
+
+.ff-particles i:nth-child(9){
+    left:76%;
+    animation-duration:16s;
+    animation-delay:2s;
+}
+
+.ff-particles i:nth-child(10){
+    left:85%;
+    animation-duration:11s;
+    animation-delay:6s;
+}
+
+.ff-particles i:nth-child(11){
+    left:93%;
+    animation-duration:14s;
+    animation-delay:4s;
+}
+
+
+/* Moving scan line */
+
+.ff-scan{
+    position:absolute;
+
+    left:0;
+
+    width:100%;
+    height:1px;
+
+    top:-5%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(0,255,136,.35),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px rgba(0,255,136,.35);
+
+    animation:
+        ffScan 8s linear infinite;
+}
+
+
+/* Animations */
+
+@keyframes ffGridMove{
+
+    from{
+        background-position:0 0,0 0;
+    }
+
+    to{
+        background-position:70px 70px,70px 70px;
+    }
+
+}
+
+@keyframes ffLightSweep{
+
+    0%{
+        transform:
+            translate(-20%,-10%)
+            rotate(0deg);
+    }
+
+    100%{
+        transform:
+            translate(20%,10%)
+            rotate(360deg);
+    }
+
+}
+
+@keyframes ffGlow{
+
+    from{
+        transform:
+            translate(0,0)
+            scale(.85);
+
+        opacity:.35;
+    }
+
+    to{
+        transform:
+            translate(90px,-50px)
+            scale(1.15);
+
+        opacity:.7;
+    }
+
+}
+
+@keyframes ffParticle{
+
+    0%{
+        transform:
+            translateY(0)
+            scale(.5);
+
+        opacity:0;
+    }
+
+    12%{
+        opacity:.8;
+    }
+
+    75%{
+        opacity:.45;
+    }
+
+    100%{
+        transform:
+            translateY(-115vh)
+            scale(1.5);
+
+        opacity:0;
+    }
+
+}
+
+@keyframes ffScan{
+
+    0%{
+        top:-5%;
+        opacity:0;
+    }
+
+    10%{
+        opacity:.7;
+    }
+
+    50%{
+        opacity:.35;
+    }
+
+    100%{
+        top:105%;
+        opacity:0;
+    }
+
+}
+
+
+/* Keep original page elements above background */
+
+.hero,
+.topbar,
+.stats,
+.section,
+.cta,
+footer{
+    position:relative;
+}
+
+
+/* Mobile background optimization */
+
+@media(max-width:800px){
+
+    .ff-grid{
+        background-size:55px 55px;
+        opacity:.45;
+    }
+
+    .ff-glow{
+        width:250px;
+        height:250px;
+    }
+
+}
+
+
+
+/* ================= ACCOUNT ACCESS ================= */
+.account-link{
+    color:#00ff88 !important;
+    border:1px solid #1f4;
+    padding:7px 10px;
+    transition:.25s;
+}
+.account-link:hover{
+    background:#00ff88;
+    color:#000 !important;
+    box-shadow:0 0 18px rgba(0,255,136,.18);
+}
+.account-user{
+    display:none;
+}
+
+
+
+/* ================= PROFILE ACCOUNT BUTTON ================= */
+.account-link{
+    display:inline-flex !important;
+    align-items:center;
+    gap:8px;
+}
+.account-avatar{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid #00ff88;
+    box-shadow:0 0 12px rgba(0,255,136,.18);
+    background:#111;
+    display:none;
+}
+.account-avatar.visible{display:block}
+.account-label{display:inline-block}
+
+/* ================= READABLE TYPOGRAPHY ================= */
+.section-title .cmd{font-size:14px}
+.section-title h2{font-size:30px}
+.section-title p{font-size:14px;line-height:1.7}
+.category h3{font-size:22px}
+.category p{font-size:14px;line-height:1.8}
+.open{font-size:13px}
+.resource h3{font-size:17px}
+.resource p{font-size:13px;line-height:1.75}
+.tag{font-size:11px}
+.feature h3{font-size:16px}
+.feature p{font-size:13px;line-height:1.8}
+.console-head{font-size:13px}
+.console-body{font-size:14px;line-height:2.1}
+.stat-label{font-size:12px}
+.btn{font-size:13px}
+.subtitle{font-size:15px}
+.system{font-size:14px}
+.about-body p{font-size:13px}
+.about-age{font-size:12px}
+.about-role,.contact-role{font-size:12px}
+.skill{font-size:11px}
+.review-name{font-size:13px}
+.review-username{font-size:11px}
+.review-text{font-size:13px}
+.review-date{font-size:10px}
+.review-note,.review-status{font-size:12px}
+.contact-item{font-size:13px}
+
+@media(max-width:800px){
+    .topbar{padding:0 12px;height:58px}
+    .terminal-title{font-size:11px;margin-left:10px}
+    .account-link{padding:5px 7px !important;font-size:11px !important;gap:6px}
+    .account-avatar{width:30px;height:30px}
+    .account-label{max-width:125px;overflow:hidden;text-overflow:ellipsis}
+    .section{padding:58px 0}
+    .section-title h2{font-size:26px}
+    .section-title p{font-size:13px}
+    .category{padding:27px}
+    .category h3{font-size:20px}
+    .category p{font-size:13px}
+    .resource h3{font-size:16px}
+    .resource p{font-size:13px}
+    .feature h3{font-size:15px}
+    .feature p{font-size:13px}
+    .console-body{font-size:12px}
+    .btn{font-size:12px}
+    .about-body p{font-size:13px}
+    .contact-item{font-size:13px}
+}
+@media(max-width:450px){
+    .terminal-title{font-size:10px}
+    .account-label{max-width:110px}
+    .hero h1{font-size:39px}
+    .subtitle{font-size:13px;line-height:1.7}
+    .section-title h2{font-size:24px}
+    .section-title p{font-size:13px}
+    .category h3{font-size:19px}
+    .category p{font-size:13px;line-height:1.75}
+    .resource p,.feature p{font-size:13px}
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    .menu{
+        display:flex;
+        align-items:center;
+        gap:0;
+        margin-left:auto;
+    }
+
+    .menu a:not(.account-link){
+        display:none;
+    }
+
+    .account-link{
+        display:inline-block !important;
+        white-space:nowrap;
+        font-size:10px;
+        padding:8px 9px;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .categories{
+        grid-template-columns:1fr;
+    }
+
+    .resource-grid{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        min-height:500px;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .hero h1{
+        font-size:39px;
+    }
+
+    .hero{
+        min-height:470px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+
+/* ===== HIM4 x NINJ4 ADDED SECTIONS ===== */
+.reveal{opacity:0;transform:translateY(48px) scale(.985);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1)}
+.reveal-left{opacity:0;transform:translateX(-45px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.7,.2,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(45px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.7,.2,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.stagger-1{transition-delay:.08s}.stagger-2{transition-delay:.16s}.stagger-3{transition-delay:.24s}.stagger-4{transition-delay:.32s}
+.brand-section{padding:80px 0}
+.about-grid,.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.about-card,.contact-card{background:linear-gradient(145deg,#111,#080808);border:1px solid #222;border-radius:14px;overflow:hidden;transition:.3s}
+.about-card:hover,.contact-card:hover{transform:translateY(-6px);border-color:#00ff88;box-shadow:0 15px 40px rgba(0,255,136,.1)}
+.about-photo{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#0b0b0b}
+.about-body{padding:26px}.about-role,.contact-role{color:#00ff88;font-size:10px;letter-spacing:1px;margin-bottom:9px}
+.about-body h3,.contact-card h3{font-size:20px}.about-age{color:#777;font-size:10px;margin:6px 0 16px}
+.about-body p{color:#777;font-size:11px;line-height:1.8}.skill-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.skill{border:1px solid #252525;padding:6px 8px;color:#aaa;font-size:9px}
+.reviews-wrap{overflow:hidden}.review-track{display:flex;gap:15px;width:max-content;animation:reviewMove 30s linear infinite}
+.review-track:hover{animation-play-state:paused}.review-card{width:310px;padding:22px;background:#0a0a0a;border:1px solid #1e1e1e;border-radius:12px;flex:0 0 310px}
+.review-head{display:flex;align-items:center;gap:11px}.review-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid #2b2b2b;background:#111}.review-avatar-fallback{display:flex;align-items:center;justify-content:center;color:#00ff88;font-weight:bold;font-size:15px}.review-meta{min-width:0}.review-name{color:#fff;font-size:11px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.review-username{color:#666;font-size:9px;margin-top:4px}.stars{color:#00ff88;letter-spacing:2px;margin-top:12px}.review-text{color:#bbb;font-size:11px;line-height:1.7;margin:11px 0}.review-date{color:#555;font-size:8px}.review-empty{width:100%;padding:30px;text-align:center;color:#666;border:1px dashed #252525;border-radius:12px}
+@keyframes reviewMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.review-action{text-align:center;margin-top:25px}.review-form{display:none;max-width:600px;margin:22px auto 0;padding:22px;background:#0a0a0a;border:1px solid #222;border-radius:12px}.review-note{color:#666;font-size:10px;line-height:1.6;margin-bottom:14px}.review-status{margin-top:10px;font-size:10px;color:#00ff88;min-height:16px}
+.review-form.open{display:block}.review-form input,.review-form textarea,.review-form select{width:100%;margin-bottom:10px;padding:11px;background:#050505;color:#fff;border:1px solid #252525;font-family:inherit}.review-form textarea{min-height:90px}
+.contact-card{padding:25px}.contact-role{margin:5px 0 15px}.contact-item{display:block;color:#888;text-decoration:none;font-size:11px;padding:10px 0;border-bottom:1px solid #151515}.contact-item:hover{color:#00ff88}
+@media(max-width:800px){.about-grid,.contact-grid{grid-template-columns:1fr}.review-card{width:280px}}
+@media(prefers-reduced-motion:reduce){.reveal,.reveal-left,.reveal-right{transition:none}.review-track{animation:none}}
+
+
+/* ================= ACCOUNT PROFILE + USERNAME ================= */
+.account-link{
+    display:inline-flex !important;
+    align-items:center;
+    gap:8px;
+    white-space:nowrap;
+}
+.account-avatar{
+    width:32px;
+    height:32px;
+    min-width:32px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid #00ff88;
+    box-shadow:0 0 12px rgba(0,255,136,.18);
+    background:#111;
+    display:none;
+}
+.account-avatar.visible{display:block}
+.account-label{
+    display:inline-block;
+    max-width:180px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.account-link.logged-in .account-label{
+    color:#00ff88;
+}
+@media(max-width:800px){
+    .account-link{gap:6px;padding:5px 7px !important}
+    .account-avatar{width:30px;height:30px;min-width:30px}
+    .account-label{max-width:125px}
+}
+@media(max-width:450px){
+    .account-label{max-width:110px}
+}
+
+</style>
+
+<style id="access-popup-style">
+.access-modal{
+    position:fixed;inset:0;z-index:99999;display:none;
+    align-items:center;justify-content:center;padding:20px;
+}
+.access-modal.open{display:flex}
+.access-backdrop{
+    position:absolute;inset:0;background:rgba(0,0,0,.82);
+    backdrop-filter:blur(9px);
+}
+.access-card{
+    position:relative;z-index:1;width:min(460px,100%);
+    background:#090909;border:1px solid #00ff88;
+    box-shadow:0 0 45px rgba(0,255,136,.14);
+    padding:34px 25px;text-align:center;
+}
+.access-close{
+    position:absolute;top:12px;right:12px;width:32px;height:32px;
+    border:1px solid #292929;background:#111;color:#aaa;
+}
+.access-icon{font-size:42px;margin-bottom:12px}
+.access-kicker{color:#666;font-size:9px;letter-spacing:2px;margin-bottom:8px}
+.access-card h2{color:#00ff88;font-size:21px;letter-spacing:2px}
+.access-card p{color:#888;font-size:12px;line-height:1.8;margin:16px 0 23px}
+.access-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.access-login,.access-cancel{
+    padding:12px 18px;font-size:10px;font-weight:bold;
+    letter-spacing:.8px;text-decoration:none;cursor:pointer;
+}
+.access-login{background:#00ff88;color:#000;border:1px solid #00ff88}
+.access-cancel{background:#111;color:#aaa;border:1px solid #292929}
+.access-login:hover{background:transparent;color:#00ff88}
+.access-cancel:hover{border-color:#00ff88;color:#00ff88}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= FREE FIRE ANIMATED BACKGROUND ================= -->
+
+<div class="ff-bg" aria-hidden="true">
+
+    <div class="ff-grid"></div>
+
+    <div class="ff-glow one"></div>
+
+    <div class="ff-glow two"></div>
+
+    <div class="ff-scan"></div>
+
+    <div class="ff-particles">
+
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOP BAR ================= -->
+
+<header class="topbar">
+
+    <div class="dots">
+
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+
+    </div>
+
+    <div class="terminal-title">
+        him4@ninj4:~$
+    </div>
+
+    <nav class="menu">
+
+        <a href="#home">HOME</a>
+
+        <a href="#resources">RESOURCES</a>
+
+        <a href="#tools">TOOLS</a>
+
+        <a href="#about">ABOUT</a>
+
+        <a href="auth.html" class="account-link" id="accountLink">
+    <img class="account-avatar" id="accountAvatar" src="" alt="Profile">
+    <span class="account-label" id="accountLabel">[ LOGIN / CREATE ACCOUNT ]</span>
+</a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="system">
+            &gt; SYSTEM ONLINE // ACCESS GRANTED
+        </div>
+
+        <h1>
+            HIM4 <span>x</span> NINJ4
+        </h1>
+
+        <div class="subtitle">
+
+            EDITING STORE // GAMING RESOURCES // VIDEO TOOLS
+
+            <span class="cursor"></span>
+
+        </div>
+
+        <div class="hero-buttons">
+
+            <a href="#resources" class="btn">
+                [ EXPLORE RESOURCES ]
+            </a>
+
+            <a href="#tools" class="btn secondary">
+                [ VIEW TOOLS ]
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+
+<div class="container">
+
+<div class="stats-grid">
+
+    <div class="stat">
+
+        <div class="stat-number">
+            ∞
+        </div>
+
+        <div class="stat-label">
+            CREATIVE POSSIBILITIES
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-number">
+            4K
+        </div>
+
+        <div class="stat-label">
+            QUALITY RESOURCES
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-number">
+            120
+        </div>
+
+        <div class="stat-label">
+            FPS OPTIMIZATION
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-number">
+            24/7
+        </div>
+
+        <div class="stat-label">
+            CREATOR ACCESS
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= MAIN CATEGORIES ================= -->
+
+<section class="section" id="resources">
+
+<div class="container">
+
+<div class="section-title">
+
+    <div class="cmd">
+        &gt; cd /resources
+    </div>
+
+    <h2>
+        Resource Categories
+    </h2>
+
+    <p>
+        Select a directory to access creator resources.
+    </p>
+
+</div>
+
+
+<div class="categories">
+
+
+<a href="editing.html" class="category">
+
+    <div class="icon">
+        🎬
+    </div>
+
+    <h3>
+        Editing Resources
+    </h3>
+
+    <p>
+        CC presets, XML files, overlays, transitions,
+        effects, fonts and editing assets for mobile editors.
+    </p>
+
+    <div class="open">
+        [ OPEN DIRECTORY → ]
+    </div>
+
+</a>
+
+
+<a href="optimize.html" class="category">
+
+    <div class="icon">
+        ⚡
+    </div>
+
+    <h3>
+        Video Optimization
+    </h3>
+
+    <p>
+        FPS enhancement, smoothening, quality improvement,
+        compression and video optimization resources.
+    </p>
+
+    <div class="open">
+        [ OPEN DIRECTORY → ]
+    </div>
+
+</a>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FEATURED ================= -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-title">
+
+    <div class="cmd">
+        &gt; loading /featured
+    </div>
+
+    <h2>
+        Featured Resources
+    </h2>
+
+    <p>
+        Popular tools and resources for editors.
+    </p>
+
+</div>
+
+
+<div class="resource-grid">
+
+
+<div class="resource">
+
+    <div class="resource-icon">
+        🎨
+    </div>
+
+    <h3>
+        Color Presets
+    </h3>
+
+    <p>
+        Cinematic color presets and CC packs
+        for your editing projects.
+    </p>
+
+    <span class="tag">
+        CC / XML
+    </span>
+
+</div>
+
+
+<div class="resource">
+
+    <div class="resource-icon">
+        ✨
+    </div>
+
+    <h3>
+        Effects & Overlays
+    </h3>
+
+    <p>
+        Glitch, particles, light leaks,
+        shakes and cinematic overlays.
+    </p>
+
+    <span class="tag">
+        EFFECTS
+    </span>
+
+</div>
+
+
+<div class="resource">
+
+    <div class="resource-icon">
+        🔤
+    </div>
+
+    <h3>
+        Fonts Collection
+    </h3>
+
+    <p>
+        Gaming, cinematic and stylish fonts
+        for titles and thumbnails.
+    </p>
+
+    <span class="tag">
+        FONTS
+    </span>
+
+</div>
+
+
+<div class="resource">
+
+    <div class="resource-icon">
+        🎞️
+    </div>
+
+    <h3>
+        Transitions
+    </h3>
+
+    <p>
+        Smooth transitions for gaming edits,
+        reels and short-form videos.
+    </p>
+
+    <span class="tag">
+        TRANSITIONS
+    </span>
+
+</div>
+
+
+<div class="resource">
+
+    <div class="resource-icon">
+        🎵
+    </div>
+
+    <h3>
+        Audio Resources
+    </h3>
+
+    <p>
+        Sound effects, cinematic sounds
+        and editing audio assets.
+    </p>
+
+    <span class="tag">
+        AUDIO
+    </span>
+
+</div>
+
+
+<div class="resource">
+
+    <div class="resource-icon">
+        🔥
+    </div>
+
+    <h3>
+        Free Fire Packs
+    </h3>
+
+    <p>
+        Gaming assets and resources
+        designed for Free Fire creators.
+    </p>
+
+    <span class="tag">
+        GAMING
+    </span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TOOLS ================= -->
+
+<section class="section" id="tools">
+
+<div class="container">
+
+<div class="section-title">
+
+    <div class="cmd">
+        &gt; execute /optimization_tools
+    </div>
+
+    <h2>
+        Video Optimization
+    </h2>
+
+    <p>
+        Tools and resources to improve your video output.
+    </p>
+
+</div>
+
+
+<div class="features">
+
+
+<div class="feature">
+
+    <h3>
+        ⚡ FPS Enhancement
+    </h3>
+
+    <p>
+        Improve motion smoothness and prepare
+        videos for high-frame-rate editing.
+    </p>
+
+</div>
+
+
+<div class="feature">
+
+    <h3>
+        💎 Quality Boost
+    </h3>
+
+    <p>
+        Resources for sharpening, upscaling
+        and improving final video quality.
+    </p>
+
+</div>
+
+
+<div class="feature">
+
+    <h3>
+        📦 File Optimization
+    </h3>
+
+    <p>
+        Compression and export resources
+        for better quality with smaller sizes.
+    </p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SYSTEM CONSOLE ================= -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="console">
+
+    <div class="console-head">
+        HIM4 x NINJ4 TERMINAL
+    </div>
+
+    <div class="console-body">
+
+        <div>
+            <span class="green">
+                root@him4-ninj4
+            </span>:~$ system-check
+        </div>
+
+        <div class="gray">
+            Checking resource database...
+        </div>
+
+        <div>
+            <span class="green">
+                [OK]
+            </span>
+            Resource system online
+        </div>
+
+        <div>
+            <span class="green">
+                [OK]
+            </span>
+            Editing directory loaded
+        </div>
+
+        <div>
+            <span class="green">
+                [OK]
+            </span>
+            Optimization tools loaded
+        </div>
+
+        <div>
+            <span class="yellow">
+                [!]
+            </span>
+            More resources coming soon...
+        </div>
+
+        <div>
+
+            <span class="green">
+                root@him4-ninj4
+            </span>:~$
+
+            <span class="cursor"></span>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="cta">
+
+<div class="cta-content">
+
+    <h2>
+        CREATE. EDIT. DOMINATE.
+    </h2>
+
+    <p>
+        Everything you need to level up your edits.
+    </p>
+
+    <a href="#resources" class="btn">
+        [ START EDITING ]
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="section" id="about">
+
+<div class="container">
+
+<div class="section-title">
+
+    <div class="cmd">
+        &gt; cat /about
+    </div>
+
+    <h2>
+        HIM4 x NINJ4 Editing Store
+    </h2>
+
+    <p>
+        A creator-focused resource hub for gaming editors,
+        video creators and mobile editing enthusiasts.
+    </p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ===== TEAM ABOUT ===== -->
+<section class="section brand-section" id="team">
+<div class="container">
+<div class="section-title reveal"><div class="cmd">&gt; cat /chiefs</div><h2>MEET THE CHIEFS</h2><p>The creators behind HIM4 × NINJ4 Editing Corporation.</p></div>
+<div class="about-grid">
+<article class="about-card reveal">
+<img class="about-photo" src="ashan.jpg" alt="Ashan Karunarathna">
+<div class="about-body"><div class="about-role">CHIEF — HIM4 × NINJ4 EDITING CORPORATION</div><h3>ASHAN KARUNARATHNA</h3><div class="about-age">AGE 21 · NINJ4</div>
+<p>I’m Ashan Karunarathna, a 21-year-old creator, developer and technology enthusiast from Sri Lanka, and one of the Chiefs behind HIM4 × NINJ4 Editing Corporation. I’m a Free Fire TikTok LIVE streamer, web developer and Computer Hardware &amp; Networking Engineer. I’m also passionate about gaming edits, video optimization, digital creativity and building useful platforms for creators.</p>
+<div class="skill-list"><span class="skill">FREE FIRE LIVE</span><span class="skill">WEB DEVELOPMENT</span><span class="skill">HARDWARE</span><span class="skill">NETWORKING</span><span class="skill">VIDEO EDITING</span><span class="skill">OPTIMIZATION</span></div></div>
+</article>
+<article class="about-card reveal">
+<img class="about-photo" src="chamalka.jpg" alt="Chamalka Ishan">
+<div class="about-body"><div class="about-role">CHIEF — HIM4 × NINJ4 EDITING CORPORATION</div><h3>CHAMALKA ISHAN</h3><div class="about-age">AGE 20 · HIM4 EDITZ</div>
+<p>I’m Chamalka Ishan, professionally known as HIM4 EDITZ, a 20-year-old advanced mobile editor from Sri Lanka. I specialize in Free Fire and mobile editing, working with Alight Motion and CapCut at an advanced level. My focus is smooth, detailed and visually powerful editing, constantly pushing the limits of smartphone-based content creation.</p>
+<div class="skill-list"><span class="skill">MOBILE EDITING</span><span class="skill">FREE FIRE</span><span class="skill">ALIGHT MOTION</span><span class="skill">CAPCUT</span><span class="skill">MOTION FX</span><span class="skill">CINEMATIC EDITING</span></div></div>
+</article>
+</div></div></section>
+
+<!-- ===== CUSTOMER REVIEWS ===== -->
+<section class="section brand-section" id="reviews">
+<div class="container">
+<div class="section-title reveal"><div class="cmd">&gt; scan /customer_reviews</div><h2>WHAT OUR CREATORS SAY</h2><p>Real feedback from the HIM4 × NINJ4 community.</p></div>
+<div class="reviews-wrap reveal" id="reviewsWrap"><div class="review-track" id="reviewTrack"><div class="review-empty">Loading customer reviews...</div></div></div>
+<div class="review-action reveal"><button class="btn" type="button" id="reviewBtn">[ WRITE A REVIEW ]</button></div>
+<div class="review-form" id="reviewForm">
+<div class="review-note">Your review will appear publicly with your account name and profile picture after it is approved.</div>
+<select id="reviewRating"><option value="5">★★★★★ — 5 Stars</option><option value="4">★★★★☆ — 4 Stars</option><option value="3">★★★☆☆ — 3 Stars</option><option value="2">★★☆☆☆ — 2 Stars</option><option value="1">★☆☆☆☆ — 1 Star</option></select>
+<textarea id="reviewText" placeholder="Write your review..."></textarea>
+<button class="btn" type="button" id="submitReviewBtn">[ SUBMIT REVIEW ]</button>
+<div class="review-status" id="reviewStatus"></div>
+</div>
+</div></section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section brand-section" id="contact">
+<div class="container">
+<div class="section-title reveal"><div class="cmd">&gt; connect /him4-ninj4</div><h2>CONTACT US</h2><p>Questions, collaborations or support? Reach us directly.</p></div>
+<div class="contact-grid">
+<article class="contact-card reveal"><h3>ASHAN KARUNARATHNA</h3><div class="contact-role">NINJ4 · CHIEF</div>
+<a class="contact-item" href="mailto:Ashanshaminda1234@gmail.com">📧 Ashanshaminda1234@gmail.com</a><a class="contact-item" href="https://wa.me/94761024243" target="_blank">📱 WhatsApp · 0761024243</a><a class="contact-item" href="https://www.tiktok.com/@ninja.editz01" target="_blank">🎵 TikTok · @ninja.editz01</a><a class="contact-item" href="https://www.facebook.com/search/top?q=Ashan%20Karunarathna" target="_blank">📘 Facebook · Ashan Karunarathna</a></article>
+<article class="contact-card reveal"><h3>CHAMALKA ISHAN</h3><div class="contact-role">HIM4 EDITZ · CHIEF</div>
+<a class="contact-item" href="mailto:chamalic562@gmail.com">📧 chamalic562@gmail.com</a><a class="contact-item" href="https://wa.me/94705895701" target="_blank">📱 WhatsApp · 0705895701</a><a class="contact-item" href="https://www.tiktok.com/@1nonly.him4" target="_blank">🎵 TikTok · @1nonly.him4</a><a class="contact-item" href="https://www.facebook.com/search/top?q=Chamalka%20Ishan" target="_blank">📘 Facebook · Chamalka Ishan</a></article>
+</div></div></section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="brand">
+        HIM4 x NINJ4
+    </div>
+
+    <p>
+        EDITING STORE // GAMING RESOURCES // VIDEO OPTIMIZATION
+    </p>
+
+    <p style="margin-top:12px;">
+        © 2026 HIM4 x NINJ4. All rights reserved.
+    </p>
+
+</footer>
+
+
+
+
+<script>
+(function(){
+  // Apply the scroll-reveal animation to existing homepage elements too — not only the new sections.
+  const selectors = [
+    '.hero-content > *', '.stats .stat', '.section-title', '.category', '.resource',
+    '.console', '.feature', '.cta-content', '#about > .container > *',
+    '#team .about-card', '#reviews .reviews-wrap', '#reviews .review-action',
+    '#contact .contact-card', 'footer > *'
+  ];
+  const targets = new Set();
+  selectors.forEach(sel => document.querySelectorAll(sel).forEach(el => targets.add(el)));
+  targets.forEach(el => el.classList.add('reveal'));
+  const els=[...document.querySelectorAll('.reveal,.reveal-left,.reveal-right')];
+  const ob=new IntersectionObserver(entries=>entries.forEach(e=>{
+    e.target.classList.toggle('visible',e.isIntersecting);
+  }),{threshold:.12,rootMargin:'0px 0px -45px 0px'});
+  els.forEach(e=>ob.observe(e));
+
+  const b=document.getElementById('reviewBtn'),f=document.getElementById('reviewForm');
+  if(b) b.onclick=()=>{
+    f.classList.toggle('open');
+    if(f.classList.contains('open')) f.scrollIntoView({behavior:'smooth',block:'center'});
+  };
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- ================= SUPABASE CUSTOMER REVIEWS ================= -->
+<script>
+(function(){
+  const SUPABASE_URL='https://ndcrvdbvhswbvahpskhj.supabase.co';
+  const SUPABASE_KEY='sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+  const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  const track=document.getElementById('reviewTrack');
+  const form=document.getElementById('reviewForm');
+  const submit=document.getElementById('submitReviewBtn');
+  const status=document.getElementById('reviewStatus');
+
+  function esc(v){const d=document.createElement('div');d.textContent=v??'';return d.innerHTML;}
+  function initials(name){return (name||'U').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase();}
+  function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n);}
+  function dateText(v){try{return new Date(v).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});}catch{return '';}}
+
+  async function loadReviews(){
+    if(!track) return;
+    const {data:reviews,error}=await sb.from('reviews').select('id,user_id,rating,review_text,created_at').eq('is_approved',true).order('created_at',{ascending:false}).limit(30);
+    if(error){console.error(error);track.innerHTML='<div class="review-empty">Reviews are temporarily unavailable.</div>';return;}
+    if(!reviews?.length){track.innerHTML='<div class="review-empty">No customer reviews yet. Be the first one to leave a review! 🔥</div>';return;}
+    const ids=[...new Set(reviews.map(r=>r.user_id).filter(Boolean))];
+    let profiles=[];
+    if(ids.length){
+      const {data}=await sb.from('profiles').select('id,username,full_name,avatar_url,badge').in('id',ids);
+      profiles=data||[];
+    }
+    const map=new Map(profiles.map(p=>[p.id,p]));
+    const cards=reviews.map(r=>{
+      const p=map.get(r.user_id)||{};
+      const name=p.full_name||p.username||'Community Member';
+      const avatar=p.avatar_url?`<img class="review-avatar" src="${esc(p.avatar_url)}" alt="${esc(name)}">`:`<div class="review-avatar review-avatar-fallback">${esc(initials(name))}</div>`;
+      return `<article class="review-card"><div class="review-head">${avatar}<div class="review-meta"><div class="review-name">${esc(name)}</div><div class="review-username">${p.username?'@'+esc(p.username):'HIM4 × NINJ4 USER'}</div></div></div><div class="stars">${stars(Math.max(1,Math.min(5,Number(r.rating)||5)))}</div><div class="review-text">${esc(r.review_text)}</div><div class="review-date">${dateText(r.created_at)}</div></article>`;
+    }).join('');
+    // Duplicate the track once for a seamless horizontal loop.
+    track.innerHTML=cards+cards;
+    track.style.animationDuration=Math.max(24,reviews.length*5)+'s';
+  }
+
+  async function submitReview(){
+    status.textContent='';
+    const {data:{session}}=await sb.auth.getSession();
+    if(!session?.user){status.textContent='Please login first to write a review.';setTimeout(()=>location.href='auth.html',900);return;}
+    const rating=Number(document.getElementById('reviewRating').value);
+    const text=document.getElementById('reviewText').value.trim();
+    if(!text){status.textContent='Please write your review.';return;}
+    if(text.length<5){status.textContent='Please write a little more.';return;}
+    submit.disabled=true;submit.textContent='[ SUBMITTING... ]';
+    const {data:profile}=await sb.from('profiles').select('full_name,username').eq('id',session.user.id).maybeSingle();
+    const reviewerName=(profile?.full_name||profile?.username||session.user.user_metadata?.full_name||session.user.email?.split('@')[0]||'Customer').trim();
+    const {error}=await sb.from('reviews').insert({user_id:session.user.id,reviewer_name:reviewerName,rating,review_text:text});
+    submit.disabled=false;submit.textContent='[ SUBMIT REVIEW ]';
+    if(error){console.error(error);status.textContent='Could not submit review. Please try again.';return;}
+    document.getElementById('reviewText').value='';
+    status.textContent='Review submitted! It will appear after approval. 🔥';
+    await loadReviews();
+  }
+  if(submit) submit.addEventListener('click',submitReview);
+  loadReviews();
+})();
+</script>
+
+<!-- ================= SUPABASE ACCOUNT ACCESS + PROTECTED NAVIGATION ================= -->
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const link = document.getElementById('accountLink');
+    const label = document.getElementById('accountLabel');
+    const avatar = document.getElementById('accountAvatar');
+
+    const modal = document.getElementById('accessModal');
+    const backdrop = document.getElementById('accessBackdrop');
+    const closeBtn = document.getElementById('accessClose');
+    const cancelBtn = document.getElementById('accessCancel');
+
+    function openAccessModal(){
+        if(!modal) return;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden';
+    }
+
+    function closeAccessModal(){
+        if(!modal) return;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow='';
+    }
+
+    [backdrop, closeBtn, cancelBtn].forEach(el=>{
+        if(el) el.addEventListener('click', closeAccessModal);
+    });
+
+    document.addEventListener('keydown', e=>{
+        if(e.key === 'Escape') closeAccessModal();
+    });
+
+    async function getSession(){
+        const {data:{session}} = await client.auth.getSession();
+        return session;
+    }
+
+    async function syncAccount(){
+        const session = await getSession();
+
+        if(session?.user){
+            if(link){
+                link.href = 'account.html';
+                link.classList.add('logged-in');
+            }
+
+            let profile = null;
+            try{
+                const {data, error} = await client
+                    .from('profiles')
+                    .select('full_name,username,avatar_url')
+                    .eq('id', session.user.id)
+                    .maybeSingle();
+
+                if(!error) profile = data;
+            }catch(e){
+                console.warn('Profile load failed', e);
+            }
+
+            const meta = session.user.user_metadata || {};
+            const displayName = (
+                profile?.full_name ||
+                profile?.username ||
+                meta.full_name ||
+                meta.username ||
+                session.user.email?.split('@')[0] ||
+                'USER'
+            ).trim();
+
+            if(label){
+                label.textContent = displayName;
+                label.title = displayName;
+            }
+
+            const photo = (
+                profile?.avatar_url ||
+                meta.avatar_url ||
+                meta.picture ||
+                ''
+            ).trim();
+
+            if(avatar && photo){
+                avatar.src = photo;
+                avatar.classList.add('visible');
+            }else if(avatar){
+                avatar.removeAttribute('src');
+                avatar.classList.remove('visible');
+            }
+        }else{
+            if(label) label.textContent='[ LOGIN / CREATE ACCOUNT ]';
+            if(link){
+                link.href='auth.html';
+                link.classList.remove('logged-in');
+            }
+            if(avatar){
+                avatar.removeAttribute('src');
+                avatar.classList.remove('visible');
+            }
+        }
+    }
+
+    const protectedPages = [
+        'editing.html',
+        'optimize.html',
+        'fonts.html',
+        'font.html',
+        'overlays.html',
+        'shakes.html',
+        'cc.html',
+        'solo.html',
+        'duo.html',
+        'squad.html'
+    ];
+
+    document.querySelectorAll('a[href]').forEach(a=>{
+        const href = a.getAttribute('href') || '';
+        const page = href.split('?')[0].split('#')[0].split('/').pop().toLowerCase();
+
+        if(!protectedPages.includes(page)) return;
+
+        a.addEventListener('click', async function(e){
+            e.preventDefault();
+
+            const session = await getSession();
+
+            if(session?.user){
+                window.location.href = a.href;
+            }else{
+                openAccessModal();
+            }
+        });
+    });
+
+    syncAccount();
+
+    client.auth.onAuthStateChange(()=>{
+        syncAccount();
+    });
+});
+</script>
+
+
+<!-- ================= LOGIN REQUIRED POPUP ================= -->
+<div class="access-modal" id="accessModal" aria-hidden="true">
+  <div class="access-backdrop" id="accessBackdrop"></div>
+  <div class="access-box" role="dialog" aria-modal="true" aria-labelledby="accessTitle">
+    <button class="access-close" id="accessClose" type="button">×</button>
+    <div class="access-icon">🔐</div>
+    <div class="access-cmd">&gt; ACCESS RESTRICTED</div>
+    <h2 id="accessTitle">ACCOUNT REQUIRED</h2>
+    <p>Login or create an account to access this directory.</p>
+    <div class="access-actions">
+      <a class="btn" href="auth.html">[ LOGIN / CREATE ACCOUNT ]</a>
+      <button class="btn secondary" type="button" id="accessCancel">[ CANCEL ]</button>
+    </div>
+  </div>
+</div>
+<style>
+.access-modal{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:20px}
+.access-modal.open{display:flex}
+.access-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(7px)}
+.access-box{position:relative;z-index:2;width:min(430px,100%);padding:32px 24px;text-align:center;background:linear-gradient(145deg,#111,#070707);border:1px solid #00ff88;border-radius:16px;box-shadow:0 0 50px rgba(0,255,136,.13)}
+.access-close{position:absolute;right:12px;top:8px;background:none;border:0;color:#777;font-size:28px;cursor:pointer}
+.access-close:hover{color:#00ff88}
+.access-icon{font-size:38px;margin-bottom:10px}
+.access-cmd{color:#00ff88;font-size:12px;letter-spacing:1px}
+.access-box h2{font-size:25px;margin:10px 0}
+.access-box p{color:#888;font-size:13px;line-height:1.7;margin-bottom:22px}
+.access-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.access-actions .btn{cursor:pointer;font-family:inherit;background:transparent}
+@media(max-width:450px){.access-box{padding:28px 18px}.access-box h2{font-size:21px}.access-box p{font-size:13px}}
+</style>
+
+</body>
+</html>

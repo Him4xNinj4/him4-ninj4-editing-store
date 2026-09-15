@@ -1,0 +1,6845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>HIM4 × NINJ4 — Admin Panel</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#07070b;
+    --panel:#0e0d14;
+    --panel2:#12101a;
+    --line:rgba(255,255,255,.08);
+
+    --purple:#8b5cf6;
+    --violet:#a855f7;
+    --pink:#ec4899;
+    --cyan:#22d3ee;
+    --green:#34d399;
+    --yellow:#facc15;
+    --red:#fb7185;
+
+    --text:#f8f7fb;
+    --muted:#8e8999;
+
+    --sidebar:258px;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,Arial,sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    border:0;
+}
+
+.hidden{
+    display:none!important;
+}
+
+
+/* =========================================================
+   INTRO VIDEO
+========================================================= */
+
+#introScreen{
+    position:fixed;
+    inset:0;
+
+    z-index:9999;
+
+    background:#020205;
+
+    overflow:hidden;
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+
+    padding:0 20px 52px;
+}
+
+.intro-video{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    background:#020205;
+
+    z-index:0;
+}
+
+.intro-shade{
+    position:absolute;
+    inset:0;
+
+    z-index:1;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.10),
+            rgba(0,0,0,.18) 35%,
+            rgba(2,1,7,.72) 72%,
+            rgba(2,1,7,.97)
+        );
+}
+
+.intro-glow{
+    position:absolute;
+
+    z-index:2;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    background:#7c3aed;
+
+    filter:blur(150px);
+
+    opacity:.15;
+
+    left:-180px;
+    bottom:-210px;
+}
+
+.intro-content{
+    position:relative;
+
+    z-index:3;
+
+    text-align:center;
+
+    width:min(500px,100%);
+
+    animation:rise .9s ease both;
+}
+
+.intro-mini{
+    font-family:Orbitron,sans-serif;
+
+    font-size:8px;
+
+    letter-spacing:4px;
+
+    color:#c4b5fd;
+
+    margin-bottom:12px;
+
+    text-transform:uppercase;
+}
+
+.intro-title{
+    font-family:Orbitron,sans-serif;
+
+    font-size:clamp(25px,7vw,42px);
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.intro-title span{
+    background:
+        linear-gradient(
+            90deg,
+            #a78bfa,
+            #f472b6,
+            #67e8f9
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.intro-sub{
+    margin:9px 0 22px;
+
+    color:#aaa4b4;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.enter-btn{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:12px 19px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.09);
+
+    border:1px solid rgba(255,255,255,.20);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1.3px;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 10px 45px rgba(0,0,0,.35);
+
+    transition:.25s;
+}
+
+.enter-btn:hover{
+    transform:translateY(-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,92,246,.35),
+            rgba(236,72,153,.25)
+        );
+
+    border-color:
+        rgba(196,181,253,.55);
+
+    box-shadow:
+        0 15px 55px rgba(124,58,237,.28);
+}
+
+.enter-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#34d399;
+
+    box-shadow:
+        0 0 15px #34d399;
+}
+
+@keyframes rise{
+
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+#authScreen{
+    position:fixed;
+    inset:0;
+
+    z-index:9998;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:#05040a;
+
+    overflow:hidden;
+}
+
+.auth-bg{
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(139,92,246,.22),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(236,72,153,.15),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #05040a,
+            #0c0714 55%,
+            #05040a
+        );
+}
+
+.auth-orb{
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    opacity:.16;
+}
+
+.auth-orb.a{
+    background:#7c3aed;
+
+    top:-170px;
+    left:-150px;
+}
+
+.auth-orb.b{
+    background:#ec4899;
+
+    right:-180px;
+    bottom:-180px;
+}
+
+.auth-card{
+    position:relative;
+
+    width:min(390px,100%);
+
+    padding:29px 25px 23px;
+
+    border:
+        1px solid
+        rgba(196,181,253,.20);
+
+    border-radius:26px;
+
+    background:
+        rgba(13,11,20,.78);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.6);
+
+    animation:
+        rise .55s ease both;
+}
+
+.auth-close{
+    position:absolute;
+
+    right:14px;
+    top:14px;
+
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:#aaa;
+
+    cursor:pointer;
+}
+
+.auth-mark{
+    width:55px;
+    height:55px;
+
+    border-radius:17px;
+
+    display:grid;
+    place-items:center;
+
+    margin:0 auto 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #a855f7,
+            #ec4899
+        );
+
+    font-family:Orbitron;
+
+    font-weight:900;
+
+    box-shadow:
+        0 0 35px
+        rgba(168,85,247,.25);
+}
+
+.auth-title{
+    text-align:center;
+
+    font-family:Orbitron;
+
+    font-size:21px;
+
+    font-weight:900;
+}
+
+.auth-title span{
+    color:#f472b6;
+}
+
+.auth-sub{
+    text-align:center;
+
+    margin-top:6px;
+
+    color:#837c91;
+
+    font-size:7px;
+
+    letter-spacing:2.5px;
+
+    font-weight:800;
+}
+
+.auth-line{
+    height:1px;
+
+    margin:18px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #8b5cf6,
+            #ec4899,
+            transparent
+        );
+}
+
+.field{
+    margin-bottom:13px;
+}
+
+.field label{
+    display:block;
+
+    margin-bottom:6px;
+
+    color:#9991a7;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.field input{
+    width:100%;
+
+    height:44px;
+
+    padding:0 12px;
+
+    border-radius:11px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    outline:none;
+
+    background:
+        rgba(255,255,255,.045);
+
+    color:#fff;
+
+    font-size:11px;
+}
+
+.field input:focus{
+    border-color:#9b5cf6;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(139,92,246,.09);
+}
+
+.auth-submit{
+    width:100%;
+
+    height:45px;
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #7c3aed,
+            #a855f7,
+            #ec4899
+        );
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.2px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(139,92,246,.18);
+
+    transition:.2s;
+}
+
+.auth-submit:hover{
+    transform:translateY(-2px);
+}
+
+.auth-submit.loading{
+    opacity:.6;
+
+    pointer-events:none;
+}
+
+.auth-error{
+    min-height:15px;
+
+    text-align:center;
+
+    color:#fb7185;
+
+    font-size:8px;
+
+    margin-top:9px;
+}
+
+.auth-foot{
+    text-align:center;
+
+    color:#5f5969;
+
+    font-size:7px;
+
+    letter-spacing:1.2px;
+
+    margin-top:6px;
+}
+
+
+/* =========================================================
+   ADMIN APP
+========================================================= */
+
+#app{
+    display:none;
+
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 75% 10%,
+            rgba(124,58,237,.10),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(34,211,238,.05),
+            transparent 25%
+        ),
+        #07070b;
+}
+
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:var(--sidebar);
+
+    padding:22px 14px;
+
+    background:
+        rgba(10,9,14,.94);
+
+    border-right:
+        1px solid var(--line);
+
+    z-index:100;
+
+    overflow-y:auto;
+
+    backdrop-filter:blur(20px);
+}
+
+.brand{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:
+        3px 9px 23px;
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+.brand-mark{
+    width:43px;
+    height:43px;
+
+    border-radius:13px;
+
+    display:grid;
+    place-items:center;
+
+    font-family:Orbitron;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6d28d9,
+            #a855f7,
+            #ec4899
+        );
+
+    box-shadow:
+        0 0 30px
+        rgba(168,85,247,.2);
+}
+
+.brand strong{
+    display:block;
+
+    font-family:Orbitron;
+
+    font-size:10px;
+}
+
+.brand small{
+    display:block;
+
+    margin-top:4px;
+
+    color:#706a78;
+
+    font-size:6px;
+
+    letter-spacing:1.5px;
+}
+
+.nav-label{
+    margin:
+        23px 9px 9px;
+
+    color:#57515f;
+
+    font-size:6px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.nav-item{
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:11px 12px;
+
+    margin-bottom:4px;
+
+    border-radius:10px;
+
+    background:transparent;
+
+    color:#817a8d;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font-size:9px;
+
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.nav-item:hover{
+    background:
+        rgba(139,92,246,.07);
+
+    color:#fff;
+}
+
+.nav-item.active{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(124,58,237,.20),
+            rgba(236,72,153,.06)
+        );
+
+    color:#fff;
+
+    box-shadow:
+        inset 3px 0 #9b5cff;
+}
+
+.nav-icon{
+    width:19px;
+
+    text-align:center;
+
+    font-size:14px;
+}
+
+
+/* MAIN */
+
+.main{
+    margin-left:var(--sidebar);
+
+    min-height:100vh;
+}
+
+
+/* TOPBAR */
+
+.topbar{
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 28px;
+
+    border-bottom:
+        1px solid var(--line);
+
+    background:
+        rgba(7,7,11,.72);
+
+    backdrop-filter:blur(20px);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:50;
+}
+
+.top-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+}
+
+.mobile-menu{
+    display:none;
+
+    width:35px;
+    height:35px;
+
+    border-radius:9px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid var(--line);
+
+    color:#fff;
+
+    cursor:pointer;
+}
+
+.live-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#34d399;
+
+    box-shadow:
+        0 0 14px #34d399;
+}
+
+.top-page{
+    font-family:Orbitron;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+.top-right{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+.top-btn{
+    padding:9px 12px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:9px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    color:#a7a0ae;
+
+    cursor:pointer;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    transition:.2s;
+}
+
+.top-btn:hover{
+    color:#fff;
+
+    border-color:
+        rgba(168,85,247,.35);
+}
+
+
+/* CONTENT */
+
+.content{
+    padding:27px;
+
+    max-width:1500px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+
+/* PAGE HEAD */
+
+.page-head{
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:22px;
+}
+
+.eyebrow{
+    font-size:7px;
+
+    letter-spacing:2px;
+
+    color:#8b5cf6;
+
+    font-weight:900;
+}
+
+.page-title{
+    font-family:Orbitron;
+
+    font-size:25px;
+
+    font-weight:900;
+
+    margin-top:6px;
+}
+
+.page-desc{
+    font-size:9px;
+
+    color:#77717f;
+
+    margin-top:7px;
+}
+
+.command{
+    font-family:monospace;
+
+    font-size:7px;
+
+    color:#9b8bb0;
+
+    border:
+        1px solid var(--line);
+
+    padding:9px 11px;
+
+    border-radius:9px;
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+
+/* WELCOME */
+
+.welcome-card{
+    padding:20px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,.12),
+            rgba(236,72,153,.04)
+        );
+
+    margin-bottom:17px;
+}
+
+.welcome-card h2{
+    font-family:Orbitron;
+
+    font-size:15px;
+}
+
+.welcome-card p{
+    font-size:8px;
+
+    color:#77717f;
+
+    margin-top:6px;
+}
+
+
+/* STATS */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+
+    margin-bottom:18px;
+}
+
+.stat{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:17px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:15px;
+
+    background:
+        rgba(16,14,22,.75);
+}
+
+.stat:after{
+    content:"";
+
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    right:-40px;
+    top:-45px;
+
+    background:#8b5cf6;
+
+    filter:blur(40px);
+
+    opacity:.12;
+}
+
+.stat-label{
+    color:#6f6877;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.stat-value{
+    font-family:Orbitron;
+
+    font-size:23px;
+
+    font-weight:900;
+
+    margin-top:8px;
+}
+
+.stat-sub{
+    color:#595360;
+
+    font-size:7px;
+
+    margin-top:5px;
+}
+
+
+/* GRID */
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.5fr)
+        minmax(270px,.8fr);
+
+    gap:16px;
+}
+
+
+/* PANEL */
+
+.panel{
+    border:
+        1px solid var(--line);
+
+    border-radius:16px;
+
+    background:
+        rgba(14,13,20,.76);
+
+    overflow:hidden;
+}
+
+.panel-head{
+    height:54px;
+
+    padding:0 17px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+.panel-title{
+    font-family:Orbitron;
+
+    font-size:8px;
+
+    font-weight:900;
+}
+
+.panel-link{
+    color:#a78bfa;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+
+/* ORDERS */
+
+.orders{
+    padding:5px 17px 12px;
+}
+
+.order{
+    display:grid;
+
+    grid-template-columns:
+        75px
+        1fr
+        85px
+        70px;
+
+    gap:10px;
+
+    align-items:center;
+
+    padding:12px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.055);
+}
+
+.order:last-child{
+    border-bottom:0;
+}
+
+.order-id{
+    font-family:monospace;
+
+    color:#9b7bd4;
+
+    font-size:7px;
+}
+
+.order-name{
+    font-size:8px;
+
+    font-weight:800;
+}
+
+.order-product{
+    color:#686171;
+
+    font-size:7px;
+
+    margin-top:3px;
+}
+
+.order-price{
+    text-align:right;
+
+    font-family:Orbitron;
+
+    font-size:7px;
+}
+
+.status{
+    justify-self:end;
+
+    padding:5px 7px;
+
+    border-radius:6px;
+
+    font-size:6px;
+
+    font-weight:900;
+}
+
+.status.pending{
+    color:#facc15;
+
+    background:
+        rgba(250,204,21,.08);
+}
+
+.status.approved{
+    color:#34d399;
+
+    background:
+        rgba(52,211,153,.08);
+}
+
+.status.rejected{
+    color:#fb7185;
+
+    background:
+        rgba(251,113,133,.08);
+}
+
+
+/* QUICK */
+
+.quick-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:9px;
+
+    padding:15px;
+}
+
+.quick{
+    min-height:72px;
+
+    padding:12px;
+
+    border-radius:11px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid var(--line);
+
+    color:#fff;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.quick:hover{
+    transform:translateY(-2px);
+
+    border-color:
+        rgba(168,85,247,.28);
+
+    background:
+        rgba(139,92,246,.06);
+}
+
+.quick b{
+    display:block;
+
+    font-size:8px;
+
+    margin-top:7px;
+}
+
+.quick span{
+    display:block;
+
+    color:#686171;
+
+    font-size:6px;
+
+    margin-top:3px;
+}
+
+.quick-icon{
+    font-size:17px;
+}
+
+
+/* =========================================================
+   PROFILE PAGE
+========================================================= */
+
+.profile-layout{
+    display:grid;
+
+    grid-template-columns:
+        310px 1fr;
+
+    gap:16px;
+}
+
+.profile-card{
+    padding:25px;
+
+    text-align:center;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:18px;
+
+    background:
+        rgba(14,13,20,.76);
+}
+
+.avatar-big{
+    width:118px;
+    height:118px;
+
+    border-radius:34px;
+
+    object-fit:cover;
+
+    margin:4px auto 15px;
+
+    border:
+        2px solid
+        rgba(168,85,247,.30);
+
+    background:
+        linear-gradient(
+            135deg,
+            #6d28d9,
+            #ec4899
+        );
+
+    box-shadow:
+        0 0 45px
+        rgba(139,92,246,.15);
+}
+
+.profile-card h2{
+    font-family:Orbitron;
+
+    font-size:14px;
+}
+
+.role-pill{
+    display:inline-block;
+
+    margin-top:7px;
+
+    padding:5px 8px;
+
+    border-radius:999px;
+
+    background:
+        rgba(52,211,153,.08);
+
+    color:#34d399;
+
+    font-size:6px;
+
+    font-weight:900;
+}
+
+.profile-card p{
+    font-size:7px;
+
+    color:#6f6877;
+
+    margin-top:9px;
+
+    word-break:break-all;
+}
+
+.profile-actions{
+    margin-top:17px;
+}
+
+.file-label{
+    display:block;
+
+    padding:10px;
+
+    border-radius:9px;
+
+    background:
+        rgba(139,92,246,.08);
+
+    border:
+        1px solid
+        rgba(168,85,247,.16);
+
+    color:#b9a1ff;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.file-label input{
+    display:none;
+}
+
+.profile-form{
+    padding:23px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:18px;
+
+    background:
+        rgba(14,13,20,.76);
+}
+
+.section-title{
+    font-family:Orbitron;
+
+    font-size:10px;
+
+    margin-bottom:17px;
+}
+
+.form-row{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+}
+
+.form-field{
+    margin-bottom:14px;
+}
+
+.form-field label{
+    display:block;
+
+    color:#77707f;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    margin-bottom:6px;
+}
+
+.form-field input,
+.form-field select{
+    width:100%;
+
+    height:43px;
+
+    padding:0 11px;
+
+    border-radius:9px;
+
+    border:
+        1px solid var(--line);
+
+    background:
+        rgba(255,255,255,.035);
+
+    color:#fff;
+
+    outline:none;
+
+    font-size:9px;
+}
+
+.form-field input:focus,
+.form-field select:focus{
+    border-color:#8b5cf6;
+}
+
+.save-btn{
+    height:42px;
+
+    padding:0 18px;
+
+    border-radius:9px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            100deg,
+            #7c3aed,
+            #a855f7,
+            #ec4899
+        );
+
+    cursor:pointer;
+
+    font-size:7px;
+
+    font-weight:900;
+}
+
+
+/* =========================================================
+   MODULES
+========================================================= */
+
+.module-card{
+    padding:28px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:17px;
+
+    background:
+        rgba(14,13,20,.76);
+}
+
+.module-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:11px;
+
+    margin-top:18px;
+}
+
+.module-tile{
+    padding:17px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+.module-tile .mi{
+    font-size:20px;
+}
+
+.module-tile b{
+    display:block;
+
+    font-size:8px;
+
+    margin-top:8px;
+}
+
+.module-tile span{
+    display:block;
+
+    color:#6c6672;
+
+    font-size:7px;
+
+    margin-top:4px;
+
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   PRODUCTS MANAGER
+========================================================= */
+
+.product-toolbar{
+    display:grid;
+    grid-template-columns:minmax(180px,1fr) 190px 150px auto;
+    gap:9px;
+    margin-bottom:14px;
+}
+
+.product-search-wrap{
+    height:42px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:0 12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:rgba(255,255,255,.035);
+}
+.product-search-wrap span{color:#a855f7;font-size:18px}
+.product-search-wrap input{
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:#fff;
+    font-size:9px;
+}
+.product-toolbar select,.ghost-btn{
+    min-height:42px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:rgba(255,255,255,.035);
+    color:#fff;
+    padding:0 12px;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.6px;
+}
+.ghost-btn{cursor:pointer;color:#c8b9ff}
+.ghost-btn:hover{border-color:rgba(168,85,247,.55);background:rgba(168,85,247,.08)}
+
+.products-list{display:grid;gap:10px}
+.product-card{
+    display:grid;
+    grid-template-columns:78px minmax(0,1fr) auto;
+    gap:15px;
+    align-items:center;
+    padding:12px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:linear-gradient(120deg,rgba(255,255,255,.035),rgba(168,85,247,.025));
+}
+.product-thumb{
+    width:78px;height:78px;border-radius:11px;overflow:hidden;
+    border:1px solid rgba(168,85,247,.22);
+    background:linear-gradient(135deg,#171221,#09080d);
+    display:flex;align-items:center;justify-content:center;
+}
+.product-thumb img{width:100%;height:100%;object-fit:cover}
+.product-thumb span{font-size:20px;font-weight:900;color:#a855f7}
+.product-main{min-width:0}
+.product-name{font-size:11px;font-weight:900;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.product-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.product-chip{padding:4px 7px;border-radius:999px;font-size:6px;font-weight:900;letter-spacing:.7px;background:rgba(168,85,247,.09);border:1px solid rgba(168,85,247,.18);color:#c4b5fd}
+.product-chip.active{color:#86efac;background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2)}
+.product-chip.off{color:#fb7185;background:rgba(244,63,94,.08);border-color:rgba(244,63,94,.2)}
+.product-desc{color:#77707f;font-size:7px;margin-top:6px;line-height:1.5;max-width:680px}
+.product-price{display:flex;gap:8px;margin-top:7px;font-size:7px;color:#aaa1b3}
+.product-price b{color:#e9d5ff}
+.product-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.product-action{height:34px;padding:0 10px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#fff;font-size:7px;font-weight:900;cursor:pointer}
+.product-action.edit{border-color:rgba(168,85,247,.35);color:#d8b4fe}
+.product-action.danger{border-color:rgba(244,63,94,.25);color:#fb7185}
+.product-action:hover{background:rgba(168,85,247,.09)}
+.empty-products{padding:45px 20px;text-align:center;border:1px dashed rgba(168,85,247,.2);border-radius:14px;color:#625c69;font-size:8px}
+
+.modal-backdrop{
+    position:fixed;inset:0;z-index:180;display:none;align-items:center;justify-content:center;
+    padding:18px;background:rgba(0,0,0,.76);backdrop-filter:blur(12px);
+}
+.modal-backdrop.show{display:flex}
+.product-modal{
+    width:min(760px,100%);max-height:92vh;overflow:auto;padding:22px;
+    border:1px solid rgba(168,85,247,.25);border-radius:18px;
+    background:linear-gradient(145deg,#100d18,#09080d);
+    box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.modal-head h2{font-size:20px;margin:5px 0 0;color:#fff}
+.modal-close{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#fff;font-size:22px;cursor:pointer}
+.product-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.product-full{grid-column:1/-1}
+.form-field textarea{
+    width:100%;min-height:105px;padding:11px;border-radius:9px;border:1px solid var(--line);
+    background:rgba(255,255,255,.035);color:#fff;outline:none;resize:vertical;font-size:9px;font-family:inherit;
+}
+.form-field textarea:focus{border-color:#8b5cf6}
+.form-field input[type=file]{padding:8px 10px;height:auto;font-size:8px}
+.file-help{display:block;margin-top:5px;color:#625c69;font-size:6px}
+.active-toggle{padding-top:2px}
+.switch-line{display:flex;align-items:center;gap:9px;height:43px;color:#b9b0c2;font-size:8px;cursor:pointer}
+.switch-line input{position:absolute;opacity:0;pointer-events:none}
+.switch-ui{width:42px;height:23px;border-radius:999px;background:#292531;border:1px solid var(--line);position:relative;transition:.2s}
+.switch-ui:after{content:"";position:absolute;top:3px;left:3px;width:15px;height:15px;border-radius:50%;background:#77707f;transition:.2s}
+.switch-line input:checked + .switch-ui{background:rgba(168,85,247,.25);border-color:#a855f7}
+.switch-line input:checked + .switch-ui:after{left:22px;background:#c084fc}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+
+@media(max-width:760px){
+    .product-toolbar{grid-template-columns:1fr 1fr}
+    .product-search-wrap{grid-column:1/-1}
+    .product-card{grid-template-columns:60px minmax(0,1fr)}
+    .product-thumb{width:60px;height:60px}
+    .product-actions{grid-column:1/-1;justify-content:flex-start}
+    .product-form-grid{grid-template-columns:1fr}
+    .product-full{grid-column:auto}
+}
+
+/* =========================================================
+   REVIEWS MANAGER
+========================================================= */
+.review-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.review-tab{height:38px;padding:0 13px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.035);color:#8e8999;font-size:7px;font-weight:900;cursor:pointer}
+.review-tab.active{color:#fff;border-color:rgba(168,85,247,.45);background:linear-gradient(90deg,rgba(124,58,237,.18),rgba(236,72,153,.08))}
+.review-list{display:grid;gap:10px}
+.review-row{display:grid;grid-template-columns:48px minmax(150px,1fr) minmax(180px,1.7fr) 95px auto;gap:12px;align-items:center;padding:13px 15px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);transition:.2s}
+.review-row:hover{transform:translateY(-2px);border-color:rgba(168,85,247,.24);box-shadow:0 15px 45px rgba(0,0,0,.18)}
+.review-avatar{width:42px;height:42px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#6d28d9,#ec4899);font-size:13px;font-weight:900;border:1px solid rgba(196,181,253,.3)}
+.review-avatar img{width:100%;height:100%;object-fit:cover}
+.review-user b{display:block;font-size:9px;font-weight:900}.review-user small{display:block;margin-top:4px;color:#a78bfa;font-size:6px}
+.review-text{color:#aaa1b3;font-size:8px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.review-stars{color:#facc15;letter-spacing:1px;font-size:10px;white-space:nowrap}.review-date{color:#625c69;font-size:6px;margin-top:4px}
+.review-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}.review-action{height:32px;padding:0 9px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#fff;font-size:6px;font-weight:900;cursor:pointer}.review-action.approve{color:#86efac;border-color:rgba(52,211,153,.3)}.review-action.reject,.review-action.delete{color:#fb7185;border-color:rgba(251,113,133,.25)}.review-action:hover{transform:translateY(-1px);background:rgba(168,85,247,.08)}
+.review-status{display:inline-flex;padding:4px 7px;border-radius:999px;font-size:5px;font-weight:900;letter-spacing:.7px}.review-status.pending{color:#facc15;background:rgba(250,204,21,.08)}.review-status.approved{color:#34d399;background:rgba(52,211,153,.08)}
+@media(max-width:900px){.review-row{grid-template-columns:45px 1fr auto}.review-text{grid-column:2/-1}.review-actions{grid-column:2/-1;justify-content:flex-start}}
+@media(max-width:600px){.review-row{grid-template-columns:42px 1fr}.review-actions{grid-column:1/-1}.review-text{grid-column:1/-1}.review-avatar{width:38px;height:38px}}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+#toast{
+    position:fixed;
+
+    right:22px;
+    bottom:22px;
+
+    z-index:200;
+
+    padding:12px 15px;
+
+    border-radius:10px;
+
+    background:#16121f;
+
+    border:
+        1px solid
+        rgba(168,85,247,.25);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.45);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    opacity:0;
+
+    transform:translateY(15px);
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast-show{
+    opacity:1!important;
+
+    transform:none!important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .profile-layout{
+        grid-template-columns:1fr;
+    }
+
+    .module-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    :root{
+        --sidebar:245px;
+    }
+
+    .sidebar{
+        transform:translateX(-100%);
+
+        transition:.25s;
+
+        box-shadow:
+            20px 0 60px
+            rgba(0,0,0,.55);
+    }
+
+    .sidebar.open{
+        transform:none;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 14px;
+    }
+
+    .top-btn.website{
+        display:none;
+    }
+
+    .content{
+        padding:19px 14px;
+    }
+
+    .page-head{
+        display:block;
+    }
+
+    .command{
+        display:inline-block;
+
+        margin-top:12px;
+    }
+
+    .page-title{
+        font-size:21px;
+    }
+
+    .order{
+        grid-template-columns:
+            65px
+            1fr
+            65px;
+    }
+
+    .order-price{
+        display:none;
+    }
+
+    .stats{
+        gap:9px;
+    }
+
+    .stat{
+        padding:14px;
+    }
+
+    .stat-value{
+        font-size:19px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    #introScreen{
+        padding-bottom:32px;
+    }
+
+}
+
+
+@media(max-width:430px){
+
+    .intro-sub{
+        font-size:7px;
+    }
+
+    .enter-btn{
+        padding:11px 16px;
+    }
+
+    .auth-card{
+        padding:25px 18px 20px;
+    }
+
+    .stats{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .module-grid{
+        grid-template-columns:1fr;
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr;
+    }
+
+    .top-page{
+        font-size:8px;
+    }
+
+}
+
+
+/* =========================================================
+   ADVANCED ADMIN UI
+========================================================= */
+:root{
+    --glow:rgba(168,85,247,.28);
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    background-size:42px 42px;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 90%);
+}
+
+#app{position:relative;z-index:1}
+
+.sidebar{
+    box-shadow:18px 0 70px rgba(0,0,0,.28);
+}
+
+.brand-mark{
+    position:relative;
+    animation:brandPulse 3s ease-in-out infinite;
+}
+.brand-mark:after{
+    content:"";
+    position:absolute;
+    inset:-4px;
+    border:1px solid rgba(168,85,247,.2);
+    border-radius:16px;
+    animation:ringPulse 2.8s ease-out infinite;
+}
+@keyframes brandPulse{
+    0%,100%{transform:translateY(0);filter:brightness(1)}
+    50%{transform:translateY(-2px);filter:brightness(1.16)}
+}
+@keyframes ringPulse{
+    0%{opacity:.65;transform:scale(.94)}
+    70%,100%{opacity:0;transform:scale(1.2)}
+}
+
+.nav-item{
+    position:relative;
+    overflow:hidden;
+}
+.nav-item:after{
+    content:"";
+    position:absolute;
+    top:0;bottom:0;left:-90%;
+    width:70%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+    transform:skewX(-18deg);
+    transition:.5s;
+}
+.nav-item:hover:after{left:120%}
+
+.topbar{
+    box-shadow:0 8px 35px rgba(0,0,0,.16);
+}
+.top-right{gap:10px}
+.admin-profile-mini{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:5px 8px 5px 5px;
+    border:1px solid rgba(168,85,247,.22);
+    border-radius:999px;
+    background:rgba(255,255,255,.035);
+    cursor:pointer;
+    transition:.25s;
+}
+.admin-profile-mini:hover{
+    transform:translateY(-1px);
+    border-color:rgba(236,72,153,.45);
+    box-shadow:0 8px 28px rgba(139,92,246,.13);
+}
+.admin-profile-mini img{
+    width:30px;height:30px;border-radius:50%;
+    object-fit:cover;
+    border:1px solid rgba(196,181,253,.55);
+    background:#171221;
+}
+.admin-profile-mini .mini-name{
+    max-width:100px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font-size:7px;font-weight:900;color:#eee9f6;
+}
+.admin-profile-mini .mini-role{
+    margin-top:2px;
+    font-size:5px;letter-spacing:1px;color:#7f768a;
+}
+
+.welcome-card,
+.stat,
+.panel,
+.module-card,
+.profile-card,
+.profile-form,
+.product-card{
+    position:relative;
+    box-shadow:0 18px 55px rgba(0,0,0,.16);
+    transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.stat:hover,.quick:hover,.product-card:hover{
+    transform:translateY(-3px);
+    border-color:rgba(168,85,247,.25);
+    box-shadow:0 22px 65px rgba(0,0,0,.22);
+}
+.welcome-card{
+    overflow:hidden;
+}
+.welcome-card:after{
+    content:"";
+    position:absolute;
+    width:220px;height:220px;border-radius:50%;
+    right:-100px;top:-120px;
+    background:#ec4899;
+    filter:blur(75px);opacity:.08;
+    animation:floatGlow 6s ease-in-out infinite;
+}
+@keyframes floatGlow{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(-20px,15px)}
+}
+
+.stat-value{letter-spacing:.5px}
+.stat:before{
+    content:"";
+    position:absolute;left:0;top:0;
+    width:100%;height:1px;
+    background:linear-gradient(90deg,transparent,#8b5cf6,#ec4899,transparent);
+    opacity:.35;
+}
+
+.order{
+    position:relative;
+    border-radius:10px;
+    padding:13px 9px;
+    transition:.22s;
+}
+.order:hover{
+    background:linear-gradient(90deg,rgba(139,92,246,.07),rgba(236,72,153,.025),transparent);
+    transform:translateX(3px);
+}
+.order-new{
+    animation:orderIn .65s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes orderIn{
+    from{opacity:0;transform:translateX(18px) scale(.985)}
+    to{opacity:1;transform:none}
+}
+.order-time{
+    color:#625c69;
+    font-size:6px;
+    margin-top:4px;
+}
+.order-badge{
+    display:inline-flex;align-items:center;gap:4px;
+    margin-left:5px;padding:3px 6px;border-radius:999px;
+    color:#67e8f9;background:rgba(34,211,238,.07);
+    border:1px solid rgba(34,211,238,.15);
+    font-size:5px;font-weight:900;
+}
+.status{
+    transition:.2s;
+}
+.status.pending{box-shadow:0 0 16px rgba(250,204,21,.06)}
+.status.approved{box-shadow:0 0 16px rgba(52,211,153,.07)}
+
+.order-detail-modal{
+    width:min(720px,100%);
+    max-height:90vh;overflow:auto;
+    border:1px solid rgba(168,85,247,.25);
+    border-radius:20px;
+    padding:22px;
+    background:linear-gradient(145deg,#100d18,#09080d);
+    box-shadow:0 35px 110px rgba(0,0,0,.75);
+    animation:modalIn .28s ease both;
+}
+@keyframes modalIn{
+    from{opacity:0;transform:translateY(18px) scale(.98)}
+    to{opacity:1;transform:none}
+}
+.order-detail-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;
+}
+.detail-box{
+    padding:12px;border:1px solid var(--line);
+    border-radius:11px;background:rgba(255,255,255,.025);
+}
+.detail-box.full{grid-column:1/-1}
+.detail-label{
+    color:#686171;font-size:6px;font-weight:900;letter-spacing:1px;
+}
+.detail-value{
+    color:#f5f1fa;font-size:9px;font-weight:800;margin-top:5px;
+    word-break:break-word;
+}
+.slip-preview{
+    width:100%;max-height:310px;object-fit:contain;
+    border-radius:12px;border:1px solid rgba(168,85,247,.2);
+    background:#05040a;margin-top:8px;
+}
+.detail-actions{
+    display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+}
+.detail-btn{
+    height:38px;padding:0 13px;border-radius:9px;
+    border:1px solid var(--line);background:rgba(255,255,255,.04);
+    color:#fff;font-size:7px;font-weight:900;cursor:pointer;
+}
+.detail-btn.approve{border-color:rgba(52,211,153,.3);color:#86efac}
+.detail-btn.reject{border-color:rgba(251,113,133,.3);color:#fb7185}
+.detail-btn:hover{transform:translateY(-1px);background:rgba(168,85,247,.08)}
+
+.live-refresh{
+    display:inline-flex;align-items:center;gap:5px;
+    color:#6ee7b7;font-size:6px;font-weight:900;letter-spacing:.7px;
+}
+.live-refresh i{
+    width:6px;height:6px;border-radius:50%;background:#34d399;
+    box-shadow:0 0 12px #34d399;
+    animation:liveBlink 1.4s infinite;
+}
+@keyframes liveBlink{50%{opacity:.25;transform:scale(.7)}}
+
+@media(max-width:700px){
+    .admin-profile-mini .mini-name,.admin-profile-mini .mini-role{display:none}
+    .admin-profile-mini{padding:4px}
+    .admin-profile-mini img{width:31px;height:31px}
+    .order-detail-grid{grid-template-columns:1fr}
+    .detail-box.full{grid-column:auto}
+}
+
+
+/* =========================================================
+   CUSTOMER DIRECTORY + RANK MANAGEMENT
+========================================================= */
+.users-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.users-search{flex:1;min-width:220px;height:42px;padding:0 13px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);color:#fff;outline:none;font-size:9px}
+.users-search:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,.08)}
+.users-count{color:#6f6877;font-size:7px;font-weight:900;letter-spacing:1px}
+.user-row{display:grid;grid-template-columns:52px minmax(140px,1.1fr) minmax(120px,1fr) 100px 80px;gap:12px;align-items:center;padding:12px 17px;border-bottom:1px solid rgba(255,255,255,.055);cursor:pointer;transition:.2s}
+.user-row:hover{background:linear-gradient(90deg,rgba(139,92,246,.08),transparent);transform:translateX(2px)}
+.user-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#6d28d9,#ec4899);color:#fff;font-size:12px;font-weight:900;border:1px solid rgba(196,181,253,.3)}
+.user-avatar img{width:100%;height:100%;object-fit:cover}
+.user-main b{font-size:9px;font-weight:900}.user-main small{display:block;margin-top:3px;color:#77707f;font-size:7px}
+.user-bio{color:#6f6877;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-rank{color:#c4b5fd;font-size:7px;font-weight:900}.user-points{color:#22d3ee;font-family:Orbitron;font-size:7px;font-weight:900;text-align:right}
+.customer-modal{position:fixed;inset:0;z-index:190;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(12px)}
+.customer-modal.show{display:flex}
+.customer-modal-box{width:min(650px,100%);max-height:90vh;overflow:auto;padding:23px;border:1px solid rgba(168,85,247,.28);border-radius:20px;background:linear-gradient(145deg,#100d18,#09080d);box-shadow:0 35px 110px rgba(0,0,0,.75);animation:modalIn .28s ease both}
+.customer-modal-head{display:flex;align-items:center;justify-content:space-between}
+.customer-profile-head{display:flex;align-items:center;gap:15px;margin-top:18px}
+.customer-big-avatar{width:82px;height:82px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#6d28d9,#ec4899);font-size:25px;font-weight:900;border:2px solid rgba(196,181,253,.35)}
+.customer-big-avatar img{width:100%;height:100%;object-fit:cover}
+.customer-public-name{font-family:Orbitron;font-size:16px;font-weight:900}.customer-public-username{margin-top:4px;color:#c084fc;font-size:8px}.customer-public-rank{margin-top:7px;color:#22d3ee;font-size:7px;font-weight:900}
+.customer-public-bio{margin-top:16px;color:#8e8999;font-size:8px;line-height:1.6}
+.customer-socials{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.customer-socials a{color:#ddd;text-decoration:none;padding:7px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.025);font-size:7px;font-weight:800}
+.customer-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.customer-detail{padding:11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025)}.customer-detail label{display:block;color:#625c69;font-size:6px;font-weight:900;letter-spacing:1px}.customer-detail span{display:block;margin-top:5px;color:#eee;font-size:8px;font-weight:800;word-break:break-word}
+.rank-admin-list{display:grid;gap:10px}.rank-admin-row{display:grid;grid-template-columns:minmax(120px,1fr) 100px minmax(160px,1.5fr) 58px;gap:8px;align-items:center;padding:11px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025)}
+.rank-admin-row input{width:100%;height:36px;padding:0 9px;border:1px solid var(--line);border-radius:8px;background:#0a0810;color:#fff;outline:none;font-size:8px}.rank-admin-row input:focus{border-color:#8b5cf6}.rank-save{height:36px;border-radius:8px;background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;font-size:7px;font-weight:900;cursor:pointer}.rank-save:disabled{opacity:.55}
+@media(max-width:850px){.user-row{grid-template-columns:48px 1fr 85px 65px}.user-bio{display:none}.user-points{text-align:left}}
+@media(max-width:700px){.customer-detail-grid{grid-template-columns:1fr}.rank-admin-row{grid-template-columns:1fr 90px}.rank-admin-row input:nth-child(3){grid-column:1/-1}.rank-admin-row button{grid-column:2}}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     VIDEO INTRO
+========================================================= -->
+
+<section id="introScreen">
+
+    <video
+        class="intro-video"
+        id="introVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+    >
+        <source
+            src="./loginpage.mp4"
+            type="video/mp4"
+        >
+    </video>
+
+    <div class="intro-shade"></div>
+
+    <div class="intro-glow"></div>
+
+    <div class="intro-content">
+
+        <div class="intro-mini">
+            PRIVATE ADMIN SYSTEM
+        </div>
+
+        <div class="intro-title">
+            <span>HIM4 × NINJ4</span>
+        </div>
+
+        <div class="intro-sub">
+            Editing Store • Control Center
+        </div>
+
+        <button
+            class="enter-btn"
+            id="showLoginBtn"
+        >
+            <span class="enter-dot"></span>
+
+            ENTER ADMIN PANEL
+
+            <span>→</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
+<section id="authScreen">
+
+    <div class="auth-bg"></div>
+
+    <div class="auth-orb a"></div>
+
+    <div class="auth-orb b"></div>
+
+    <div class="auth-card">
+
+        <button
+            class="auth-close"
+            id="closeAuth"
+        >
+            ×
+        </button>
+
+        <div class="auth-mark">
+            HN
+        </div>
+
+        <div class="auth-title">
+            ADMIN <span>LOGIN</span>
+        </div>
+
+        <div class="auth-sub">
+            SECURE CONTROL CENTER
+        </div>
+
+        <div class="auth-line"></div>
+
+        <form id="loginForm">
+
+            <div class="field">
+
+                <label>
+                    EMAIL ADDRESS
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="admin@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    PASSWORD
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••••••"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                class="auth-submit"
+                id="loginButton"
+                type="submit"
+            >
+                ACCESS CONTROL CENTER
+            </button>
+
+        </form>
+
+
+        <div
+            class="auth-error"
+            id="loginError"
+        ></div>
+
+
+        <div class="auth-foot">
+            AUTHORIZED STAFF ONLY • HIM4 × NINJ4
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ADMIN APP
+========================================================= -->
+
+<div id="app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                HN
+            </div>
+
+            <div>
+
+                <strong>
+                    HIM4 × NINJ4
+                </strong>
+
+                <small>
+                    ADMIN CONTROL CENTER
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="nav-label">
+            OVERVIEW
+        </div>
+
+
+        <button
+            class="nav-item active"
+            data-page="dashboard"
+        >
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            Dashboard
+        </button>
+
+
+        <div class="nav-label">
+            STORE MANAGEMENT
+        </div>
+
+
+        <button
+            class="nav-item"
+            data-page="products"
+        >
+            <span class="nav-icon">
+                ◈
+            </span>
+
+            Products
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-page="pricing"
+        >
+            <span class="nav-icon">
+                ◇
+            </span>
+
+            Pricing
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-page="uploads"
+        >
+            <span class="nav-icon">
+                ↥
+            </span>
+
+            File Uploads
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-page="orders"
+        >
+            <span class="nav-icon">
+                ▣
+            </span>
+
+            Orders
+        </button>
+
+        <button
+            class="nav-item"
+            data-page="customers"
+        >
+            <span class="nav-icon">
+                ♙
+            </span>
+            Customers
+        </button>
+
+        <button
+            class="nav-item"
+            data-page="reviews"
+        >
+            <span class="nav-icon">
+                ★
+            </span>
+            Reviews
+        </button>
+
+
+
+        <div class="nav-label">
+            TEAM
+        </div>
+
+
+        <button
+            class="nav-item"
+            data-page="staff"
+        >
+            <span class="nav-icon">
+                ♧
+            </span>
+
+            Staff Members
+        </button>
+
+
+        <div class="nav-label">
+            ACCOUNT
+        </div>
+
+
+        <button
+            class="nav-item"
+            data-page="profile"
+        >
+            <span class="nav-icon">
+                ◎
+            </span>
+
+            My Profile
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-page="settings"
+        >
+            <span class="nav-icon">
+                ⚙
+            </span>
+
+            Settings
+        </button>
+
+        <button
+            class="nav-item"
+            data-page="rank-settings"
+        >
+            <span class="nav-icon">
+                ★
+            </span>
+            Rank Rewards
+        </button>
+
+
+
+        <button
+            class="nav-item"
+            id="logoutBtn"
+        >
+            <span class="nav-icon">
+                ↪
+            </span>
+
+            Logout
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="top-left">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                >
+                    ☰
+                </button>
+
+                <span class="live-dot"></span>
+
+                <span
+                    class="top-page"
+                    id="topPage"
+                >
+                    DASHBOARD
+                </span>
+
+            </div>
+
+
+            <div class="top-right">
+
+                <button
+                    class="top-btn website"
+                    onclick="window.open('../index.html','_blank')"
+                >
+                    OPEN WEBSITE
+                </button>
+
+                <span class="live-refresh"><i></i> LIVE</span>
+
+                <button
+                    class="top-btn"
+                    onclick="loadDashboard()"
+                >
+                    ↻ REFRESH
+                </button>
+
+                <button class="admin-profile-mini" id="topProfileBtn" type="button" title="Open profile">
+                    <img id="topProfileAvatar" src="" alt="Admin">
+                    <span>
+                        <span class="mini-name" id="topProfileName">ADMIN</span>
+                        <span class="mini-role" id="topProfileRole">STAFF</span>
+                    </span>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================= -->
+
+            <section
+                class="page active"
+                id="page-dashboard"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            CONTROL CENTER
+                        </div>
+
+                        <h1 class="page-title">
+                            Dashboard
+                        </h1>
+
+                        <p class="page-desc">
+                            Manage your HIM4 × NINJ4 editing store from one place.
+                        </p>
+
+                    </div>
+
+
+                    <div class="command">
+                        root@hn:~$ system_status
+                    </div>
+
+                </div>
+
+
+                <div class="welcome-card">
+
+                    <h2>
+                        Everything is under control.
+                    </h2>
+
+                    <p>
+                        Products, prices, uploads, customer orders and staff management are organized here.
+                    </p>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <div class="stat-label">
+                            TOTAL PRODUCTS
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="totalProducts"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-sub">
+                            Resources in store
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-label">
+                            TOTAL ORDERS
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="totalOrders"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-sub">
+                            Customer orders
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-label">
+                            PENDING ORDERS
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="pendingOrders"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-sub">
+                            Waiting for review
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-label">
+                            STAFF MEMBERS
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="totalStaff"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-sub">
+                            Authorized team
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GRID -->
+
+                <div class="grid">
+
+
+                    <!-- RECENT ORDERS -->
+
+                    <div class="panel">
+
+                        <div class="panel-head">
+
+                            <div class="panel-title">
+                                RECENT ORDERS
+                            </div>
+
+                            <div
+                                class="panel-link"
+                                onclick="openPage('orders')"
+                            >
+                                VIEW ALL
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="orders"
+                            id="recentOrders"
+                        >
+
+                            <div
+                                style="
+                                padding:25px;
+                                text-align:center;
+                                color:#625c69;
+                                font-size:8px
+                                "
+                            >
+                                Loading...
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- QUICK ACTIONS -->
+
+                    <div class="panel">
+
+                        <div class="panel-head">
+
+                            <div class="panel-title">
+                                QUICK ACTIONS
+                            </div>
+
+                        </div>
+
+
+                        <div class="quick-grid">
+
+
+                            <button
+                                class="quick"
+                                onclick="openPage('products')"
+                            >
+
+                                <div class="quick-icon">
+                                    ◈
+                                </div>
+
+                                <b>
+                                    Add Product
+                                </b>
+
+                                <span>
+                                    Create a new store resource
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                class="quick"
+                                onclick="openPage('pricing')"
+                            >
+
+                                <div class="quick-icon">
+                                    ◇
+                                </div>
+
+                                <b>
+                                    Change Pricing
+                                </b>
+
+                                <span>
+                                    Update monthly or lifetime price
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                class="quick"
+                                onclick="openPage('uploads')"
+                            >
+
+                                <div class="quick-icon">
+                                    ↥
+                                </div>
+
+                                <b>
+                                    Upload File
+                                </b>
+
+                                <span>
+                                    Add files to your resources
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                class="quick"
+                                onclick="openPage('orders')"
+                            >
+
+                                <div class="quick-icon">
+                                    ▣
+                                </div>
+
+                                <b>
+                                    Manage Orders
+                                </b>
+
+                                <span>
+                                    Review customer payments
+                                </span>
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PRODUCTS
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-products"
+            >
+
+                <div class="page-head">
+                    <div>
+                        <div class="eyebrow">STORE MANAGEMENT</div>
+                        <h1 class="page-title">Products</h1>
+                        <p class="page-desc">Create products, set one price, add thumbnails and preview videos.</p>
+                    </div>
+
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+                        <div class="command">products.database()</div>
+                        <button class="save-btn" id="addProductBtn" type="button">+ ADD PRODUCT</button>
+                    </div>
+                </div>
+
+                <div class="product-toolbar">
+                    <div class="product-search-wrap">
+                        <span>⌕</span>
+                        <input id="productSearch" type="search" placeholder="Search products...">
+                    </div>
+                    <select id="productCategoryFilter">
+                        <option value="">ALL CATEGORIES</option>
+                        <option>Premium Shakes</option>
+                        <option>Premium CC</option>
+                        <option>Fonts</option>
+                        <option>Overlays</option>
+                        <option>Solo Edits</option>
+                        <option>Duo Edits</option>
+                        <option>Squad Edits</option>
+                    </select>
+                    <select id="productStatusFilter">
+                        <option value="">ALL STATUS</option>
+                        <option value="true">ACTIVE</option>
+                        <option value="false">INACTIVE</option>
+                    </select>
+                    <button class="ghost-btn" id="refreshProducts" type="button">↻ REFRESH</button>
+                </div>
+
+                <div id="productsList" class="products-list">
+                    <div class="empty-products">Loading products...</div>
+                </div>
+
+            </section>
+
+            <!-- PRODUCT MODAL -->
+            
+            <!-- ORDER DETAIL MODAL -->
+            <div class="modal-backdrop" id="orderDetailModal">
+                <div class="order-detail-modal">
+                    <div class="modal-head">
+                        <div>
+                            <div class="eyebrow">LIVE ORDER / CUSTOMER REQUEST</div>
+                            <h2 id="detailOrderTitle">Order Details</h2>
+                        </div>
+                        <button class="modal-close" id="closeOrderDetail" type="button">×</button>
+                    </div>
+
+                    <div class="order-detail-grid">
+                        <div class="detail-box">
+                            <div class="detail-label">ORDER ID</div>
+                            <div class="detail-value" id="detailOrderId">-</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">STATUS</div>
+                            <div class="detail-value" id="detailStatus">-</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">CUSTOMER</div>
+                            <div class="detail-value" id="detailCustomer">-</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">ORDER TIME</div>
+                            <div class="detail-value" id="detailTime">-</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">WHATSAPP</div>
+                            <div class="detail-value" id="detailWhatsapp">-</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">EMAIL</div>
+                            <div class="detail-value" id="detailEmail">-</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">PRODUCT</div>
+                            <div class="detail-value" id="detailProduct">-</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">AMOUNT</div>
+                            <div class="detail-value" id="detailPrice">-</div>
+                        </div>
+                        <div class="detail-box full">
+                            <div class="detail-label">PAYMENT SLIP</div>
+                            <img class="slip-preview" id="detailSlip" src="" alt="Payment slip">
+                        </div>
+                    </div>
+
+                    <div class="detail-actions">
+                        <button class="detail-btn" id="openSlipBtn" type="button">OPEN SLIP</button>
+                        <button class="detail-btn approve" id="approveOrderBtn" type="button">✓ APPROVE</button>
+                        <button class="detail-btn reject" id="rejectOrderBtn" type="button">× REJECT</button>
+                    </div>
+                </div>
+            </div>
+
+<div class="modal-backdrop" id="productModal">
+                <div class="product-modal">
+                    <div class="modal-head">
+                        <div>
+                            <div class="eyebrow">DATABASE / PRODUCTS</div>
+                            <h2 id="productModalTitle">Add Product</h2>
+                        </div>
+                        <button class="modal-close" id="closeProductModal" type="button">×</button>
+                    </div>
+
+                    <form id="productForm">
+                        <input id="productId" type="hidden">
+
+                        <div class="product-form-grid">
+                            <div class="form-field">
+                                <label>PRODUCT NAME</label>
+                                <input id="productName" type="text" maxlength="120" placeholder="e.g. Premium Shake Pack 01" required>
+                            </div>
+
+                            <div class="form-field">
+                                <label>CATEGORY</label>
+                                <select id="productCategory" required>
+                                    <option value="">Select category</option>
+                                    <option>Premium Shakes</option>
+                                    <option>Premium CC</option>
+                                    <option>Fonts</option>
+                                    <option>Overlays</option>
+                                    <option>Solo Edits</option>
+                                    <option>Duo Edits</option>
+                                    <option>Squad Edits</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field product-full">
+                                <label>DESCRIPTION</label>
+                                <textarea id="productDescription" maxlength="1000" placeholder="Describe what the customer receives..."></textarea>
+                            </div>
+
+                            <div class="form-field">
+                                <label>PRICE (LKR)</label>
+                                <input id="productPrice" type="number" min="0" step="1" placeholder="500" required>
+                            </div>
+
+                            <div class="form-field">
+                                <label>THUMBNAIL</label>
+                                <input id="productThumbnail" type="file" accept="image/*">
+                                <small class="file-help">PNG / JPG / WEBP · optional when editing</small>
+                            </div>
+
+                            <div class="form-field product-full">
+                                <label>PREVIEW VIDEO</label>
+                                <input id="productPreview" type="file" accept="video/mp4,video/webm,video/quicktime">
+                                <small class="file-help">Premium: upload customer preview only. Free: upload a preview if you want one.</small>
+                            </div>
+
+                            <div class="form-field product-full" id="resourceFileField" style="display:none">
+                                <label>FREE RESOURCE FILE</label>
+                                <input id="productResourceFile" type="file">
+                                <small class="file-help">Required for Fonts / Overlays. This is the actual file customers can download.</small>
+                            </div>
+
+                            <div class="form-field product-full active-toggle">
+                                <label>PRODUCT STATUS</label>
+                                <label class="switch-line">
+                                    <input id="productActive" type="checkbox" checked>
+                                    <span class="switch-ui"></span>
+                                    <span>Product is visible / active</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button class="ghost-btn" id="cancelProduct" type="button">CANCEL</button>
+                            <button class="save-btn" id="saveProduct" type="submit">SAVE PRODUCT</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- =================================================
+                 PRICING
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-pricing"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            STORE MANAGEMENT
+                        </div>
+
+                        <h1 class="page-title">
+                            Pricing
+                        </h1>
+
+                        <p class="page-desc">
+                            Manage monthly and lifetime package prices.
+                        </p>
+
+                    </div>
+
+                    <div class="command">
+                        pricing.config()
+                    </div>
+
+                </div>
+
+
+                <div class="module-card">
+
+                    <div class="module-grid">
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                120
+                            </div>
+
+                            <b>
+                                120 FPS Android
+                            </b>
+
+                            <span>
+                                Monthly + lifetime pricing.
+                            </span>
+
+                        </div>
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                120
+                            </div>
+
+                            <b>
+                                120 FPS iOS
+                            </b>
+
+                            <span>
+                                Monthly + lifetime pricing.
+                            </span>
+
+                        </div>
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                240
+                            </div>
+
+                            <b>
+                                240 FPS Android
+                            </b>
+
+                            <span>
+                                Monthly + lifetime pricing.
+                            </span>
+
+                        </div>
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                240
+                            </div>
+
+                            <b>
+                                240 FPS iOS
+                            </b>
+
+                            <span>
+                                Monthly + lifetime pricing.
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 UPLOADS
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-uploads"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            STORE MANAGEMENT
+                        </div>
+
+                        <h1 class="page-title">
+                            File Uploads
+                        </h1>
+
+                        <p class="page-desc">
+                            Central area for product files, thumbnails and resources.
+                        </p>
+
+                    </div>
+
+                    <div class="command">
+                        storage.upload()
+                    </div>
+
+                </div>
+
+
+                <div class="module-card">
+
+                    <div class="module-grid">
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                ⇧
+                            </div>
+
+                            <b>
+                                Resource File
+                            </b>
+
+                            <span>
+                                Upload the actual downloadable editing resource.
+                            </span>
+
+                        </div>
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                ▣
+                            </div>
+
+                            <b>
+                                Thumbnail
+                            </b>
+
+                            <span>
+                                Upload product preview images.
+                            </span>
+
+                        </div>
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                ☁
+                            </div>
+
+                            <b>
+                                Storage
+                            </b>
+
+                            <span>
+                                Supabase Storage will keep your files organized.
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ORDERS
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-orders"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            CUSTOMER MANAGEMENT
+                        </div>
+
+                        <h1 class="page-title">
+                            Orders
+                        </h1>
+
+                        <p class="page-desc">
+                            Review orders, payment slips and customer details.
+                        </p>
+
+                    </div>
+
+                    <div class="command">
+                        orders.review()
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-head">
+
+                        <div class="panel-title">
+                            ORDER QUEUE
+                        </div>
+
+                        <div
+                            class="panel-link"
+                            onclick="loadOrdersFull()"
+                        >
+                            REFRESH
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="orders"
+                        id="fullOrders"
+                    >
+
+                        <div
+                            style="
+                            padding:25px;
+                            text-align:center;
+                            color:#625c69;
+                            font-size:8px
+                            "
+                        >
+                            Open the order manager to load orders.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 CUSTOMERS
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-customers"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            CUSTOMER MANAGEMENT
+                        </div>
+
+                        <h1 class="page-title">
+                            Customers
+                        </h1>
+
+                        <p class="page-desc">
+                            All registered customer profiles • Search • Public profile view
+                        </p>
+
+                    </div>
+
+                    <div class="command">
+                        customers.search()
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-head">
+
+                        <div>
+
+                            <div class="panel-title">
+                                CUSTOMER DIRECTORY
+                            </div>
+
+                            <div
+                                class="panel-sub"
+                                style="color:#625c69;font-size:7px;margin-top:4px"
+                            >
+                                REGISTERED USERS • RANK • POINTS • PROFILE DATA
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="ghost-btn"
+                            type="button"
+                            onclick="loadCustomerUsers()"
+                        >
+                            ↻ REFRESH
+                        </button>
+
+                    </div>
+
+
+                    <div style="padding:16px 17px 5px">
+
+                        <div class="users-toolbar">
+
+                            <input
+                                class="users-search"
+                                id="customerSearch"
+                                type="search"
+                                placeholder="Search name, username, bio..."
+                                autocomplete="off"
+                            >
+
+                            <span
+                                class="users-count"
+                                id="customerCount"
+                            >
+                                0 USERS
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="customerUsers">
+
+                        <div
+                            style="
+                                padding:30px;
+                                text-align:center;
+                                color:#625c69;
+                                font-size:8px
+                            "
+                        >
+                            Loading customers...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+
+            <!-- =================================================
+                 STAFF
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-staff"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            TEAM MANAGEMENT
+                        </div>
+
+                        <h1 class="page-title">
+                            Staff Members
+                        </h1>
+
+                        <p class="page-desc">
+                            Manage authorized staff profiles and roles.
+                        </p>
+
+                    </div>
+
+                    <div class="command">
+                        staff.manage()
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-head">
+
+                        <div class="panel-title">
+                            AUTHORIZED STAFF
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="orders"
+                        id="fullStaff"
+                    >
+
+                        <div
+                            style="
+                            padding:25px;
+                            text-align:center;
+                            color:#625c69;
+                            font-size:8px
+                            "
+                        >
+                            Loading staff...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROFILE
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-profile"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            ACCOUNT
+                        </div>
+
+                        <h1 class="page-title">
+                            My Profile
+                        </h1>
+
+                        <p class="page-desc">
+                            Your profile is kept separate from the main dashboard.
+                        </p>
+
+                    </div>
+
+                    <div class="command">
+                        account.profile()
+                    </div>
+
+                </div>
+
+
+                <div class="profile-layout">
+
+
+                    <div class="profile-card">
+
+                        <img
+                            class="avatar-big"
+                            id="profileAvatar"
+                            alt="Profile"
+                        >
+
+
+                        <h2 id="profileName">
+                            Loading...
+                        </h2>
+
+
+                        <div
+                            class="role-pill"
+                            id="profileRole"
+                        >
+                            STAFF
+                        </div>
+
+
+                        <p id="profileEmail">
+                            -
+                        </p>
+
+
+                        <div class="profile-actions">
+
+                            <label class="file-label">
+
+                                CHANGE PROFILE PICTURE
+
+                                <input
+                                    type="file"
+                                    id="avatarInput"
+                                    accept="image/*"
+                                >
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-form">
+
+                        <div class="section-title">
+                            PROFILE SETTINGS
+                        </div>
+
+
+                        <div class="form-row">
+
+
+                            <div class="form-field">
+
+                                <label>
+                                    DISPLAY NAME
+                                </label>
+
+                                <input
+                                    id="profileNameInput"
+                                    type="text"
+                                    placeholder="Your name"
+                                >
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label>
+                                    ROLE
+                                </label>
+
+                                <input
+                                    id="profileRoleInput"
+                                    type="text"
+                                    placeholder="Admin"
+                                    disabled
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label>
+                                ACCOUNT EMAIL
+                            </label>
+
+                            <input
+                                id="profileEmailInput"
+                                type="email"
+                                disabled
+                            >
+
+                        </div>
+
+
+                        <button
+                            class="save-btn"
+                            id="saveProfile"
+                        >
+                            SAVE PROFILE
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 REVIEWS
+            ================================================= -->
+
+            <section class="page" id="page-reviews">
+
+                <div class="page-head">
+                    <div>
+                        <div class="eyebrow">CUSTOMER FEEDBACK</div>
+                        <h1 class="page-title">Reviews</h1>
+                        <p class="page-desc">Review moderation • Customer ratings • Profile details</p>
+                    </div>
+                    <div class="command">reviews.moderate()</div>
+                </div>
+
+                <div class="review-tabs">
+                    <button class="review-tab active" id="reviewTabPending" onclick="setReviewFilter('pending',this)">PENDING</button>
+                    <button class="review-tab" id="reviewTabApproved" onclick="setReviewFilter('approved',this)">APPROVED</button>
+                    <button class="review-tab" id="reviewTabAll" onclick="setReviewFilter('all',this)">ALL</button>
+                    <button class="ghost-btn" type="button" onclick="loadReviewsAdmin()">↻ REFRESH</button>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="panel-title">REVIEW QUEUE</div>
+                            <div style="color:#625c69;font-size:7px;margin-top:4px">APPROVE REVIEWS TO SHOW THEM ON THE WEBSITE</div>
+                        </div>
+                        <div class="live-refresh"><i></i> LIVE</div>
+                    </div>
+                    <div id="adminReviewList" class="review-list" style="padding:14px 15px">
+                        <div style="padding:30px;text-align:center;color:#625c69;font-size:8px">Open Reviews to load reviews.</div>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 RANK REWARDS
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-rank-settings"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            MEMBERSHIP SYSTEM
+                        </div>
+
+                        <h1 class="page-title">
+                            Rank Rewards
+                        </h1>
+
+                        <p class="page-desc">
+                            Manage customer rank thresholds and reward descriptions.
+                        </p>
+
+                    </div>
+
+                    <div class="command">
+                        rank_rewards.edit()
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-head">
+
+                        <div>
+
+                            <div class="panel-title">
+                                RANK CONFIGURATION
+                            </div>
+
+                            <div
+                                style="
+                                    color:#625c69;
+                                    font-size:7px;
+                                    margin-top:4px
+                                "
+                            >
+                                CHANGES APPLY TO CUSTOMER RANK DISPLAY
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="ghost-btn"
+                            type="button"
+                            onclick="loadRankAdmin()"
+                        >
+                            ↻ REFRESH
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        style="padding:16px 17px"
+                        id="rankAdminList"
+                        class="rank-admin-list"
+                    >
+
+                        <div
+                            style="
+                                padding:30px;
+                                text-align:center;
+                                color:#625c69;
+                                font-size:8px
+                            "
+                        >
+                            Loading ranks...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+
+            <!-- =================================================
+                 SETTINGS
+            ================================================= -->
+
+            <section
+                class="page"
+                id="page-settings"
+            >
+
+                <div class="page-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            SYSTEM
+                        </div>
+
+                        <h1 class="page-title">
+                            Settings
+                        </h1>
+
+                        <p class="page-desc">
+                            Admin system configuration.
+                        </p>
+
+                    </div>
+
+                    <div class="command">
+                        system.settings()
+                    </div>
+
+                </div>
+
+
+                <div class="module-card">
+
+                    <div class="module-grid">
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                ●
+                            </div>
+
+                            <b>
+                                Authentication
+                            </b>
+
+                            <span>
+                                Supabase email/password authentication is active.
+                            </span>
+
+                        </div>
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                ▣
+                            </div>
+
+                            <b>
+                                Database
+                            </b>
+
+                            <span>
+                                Products, orders and staff profiles use Supabase.
+                            </span>
+
+                        </div>
+
+
+                        <div class="module-tile">
+
+                            <div class="mi">
+                                ☁
+                            </div>
+
+                            <b>
+                                Storage
+                            </b>
+
+                            <span>
+                                Avatar uploads use the public avatars bucket.
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<div
+    class="customer-modal"
+    id="customerModal"
+>
+
+    <div class="customer-modal-box">
+
+        <div class="customer-modal-head">
+
+            <div class="panel-title">
+                CUSTOMER PROFILE
+            </div>
+
+            <button
+                class="modal-close"
+                type="button"
+                onclick="closeCustomerModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="customer-profile-head">
+
+            <div
+                class="customer-big-avatar"
+                id="customerAvatar"
+            >
+                U
+            </div>
+
+            <div>
+
+                <div
+                    class="customer-public-name"
+                    id="customerName"
+                >
+                    Customer
+                </div>
+
+                <div
+                    class="customer-public-username"
+                    id="customerUsername"
+                >
+                    @user
+                </div>
+
+                <div
+                    class="customer-public-rank"
+                    id="customerRank"
+                >
+                    NEWBIE • 0 POINTS
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="customer-public-bio"
+            id="customerBio"
+        >
+            No public bio.
+        </div>
+
+
+        <div
+            class="customer-socials"
+            id="customerSocials"
+        ></div>
+
+
+        <div class="customer-detail-grid">
+
+            <div class="customer-detail">
+                <label>POINTS</label>
+                <span id="customerPoints">0</span>
+            </div>
+
+            <div class="customer-detail">
+                <label>MEMBER SINCE</label>
+                <span id="customerSince">—</span>
+            </div>
+
+            <div class="customer-detail">
+                <label>PROFILE ID</label>
+                <span id="customerId">—</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+    'https://ndcrvdbvhswbvahpskhj.supabase.co';
+
+const SUPABASE_KEY =
+    'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+let currentUser = null;
+let currentProfile = null;
+let ordersCache = [];
+let activeOrderDetail = null;
+let orderRealtimeChannel = null;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const introScreen =
+    document.getElementById(
+        'introScreen'
+    );
+
+const authScreen =
+    document.getElementById(
+        'authScreen'
+    );
+
+const app =
+    document.getElementById(
+        'app'
+    );
+
+const introVideo =
+    document.getElementById(
+        'introVideo'
+    );
+
+
+/* =========================================================
+   INTRO VIDEO
+========================================================= */
+
+function playIntro(){
+
+    if(introVideo){
+
+        introVideo.muted = true;
+
+        introVideo.play()
+            .catch(() => {});
+
+    }
+
+}
+
+playIntro();
+
+
+if(introVideo){
+
+    introVideo.addEventListener(
+        'loadeddata',
+        playIntro
+    );
+
+    introVideo.addEventListener(
+        'canplay',
+        playIntro
+    );
+
+}
+
+
+/* =========================================================
+   OPEN LOGIN
+========================================================= */
+
+document
+.getElementById(
+    'showLoginBtn'
+)
+.addEventListener(
+    'click',
+    () => {
+
+        introScreen.style.display =
+            'none';
+
+        authScreen.style.display =
+            'flex';
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE LOGIN
+========================================================= */
+
+document
+.getElementById(
+    'closeAuth'
+)
+.addEventListener(
+    'click',
+    () => {
+
+        authScreen.style.display =
+            'none';
+
+        introScreen.style.display =
+            'flex';
+
+        playIntro();
+
+    }
+);
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+document
+.getElementById(
+    'loginForm'
+)
+.addEventListener(
+    'submit',
+    async (e) => {
+
+        e.preventDefault();
+
+
+        const button =
+            document.getElementById(
+                'loginButton'
+            );
+
+        const errorBox =
+            document.getElementById(
+                'loginError'
+            );
+
+
+        errorBox.textContent = '';
+
+
+        button.classList.add(
+            'loading'
+        );
+
+        button.textContent =
+            'AUTHENTICATING...';
+
+
+        try{
+
+            const email =
+                document
+                .getElementById(
+                    'email'
+                )
+                .value
+                .trim();
+
+
+            const password =
+                document
+                .getElementById(
+                    'password'
+                )
+                .value;
+
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                .auth
+                .signInWithPassword({
+
+                    email,
+                    password
+
+                });
+
+
+            if(error){
+
+                throw error;
+
+            }
+
+
+            if(data.session){
+
+                showApp();
+
+            }
+
+        }
+        catch(err){
+
+            errorBox.textContent =
+                err.message ||
+                'Login failed.';
+
+        }
+        finally{
+
+            button.classList.remove(
+                'loading'
+            );
+
+            button.textContent =
+                'ACCESS CONTROL CENTER';
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabaseClient
+.auth
+.onAuthStateChange(
+    (event,session) => {
+
+        if(session){
+
+            showApp();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SESSION CHECK
+========================================================= */
+
+async function checkSession(){
+
+    try{
+
+        const {
+            data
+        } =
+            await supabaseClient
+            .auth
+            .getSession();
+
+
+        if(data.session){
+
+            showApp();
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SHOW APP
+========================================================= */
+
+function showApp(){
+
+    currentUser = null;
+
+    introScreen.style.display =
+        'none';
+
+    authScreen.style.display =
+        'none';
+
+    app.style.display =
+        'block';
+
+    loadDashboard();
+    startOrderRealtime();
+
+}
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function openPage(page){
+
+    document
+    .querySelectorAll(
+        '.page'
+    )
+    .forEach(
+        x => {
+
+            x.classList.remove(
+                'active'
+            );
+
+        }
+    );
+
+
+    const target =
+        document.getElementById(
+            'page-' + page
+        );
+
+
+    if(target){
+
+        target.classList.add(
+            'active'
+        );
+
+    }
+
+
+    document
+    .querySelectorAll(
+        '.nav-item[data-page]'
+    )
+    .forEach(
+        x => {
+
+            x.classList.toggle(
+                'active',
+                x.dataset.page === page
+            );
+
+        }
+    );
+
+
+    document
+    .getElementById(
+        'topPage'
+    )
+    .textContent =
+        page
+        .replaceAll(
+            '-',
+            ' '
+        )
+        .toUpperCase();
+
+
+    document
+    .getElementById(
+        'sidebar'
+    )
+    .classList.remove(
+        'open'
+    );
+
+
+    if(page === 'products'){
+
+        loadProductsFull();
+
+    }
+
+
+    if(page === 'orders'){
+
+        loadOrdersFull();
+
+    }
+
+
+    if(page === 'staff'){
+
+        loadStaffFull();
+
+    }
+
+
+    if(page === 'customers'){
+
+        loadCustomerUsers();
+
+    }
+
+
+    if(page === 'reviews'){
+
+        loadReviewsAdmin();
+
+    }
+
+
+    if(page === 'rank-settings'){
+
+        loadRankAdmin();
+
+    }
+
+
+    if(page === 'profile'){
+
+        loadProfile();
+
+    }
+
+}
+
+
+/* =========================================================
+   NAV BUTTONS
+========================================================= */
+
+document
+.querySelectorAll(
+    '.nav-item[data-page]'
+)
+.forEach(
+    item => {
+
+        item.addEventListener(
+            'click',
+            () => {
+
+                openPage(
+                    item.dataset.page
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+document
+.getElementById(
+    'mobileMenu'
+)
+.addEventListener(
+    'click',
+    () => {
+
+        document
+        .getElementById(
+            'sidebar'
+        )
+        .classList.toggle(
+            'open'
+        );
+
+    }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+.getElementById(
+    'logoutBtn'
+)
+.addEventListener(
+    'click',
+    async () => {
+
+        await supabaseClient
+            .auth
+            .signOut();
+
+        location.reload();
+
+    }
+);
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+async function loadDashboard(){
+
+    await loadProfile();
+
+    await loadStats();
+
+    await loadRecentOrders();
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+async function loadProfile(){
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .auth
+        .getUser();
+
+
+    if(
+        error ||
+        !data.user
+    ){
+
+        return;
+
+    }
+
+
+    currentUser =
+        data.user;
+
+
+    document
+    .getElementById(
+        'profileEmail'
+    )
+    .textContent =
+        currentUser.email || '-';
+
+
+    document
+    .getElementById(
+        'profileEmailInput'
+    )
+    .value =
+        currentUser.email || '';
+
+
+    const result =
+        await supabaseClient
+        .from(
+            'staff_profiles'
+        )
+        .select('*')
+        .eq(
+            'user_id',
+            currentUser.id
+        )
+        .maybeSingle();
+
+
+    if(result.error){
+
+        console.error(
+            result.error
+        );
+
+        setDefaultProfile();
+
+        return;
+
+    }
+
+
+    currentProfile =
+        result.data;
+
+
+    const name =
+        result.data?.full_name ||
+        currentUser.email ||
+        'Admin';
+
+
+    document
+    .getElementById(
+        'profileName'
+    )
+    .textContent =
+        name;
+
+
+    document
+    .getElementById(
+        'profileNameInput'
+    )
+    .value =
+        result.data?.full_name ||
+        '';
+
+
+    document
+    .getElementById(
+        'profileRole'
+    )
+    .textContent =
+        (
+            result.data?.role ||
+            'STAFF'
+        )
+        .toUpperCase();
+
+
+    document
+    .getElementById(
+        'profileRoleInput'
+    )
+    .value =
+        result.data?.role ||
+        'Admin';
+
+
+    const avatar =
+        result.data?.avatar_url ||
+        makeAvatar(name);
+
+    document
+    .getElementById(
+        'profileAvatar'
+    )
+    .src = avatar;
+
+    const topAvatar = document.getElementById('topProfileAvatar');
+    const topName = document.getElementById('topProfileName');
+    const topRole = document.getElementById('topProfileRole');
+
+    if(topAvatar) topAvatar.src = avatar;
+    if(topName) topName.textContent = name;
+    if(topRole) topRole.textContent = (result.data?.role || 'STAFF').toUpperCase();
+
+}
+
+
+/* =========================================================
+   DEFAULT PROFILE
+========================================================= */
+
+function setDefaultProfile(){
+
+    const name =
+        currentUser?.email ||
+        'Admin';
+
+
+    document
+    .getElementById(
+        'profileName'
+    )
+    .textContent =
+        name;
+
+
+    document
+    .getElementById(
+        'profileNameInput'
+    )
+    .value =
+        '';
+
+
+    document
+    .getElementById(
+        'profileRoleInput'
+    )
+    .value =
+        'Admin';
+
+
+    const avatar = makeAvatar(name);
+
+    document
+    .getElementById(
+        'profileAvatar'
+    )
+    .src = avatar;
+
+    const topAvatar = document.getElementById('topProfileAvatar');
+    const topName = document.getElementById('topProfileName');
+    const topRole = document.getElementById('topProfileRole');
+
+    if(topAvatar) topAvatar.src = avatar;
+    if(topName) topName.textContent = name;
+    if(topRole) topRole.textContent = 'STAFF';
+
+}
+
+
+/* =========================================================
+   SAVE PROFILE
+========================================================= */
+
+document
+.getElementById(
+    'saveProfile'
+)
+.addEventListener(
+    'click',
+    async () => {
+
+        if(!currentUser){
+
+            return;
+
+        }
+
+
+        const button =
+            document
+            .getElementById(
+                'saveProfile'
+            );
+
+
+        const name =
+            document
+            .getElementById(
+                'profileNameInput'
+            )
+            .value
+            .trim();
+
+
+        if(!name){
+
+            toast(
+                'Enter a display name'
+            );
+
+            return;
+
+        }
+
+
+        button.textContent =
+            'SAVING...';
+
+
+        try{
+
+            const {
+                error
+            } =
+                await supabaseClient
+                .from(
+                    'staff_profiles'
+                )
+                .upsert(
+                    {
+                        user_id:
+                            currentUser.id,
+
+                        full_name:
+                            name,
+
+                        avatar_url:
+                            currentProfile?.avatar_url ||
+                            null,
+
+                        role:
+                            currentProfile?.role ||
+                            'Admin',
+
+                        is_active:
+                            true
+                    },
+                    {
+                        onConflict:
+                            'user_id'
+                    }
+                );
+
+
+            if(error){
+
+                throw error;
+
+            }
+
+
+            currentProfile = {
+                ...(currentProfile || {}),
+                full_name:name
+            };
+
+
+            document
+            .getElementById(
+                'profileName'
+            )
+            .textContent =
+                name;
+
+
+            toast(
+                'Profile saved successfully'
+            );
+
+        }
+        catch(err){
+
+            toast(
+                'Save failed: ' +
+                err.message
+            );
+
+        }
+        finally{
+
+            button.textContent =
+                'SAVE PROFILE';
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AVATAR UPLOAD
+========================================================= */
+
+document
+.getElementById(
+    'avatarInput'
+)
+.addEventListener(
+    'change',
+    async (e) => {
+
+        const file =
+            e.target.files?.[0];
+
+
+        if(
+            !file ||
+            !currentUser
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            !file.type.startsWith(
+                'image/'
+            )
+        ){
+
+            toast(
+                'Select an image file'
+            );
+
+            return;
+
+        }
+
+
+        try{
+
+            const ext =
+                file.name
+                .split('.')
+                .pop()
+                .toLowerCase();
+
+
+            const path =
+                currentUser.id +
+                '/avatar-' +
+                Date.now() +
+                '.' +
+                ext;
+
+
+            const {
+                error:uploadError
+            } =
+                await supabaseClient
+                .storage
+                .from('avatars')
+                .upload(
+                    path,
+                    file,
+                    {
+                        upsert:true,
+                        contentType:
+                            file.type
+                    }
+                );
+
+
+            if(uploadError){
+
+                throw uploadError;
+
+            }
+
+
+            const {
+                data
+            } =
+                supabaseClient
+                .storage
+                .from('avatars')
+                .getPublicUrl(
+                    path
+                );
+
+
+            const url =
+                data.publicUrl;
+
+
+            const {
+                error:updateError
+            } =
+                await supabaseClient
+                .from(
+                    'staff_profiles'
+                )
+                .upsert(
+                    {
+                        user_id:
+                            currentUser.id,
+
+                        full_name:
+                            currentProfile?.full_name ||
+                            currentUser.email,
+
+                        avatar_url:
+                            url,
+
+                        role:
+                            currentProfile?.role ||
+                            'Admin',
+
+                        is_active:
+                            true
+                    },
+                    {
+                        onConflict:
+                            'user_id'
+                    }
+                );
+
+
+            if(updateError){
+
+                throw updateError;
+
+            }
+
+
+            currentProfile = {
+                ...(currentProfile || {}),
+                avatar_url:url
+            };
+
+
+            document
+            .getElementById(
+                'profileAvatar'
+            )
+            .src = url;
+
+            const topAvatar = document.getElementById('topProfileAvatar');
+            if(topAvatar) topAvatar.src = url;
+
+            toast(
+                'Profile picture updated'
+            );
+
+        }
+        catch(err){
+
+            toast(
+                'Upload failed: ' +
+                err.message
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PRODUCTS MANAGER
+========================================================= */
+
+let productsCache = [];
+
+function productLetter(name){
+    return String(name || 'P').charAt(0).toUpperCase();
+}
+
+function productFilterList(){
+    const search = document.getElementById('productSearch').value.trim().toLowerCase();
+    const category = document.getElementById('productCategoryFilter').value;
+    const status = document.getElementById('productStatusFilter').value;
+
+    return productsCache.filter(product => {
+        const hay = [product.name,product.category,product.description].filter(Boolean).join(' ').toLowerCase();
+        const matchesSearch = !search || hay.includes(search);
+        const matchesCategory = !category || product.category === category;
+        const matchesStatus = !status || String(!!product.is_active) === status;
+        return matchesSearch && matchesCategory && matchesStatus;
+    });
+}
+
+function renderProducts(){
+    const box = document.getElementById('productsList');
+    const list = productFilterList();
+
+    if(!list.length){
+        box.innerHTML = '<div class="empty-products">No products found. Click <b>+ ADD PRODUCT</b> to create one.</div>';
+        return;
+    }
+
+    box.innerHTML = list.map(product => {
+        const thumb = product.thumbnail_url
+            ? `<img src="${esc(product.thumbnail_url)}" alt="">`
+            : `<span>${esc(productLetter(product.name))}</span>`;
+        const desc = product.description || 'No description added.';
+        return `
+            <article class="product-card">
+                <div class="product-thumb">${thumb}</div>
+                <div class="product-main">
+                    <div class="product-name">${esc(product.name || 'Untitled Product')}</div>
+                    <div class="product-meta">
+                        <span class="product-chip">${esc(product.category || 'Uncategorized')}</span>
+                        <span class="product-chip ${product.is_active ? 'active' : 'off'}">${product.is_active ? 'ACTIVE' : 'INACTIVE'}</span>
+                        ${product.preview_url ? '<span class="product-chip">PREVIEW READY</span>' : '<span class="product-chip off">NO PREVIEW</span>'}
+                    </div>
+                    <div class="product-desc">${esc(desc)}</div>
+                    <div class="product-price"><span>${(['Fonts','Overlays'].includes(product.category) ? 'FREE DOWNLOAD' : `PRICE <b>LKR ${Number(product.price || 0).toLocaleString()}</b>`)}</span></div>
+                </div>
+                <div class="product-actions">
+                    <button class="product-action edit" type="button" onclick="editProduct(${Number(product.id)})">EDIT</button>
+                    <button class="product-action" type="button" onclick="toggleProduct(${Number(product.id)})">${product.is_active ? 'DISABLE' : 'ACTIVATE'}</button>
+                    <button class="product-action danger" type="button" onclick="deleteProduct(${Number(product.id)})">DELETE</button>
+                </div>
+            </article>
+        `;
+    }).join('');
+}
+
+async function loadProductsFull(){
+    const box = document.getElementById('productsList');
+    box.innerHTML = '<div class="empty-products">Loading products...</div>';
+
+    const {data,error} = await supabaseClient
+        .from('products')
+        .select('*')
+        .order('created_at',{ascending:false});
+
+    if(error){
+        console.error(error);
+        box.innerHTML = `<div class="empty-products" style="color:#fb7185">Unable to load products.<br><br>${esc(error.message)}</div>`;
+        return;
+    }
+
+    productsCache = data || [];
+    renderProducts();
+}
+
+function resetProductForm(){
+    document.getElementById('productForm').reset();
+    document.getElementById('productId').value = '';
+    document.getElementById('productActive').checked = true;
+    document.getElementById('productModalTitle').textContent = 'Add Product';
+    document.getElementById('saveProduct').textContent = 'SAVE PRODUCT';
+}
+
+function updateResourceFileField(){
+    const category = document.getElementById('productCategory').value;
+    const isFree = category === 'Fonts' || category === 'Overlays';
+    const field = document.getElementById('resourceFileField');
+    const input = document.getElementById('productResourceFile');
+    const price = document.getElementById('productPrice');
+
+    field.style.display = isFree ? 'block' : 'none';
+    input.required = isFree && !document.getElementById('productId').value;
+
+    if(isFree){
+        price.value = 0;
+        price.disabled = true;
+    }else{
+        price.disabled = false;
+    }
+}
+
+function openProductModal(product = null){
+    resetProductForm();
+    if(product){
+        document.getElementById('productModalTitle').textContent = 'Edit Product';
+        document.getElementById('productId').value = product.id;
+        document.getElementById('productName').value = product.name || '';
+        document.getElementById('productCategory').value = product.category || '';
+        document.getElementById('productDescription').value = product.description || '';
+        document.getElementById('productPrice').value = product.price ?? 0;
+        document.getElementById('productActive').checked = product.is_active !== false;
+    }
+    updateResourceFileField();
+    document.getElementById('productModal').classList.add('show');
+}
+
+function closeProductModal(){
+    document.getElementById('productModal').classList.remove('show');
+}
+
+function editProduct(id){
+    const product = productsCache.find(x => Number(x.id) === Number(id));
+    if(product) openProductModal(product);
+}
+
+async function uploadProductAsset(file, bucket, folder){
+    if(!file) return null;
+
+    const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,'-');
+    const path = `${folder}/${Date.now()}-${safe}`;
+    const {error} = await supabaseClient.storage
+        .from(bucket)
+        .upload(path,file,{upsert:false,contentType:file.type || 'application/octet-stream'});
+
+    if(error) throw error;
+
+    const {data} = supabaseClient.storage
+        .from(bucket)
+        .getPublicUrl(path);
+
+    return data.publicUrl;
+}
+
+document.getElementById('addProductBtn').addEventListener('click',() => openProductModal());
+document.getElementById('closeProductModal').addEventListener('click',closeProductModal);
+document.getElementById('cancelProduct').addEventListener('click',closeProductModal);
+document.getElementById('productModal').addEventListener('click',e => {
+    if(e.target.id === 'productModal') closeProductModal();
+});
+document.getElementById('productSearch').addEventListener('input',renderProducts);
+document.getElementById('productCategoryFilter').addEventListener('change',renderProducts);
+document.getElementById('productCategory').addEventListener('change',updateResourceFileField);
+document.getElementById('productStatusFilter').addEventListener('change',renderProducts);
+document.getElementById('refreshProducts').addEventListener('click',loadProductsFull);
+
+document.getElementById('productForm').addEventListener('submit',async e => {
+    e.preventDefault();
+
+    const button = document.getElementById('saveProduct');
+    const id = document.getElementById('productId').value;
+    const name = document.getElementById('productName').value.trim();
+    const category = document.getElementById('productCategory').value;
+    const description = document.getElementById('productDescription').value.trim();
+    const isFree = category === 'Fonts' || category === 'Overlays';
+    const price = isFree ? 0 : Number(document.getElementById('productPrice').value || 0);
+    const active = document.getElementById('productActive').checked;
+    const thumbnail = document.getElementById('productThumbnail').files?.[0];
+    const previewVideo = document.getElementById('productPreview').files?.[0];
+    const resourceFile = document.getElementById('productResourceFile').files?.[0];
+
+    if(!name || !category){
+        toast('Product name and category are required');
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = 'SAVING...';
+
+    try{
+        const existingProduct = id ? productsCache.find(x => Number(x.id) === Number(id)) : null;
+        let thumbnailUrl = existingProduct?.thumbnail_url || null;
+        let previewUrl = existingProduct?.preview_url || null;
+        let resourceUrl = isFree ? (existingProduct?.file_url || null) : null;
+
+        if(isFree && !resourceFile && !resourceUrl){
+            throw new Error('Please upload the actual resource file for Fonts / Overlays.');
+        }
+
+        if(thumbnail){
+            button.textContent = 'UPLOADING IMAGE...';
+            thumbnailUrl = await uploadProductAsset(thumbnail,'product-files','thumbnails');
+        }
+
+        if(previewVideo){
+            button.textContent = 'UPLOADING PREVIEW...';
+            previewUrl = await uploadProductAsset(previewVideo,'previews','videos');
+        }
+
+        if(isFree && resourceFile){
+            button.textContent = 'UPLOADING RESOURCE...';
+            resourceUrl = await uploadProductAsset(resourceFile,'product-files','resources');
+        }
+
+        button.textContent = 'SAVING...';
+        const payload = {
+            name,
+            category,
+            description,
+            price,
+            file_url: resourceUrl,
+            thumbnail_url: thumbnailUrl,
+            preview_url: previewUrl,
+            is_active: active
+        };
+
+        let result;
+        if(id){
+            result = await supabaseClient.from('products').update(payload).eq('id',Number(id));
+        }else{
+            result = await supabaseClient.from('products').insert(payload);
+        }
+
+        if(result.error) throw result.error;
+
+        toast(id ? 'Product updated successfully' : 'Product created successfully');
+        closeProductModal();
+        await loadProductsFull();
+        await loadStats();
+    }catch(err){
+        console.error(err);
+        toast('Product save failed: ' + err.message);
+    }finally{
+        button.disabled = false;
+        button.textContent = 'SAVE PRODUCT';
+    }
+});
+
+async function toggleProduct(id){
+    const product = productsCache.find(x => Number(x.id) === Number(id));
+    if(!product) return;
+
+    const next = !product.is_active;
+    const {error} = await supabaseClient.from('products').update({is_active:next}).eq('id',Number(id));
+    if(error){
+        toast('Status update failed: ' + error.message);
+        return;
+    }
+    toast(next ? 'Product activated' : 'Product disabled');
+    await loadProductsFull();
+}
+
+async function deleteProduct(id){
+    const product = productsCache.find(x => Number(x.id) === Number(id));
+    if(!product) return;
+
+    if(!confirm(`Delete "${product.name || 'this product'}"?\n\nThis will permanently remove the database product record.`)) return;
+
+    const {error} = await supabaseClient.from('products').delete().eq('id',Number(id));
+    if(error){
+        toast('Delete failed: ' + error.message);
+        return;
+    }
+    toast('Product deleted');
+    await loadProductsFull();
+    await loadStats();
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+async function loadStats(){
+
+    const p =
+        await supabaseClient
+        .from('products')
+        .select(
+            'id',
+            {
+                count:'exact',
+                head:true
+            }
+        );
+
+
+    const o =
+        await supabaseClient
+        .from('orders')
+        .select(
+            'id',
+            {
+                count:'exact',
+                head:true
+            }
+        );
+
+
+    const pending =
+        await supabaseClient
+        .from('orders')
+        .select(
+            'id',
+            {
+                count:'exact',
+                head:true
+            }
+        )
+        .eq(
+            'status',
+            'pending'
+        );
+
+
+    const s =
+        await supabaseClient
+        .from('staff_profiles')
+        .select(
+            'id',
+            {
+                count:'exact',
+                head:true
+            }
+        );
+
+
+    document
+    .getElementById(
+        'totalProducts'
+    )
+    .textContent =
+        p.count ?? 0;
+
+
+    document
+    .getElementById(
+        'totalOrders'
+    )
+    .textContent =
+        o.count ?? 0;
+
+
+    document
+    .getElementById(
+        'pendingOrders'
+    )
+    .textContent =
+        pending.count ?? 0;
+
+
+    document
+    .getElementById(
+        'totalStaff'
+    )
+    .textContent =
+        s.count ?? 0;
+
+}
+
+
+/* =========================================================
+   RECENT ORDERS
+========================================================= */
+
+async function fetchOrders(limit=100){
+    const {data,error} = await supabaseClient
+        .from('orders')
+        .select('*,products(name)')
+        .order('created_at',{ascending:false})
+        .limit(limit);
+
+    if(error) throw error;
+    return data || [];
+}
+
+function formatOrderTime(value){
+    if(!value) return '-';
+    const d = new Date(value);
+    if(Number.isNaN(d.getTime())) return '-';
+    return d.toLocaleString('en-LK',{
+        year:'numeric',month:'short',day:'2-digit',
+        hour:'2-digit',minute:'2-digit',second:'2-digit',
+        hour12:true
+    });
+}
+
+function orderAge(value){
+    if(!value) return '';
+    const t = new Date(value).getTime();
+    if(Number.isNaN(t)) return '';
+    const sec = Math.max(0,Math.floor((Date.now()-t)/1000));
+    if(sec < 60) return `${sec}s ago`;
+    const min = Math.floor(sec/60);
+    if(min < 60) return `${min}m ago`;
+    const hr = Math.floor(min/60);
+    if(hr < 24) return `${hr}h ago`;
+    return `${Math.floor(hr/24)}d ago`;
+}
+
+async function loadRecentOrders(){
+    const box = document.getElementById('recentOrders');
+    try{
+        const data = await fetchOrders(6);
+        ordersCache = data;
+        box.innerHTML = data.length
+            ? data.map((o,i)=>orderRow(o,i===0)).join('')
+            : `<div style="padding:25px;text-align:center;color:#625c69;font-size:8px">No orders yet.</div>`;
+    }catch(error){
+        console.error(error);
+        box.innerHTML = `<div style="padding:25px;text-align:center;color:#fb7185;font-size:8px">
+            ORDER DATABASE ERROR<br><small>${esc(error.message || '')}</small>
+        </div>`;
+    }
+}
+
+async function loadOrdersFull(){
+    const box = document.getElementById('fullOrders');
+    box.innerHTML = `<div style="padding:25px;text-align:center;color:#625c69;font-size:8px">Loading orders...</div>`;
+
+    try{
+        const data = await fetchOrders(100);
+        ordersCache = data;
+        box.innerHTML = data.length
+            ? data.map((o,i)=>orderRow(o,i===0)).join('')
+            : `<div style="padding:25px;text-align:center;color:#625c69;font-size:8px">No orders found.</div>`;
+    }catch(error){
+        console.error(error);
+        box.innerHTML = `<div style="padding:25px;text-align:center;color:#fb7185;font-size:8px">
+            UNABLE TO LOAD ORDERS<br><small>${esc(error.message || '')}</small>
+        </div>`;
+    }
+}
+
+function orderRow(order,isNewest=false){
+    const status = (order.status || 'pending').toLowerCase();
+    const product = order.products?.name || order.package_name || 'Product';
+    const price = order.price == null ? '-' : 'LKR ' + Number(order.price).toLocaleString();
+    const when = formatOrderTime(order.created_at);
+    const age = orderAge(order.created_at);
+
+    return `
+        <div class="order ${isNewest ? 'order-new' : ''}" onclick="openOrderDetail(${Number(order.id)})" style="cursor:pointer">
+            <div class="order-id">
+                ${esc(order.order_id || ('#' + order.id))}
+            </div>
+            <div>
+                <div class="order-name">
+                    ${esc(order.customer_name || 'Unknown')}
+                    ${isNewest ? '<span class="order-badge">NEW</span>' : ''}
+                </div>
+                <div class="order-product">${esc(product)}</div>
+                <div class="order-time">${esc(when)} • ${esc(age)}</div>
+            </div>
+            <div class="order-price">${price}</div>
+            <div class="status ${esc(status)}">${esc(status.toUpperCase())}</div>
+        </div>
+    `;
+}
+
+function openOrderDetail(id){
+    const order = ordersCache.find(x => Number(x.id) === Number(id));
+    if(!order) return;
+
+    activeOrderDetail = order;
+    const product = order.products?.name || order.package_name || 'Product';
+    const slip = order.payment_slip_url || '';
+
+    document.getElementById('detailOrderTitle').textContent =
+        order.order_id || ('#' + order.id);
+    document.getElementById('detailOrderId').textContent =
+        order.order_id || ('#' + order.id);
+    document.getElementById('detailStatus').textContent =
+        (order.status || 'pending').toUpperCase();
+    document.getElementById('detailCustomer').textContent =
+        order.customer_name || '-';
+    document.getElementById('detailTime').textContent =
+        formatOrderTime(order.created_at);
+    document.getElementById('detailWhatsapp').textContent =
+        order.whatsapp || '-';
+    document.getElementById('detailEmail').textContent =
+        order.email || '-';
+    document.getElementById('detailProduct').textContent =
+        product;
+    document.getElementById('detailPrice').textContent =
+        order.price == null ? '-' : 'LKR ' + Number(order.price).toLocaleString();
+
+    const img = document.getElementById('detailSlip');
+    img.src = slip;
+    img.style.display = slip ? 'block' : 'none';
+
+    document.getElementById('orderDetailModal').classList.add('show');
+}
+
+function closeOrderDetail(){
+    document.getElementById('orderDetailModal').classList.remove('show');
+    activeOrderDetail = null;
+}
+
+async function updateOrderStatus(status){
+    if(!activeOrderDetail) return;
+
+    const id = activeOrderDetail.id;
+    const {error} = await supabaseClient
+        .from('orders')
+        .update({status})
+        .eq('id',id);
+
+    if(error){
+        toast('Order update failed: ' + error.message);
+        return;
+    }
+
+    toast('Order ' + status.toUpperCase());
+    closeOrderDetail();
+    await loadDashboard();
+    if(document.getElementById('page-orders')?.classList.contains('active')){
+        await loadOrdersFull();
+    }
+}
+
+function startOrderRealtime(){
+    if(orderRealtimeChannel) return;
+
+    orderRealtimeChannel = supabaseClient
+        .channel('admin-orders-live')
+        .on('postgres_changes',
+            {event:'*',schema:'public',table:'orders'},
+            async payload => {
+                if(payload.eventType === 'INSERT'){
+                    toast('⚡ NEW ORDER: ' + (payload.new?.order_id || 'ORDER'));
+                }
+                await loadStats();
+                await loadRecentOrders();
+                if(document.getElementById('page-orders')?.classList.contains('active')){
+                    await loadOrdersFull();
+                }
+            }
+        )
+        .subscribe();
+}
+
+document.getElementById('closeOrderDetail').addEventListener('click',closeOrderDetail);
+document.getElementById('orderDetailModal').addEventListener('click',e=>{
+    if(e.target.id === 'orderDetailModal') closeOrderDetail();
+});
+document.getElementById('approveOrderBtn').addEventListener('click',()=>updateOrderStatus('approved'));
+document.getElementById('rejectOrderBtn').addEventListener('click',()=>updateOrderStatus('rejected'));
+document.getElementById('openSlipBtn').addEventListener('click',()=>{
+    if(activeOrderDetail?.payment_slip_url){
+        window.open(activeOrderDetail.payment_slip_url,'_blank');
+    }else{
+        toast('No payment slip attached');
+    }
+});
+document.getElementById('topProfileBtn').addEventListener('click',()=>openPage('profile'));
+
+/* =========================================================
+   FULL STAFF
+========================================================= */
+
+async function loadStaffFull(){
+
+    const box =
+        document
+        .getElementById(
+            'fullStaff'
+        );
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from(
+            'staff_profiles'
+        )
+        .select('*')
+        .order(
+            'created_at',
+            {
+                ascending:false
+            }
+        )
+        .limit(100);
+
+
+    if(error){
+
+        box.innerHTML = `
+            <div style="
+                padding:25px;
+                text-align:center;
+                color:#fb7185;
+                font-size:8px
+            ">
+                Unable to load staff.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    if(!data?.length){
+
+        box.innerHTML = `
+            <div style="
+                padding:25px;
+                text-align:center;
+                color:#625c69;
+                font-size:8px
+            ">
+                No staff members found.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        data
+        .map(
+            member => `
+
+                <div class="order">
+
+                    <div class="order-id">
+                        STAFF
+                    </div>
+
+
+                    <div>
+
+                        <div class="order-name">
+                            ${esc(
+                                member.full_name ||
+                                'Staff Member'
+                            )}
+                        </div>
+
+                        <div class="order-product">
+                            ${esc(
+                                member.role ||
+                                'Staff'
+                            )}
+
+                            •
+
+                            ${
+                                member.is_active
+                                ?
+                                'Active'
+                                :
+                                'Inactive'
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <div></div>
+
+
+                    <div
+                        class="
+                            status
+                            ${
+                                member.is_active
+                                ?
+                                'approved'
+                                :
+                                'rejected'
+                            }
+                        "
+                    >
+                        ${
+                            member.is_active
+                            ?
+                            'ACTIVE'
+                            :
+                            'OFF'
+                        }
+                    </div>
+
+                </div>
+
+            `
+        )
+        .join('');
+
+}
+
+
+/* =========================================================
+   DEFAULT AVATAR
+========================================================= */
+
+function makeAvatar(name){
+
+    const letter =
+        (
+            name ||
+            'A'
+        )
+        .charAt(0)
+        .toUpperCase();
+
+
+    const svg = `
+
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="200"
+            height="200"
+        >
+
+            <defs>
+
+                <linearGradient
+                    id="g"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                >
+
+                    <stop
+                        offset="0"
+                        stop-color="#6d28d9"
+                    />
+
+                    <stop
+                        offset=".55"
+                        stop-color="#a855f7"
+                    />
+
+                    <stop
+                        offset="1"
+                        stop-color="#ec4899"
+                    />
+
+                </linearGradient>
+
+            </defs>
+
+
+            <rect
+                width="200"
+                height="200"
+                rx="45"
+                fill="url(#g)"
+            />
+
+
+            <text
+                x="100"
+                y="128"
+                text-anchor="middle"
+                font-family="Arial"
+                font-size="90"
+                font-weight="900"
+                fill="white"
+            >
+                ${letter}
+            </text>
+
+        </svg>
+
+    `;
+
+
+    return (
+        'data:image/svg+xml;charset=UTF-8,' +
+        encodeURIComponent(svg)
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function esc(v){
+
+    return String(
+        v ?? ''
+    )
+    .replace(
+        /[&<>"']/g,
+        c => ({
+            '&':'&amp;',
+            '<':'&lt;',
+            '>':'&gt;',
+            '"':'&quot;',
+            "'":'&#039;'
+        }[c])
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message){
+
+    const t =
+        document.getElementById(
+            'toast'
+        );
+
+
+    t.textContent =
+        message;
+
+
+    t.classList.add(
+        'toast-show'
+    );
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(
+            () => {
+
+                t.classList.remove(
+                    'toast-show'
+                );
+
+            },
+            2600
+        );
+
+}
+
+
+
+/* =========================================================
+   CUSTOMER DIRECTORY
+========================================================= */
+
+let customerUsersCache = [];
+
+
+function customerEsc(value){
+
+    return String(value ?? '')
+        .replace(
+            /[&<>"']/g,
+            c => ({
+                '&':'&amp;',
+                '<':'&lt;',
+                '>':'&gt;',
+                '"':'&quot;',
+                "'":'&#039;'
+            }[c])
+        );
+
+}
+
+
+function customerRankFromPoints(points){
+
+    const p = Number(points) || 0;
+
+    if(p >= 3000) return 'LEGEND';
+    if(p >= 1500) return 'ELITE EDITOR';
+    if(p >= 700) return 'PRO EDITOR';
+    if(p >= 300) return 'EDITOR';
+    if(p >= 100) return 'MEMBER';
+
+    return 'NEWBIE';
+
+}
+
+
+function customerAvatarHtml(member){
+
+    const name =
+        member.full_name ||
+        member.username ||
+        'U';
+
+    const letter =
+        String(name)
+        .charAt(0)
+        .toUpperCase();
+
+    if(member.avatar_url){
+
+        return `
+            <img
+                src="${customerEsc(member.avatar_url)}"
+                alt=""
+            >
+        `;
+
+    }
+
+    return `<span>${customerEsc(letter)}</span>`;
+
+}
+
+
+async function loadCustomerUsers(){
+
+    const box =
+        document.getElementById(
+            'customerUsers'
+        );
+
+    if(!box) return;
+
+
+    box.innerHTML = `
+        <div
+            style="
+                padding:30px;
+                text-align:center;
+                color:#625c69;
+                font-size:8px
+            "
+        >
+            Loading customers...
+        </div>
+    `;
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from('profiles')
+        .select(`
+            id,
+            username,
+            full_name,
+            bio,
+            avatar_url,
+            points,
+            badge,
+            created_at,
+            tiktok_username,
+            facebook_url,
+            instagram_username
+        `)
+        .order(
+            'created_at',
+            {
+                ascending:false
+            }
+        )
+        .limit(2000);
+
+
+    if(error){
+
+        console.error(error);
+
+        box.innerHTML = `
+            <div
+                style="
+                    padding:30px;
+                    text-align:center;
+                    color:#fb7185;
+                    font-size:8px
+                "
+            >
+                CUSTOMER DATABASE ERROR
+                <br>
+                <small>${customerEsc(error.message)}</small>
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    customerUsersCache =
+        data || [];
+
+    renderCustomerUsers();
+
+}
+
+
+function renderCustomerUsers(){
+
+    const box =
+        document.getElementById(
+            'customerUsers'
+        );
+
+    if(!box) return;
+
+
+    const search =
+        (
+            document.getElementById(
+                'customerSearch'
+            )?.value || ''
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const rows =
+        customerUsersCache.filter(
+            member => {
+
+                return [
+                    member.username,
+                    member.full_name,
+                    member.bio,
+                    member.tiktok_username
+                ]
+                .some(
+                    value =>
+                        String(value || '')
+                        .toLowerCase()
+                        .includes(search)
+                );
+
+            }
+        );
+
+
+    const count =
+        document.getElementById(
+            'customerCount'
+        );
+
+    if(count){
+
+        count.textContent =
+            rows.length +
+            ' USERS';
+
+    }
+
+
+    if(!rows.length){
+
+        box.innerHTML = `
+            <div
+                style="
+                    padding:35px;
+                    text-align:center;
+                    color:#625c69;
+                    font-size:8px
+                "
+            >
+                NO CUSTOMERS FOUND
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        rows
+        .map(
+            member => {
+
+                const rank =
+                    customerRankFromPoints(
+                        member.points
+                    );
+
+                return `
+
+                    <div
+                        class="user-row"
+                        data-user-id="${customerEsc(member.id)}"
+                        onclick="openCustomerModal('${customerEsc(member.id)}')"
+                    >
+
+                        <div class="user-avatar">
+                            ${customerAvatarHtml(member)}
+                        </div>
+
+
+                        <div class="user-main">
+
+                            <b>
+                                ${customerEsc(
+                                    member.full_name ||
+                                    'Unnamed User'
+                                )}
+                            </b>
+
+                            <small>
+                                @${customerEsc(
+                                    member.username ||
+                                    'user'
+                                )}
+                            </small>
+
+                        </div>
+
+
+                        <div class="user-bio">
+
+                            ${customerEsc(
+                                member.bio ||
+                                'No bio'
+                            )}
+
+                        </div>
+
+
+                        <div class="user-rank">
+
+                            ${customerEsc(rank)}
+
+                        </div>
+
+
+                        <div class="user-points">
+
+                            ${Number(member.points) || 0}
+                            PTS
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join('');
+
+}
+
+
+function openCustomerModal(id){
+
+    const member =
+        customerUsersCache.find(
+            x =>
+                String(x.id) ===
+                String(id)
+        );
+
+    if(!member) return;
+
+
+    const avatar =
+        document.getElementById(
+            'customerAvatar'
+        );
+
+    if(avatar){
+
+        avatar.innerHTML =
+            customerAvatarHtml(
+                member
+            );
+
+    }
+
+
+    document.getElementById(
+        'customerName'
+    ).textContent =
+        member.full_name ||
+        'Unnamed User';
+
+
+    document.getElementById(
+        'customerUsername'
+    ).textContent =
+        '@' +
+        (
+            member.username ||
+            'user'
+        );
+
+
+    document.getElementById(
+        'customerRank'
+    ).textContent =
+        customerRankFromPoints(
+            member.points
+        ) +
+        ' • ' +
+        (
+            Number(member.points) || 0
+        ) +
+        ' POINTS';
+
+
+    document.getElementById(
+        'customerBio'
+    ).textContent =
+        member.bio ||
+        'No public bio.';
+
+
+    document.getElementById(
+        'customerPoints'
+    ).textContent =
+        Number(member.points) || 0;
+
+
+    document.getElementById(
+        'customerSince'
+    ).textContent =
+        member.created_at
+        ?
+        new Date(
+            member.created_at
+        )
+        .toLocaleDateString(
+            'en-LK',
+            {
+                year:'numeric',
+                month:'short',
+                day:'numeric'
+            }
+        )
+        :
+        '—';
+
+
+    document.getElementById(
+        'customerId'
+    ).textContent =
+        member.id || '—';
+
+
+    const socials =
+        document.getElementById(
+            'customerSocials'
+        );
+
+    if(socials){
+
+        socials.innerHTML = '';
+
+
+        if(member.tiktok_username){
+
+            const username =
+                String(
+                    member.tiktok_username
+                )
+                .replace(
+                    /^@/,
+                    ''
+                );
+
+            socials.innerHTML += `
+                <a
+                    target="_blank"
+                    rel="noopener"
+                    href="https://www.tiktok.com/@${encodeURIComponent(username)}"
+                >
+                    ♪ TikTok @${customerEsc(username)}
+                </a>
+            `;
+
+        }
+
+
+        if(member.instagram_username){
+
+            const username =
+                String(
+                    member.instagram_username
+                )
+                .replace(
+                    /^@/,
+                    ''
+                );
+
+            socials.innerHTML += `
+                <a
+                    target="_blank"
+                    rel="noopener"
+                    href="https://www.instagram.com/${encodeURIComponent(username)}"
+                >
+                    ◎ Instagram
+                </a>
+            `;
+
+        }
+
+
+        if(member.facebook_url){
+
+            socials.innerHTML += `
+                <a
+                    target="_blank"
+                    rel="noopener"
+                    href="${customerEsc(member.facebook_url)}"
+                >
+                    f Facebook
+                </a>
+            `;
+
+        }
+
+    }
+
+
+    document
+        .getElementById(
+            'customerModal'
+        )
+        .classList
+        .add('show');
+
+}
+
+
+function closeCustomerModal(){
+
+    document
+        .getElementById(
+            'customerModal'
+        )
+        .classList
+        .remove('show');
+
+}
+
+
+const customerSearch =
+    document.getElementById(
+        'customerSearch'
+    );
+
+if(customerSearch){
+
+    customerSearch.addEventListener(
+        'input',
+        renderCustomerUsers
+    );
+
+}
+
+
+const customerModal =
+    document.getElementById(
+        'customerModal'
+    );
+
+if(customerModal){
+
+    customerModal.addEventListener(
+        'click',
+        event => {
+
+            if(
+                event.target ===
+                customerModal
+            ){
+
+                closeCustomerModal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   REVIEWS MANAGER
+========================================================= */
+
+let reviewUsersCache = {};
+let reviewsAdminCache = [];
+let reviewFilter = 'pending';
+
+function reviewEsc(value){
+    return String(value ?? '')
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#039;');
+}
+
+function reviewAvatarHtml(user, name){
+    const letter = String(name || user?.username || 'U').charAt(0).toUpperCase();
+    if(user?.avatar_url){
+        return `<img src="${reviewEsc(user.avatar_url)}" alt="">`;
+    }
+    return `<span>${reviewEsc(letter)}</span>`;
+}
+
+function reviewStars(rating){
+    const n = Math.max(1, Math.min(5, Number(rating) || 0));
+    return '★'.repeat(n) + '☆'.repeat(5-n);
+}
+
+function setReviewFilter(filter, button){
+    reviewFilter = filter;
+    document.querySelectorAll('.review-tab').forEach(x=>x.classList.remove('active'));
+    if(button) button.classList.add('active');
+    renderAdminReviews();
+}
+
+async function loadReviewsAdmin(){
+    const box = document.getElementById('adminReviewList');
+    if(!box) return;
+    box.innerHTML = `<div style="padding:30px;text-align:center;color:#625c69;font-size:8px">Loading reviews...</div>`;
+
+    const {data, error} = await supabaseClient
+        .from('reviews')
+        .select('id,user_id,reviewer_name,rating,review_text,is_approved,created_at,updated_at')
+        .order('created_at',{ascending:false})
+        .limit(500);
+
+    if(error){
+        console.error(error);
+        box.innerHTML = `<div style="padding:30px;text-align:center;color:#fb7185;font-size:8px">REVIEW DATABASE ERROR<br><small>${reviewEsc(error.message)}</small></div>`;
+        return;
+    }
+
+    reviewsAdminCache = data || [];
+    reviewUsersCache = {};
+
+    const ids = [...new Set(reviewsAdminCache.map(x=>x.user_id).filter(Boolean))];
+    if(ids.length){
+        const result = await supabaseClient
+            .from('profiles')
+            .select('id,username,full_name,avatar_url,badge,points')
+            .in('id',ids);
+        if(!result.error){
+            (result.data || []).forEach(user=>reviewUsersCache[user.id]=user);
+        }
+    }
+
+    renderAdminReviews();
+}
+
+function renderAdminReviews(){
+    const box = document.getElementById('adminReviewList');
+    if(!box) return;
+
+    let rows = reviewsAdminCache.filter(r=>{
+        if(reviewFilter === 'pending') return !r.is_approved;
+        if(reviewFilter === 'approved') return !!r.is_approved;
+        return true;
+    });
+
+    if(!rows.length){
+        box.innerHTML = `<div style="padding:35px;text-align:center;color:#625c69;font-size:8px">NO ${reviewFilter.toUpperCase()} REVIEWS</div>`;
+        return;
+    }
+
+    box.innerHTML = rows.map(review=>{
+        const user = reviewUsersCache[review.user_id] || {};
+        const name = user.full_name || user.username || review.reviewer_name || 'Customer';
+        const username = user.username ? '@'+user.username.replace(/^@/,'') : '@user';
+        const date = review.created_at ? new Date(review.created_at).toLocaleDateString('en-LK',{year:'numeric',month:'short',day:'numeric'}) : '—';
+        return `
+            <div class="review-row">
+                <div class="review-avatar">${reviewAvatarHtml(user,name)}</div>
+                <div class="review-user">
+                    <b>${reviewEsc(name)}</b>
+                    <small>${reviewEsc(username)}</small>
+                    <div class="review-date">${reviewEsc(date)}</div>
+                </div>
+                <div class="review-text">${reviewEsc(review.review_text)}</div>
+                <div>
+                    <div class="review-stars" title="${Number(review.rating)||0}/5">${reviewStars(review.rating)}</div>
+                    <div style="margin-top:5px"><span class="review-status ${review.is_approved?'approved':'pending'}">${review.is_approved?'APPROVED':'PENDING'}</span></div>
+                </div>
+                <div class="review-actions">
+                    ${!review.is_approved ? `<button class="review-action approve" onclick="moderateReview(${Number(review.id)},true)">✓ APPROVE</button>` : `<button class="review-action reject" onclick="moderateReview(${Number(review.id)},false)">↺ HIDE</button>`}
+                    <button class="review-action delete" onclick="deleteReviewAdmin(${Number(review.id)})">DELETE</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+async function moderateReview(id, approved){
+    const {error} = await supabaseClient
+        .from('reviews')
+        .update({is_approved:approved,updated_at:new Date().toISOString()})
+        .eq('id',id);
+
+    if(error){
+        toast('Review update failed: '+error.message);
+        return;
+    }
+
+    toast(approved ? 'Review approved.' : 'Review hidden.');
+    await loadReviewsAdmin();
+}
+
+async function deleteReviewAdmin(id){
+    if(!confirm('Delete this review permanently?')) return;
+    const {error} = await supabaseClient.from('reviews').delete().eq('id',id);
+    if(error){
+        toast('Delete failed: '+error.message);
+        return;
+    }
+    toast('Review deleted.');
+    await loadReviewsAdmin();
+}
+
+
+/* =========================================================
+   RANK REWARD MANAGER
+========================================================= */
+
+async function loadRankAdmin(){
+
+    const box =
+        document.getElementById(
+            'rankAdminList'
+        );
+
+    if(!box) return;
+
+
+    box.innerHTML = `
+        <div
+            style="
+                padding:30px;
+                text-align:center;
+                color:#625c69;
+                font-size:8px
+            "
+        >
+            Loading ranks...
+        </div>
+    `;
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from('rank_settings')
+        .select(`
+            id,
+            rank_name,
+            min_points,
+            reward_text,
+            sort_order,
+            is_active
+        `)
+        .order(
+            'sort_order',
+            {
+                ascending:true
+            }
+        );
+
+
+    if(error){
+
+        box.innerHTML = `
+            <div
+                style="
+                    padding:30px;
+                    color:#fb7185;
+                    font-size:8px
+                "
+            >
+                RANK DATABASE ERROR
+                <br>
+                <small>${customerEsc(error.message)}</small>
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    if(!data?.length){
+
+        box.innerHTML = `
+            <div
+                style="
+                    padding:30px;
+                    text-align:center;
+                    color:#625c69;
+                    font-size:8px
+                "
+            >
+                NO RANKS FOUND
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        data
+        .map(
+            rank => `
+
+                <div
+                    class="rank-admin-row"
+                    data-rank-id="${rank.id}"
+                >
+
+                    <input
+                        class="rank-name-input"
+                        value="${customerEsc(rank.rank_name)}"
+                        placeholder="Rank name"
+                    >
+
+
+                    <input
+                        class="rank-points-input"
+                        type="number"
+                        min="0"
+                        value="${Number(rank.min_points) || 0}"
+                        placeholder="Points"
+                    >
+
+
+                    <input
+                        class="rank-reward-input"
+                        value="${customerEsc(rank.reward_text || '')}"
+                        placeholder="Reward description"
+                    >
+
+
+                    <button
+                        class="rank-save"
+                        type="button"
+                        onclick="saveRankAdmin(${Number(rank.id)},this)"
+                    >
+                        SAVE
+                    </button>
+
+                </div>
+
+            `
+        )
+        .join('');
+
+}
+
+
+async function saveRankAdmin(id,button){
+
+    const row =
+        button.closest(
+            '.rank-admin-row'
+        );
+
+    if(!row) return;
+
+
+    const rank_name =
+        row
+        .querySelector(
+            '.rank-name-input'
+        )
+        .value
+        .trim();
+
+
+    const min_points =
+        Math.max(
+            0,
+            Number(
+                row
+                .querySelector(
+                    '.rank-points-input'
+                )
+                .value
+            ) || 0
+        );
+
+
+    const reward_text =
+        row
+        .querySelector(
+            '.rank-reward-input'
+        )
+        .value
+        .trim();
+
+
+    if(!rank_name){
+
+        toast(
+            'Rank name is required.'
+        );
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+    button.textContent = '...';
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+        .from('rank_settings')
+        .update({
+            rank_name,
+            min_points,
+            reward_text,
+            updated_at:
+                new Date()
+                .toISOString()
+        })
+        .eq(
+            'id',
+            id
+        );
+
+
+    button.disabled = false;
+    button.textContent = 'SAVE';
+
+
+    if(error){
+
+        toast(
+            'Rank update failed: ' +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    toast(
+        'Rank updated successfully.'
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+checkSession();
+
+</script>
+
+</body>
+</html>

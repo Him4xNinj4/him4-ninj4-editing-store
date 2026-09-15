@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Optimize | HIM4 x NINJ4</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:monospace;
+}
+
+body{
+    background:#050505;
+    color:#fff;
+    min-height:100vh;
+}
+
+
+/* =========================
+   FREE FIRE ANIMATED BG
+========================= */
+
+.ff-bg{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+    overflow:hidden;
+    pointer-events:none;
+    background:#030504;
+}
+
+.ff-grid{
+    position:absolute;
+    inset:-60%;
+
+    background-image:
+        linear-gradient(
+            rgba(0,255,136,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,255,136,.055) 1px,
+            transparent 1px
+        );
+
+    background-size:55px 55px;
+
+    transform:
+        perspective(500px)
+        rotateX(62deg);
+
+    animation:ffGridMove 8s linear infinite;
+
+    opacity:.42;
+}
+
+.ff-glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.12;
+    animation:ffGlow 6s ease-in-out infinite;
+}
+
+.ff-glow.one{
+    width:420px;
+    height:420px;
+    background:#00ff88;
+    top:-180px;
+    left:-120px;
+}
+
+.ff-glow.two{
+    width:380px;
+    height:380px;
+    background:#00aa66;
+    right:-140px;
+    bottom:-160px;
+    animation-delay:2s;
+}
+
+.ff-scan{
+    position:absolute;
+    left:0;
+    right:0;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #00ff88,
+            transparent
+        );
+
+    box-shadow:
+        0 0 18px rgba(0,255,136,.5);
+
+    opacity:.28;
+
+    animation:ffScan 5s linear infinite;
+}
+
+.ff-particles{
+    position:absolute;
+    inset:0;
+}
+
+.ff-particles i{
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:#00ff88;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 8px #00ff88;
+
+    opacity:0;
+
+    animation:ffParticle 5s linear infinite;
+}
+
+.ff-particles i:nth-child(1){
+    left:8%;
+    animation-delay:.2s;
+}
+
+.ff-particles i:nth-child(2){
+    left:19%;
+    animation-delay:1.4s;
+}
+
+.ff-particles i:nth-child(3){
+    left:31%;
+    animation-delay:3s;
+}
+
+.ff-particles i:nth-child(4){
+    left:44%;
+    animation-delay:2s;
+}
+
+.ff-particles i:nth-child(5){
+    left:57%;
+    animation-delay:4s;
+}
+
+.ff-particles i:nth-child(6){
+    left:68%;
+    animation-delay:1s;
+}
+
+.ff-particles i:nth-child(7){
+    left:76%;
+    animation-delay:2.7s;
+}
+
+.ff-particles i:nth-child(8){
+    left:84%;
+    animation-delay:3.6s;
+}
+
+.ff-particles i:nth-child(9){
+    left:92%;
+    animation-delay:.8s;
+}
+
+.ff-particles i:nth-child(10){
+    left:37%;
+    animation-delay:4.5s;
+}
+
+.ff-particles i:nth-child(11){
+    left:63%;
+    animation-delay:1.9s;
+}
+
+
+@keyframes ffGridMove{
+
+    0%{
+        transform:
+            perspective(500px)
+            rotateX(62deg)
+            translateY(0);
+    }
+
+    100%{
+        transform:
+            perspective(500px)
+            rotateX(62deg)
+            translateY(55px);
+    }
+
+}
+
+
+@keyframes ffGlow{
+
+    0%,100%{
+        transform:scale(1);
+        opacity:.08;
+    }
+
+    50%{
+        transform:scale(1.15);
+        opacity:.16;
+    }
+
+}
+
+
+@keyframes ffScan{
+
+    0%{
+        top:-5%;
+    }
+
+    100%{
+        top:105%;
+    }
+
+}
+
+
+@keyframes ffParticle{
+
+    0%{
+        top:105%;
+        opacity:0;
+        transform:translateX(0);
+    }
+
+    15%{
+        opacity:.7;
+    }
+
+    85%{
+        opacity:.25;
+    }
+
+    100%{
+        top:-5%;
+        opacity:0;
+        transform:translateX(35px);
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .ff-grid{
+        background-size:38px 38px;
+        opacity:.3;
+    }
+
+    .ff-glow{
+        filter:blur(55px);
+        opacity:.08;
+    }
+
+    .ff-scan{
+        opacity:.18;
+    }
+
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    padding:18px 20px;
+    border-bottom:1px solid #00ff88;
+    color:#00ff88;
+    font-size:16px;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(0,255,136,.12);
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:92%;
+    max-width:850px;
+    margin:35px auto;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title{
+    text-align:center;
+    color:#00ff88;
+    font-size:32px;
+    margin-bottom:8px;
+    text-shadow:0 0 15px rgba(0,255,136,.5);
+}
+
+.command{
+    text-align:center;
+    color:#777;
+    margin-bottom:30px;
+    font-size:13px;
+}
+
+
+/* =========================
+   SELECT PANEL
+========================= */
+
+.select-panel{
+    background:rgba(11,11,11,.94);
+    border:1px solid #222;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 0 25px rgba(0,255,136,.04);
+}
+
+.select-panel h2{
+    text-align:center;
+    color:#00ff88;
+    font-size:21px;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    color:#aaa;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+select{
+    width:100%;
+    padding:15px;
+    background:#050505;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:8px;
+    outline:none;
+    font-family:monospace;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+select:focus{
+    border-color:#00ff88;
+    box-shadow:0 0 10px rgba(0,255,136,.12);
+}
+
+select option{
+    background:#050505;
+    color:#fff;
+}
+
+
+/* =========================
+   PRICE
+========================= */
+
+.price-box{
+    display:none;
+    margin-top:10px;
+    padding:20px;
+    border:1px solid #00ff88;
+    background:#06130d;
+    border-radius:10px;
+    text-align:center;
+}
+
+.price-label{
+    color:#888;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.price{
+    color:#00ff88;
+    font-size:30px;
+    font-weight:bold;
+    text-shadow:0 0 12px rgba(0,255,136,.35);
+}
+
+.buy-btn{
+    display:none;
+    width:100%;
+    border:none;
+    background:#00ff88;
+    color:#000;
+    font-weight:bold;
+    padding:14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:monospace;
+    margin-top:18px;
+    font-size:14px;
+}
+
+.buy-btn:hover{
+    background:#fff;
+}
+
+
+/* =========================
+   ORDER
+========================= */
+
+#orderSection{
+    display:none;
+    margin-top:25px;
+}
+
+.panel{
+    background:rgba(11,11,11,.94);
+    border:1px solid #222;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:20px;
+}
+
+.panel h2{
+    color:#00ff88;
+    text-align:center;
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.selected-info{
+    text-align:center;
+    color:#aaa;
+    line-height:1.8;
+}
+
+.selected-info span{
+    color:#00ff88;
+    font-weight:bold;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+input{
+    width:100%;
+    padding:13px;
+    background:#050505;
+    border:1px solid #333;
+    color:#fff;
+    border-radius:7px;
+    outline:none;
+    font-family:monospace;
+    font-size:14px;
+}
+
+input:focus{
+    border-color:#00ff88;
+    box-shadow:0 0 8px rgba(0,255,136,.12);
+}
+
+.input-label{
+    display:block;
+    color:#aaa;
+    font-size:13px;
+    margin:15px 0 7px;
+}
+
+
+/* =========================
+   BANK
+========================= */
+
+.bank-box{
+    border:1px solid #00ff88;
+    background:#06130d;
+    border-radius:10px;
+    padding:18px;
+    line-height:2;
+    color:#aaa;
+    font-size:13px;
+}
+
+.bank-box span{
+    color:#00ff88;
+    font-weight:bold;
+}
+
+.warning{
+    color:#ffcc00;
+    font-size:12px;
+    line-height:1.6;
+    margin-top:15px;
+}
+
+
+/* =========================
+   SUBMIT
+========================= */
+
+.submit-btn{
+    width:100%;
+    border:none;
+    background:#00ff88;
+    color:#000;
+    font-weight:bold;
+    padding:14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:monospace;
+    margin-top:20px;
+    font-size:14px;
+}
+
+.submit-btn:hover{
+    background:#fff;
+}
+
+
+/* =========================
+   ORDER RECEIPT
+========================= */
+
+.receipt{
+    display:none;
+    margin-top:25px;
+    background:#070707;
+    border:1px solid #00ff88;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 0 30px rgba(0,255,136,.10);
+}
+
+.receipt-head{
+    text-align:center;
+    border-bottom:1px dashed #333;
+    padding-bottom:18px;
+    margin-bottom:18px;
+}
+
+.receipt-head h2{
+    color:#00ff88;
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.receipt-head p{
+    color:#888;
+    font-size:12px;
+}
+
+.receipt-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:9px 0;
+    border-bottom:1px solid #151515;
+    font-size:13px;
+}
+
+.receipt-row .label{
+    color:#777;
+}
+
+.receipt-row .value{
+    color:#fff;
+    text-align:right;
+    word-break:break-word;
+}
+
+.receipt-status{
+    margin-top:20px;
+    padding:15px;
+    border:1px solid #00ff88;
+    background:#06130d;
+    color:#00ff88;
+    text-align:center;
+    line-height:1.7;
+    font-size:13px;
+}
+
+.receipt-actions{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+.receipt-btn{
+    flex:1;
+    border:1px solid #00ff88;
+    background:#00ff88;
+    color:#000;
+    padding:13px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:monospace;
+    font-weight:bold;
+}
+
+.receipt-btn.secondary{
+    background:#050505;
+    color:#00ff88;
+}
+
+.receipt-btn:hover{
+    background:#fff;
+    color:#000;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    margin-top:30px;
+    padding:15px;
+    background:#080808;
+    border-left:3px solid #00ff88;
+    color:#777;
+    font-size:12px;
+    line-height:1.8;
+}
+
+.status span{
+    color:#00ff88;
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+.back{
+    display:block;
+    text-align:center;
+    color:#00ff88;
+    text-decoration:none;
+    margin:30px 0;
+    font-size:13px;
+}
+
+.back:hover{
+    color:#fff;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    color:#444;
+    padding:25px;
+    font-size:11px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .container{
+        width:94%;
+    }
+
+    .title{
+        font-size:28px;
+    }
+
+    .select-panel,
+    .panel{
+        padding:20px;
+    }
+
+    .price{
+        font-size:27px;
+    }
+
+    .receipt-row{
+        flex-direction:column;
+        gap:4px;
+    }
+
+    .receipt-row .value{
+        text-align:left;
+    }
+
+    .receipt-actions{
+        flex-direction:column;
+    }
+
+}
+
+
+/* =========================
+   PRINT RECEIPT
+========================= */
+
+@media print{
+
+    body{
+        background:#fff !important;
+        color:#000 !important;
+    }
+
+    .topbar,
+    .container > *:not(#receipt),
+    footer{
+        display:none !important;
+    }
+
+    #receipt{
+        display:block !important;
+        color:#000;
+        border:1px solid #000;
+        box-shadow:none;
+    }
+
+    .receipt-head h2,
+    .receipt-head p,
+    .receipt-row .label,
+    .receipt-row .value,
+    .receipt-status{
+        color:#000 !important;
+    }
+
+    .receipt-status{
+        border:1px solid #000;
+        background:#fff;
+    }
+
+    .receipt-actions{
+        display:none !important;
+    }
+
+}
+
+
+
+/* =========================
+   LOGIN REQUIRED POPUP
+========================= */
+#loginPopup{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.86);backdrop-filter:blur(8px)}
+#loginPopup.open{display:flex}
+.login-popup-box{width:min(430px,100%);padding:30px 24px;text-align:center;background:#090909;border:1px solid #00ff88;border-radius:14px;box-shadow:0 0 35px rgba(0,255,136,.18)}
+.login-popup-icon{font-size:42px;margin-bottom:12px}
+.login-popup-box h2{color:#00ff88;font-size:23px;margin-bottom:12px}
+.login-popup-box p{color:#aaa;font-size:13px;line-height:1.7;margin-bottom:22px}
+.login-popup-actions{display:flex;gap:10px}
+.login-popup-btn{flex:1;display:block;padding:13px 10px;border-radius:8px;border:1px solid #00ff88;background:#00ff88;color:#000;text-decoration:none;font-family:monospace;font-weight:bold;cursor:pointer}
+.login-popup-btn.secondary{background:#050505;color:#00ff88}
+@media(max-width:600px){.login-popup-actions{flex-direction:column}.login-popup-box{padding:25px 18px}}
+</style>
+
+</head>
+
+
+<body>
+<div id="loginPopup" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="login-popup-box">
+    <div class="login-popup-icon">🔐</div>
+    <h2>LOGIN REQUIRED</h2>
+    <p>Video Optimization is available only for registered users.<br><br>Please login or create an account to continue.</p>
+    <div class="login-popup-actions">
+      <a class="login-popup-btn" href="auth.html">LOGIN / CREATE ACCOUNT</a>
+      <a class="login-popup-btn secondary" href="index.html">BACK TO HOME</a>
+    </div>
+  </div>
+</div>
+
+
+
+    </div>
+</div>
+
+
+
+<!-- =========================
+     FREE FIRE ANIMATED BACKGROUND
+========================= -->
+
+<div class="ff-bg" aria-hidden="true">
+
+    <div class="ff-grid"></div>
+
+    <div class="ff-glow one"></div>
+
+    <div class="ff-glow two"></div>
+
+    <div class="ff-scan"></div>
+
+    <div class="ff-particles">
+
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+
+    </div>
+
+</div>
+
+
+<div class="topbar">
+
+    HIM4 x NINJ4 // VIDEO OPTIMIZATION
+
+</div>
+
+
+<div class="container">
+
+
+    <h1 class="title">
+        OPTIMIZE
+    </h1>
+
+
+    <div class="command">
+
+        root@him4-ninj4:~$ select optimization
+
+    </div>
+
+
+    <!-- PACKAGE SELECTION -->
+
+    <div class="select-panel">
+
+        <h2>
+            ⚙ SELECT YOUR PACKAGE
+        </h2>
+
+
+        <label>
+            SELECT FPS & DEVICE
+        </label>
+
+
+        <select
+            id="packageSelect"
+            onchange="updatePlan()"
+        >
+
+            <option value="">
+                -- Select Package --
+            </option>
+
+            <option value="120_android">
+                120 FPS — Android
+            </option>
+
+            <option value="120_ios">
+                120 FPS — iOS
+            </option>
+
+            <option value="240_android">
+                240 FPS — Android
+            </option>
+
+            <option value="240_ios">
+                240 FPS — iOS
+            </option>
+
+        </select>
+
+
+        <div
+            id="planArea"
+            style="display:none;"
+        >
+
+            <label>
+                SELECT PLAN
+            </label>
+
+
+            <select
+                id="planSelect"
+                onchange="updatePrice()"
+            >
+
+                <option value="">
+                    -- Select Plan --
+                </option>
+
+                <option value="month">
+                    1 MONTH
+                </option>
+
+                <option value="lifetime">
+                    LIFE TIME
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- PRICE -->
+
+        <div
+            class="price-box"
+            id="priceBox"
+        >
+
+            <div class="price-label">
+
+                SELECTED PACKAGE PRICE
+
+            </div>
+
+
+            <div
+                class="price"
+                id="price"
+            >
+                Rs. 0
+            </div>
+
+        </div>
+
+
+        <button
+            class="buy-btn"
+            id="buyBtn"
+            onclick="openOrder()"
+        >
+
+            BUY NOW →
+
+        </button>
+
+    </div>
+
+
+    <!-- ORDER SECTION -->
+
+    <div id="orderSection">
+
+
+        <!-- SELECTED PACKAGE -->
+
+        <div class="panel">
+
+            <h2>
+                🛒 ORDER SUMMARY
+            </h2>
+
+
+            <div class="selected-info">
+
+                PACKAGE :
+                <span id="summaryPackage">
+                    ---
+                </span>
+
+                <br>
+
+                PLAN :
+                <span id="summaryPlan">
+                    ---
+                </span>
+
+                <br>
+
+                PRICE :
+                <span id="summaryPrice">
+                    ---
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <div class="panel">
+
+            <h2>
+                👤 CUSTOMER DETAILS
+            </h2>
+
+
+            <label class="input-label">
+                FULL NAME
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+            >
+
+
+            <label class="input-label">
+                WHATSAPP NUMBER
+            </label>
+
+            <input
+                type="tel"
+                id="whatsapp"
+                placeholder="Enter WhatsApp number"
+            >
+
+
+            <label class="input-label">
+                EMAIL ADDRESS
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+            >
+
+        </div>
+
+
+        <!-- BANK DETAILS -->
+
+        <div class="panel">
+
+            <h2>
+                🏦 BANK PAYMENT
+            </h2>
+
+
+            <div class="bank-box">
+
+                <div>
+                    Bank :
+                    <span>Commercial Bank</span>
+                </div>
+
+                <div>
+                    Account Name :
+                    <span>K.A.S.KARUNARATHNA</span>
+                </div>
+
+                <div>
+                    Account Number :
+                    <span>8031209744</span>
+                </div>
+
+                <div>
+                    Branch :
+                    <span>Katubedda branch</span>
+                </div>
+
+            </div>
+
+
+            <div class="warning">
+
+                ⚠ Transfer the exact amount shown above
+                to our bank account.
+
+                <br><br>
+
+                After payment, upload your bank slip or
+                payment screenshot below.
+
+            </div>
+
+        </div>
+
+
+        <!-- PAYMENT SLIP -->
+
+        <div class="panel">
+
+            <h2>
+                📸 PAYMENT SLIP
+            </h2>
+
+
+            <label class="input-label">
+
+                UPLOAD BANK SLIP / SCREENSHOT
+
+            </label>
+
+
+            <input
+                type="file"
+                id="slip"
+                accept="image/*"
+            >
+
+
+            <button
+                class="submit-btn"
+                onclick="submitOrder()"
+            >
+
+                SUBMIT ORDER
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ORDER RECEIPT
+    ========================= -->
+
+    <div
+        class="receipt"
+        id="receipt"
+    >
+
+        <div class="receipt-head">
+
+            <h2>
+                ✓ ORDER RECEIPT
+            </h2>
+
+            <p>
+                HIM4 x NINJ4 // VIDEO OPTIMIZATION
+            </p>
+
+        </div>
+
+
+        <div class="receipt-row">
+
+            <span class="label">
+                ORDER ID
+            </span>
+
+            <span
+                class="value"
+                id="receiptOrderId"
+            >
+                ---
+            </span>
+
+        </div>
+
+
+        <div class="receipt-row">
+
+            <span class="label">
+                PACKAGE
+            </span>
+
+            <span
+                class="value"
+                id="receiptPackage"
+            >
+                ---
+            </span>
+
+        </div>
+
+
+        <div class="receipt-row">
+
+            <span class="label">
+                PLAN
+            </span>
+
+            <span
+                class="value"
+                id="receiptPlan"
+            >
+                ---
+            </span>
+
+        </div>
+
+
+        <div class="receipt-row">
+
+            <span class="label">
+                PRICE
+            </span>
+
+            <span
+                class="value"
+                id="receiptPrice"
+            >
+                ---
+            </span>
+
+        </div>
+
+
+        <div class="receipt-row">
+
+            <span class="label">
+                CUSTOMER
+            </span>
+
+            <span
+                class="value"
+                id="receiptName"
+            >
+                ---
+            </span>
+
+        </div>
+
+
+        <div class="receipt-row">
+
+            <span class="label">
+                WHATSAPP
+            </span>
+
+            <span
+                class="value"
+                id="receiptWhatsapp"
+            >
+                ---
+            </span>
+
+        </div>
+
+
+        <div class="receipt-row">
+
+            <span class="label">
+                EMAIL
+            </span>
+
+            <span
+                class="value"
+                id="receiptEmail"
+            >
+                ---
+            </span>
+
+        </div>
+
+
+        <div class="receipt-row">
+
+            <span class="label">
+                PAYMENT
+            </span>
+
+            <span class="value">
+                BANK TRANSFER
+            </span>
+
+        </div>
+
+
+        <div class="receipt-status">
+
+            ✓ ORDER SUBMITTED SUCCESSFULLY
+
+            <br>
+
+            Your order is now under review.
+
+            <br>
+
+            Please wait until payment verification
+            is completed.
+
+            <br>
+
+            We will contact you on WhatsApp.
+
+        </div>
+
+
+        <div class="receipt-actions">
+
+            <button
+                class="receipt-btn"
+                onclick="sendWhatsApp()"
+            >
+
+                SEND ORDER TO WHATSAPP →
+
+            </button>
+
+
+            <button
+                class="receipt-btn secondary"
+                onclick="window.print()"
+            >
+
+                PRINT / SAVE RECEIPT
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SYSTEM STATUS -->
+
+    <div class="status">
+
+        SYSTEM STATUS :
+        <span>● ONLINE</span>
+
+        <br>
+
+        OPTIMIZATION DATABASE :
+        READY
+
+        <br>
+
+        PAYMENT METHOD :
+        BANK TRANSFER
+
+    </div>
+
+
+    <a
+        href="index.html"
+        class="back"
+    >
+
+        ← BACK TO HOME
+
+    </a>
+
+</div>
+
+
+<footer>
+
+    © 2026 HIM4 x NINJ4 EDITING STORE
+
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+ const URL='https://ndcrvdbvhswbvahpskhj.supabase.co';
+ const KEY='sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+ const client=window.supabase.createClient(URL,KEY);
+ const popup=document.getElementById('loginPopup');
+ async function check(){
+   try{
+     const {data:{session}}=await client.auth.getSession();
+     if(!session?.user){
+       popup.classList.add('open'); popup.setAttribute('aria-hidden','false');
+       document.querySelectorAll('body > *:not(#loginPopup)').forEach(el=>el.style.visibility='hidden');
+       document.body.style.overflow='hidden';
+     }
+   }catch(e){
+     popup.classList.add('open'); popup.setAttribute('aria-hidden','false');
+     document.querySelectorAll('body > *:not(#loginPopup)').forEach(el=>el.style.visibility='hidden');
+     document.body.style.overflow='hidden';
+   }
+ }
+ check();
+ client.auth.onAuthStateChange((_event,session)=>{
+   if(session?.user){ popup.classList.remove('open'); popup.setAttribute('aria-hidden','true'); document.querySelectorAll('body > *:not(#loginPopup)').forEach(el=>el.style.visibility=''); document.body.style.overflow=''; }
+ });
+})();
+</script>
+<script>
+
+
+/* =========================
+   PRICES
+========================= */
+
+const prices = {
+
+    "120_android": {
+        month:850,
+        lifetime:2000
+    },
+
+    "120_ios": {
+        month:850,
+        lifetime:2000
+    },
+
+    "240_android": {
+        month:1250,
+        lifetime:4000
+    },
+
+    "240_ios": {
+        month:1250,
+        lifetime:4000
+    }
+
+};
+
+
+/* =========================
+   PACKAGE
+========================= */
+
+function updatePlan(){
+
+    const packageSelect =
+        document.getElementById("packageSelect");
+
+    const planArea =
+        document.getElementById("planArea");
+
+    const planSelect =
+        document.getElementById("planSelect");
+
+    const priceBox =
+        document.getElementById("priceBox");
+
+    const buyBtn =
+        document.getElementById("buyBtn");
+
+    const orderSection =
+        document.getElementById("orderSection");
+
+
+    if(packageSelect.value === ""){
+
+        planArea.style.display = "none";
+
+        priceBox.style.display = "none";
+
+        buyBtn.style.display = "none";
+
+        orderSection.style.display = "none";
+
+        planSelect.value = "";
+
+        return;
+
+    }
+
+
+    planArea.style.display = "block";
+
+    priceBox.style.display = "none";
+
+    buyBtn.style.display = "none";
+
+    orderSection.style.display = "none";
+
+    planSelect.value = "";
+
+}
+
+
+/* =========================
+   PRICE
+========================= */
+
+function updatePrice(){
+
+    const packageValue =
+        document.getElementById("packageSelect").value;
+
+    const planValue =
+        document.getElementById("planSelect").value;
+
+    const priceBox =
+        document.getElementById("priceBox");
+
+    const price =
+        document.getElementById("price");
+
+    const buyBtn =
+        document.getElementById("buyBtn");
+
+
+    if(
+        packageValue === "" ||
+        planValue === ""
+    ){
+
+        priceBox.style.display = "none";
+
+        buyBtn.style.display = "none";
+
+        return;
+
+    }
+
+
+    const selectedPrice =
+        prices[packageValue][planValue];
+
+
+    price.innerText =
+        "Rs. " +
+        selectedPrice.toLocaleString();
+
+
+    priceBox.style.display = "block";
+
+    buyBtn.style.display = "block";
+
+}
+
+
+/* =========================
+   OPEN ORDER
+========================= */
+
+function openOrder(){
+
+    const packageValue =
+        document.getElementById("packageSelect").value;
+
+    const planValue =
+        document.getElementById("planSelect").value;
+
+
+    if(
+        packageValue === "" ||
+        planValue === ""
+    ){
+
+        alert(
+            "Please select package and plan."
+        );
+
+        return;
+
+    }
+
+
+    const packageSelect =
+        document.getElementById("packageSelect");
+
+    const planSelect =
+        document.getElementById("planSelect");
+
+
+    const packageText =
+        packageSelect.options[
+            packageSelect.selectedIndex
+        ].text;
+
+
+    const planText =
+        planSelect.options[
+            planSelect.selectedIndex
+        ].text;
+
+
+    const selectedPrice =
+        prices[packageValue][planValue];
+
+
+    document.getElementById(
+        "summaryPackage"
+    ).innerText = packageText;
+
+
+    document.getElementById(
+        "summaryPlan"
+    ).innerText = planText;
+
+
+    document.getElementById(
+        "summaryPrice"
+    ).innerText =
+        "Rs. " +
+        selectedPrice.toLocaleString();
+
+
+    document.getElementById(
+        "orderSection"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "orderSection"
+    ).scrollIntoView({
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* =========================
+   SUBMIT ORDER
+========================= */
+
+function submitOrder(){
+
+    const name =
+        document.getElementById(
+            "name"
+        ).value.trim();
+
+
+    const whatsapp =
+        document.getElementById(
+            "whatsapp"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+
+    const slip =
+        document.getElementById(
+            "slip"
+        ).files.length;
+
+
+    if(name === ""){
+
+        alert(
+            "Please enter your full name."
+        );
+
+        return;
+
+    }
+
+
+    if(whatsapp === ""){
+
+        alert(
+            "Please enter your WhatsApp number."
+        );
+
+        return;
+
+    }
+
+
+    if(email === ""){
+
+        alert(
+            "Please enter your email address."
+        );
+
+        return;
+
+    }
+
+
+    if(slip === 0){
+
+        alert(
+            "Please upload your payment slip."
+        );
+
+        return;
+
+    }
+
+
+    const packageName =
+        document.getElementById(
+            "summaryPackage"
+        ).innerText;
+
+
+    const planName =
+        document.getElementById(
+            "summaryPlan"
+        ).innerText;
+
+
+    const finalPrice =
+        document.getElementById(
+            "summaryPrice"
+        ).innerText;
+
+
+    /* CREATE ORDER ID */
+
+    const orderId =
+        "HN-" +
+        Date.now()
+        .toString()
+        .slice(-8);
+
+
+    /* FILL RECEIPT */
+
+    document.getElementById(
+        "receiptOrderId"
+    ).innerText = orderId;
+
+
+    document.getElementById(
+        "receiptPackage"
+    ).innerText = packageName;
+
+
+    document.getElementById(
+        "receiptPlan"
+    ).innerText = planName;
+
+
+    document.getElementById(
+        "receiptPrice"
+    ).innerText = finalPrice;
+
+
+    document.getElementById(
+        "receiptName"
+    ).innerText = name;
+
+
+    document.getElementById(
+        "receiptWhatsapp"
+    ).innerText = whatsapp;
+
+
+    document.getElementById(
+        "receiptEmail"
+    ).innerText = email;
+
+
+    /* SAVE ORDER */
+
+    window.currentOrder = {
+
+        id:orderId,
+
+        package:packageName,
+
+        plan:planName,
+
+        price:finalPrice,
+
+        name:name,
+
+        whatsapp:whatsapp,
+
+        email:email
+
+    };
+
+
+    /* SHOW RECEIPT */
+
+    const receipt =
+        document.getElementById(
+            "receipt"
+        );
+
+
+    receipt.style.display =
+        "block";
+
+
+    /* SUCCESS MESSAGE */
+
+    alert(
+
+        "ORDER SUBMITTED SUCCESSFULLY!\n\n" +
+
+        "Order ID : " +
+        orderId +
+
+        "\n\n" +
+
+        "Your order is now under review.\n" +
+
+        "Please wait until payment verification is completed."
+
+    );
+
+
+    receipt.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"start"
+
+    });
+
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function sendWhatsApp(){
+
+    if(!window.currentOrder){
+
+        alert(
+            "Please submit the order first."
+        );
+
+        return;
+
+    }
+
+
+    const o =
+        window.currentOrder;
+
+
+    const message =
+
+        "HIM4 x NINJ4 - NEW ORDER\n\n" +
+
+        "Order ID : " +
+        o.id +
+
+        "\n" +
+
+        "Package : " +
+        o.package +
+
+        "\n" +
+
+        "Plan : " +
+        o.plan +
+
+        "\n" +
+
+        "Price : " +
+        o.price +
+
+        "\n\n" +
+
+        "CUSTOMER DETAILS\n" +
+
+        "Name : " +
+        o.name +
+
+        "\n" +
+
+        "WhatsApp : " +
+        o.whatsapp +
+
+        "\n" +
+
+        "Email : " +
+        o.email +
+
+        "\n\n" +
+
+        "Payment : Bank Transfer\n" +
+
+        "Status : Payment slip uploaded - Review Required";
+
+
+    /*
+       0761024243
+       Sri Lanka international format:
+       94761024243
+    */
+
+    const whatsappNumber =
+        "94761024243";
+
+
+    const url =
+
+        "https://wa.me/" +
+
+        whatsappNumber +
+
+        "?text=" +
+
+        encodeURIComponent(
+            message
+        );
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

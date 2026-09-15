@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fonts | HIM4 x NINJ4</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:monospace;
+}
+
+body{
+    background:#050505;
+    color:#00ff88;
+    min-height:100vh;
+}
+
+/* TOP BAR */
+.topbar{
+    padding:18px 20px;
+    background:#080808;
+    border-bottom:1px solid #00ff88;
+}
+
+.logo{
+    font-size:18px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.logo .white{
+    color:white;
+}
+
+/* MAIN */
+.container{
+    width:92%;
+    max-width:900px;
+    margin:auto;
+    padding:55px 0;
+}
+
+/* TITLE */
+.title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.command{
+    color:#777;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.title h1{
+    color:#00ff88;
+    font-size:35px;
+    letter-spacing:4px;
+    text-shadow:0 0 15px rgba(0,255,136,.6);
+}
+
+.title p{
+    color:#777;
+    margin-top:12px;
+}
+
+/* MAIN BOX */
+.font-box{
+    background:#090909;
+    border:1px solid #00ff88;
+    padding:40px 25px;
+    text-align:center;
+    box-shadow:0 0 25px rgba(0,255,136,.08);
+}
+
+.font-icon{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.font-box h2{
+    color:white;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.font-box p{
+    color:#888;
+    line-height:1.7;
+}
+
+/* FONT PREVIEW */
+.preview{
+    margin:30px auto;
+    padding:25px 15px;
+    border:1px dashed #00ff88;
+}
+
+.preview-label{
+    color:#00ff88;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+.preview-text{
+    color:white;
+    font-family:Arial,sans-serif;
+    font-size:30px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+/* STATUS */
+.status{
+    margin-top:25px;
+    color:#00ff88;
+    font-size:13px;
+}
+
+.dot{
+    display:inline-block;
+    width:8px;
+    height:8px;
+    background:#00ff88;
+    border-radius:50%;
+    margin-right:8px;
+    box-shadow:0 0 10px #00ff88;
+}
+
+/* TERMINAL */
+.terminal{
+    margin-top:30px;
+    padding:20px;
+    background:#020202;
+    border:1px solid #181818;
+    color:#777;
+    line-height:2;
+    font-size:13px;
+}
+
+.green{
+    color:#00ff88;
+}
+
+/* BACK */
+.back{
+    display:inline-block;
+    margin-top:30px;
+    padding:12px 20px;
+    border:1px solid #00ff88;
+    color:#00ff88;
+    text-decoration:none;
+}
+
+.back:hover{
+    background:#00ff88;
+    color:#000;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px;
+    margin-top:20px;
+    border-top:1px solid #151515;
+    color:#555;
+    font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .logo{
+        font-size:14px;
+    }
+
+    .container{
+        width:92%;
+        padding:45px 0;
+    }
+
+    .title h1{
+        font-size:27px;
+        letter-spacing:2px;
+    }
+
+    .font-box{
+        padding:35px 18px;
+    }
+
+    .preview-text{
+        font-size:23px;
+    }
+}
+</style>
+
+<style id="login-guard-style">
+#loginGuard{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.88);
+    backdrop-filter:blur(10px);
+}
+#loginGuard.hidden{display:none}
+.login-guard-card{
+    width:min(440px,100%);
+    background:#090909;
+    border:1px solid #00ff88;
+    box-shadow:0 0 45px rgba(0,255,136,.12);
+    padding:32px 24px;
+    text-align:center;
+}
+.login-guard-icon{font-size:42px;margin-bottom:15px}
+.login-guard-card h2{
+    color:#00ff88;
+    font-size:20px;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+.login-guard-card p{
+    color:#888;
+    font-size:12px;
+    line-height:1.8;
+    margin-bottom:22px;
+}
+.login-guard-btn{
+    display:inline-block;
+    padding:12px 22px;
+    border:1px solid #00ff88;
+    background:#00ff88;
+    color:#000;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:11px;
+    letter-spacing:1px;
+}
+.login-guard-btn:hover{background:transparent;color:#00ff88}
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN GUARD -->
+<div id="loginGuard">
+    <div class="login-guard-card">
+        <div class="login-guard-icon">🔐</div>
+        <h2>LOGIN REQUIRED</h2>
+        <p>
+            You must be logged in to access Premium Fonts.<br>
+            If you don't have an account, create one first and then login.
+        </p>
+        <a class="login-guard-btn" href="auth.html">LOGIN / CREATE ACCOUNT</a>
+    </div>
+</div>
+
+
+<!-- TOP BAR -->
+<div class="topbar">
+
+    <div class="logo">
+        HIM4 <span class="white">x</span> NINJ4
+        <span class="white"> // EDITING STORE</span>
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+<div class="container">
+
+    <!-- TITLE -->
+    <div class="title">
+
+        <div class="command">
+            root@him4-ninj4:~$ open fonts
+        </div>
+
+        <h1>FONTS</h1>
+
+        <p>
+            Premium fonts for your editing projects
+        </p>
+
+    </div>
+
+
+    <!-- FONT SECTION -->
+    <div class="font-box">
+
+        <div class="font-icon">
+            🔤
+        </div>
+
+        <h2>
+            PREMIUM FONTS
+        </h2>
+
+        <p>
+            Download high quality fonts for
+            Free Fire edits, thumbnails, posters
+            and cinematic videos.
+        </p>
+
+
+        <!-- PREVIEW -->
+        <div class="preview">
+
+            <div class="preview-label">
+                FONT PREVIEW
+            </div>
+
+            <div class="preview-text">
+                HIM4 × NINJ4
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+        <div class="status">
+
+            <span class="dot"></span>
+
+            FONT DATABASE : COMING SOON
+
+        </div>
+
+    </div>
+
+
+    <!-- TERMINAL -->
+    <div class="terminal">
+
+        <div>
+            <span class="green">[SYSTEM]</span>
+            Font section initialized...
+        </div>
+
+        <div>
+            <span class="green">[DATABASE]</span>
+            Premium fonts : READY
+        </div>
+
+        <div>
+            <span class="green">[STATUS]</span>
+            Downloads : COMING SOON
+        </div>
+
+        <div>
+            <span class="green">[HIM4 x NINJ4]</span>
+            More resources coming soon...
+        </div>
+
+    </div>
+
+
+    <!-- BACK -->
+    <a href="editing.html" class="back">
+        ← BACK TO EDITING RESOURCES
+    </a>
+
+</div>
+
+
+<footer>
+    © 2026 HIM4 x NINJ4 Editing Store
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script id="login-guard-script">
+(function(){
+    const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+    const guard = document.getElementById('loginGuard');
+
+    function allowPage(){
+        if(guard) guard.classList.add('hidden');
+    }
+
+    function keepLocked(){
+        if(guard) guard.classList.remove('hidden');
+        document.querySelectorAll('body > *:not(#loginGuard)').forEach(el => {
+            el.style.visibility = 'hidden';
+        });
+    }
+
+    async function checkLogin(){
+        try{
+            if(!window.supabase || !window.supabase.createClient){
+                keepLocked();
+                return;
+            }
+
+            const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            const { data, error } = await client.auth.getSession();
+
+            if(error || !data.session){
+                keepLocked();
+                return;
+            }
+
+            document.querySelectorAll('body > *:not(#loginGuard)').forEach(el => {
+                el.style.visibility = '';
+            });
+            allowPage();
+        }catch(err){
+            console.error('Login guard error:', err);
+            keepLocked();
+        }
+    }
+
+    checkLogin();
+})();
+</script>
+
+</body>
+</html>

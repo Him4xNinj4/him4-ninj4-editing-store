@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HIM4 × NINJ4 — Profile</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:#fff;background:#07060d;min-height:100vh;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;width:430px;height:430px;border-radius:50%;filter:blur(110px);opacity:.24;z-index:-2;pointer-events:none}
+body:before{background:#a855f7;top:-180px;left:-160px}body:after{background:#06b6d4;right:-170px;bottom:-180px}
+.topbar{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(7,6,13,.78);backdrop-filter:blur(18px);position:sticky;top:0;z-index:20}.brand{font-weight:900;letter-spacing:1.5px}.brand span{color:#d946ef}.back{color:#d8d2e8;text-decoration:none;font-size:11px;font-weight:800;padding:9px 13px;border:1px solid rgba(255,255,255,.12);border-radius:12px}
+.container{width:min(1120px,92%);margin:34px auto 70px}.hero-title{font-size:40px;margin:0;background:linear-gradient(90deg,#fff,#d946ef,#22d3ee,#f59e0b);-webkit-background-clip:text;color:transparent}.hero-sub{color:#8f8aa1;margin:8px 0 25px;font-size:13px}
+.profile{position:relative;padding:30px 30px 24px;border:1px solid rgba(255,255,255,.11);border-radius:28px;background:linear-gradient(135deg,rgba(168,85,247,.14),rgba(6,182,212,.08),rgba(236,72,153,.12));backdrop-filter:blur(20px);box-shadow:0 25px 80px rgba(0,0,0,.4);overflow:hidden}
+.profile:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:rgba(245,158,11,.10);filter:blur(60px);right:-70px;top:-70px}
+.profile-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
+.avatar-wrap{width:132px;height:132px;padding:4px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#ec4899,#22d3ee,#f59e0b);box-shadow:0 0 45px rgba(168,85,247,.22)}.avatar{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#171322;font-size:50px;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}
+.profile-name{font-size:28px;font-weight:950;margin-top:16px}.profile-username{font-size:12px;color:#a9a0b4;margin-top:4px}.profile-bio{max-width:620px;color:#8f879d;font-size:12px;line-height:1.6;margin:10px auto 0}.badge{display:inline-block;margin-top:12px;padding:6px 11px;border-radius:999px;background:linear-gradient(90deg,#a855f7,#ec4899);font-size:9px;font-weight:900;letter-spacing:1px}
+.socials{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:13px}.social{display:none;text-decoration:none;color:#ddd;padding:7px 10px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);border-radius:999px;font-size:9px;font-weight:800}.social.show{display:inline-flex}.social.tiktok{color:#fff}.social.fb{color:#8ab4ff}.social.ig{color:#ff9bdc}
+.profile-edit-row{display:flex;justify-content:flex-end;margin-top:16px;position:relative;z-index:3}.btn{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.05);color:#fff;padding:10px 14px;border-radius:11px;cursor:pointer;font-weight:800;font-size:10px}.btn:hover{transform:translateY(-1px);border-color:#22d3ee}.btn.logout{border-color:rgba(248,113,113,.3);color:#fda4af}.btn.primary{background:linear-gradient(90deg,#7c3aed,#db2777);border:0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px;position:relative;z-index:1}.stat{padding:17px;border:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.18);border-radius:17px}.stat .number{font-size:21px;font-weight:950}.stat .label{font-size:9px;color:#81798f;margin-top:5px;letter-spacing:1px}.rank{color:#c084fc}.points{color:#22d3ee}.purchases{color:#f59e0b}.reviews{color:#fb7185}
+.rank-panel{margin-top:20px;padding:18px;border-radius:17px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08);cursor:pointer}.rank-top{display:flex;justify-content:space-between;gap:10px;font-size:11px;font-weight:900}.rank-next{color:#9f96ad}.bar{height:10px;background:#171421;border-radius:99px;margin:12px 0;overflow:hidden}.bar span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#a855f7,#ec4899,#22d3ee,#f59e0b);transition:width .8s}.progress-meta{display:flex;justify-content:space-between;color:#8f879d;font-size:9px}
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin-top:16px}.card{border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:20px;background:rgba(13,11,24,.72);backdrop-filter:blur(16px)}.card h2{font-size:14px;margin:0}.card h2 span{color:#22d3ee}.sub{font-size:9px;color:#70697e;margin-top:5px;letter-spacing:.6px}
+.details{margin-top:14px}.detail{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:10px}.detail span:first-child{color:#777083}.detail span:last-child{font-weight:800;text-align:right;word-break:break-word}
+.purchase-list{margin-top:14px;display:grid;gap:9px}.purchase{padding:13px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.025);display:grid;grid-template-columns:1fr auto;gap:8px}.purchase-name{font-weight:900;font-size:11px}.purchase-id{font-size:8px;color:#70697e;margin-top:4px}.purchase-price{font-weight:900;color:#f59e0b;font-size:11px;text-align:right}.status{display:inline-block;margin-top:6px;font-size:8px;font-weight:900;padding:4px 7px;border-radius:999px}.approved{color:#86efac;background:rgba(34,197,94,.1)}.pending{color:#fde68a;background:rgba(245,158,11,.1)}.rejected{color:#fda4af;background:rgba(244,63,94,.1)}.empty{text-align:center;padding:28px 12px;color:#71697d;font-size:10px}.empty strong{display:block;color:#aaa1b5;margin-bottom:6px}
+.achievements{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.achievement{padding:14px;border:1px solid rgba(255,255,255,.07);border-radius:15px;background:rgba(255,255,255,.025);opacity:.42}.achievement.unlocked{opacity:1;border-color:rgba(168,85,247,.4);background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(34,211,238,.05))}.achievement .icon{font-size:22px}.achievement b{display:block;font-size:9px;margin-top:7px}.achievement small{display:block;color:#82798f;font-size:8px;line-height:1.5;margin-top:4px}.check{float:right;color:#86efac;font-size:11px}
+.rewards{margin-top:16px}.reward{padding:13px;border-radius:14px;margin-top:8px;border-left:3px solid #6b6574;background:rgba(255,255,255,.025);opacity:.5}.reward.unlocked{opacity:1;border-left-color:#22d3ee;background:rgba(168,85,247,.06)}.reward b{font-size:10px}.reward p{margin:5px 0 0;color:#81798f;font-size:9px;line-height:1.5}.rank-modal .modal-card{width:min(620px,100%)}.rank-list{display:grid;gap:9px;margin-top:15px}.rank-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:13px;border:1px solid rgba(255,255,255,.08);border-radius:13px;background:rgba(255,255,255,.025)}.rank-row.locked{opacity:.45}.rank-row b{font-size:10px}.rank-row small{display:block;color:#82798f;margin-top:4px;font-size:8px;line-height:1.5}.rank-points{font-size:9px;font-weight:900;color:#c084fc;text-align:right}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.76);backdrop-filter:blur(9px);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.show{display:flex}.modal-card{width:min(500px,100%);max-height:92vh;overflow:auto;background:#100d1b;border:1px solid rgba(168,85,247,.35);border-radius:20px;padding:21px;box-shadow:0 30px 100px rgba(0,0,0,.7)}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-head h3{margin:0;font-size:14px}.close{background:none;border:0;color:#aaa;cursor:pointer;font-size:20px}.field{margin-top:13px}.field label{display:block;color:#81798f;font-size:9px;margin-bottom:6px;font-weight:800}.field input,.field textarea{width:100%;background:#0a0810;border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:11px;outline:none}.field textarea{min-height:90px;resize:vertical}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}.file-note{font-size:8px;color:#70697e;margin-top:6px}.toast{position:fixed;right:18px;bottom:18px;background:#171322;border:1px solid rgba(34,211,238,.3);padding:12px 15px;border-radius:12px;font-size:10px;display:none;z-index:100}.toast.show{display:block}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.achievements{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.topbar{padding:0 13px}.brand{font-size:11px}.back{font-size:9px}.container{width:94%;margin-top:22px}.hero-title{font-size:29px}.profile{padding:22px 16px}.avatar-wrap{width:116px;height:116px}.profile-name{font-size:24px}.profile-edit-row{justify-content:center}.stats{gap:8px}.stat{padding:13px}.stat .number{font-size:16px}.achievements{grid-template-columns:1fr}.purchase{grid-template-columns:1fr}.purchase-price{text-align:left}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand">HIM4 <span>×</span> NINJ4</div><a class="back" href="index.html">← BACK TO STORE</a></header>
+<main class="container">
+<h1 class="hero-title" id="pageTitle">MY ACCOUNT</h1><p class="hero-sub" id="pageSub">Creator profile • rank • purchases • achievements • rewards</p>
+<section class="profile">
+<div class="profile-center">
+<div class="avatar-wrap"><div class="avatar" id="avatar">👤</div></div>
+<div class="profile-name" id="profileName">LOADING...</div>
+<div class="profile-username" id="username">@loading</div>
+<div class="profile-bio" id="bio">Loading profile...</div>
+<div class="badge" id="badge">NEW USER</div>
+<div class="socials"><a class="social tiktok" id="tiktok" target="_blank" rel="noopener">♪ TikTok</a><a class="social fb" id="facebook" target="_blank" rel="noopener">f Facebook</a><a class="social ig" id="instagram" target="_blank" rel="noopener">◎ Instagram</a></div>
+</div>
+<div class="profile-edit-row" id="ownerActions"><button class="btn primary" id="editBtn">EDIT PROFILE</button><button class="btn logout" id="logoutBtn" style="margin-left:8px">LOGOUT</button></div>
+<div class="stats"><div class="stat"><div class="number rank" id="rank">NEWBIE</div><div class="label">CURRENT RANK</div></div><div class="stat"><div class="number points" id="points">0</div><div class="label">TOTAL POINTS</div></div><div class="stat"><div class="number purchases" id="ordersCount">0</div><div class="label">APPROVED PURCHASES</div></div><div class="stat"><div class="number reviews" id="reviewsCount">0</div><div class="label">REVIEWS</div></div></div>
+<div class="rank-panel" id="rankPanel"><div class="rank-top"><span>RANK PROGRESS</span><span class="rank-next" id="rankNext">NEXT RANK: MEMBER</span></div><div class="bar"><span id="progressBar"></span></div><div class="progress-meta"><span id="progressPoints">0 POINTS</span><span id="progressNeed">100 TO NEXT RANK</span></div></div>
+</section>
+<div class="grid">
+<section class="card"><h2><span>›</span> MY PURCHASES</h2><div class="sub">YOUR ORDERS • PAYMENT STATUS • ORDER ID</div><div class="purchase-list" id="purchaseBox"><div class="empty">LOADING PURCHASES...</div></div></section>
+<section class="card"><h2><span>›</span> ACCOUNT INFO</h2><div class="sub">PROFILE & MEMBERSHIP DATA</div><div class="details"><div class="detail"><span>USERNAME</span><span id="detailUsername">—</span></div><div class="detail"><span>FULL NAME</span><span id="detailName">—</span></div><div class="detail"><span>EMAIL</span><span id="detailEmail">—</span></div><div class="detail"><span>MEMBER SINCE</span><span id="memberSince">—</span></div></div></section>
+</div>
+<section class="card" style="margin-top:16px"><h2><span>›</span> ACHIEVEMENTS</h2><div class="sub">UNLOCK THEM THROUGH REAL ACCOUNT ACTIVITY</div><div class="achievements" id="achievements"></div></section>
+<section class="card rewards"><h2><span>›</span> RANK REWARDS</h2><div class="sub">LOCKED REWARDS ARE SHOWN UNTIL YOU REACH THEIR RANK</div><div id="rewardsBox"></div></section>
+<p style="text-align:center;color:#554d62;font-size:9px;margin-top:25px">HIM4 × NINJ4 // CREATOR PROFILE SYSTEM</p>
+</main>
+
+<div class="modal" id="editModal"><div class="modal-card"><div class="modal-head"><h3>EDIT PROFILE</h3><button class="close" id="closeModal">×</button></div>
+<div class="field"><label>PROFILE PHOTO</label><input id="photoInput" type="file" accept="image/png,image/jpeg,image/webp"><div class="file-note">JPG / PNG / WEBP • MAX 5MB</div></div>
+<div class="field"><label>FULL NAME</label><input id="editName" type="text" maxlength="80"></div>
+<div class="field"><label>USERNAME</label><input id="editUsername" type="text" maxlength="30"></div>
+<div class="field"><label>BIO</label><textarea id="editBio" maxlength="300" placeholder="Tell other creators about you..."></textarea></div>
+<div class="field"><label>TIKTOK USERNAME</label><input id="editTikTok" type="text" maxlength="60" placeholder="@username"></div>
+<div class="field"><label>FACEBOOK PROFILE URL</label><input id="editFacebook" type="url" placeholder="https://facebook.com/..."></div>
+<div class="field"><label>INSTAGRAM USERNAME</label><input id="editInstagram" type="text" maxlength="60" placeholder="@username"></div>
+<div class="modal-actions"><button class="btn" id="cancelEdit">CANCEL</button><button class="btn primary" id="saveEdit">SAVE PROFILE</button></div></div></div>
+
+<div class="modal rank-modal" id="rankModal"><div class="modal-card"><div class="modal-head"><h3>RANKS & REWARDS</h3><button class="close" id="closeRank">×</button></div><div class="rank-list" id="rankList"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL='https://ndcrvdbvhswbvahpskhj.supabase.co';
+const SUPABASE_KEY='sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let currentUser=null,currentProfile=null,approvedPurchases=0,ranks=[];
+const defaultRanks=[
+ {name:'NEWBIE',points:0,reward:'Starter creator status.'},
+ {name:'MEMBER',points:100,reward:'Member-only offers and promotions.'},
+ {name:'EDITOR',points:300,reward:'Special discounts on selected resources.'},
+ {name:'PRO EDITOR',points:700,reward:'Better discounts and exclusive resources.'},
+ {name:'ELITE EDITOR',points:1500,reward:'Higher discounts, special offers and exclusive access.'},
+ {name:'LEGEND',points:3000,reward:'Highest rank benefits and exclusive access.'}
+];
+const achievements=[
+ ['🆕','FIRST STEP','Create your HIM4 × NINJ4 account.',()=>true],
+ ['🛒','FIRST PURCHASE','Complete your first approved purchase.',()=>approvedPurchases>=1],
+ ['🎨','CREATOR','Complete 3 approved purchases.',()=>approvedPurchases>=3],
+ ['⚡','ACTIVE EDITOR','Complete 5 approved purchases.',()=>approvedPurchases>=5],
+ ['💎','COLLECTOR','Complete 10 approved purchases.',()=>approvedPurchases>=10],
+ ['👑','LEGENDARY','Reach the LEGEND rank.',()=>Number(currentProfile?.points||0)>=3000]
+];
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove('show'),2800)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function money(v){return 'Rs. '+Number(v||0).toLocaleString('en-LK')}
+function getRank(p){let idx=0;for(let i=0;i<ranks.length;i++)if(p>=Number(ranks[i].points))idx=i;return {idx,current:ranks[idx],next:ranks[idx+1]||null}}
+async function loadRankSettings(){
+ try{const {data,error}=await client.from('rank_settings').select('rank_name,min_points,reward_text,sort_order').eq('is_active',true).order('sort_order',{ascending:true});if(!error&&data?.length)ranks=data.map(x=>({name:x.rank_name,points:Number(x.min_points)||0,reward:x.reward_text||''}));else ranks=defaultRanks}catch(e){ranks=defaultRanks}
+}
+function renderRanks(p){
+ const x=getRank(p),cur=x.current,next=x.next;
+ document.getElementById('rank').textContent=cur.name;
+ document.getElementById('rankNext').textContent=next?'NEXT RANK: '+next.name:'MAX RANK REACHED';
+ document.getElementById('progressPoints').textContent=p+' POINTS';
+ if(next){const pct=Math.min(100,Math.max(0,((p-cur.points)/(next.points-cur.points))*100));document.getElementById('progressBar').style.width=pct+'%';document.getElementById('progressNeed').textContent=Math.max(0,next.points-p)+' TO NEXT RANK'}else{document.getElementById('progressBar').style.width='100%';document.getElementById('progressNeed').textContent='MAX RANK'}
+ document.getElementById('rewardsBox').innerHTML=ranks.slice(1).map(r=>`<div class="reward ${p>=r.points?'unlocked':''}"><b>${esc(r.name)} • ${r.points} POINTS ${p>=r.points?'✓ UNLOCKED':'🔒 LOCKED'}</b><p>${esc(r.reward)}</p></div>`).join('');
+ document.getElementById('rankList').innerHTML=ranks.map(r=>`<div class="rank-row ${p<r.points?'locked':''}"><div><b>${esc(r.name)}</b><small>${esc(r.reward)}</small></div><div class="rank-points">${r.points} PTS ${p>=r.points?'✓':'🔒'}</div></div>`).join('');
+}
+function renderAchievements(){document.getElementById('achievements').innerHTML=achievements.map(a=>{const ok=a[3]();return `<div class="achievement ${ok?'unlocked':''}"><span class="check">${ok?'✓':''}</span><div class="icon">${a[0]}</div><b>${a[1]}</b><small>${a[2]}</small></div>`}).join('')}
+function setSocial(id,value,type){
+ const el=document.getElementById(id);if(!value){el.classList.remove('show');el.removeAttribute('href');return}
+ el.classList.add('show');
+ if(type==='tiktok')el.href='https://www.tiktok.com/@'+String(value).replace(/^@/,'');
+ if(type==='instagram')el.href='https://www.instagram.com/'+String(value).replace(/^@/,'');
+ if(type==='facebook')el.href=value;
+}
+async function loadPurchases(){
+ const box=document.getElementById('purchaseBox');const {data,error}=await client.from('orders').select('order_id,package_name,price,status,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(50);
+ if(error){console.error(error);box.innerHTML='<div class="empty"><strong>ORDERS NOT AVAILABLE</strong>Order history could not be loaded.</div>';return}
+ const orders=data||[];approvedPurchases=orders.filter(o=>String(o.status||'').toLowerCase()==='approved').length;document.getElementById('ordersCount').textContent=approvedPurchases;
+ if(!orders.length){box.innerHTML='<div class="empty"><strong>NO PURCHASES YET</strong>Your orders will appear here after you place one.</div>';renderAchievements();return}
+ box.innerHTML=orders.map(o=>{const s=String(o.status||'pending').toLowerCase(),cls=s==='approved'?'approved':s==='rejected'?'rejected':'pending';return `<div class="purchase"><div><div class="purchase-name">${esc(o.package_name||'Resource')}</div><div class="purchase-id">${esc(o.order_id||'—')} • ${o.created_at?new Date(o.created_at).toLocaleDateString('en-LK'):''}</div><span class="status ${cls}">${esc(s.toUpperCase())}</span></div><div class="purchase-price">${money(o.price)}</div></div>`}).join('');renderAchievements()
+}
+async function loadReviews(userId){
+ try{const {count,error}=await client.from('reviews').select('id',{count:'exact',head:true}).eq('user_id',userId);if(!error)document.getElementById('reviewsCount').textContent=count||0}catch(e){}
+}
+async function loadProfile(userId,owner){
+ const {data,error}=await client.from('profiles').select('*').eq('id',userId).maybeSingle();
+ if(error||!data){toast('Profile could not be loaded');return false}
+ currentProfile=data;
+ const displayName=data.full_name||data.username||'CREATOR';
+ document.getElementById('profileName').textContent=displayName;
+ document.getElementById('username').textContent='@'+(data.username||'user');
+ document.getElementById('bio').textContent=data.bio||'Creator profile';
+ document.getElementById('badge').textContent=data.badge||'NEW USER';
+ document.getElementById('points').textContent=Number(data.points)||0;
+ document.getElementById('detailUsername').textContent='@'+(data.username||'—');
+ document.getElementById('detailName').textContent=displayName;
+ document.getElementById('detailEmail').textContent=owner?(currentUser.email||'—'):'Hidden';
+ document.getElementById('memberSince').textContent=data.created_at?new Date(data.created_at).toLocaleDateString('en-LK',{year:'numeric',month:'short',day:'numeric'}):'—';
+ if(data.avatar_url)document.getElementById('avatar').innerHTML=`<img src="${esc(data.avatar_url)}" alt="Profile">`;else document.getElementById('avatar').textContent='👤';
+ setSocial('tiktok',data.tiktok_username,'tiktok');setSocial('facebook',data.facebook_url,'facebook');setSocial('instagram',data.instagram_username,'instagram');
+ await loadRankSettings();renderRanks(Number(data.points)||0);await loadReviews(userId);return true
+}
+async function loadOwner(){
+ const {data:{session}}=await client.auth.getSession();if(!session){location.href='auth.html';return}
+ currentUser=session.user;document.getElementById('ownerActions').style.display='flex';
+ await loadProfile(currentUser.id,true);await loadPurchases();
+}
+async function loadPublic(id){
+ document.getElementById('pageTitle').textContent='CREATOR PROFILE';document.getElementById('pageSub').textContent='Public profile • rank • achievements • social links';
+ document.getElementById('ownerActions').style.display='none';await loadProfile(id,false);document.querySelector('.grid').style.display='none'
+}
+document.getElementById('editBtn').onclick=()=>{
+ document.getElementById('editName').value=currentProfile.full_name||'';document.getElementById('editUsername').value=currentProfile.username||'';document.getElementById('editBio').value=currentProfile.bio||'';document.getElementById('editTikTok').value=currentProfile.tiktok_username||'';document.getElementById('editFacebook').value=currentProfile.facebook_url||'';document.getElementById('editInstagram').value=currentProfile.instagram_username||'';document.getElementById('photoInput').value='';document.getElementById('editModal').classList.add('show')
+};
+document.getElementById('closeModal').onclick=()=>document.getElementById('editModal').classList.remove('show');document.getElementById('cancelEdit').onclick=()=>document.getElementById('editModal').classList.remove('show');document.getElementById('rankPanel').onclick=()=>document.getElementById('rankModal').classList.add('show');document.getElementById('closeRank').onclick=()=>document.getElementById('rankModal').classList.remove('show');
+document.getElementById('saveEdit').onclick=async()=>{
+ const btn=document.getElementById('saveEdit');btn.disabled=true;
+ const full_name=document.getElementById('editName').value.trim(),username=document.getElementById('editUsername').value.trim(),bio=document.getElementById('editBio').value.trim(),tiktok_username=document.getElementById('editTikTok').value.trim(),facebook_url=document.getElementById('editFacebook').value.trim(),instagram_username=document.getElementById('editInstagram').value.trim();
+ if(!username){toast('Username is required');btn.disabled=false;return}
+ let avatar_url=currentProfile.avatar_url||null;const file=document.getElementById('photoInput').files[0];
+ if(file){if(file.size>5*1024*1024){toast('Photo must be 5MB or less');btn.disabled=false;return}const ext=(file.name.split('.').pop()||'jpg').toLowerCase();const path=currentUser.id+'/'+Date.now()+'.'+ext;const {error:upErr}=await client.storage.from('avatars').upload(path,file,{upsert:true,contentType:file.type});if(upErr){toast('Photo upload failed: '+upErr.message);btn.disabled=false;return}const {data:urlData}=client.storage.from('avatars').getPublicUrl(path);avatar_url=urlData.publicUrl}
+ const {data,error}=await client.from('profiles').update({full_name,username,bio,tiktok_username,facebook_url,instagram_username,avatar_url}).eq('id',currentUser.id).select('*').single();btn.disabled=false;
+ if(error){toast('Profile update failed: '+error.message);return}
+ currentProfile=data;document.getElementById('editModal').classList.remove('show');toast('Profile updated successfully');await loadProfile(currentUser.id,true)
+};
+document.getElementById('logoutBtn').onclick=async()=>{await client.auth.signOut();location.href='index.html'};
+document.getElementById('editModal').addEventListener('click',e=>{if(e.target.id==='editModal')e.currentTarget.classList.remove('show')});document.getElementById('rankModal').addEventListener('click',e=>{if(e.target.id==='rankModal')e.currentTarget.classList.remove('show')});
+(async()=>{const params=new URLSearchParams(location.search),id=params.get('profile');if(id){await loadPublic(id)}else{await loadOwner()}})();
+</script>
+</body>
+</html>

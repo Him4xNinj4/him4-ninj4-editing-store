@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Duo Edits | HIM4 x NINJ4</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    background:#050505;color:#fff;font-family:"Courier New",monospace;
+    min-height:100vh;overflow-x:hidden
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.ff-bg{position:fixed;inset:0;z-index:-10;overflow:hidden;pointer-events:none;background:#030504}
+.ff-grid{
+    position:absolute;inset:-60%;
+    background-image:linear-gradient(rgba(0,255,136,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,255,136,.055) 1px,transparent 1px);
+    background-size:55px 55px;
+    transform:perspective(500px) rotateX(62deg);
+    animation:ffGridMove 8s linear infinite;opacity:.42
+}
+.ff-glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.12;animation:ffGlow 6s ease-in-out infinite}
+.ff-glow.one{width:420px;height:420px;background:#00ff88;top:-180px;left:-120px}
+.ff-glow.two{width:380px;height:380px;background:#00aa66;right:-140px;bottom:-160px;animation-delay:2s}
+.ff-scan{
+    position:absolute;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,#00ff88,transparent);
+    box-shadow:0 0 18px rgba(0,255,136,.5);opacity:.28;
+    animation:ffScan 5s linear infinite
+}
+.ff-particles{position:absolute;inset:0}
+.ff-particles i{
+    position:absolute;width:3px;height:3px;background:#00ff88;border-radius:50%;
+    box-shadow:0 0 8px #00ff88;opacity:0;animation:ffParticle 5s linear infinite
+}
+.ff-particles i:nth-child(1){left:8%;animation-delay:.2s}.ff-particles i:nth-child(2){left:19%;animation-delay:1.4s}
+.ff-particles i:nth-child(3){left:31%;animation-delay:3s}.ff-particles i:nth-child(4){left:44%;animation-delay:2s}
+.ff-particles i:nth-child(5){left:57%;animation-delay:4s}.ff-particles i:nth-child(6){left:68%;animation-delay:1s}
+.ff-particles i:nth-child(7){left:76%;animation-delay:2.7s}.ff-particles i:nth-child(8){left:84%;animation-delay:3.6s}
+.ff-particles i:nth-child(9){left:92%;animation-delay:.8s}.ff-particles i:nth-child(10){left:37%;animation-delay:4.5s}
+.ff-particles i:nth-child(11){left:63%;animation-delay:1.9s}
+
+@keyframes ffGridMove{0%{transform:perspective(500px) rotateX(62deg) translateY(0)}100%{transform:perspective(500px) rotateX(62deg) translateY(55px)}}
+@keyframes ffGlow{0%,100%{transform:scale(1);opacity:.08}50%{transform:scale(1.15);opacity:.16}}
+@keyframes ffScan{0%{top:-5%}100%{top:105%}}
+@keyframes ffParticle{0%{top:105%;opacity:0;transform:translateX(0)}15%{opacity:.7}85%{opacity:.25}100%{top:-5%;opacity:0;transform:translateX(35px)}}
+
+.topbar{
+    height:58px;display:flex;align-items:center;padding:0 18px;
+    background:#090909;border-bottom:1px solid #202020
+}
+.dots{display:flex;gap:8px}.dot{width:11px;height:11px;border-radius:50%}
+.red{background:#ff5555}.yellow{background:#ffaa00}.green{background:#00ff88}
+.title{margin-left:16px;color:#666;font-size:12px}.title span{color:#00ff88}
+
+.container{width:92%;max-width:1000px;margin:auto}
+.header{padding:70px 0 35px}
+.command{color:#00ff88;font-size:12px;margin-bottom:15px}
+h1{font-size:42px;letter-spacing:2px}h1 span{color:#00ff88}
+.description{color:#666;font-size:12px;line-height:1.8;margin-top:15px;max-width:650px}
+.back{
+    display:inline-block;text-decoration:none;color:#777;border:1px solid #242424;
+    padding:11px 17px;font-size:11px;transition:.3s
+}
+.back:hover{color:#00ff88;border-color:#00ff88}
+
+.catalog{
+    margin-top:40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px
+}
+.product{
+    background:linear-gradient(145deg,#111,#080808);
+    border:1px solid #202020;border-radius:12px;overflow:hidden;
+    transition:.3s
+}
+.product:hover{border-color:rgba(0,255,136,.35);transform:translateY(-3px)}
+.preview{
+    position:relative;aspect-ratio:9/16;background:#080808;overflow:hidden
+}
+.preview video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.preview img{width:100%;height:100%;object-fit:cover;display:block}
+.preview-empty{
+    height:100%;display:grid;place-items:center;color:#00ff88;font-size:28px;
+    background:radial-gradient(circle,rgba(0,255,136,.08),transparent 55%)
+}
+.preview-tag{
+    position:absolute;top:10px;left:10px;padding:6px 9px;
+    background:rgba(0,0,0,.72);border:1px solid rgba(0,255,136,.3);
+    color:#00ff88;font-size:9px;letter-spacing:1px
+}
+.product-body{padding:20px}
+.product-cat{font-size:9px;color:#00ff88;letter-spacing:1.5px;margin-bottom:8px}
+.product h2{font-size:18px;margin-bottom:9px}
+.product-desc{color:#777;font-size:10px;line-height:1.7;min-height:34px}
+.product-foot{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-top:18px;padding-top:15px;border-top:1px solid #1c1c1c
+}
+.price{font-size:17px;font-weight:bold;color:#fff}.price small{font-size:9px;color:#777}
+.order-btn{
+    border:1px solid #00ff88;background:rgba(0,255,136,.07);color:#00ff88;
+    padding:10px 14px;font-size:9px;font-weight:bold;letter-spacing:1px;transition:.25s
+}
+.order-btn:hover{background:#00ff88;color:#000;box-shadow:0 0 25px rgba(0,255,136,.18)}
+
+.empty{
+    grid-column:1/-1;padding:55px 20px;text-align:center;
+    background:linear-gradient(145deg,#111,#080808);border:1px solid #202020;border-radius:12px
+}
+.empty-icon{font-size:40px;margin-bottom:16px}.empty h2{font-size:18px;margin-bottom:10px}
+.empty p{color:#666;font-size:11px;line-height:1.8}
+
+.terminal{margin-top:40px;background:#080808;border:1px solid #1d1d1d;border-radius:9px;overflow:hidden}
+.terminal-head{padding:12px 16px;background:#101010;border-bottom:1px solid #1d1d1d;color:#555;font-size:10px}
+.terminal-body{padding:22px;color:#666;font-size:11px;line-height:2}
+.green-text{color:#00ff88}
+footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid #171717;color:#444;font-size:10px}
+.footer-name{color:#00ff88;font-size:15px;margin-bottom:10px}
+
+.modal{
+    position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;
+    padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);overflow-y:auto
+}
+.modal.show{display:flex}
+.modal-card{
+    width:min(520px,100%);max-height:94vh;overflow-y:auto;
+    background:#0b0b0b;border:1px solid #2a2a2a;border-radius:14px;
+    box-shadow:0 30px 100px rgba(0,0,0,.7)
+}
+.modal-head{
+    position:sticky;top:0;z-index:2;padding:17px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    background:#0d0d0d;border-bottom:1px solid #202020
+}
+.modal-head h3{font-size:14px}.modal-close{
+    width:30px;height:30px;border:1px solid #292929;background:#111;color:#aaa;border-radius:7px
+}
+.modal-content{padding:20px}
+.selected{
+    display:flex;gap:13px;align-items:center;padding:12px;border:1px solid #202020;
+    background:#080808;border-radius:9px;margin-bottom:20px
+}
+.selected-thumb{width:75px;height:48px;object-fit:cover;border-radius:6px;background:#151515}
+.selected-name{font-size:11px;font-weight:bold}.selected-price{margin-top:5px;color:#00ff88;font-size:10px}
+.form-group{margin-bottom:14px}
+.form-group label{
+    display:block;color:#888;font-size:9px;font-weight:bold;letter-spacing:1px;margin-bottom:6px
+}
+.form-group input,.form-group textarea{
+    width:100%;border:1px solid #262626;outline:none;background:#111;color:#fff;
+    border-radius:8px;padding:11px 12px;font-size:11px
+}
+.form-group textarea{min-height:75px;resize:vertical}
+.form-group input:focus,.form-group textarea:focus{border-color:#00ff88;box-shadow:0 0 0 3px rgba(0,255,136,.06)}
+.bank-box{
+    margin:18px 0;padding:16px;border:1px solid rgba(0,255,136,.18);
+    background:rgba(0,255,136,.035);border-radius:9px
+}
+.bank-title{color:#00ff88;font-size:10px;font-weight:bold;letter-spacing:1.5px;margin-bottom:12px}
+.bank-row{display:flex;justify-content:space-between;gap:15px;padding:5px 0;font-size:10px}
+.bank-row span:first-child{color:#666}.bank-row span:last-child{text-align:right;color:#ddd}
+.notice{
+    padding:12px;border-left:2px solid #00ff88;background:#0d110f;
+    color:#777;font-size:9px;line-height:1.7;margin-bottom:16px
+}
+.submit-btn{
+    width:100%;padding:13px;border:1px solid #00ff88;
+    background:#00ff88;color:#000;font-weight:bold;font-size:10px;letter-spacing:1px
+}
+.submit-btn:disabled{opacity:.45;cursor:not-allowed}
+.file-label{
+    display:block;border:1px dashed #303030;padding:15px;text-align:center;
+    color:#777;font-size:10px;border-radius:8px;cursor:pointer
+}
+.file-label:hover{border-color:#00ff88;color:#00ff88}
+.file-label input{display:none}
+.file-name{margin-top:7px;color:#00ff88;font-size:9px;word-break:break-all}
+.error{min-height:16px;color:#ff6666;font-size:9px;margin:8px 0;text-align:center}
+
+.receipt{text-align:center;padding:28px 20px}
+.receipt-icon{font-size:40px;margin-bottom:12px}
+.receipt h2{font-size:19px;margin-bottom:8px}.receipt-sub{color:#777;font-size:10px;line-height:1.7}
+.order-id{
+    margin:18px 0;padding:14px;border:1px solid rgba(0,255,136,.25);
+    background:rgba(0,255,136,.04);color:#00ff88;font-size:18px;font-weight:bold;letter-spacing:1px
+}
+.receipt-details{text-align:left;border-top:1px solid #202020;border-bottom:1px solid #202020;padding:12px 0;margin-bottom:18px}
+.detail-row{display:flex;justify-content:space-between;gap:15px;padding:6px 0;font-size:10px}
+.detail-row span:first-child{color:#666}.detail-row span:last-child{text-align:right}
+.whatsapp-btn{
+    display:block;width:100%;padding:13px;text-decoration:none;
+    background:#1db954;color:#fff;font-size:10px;font-weight:bold;letter-spacing:.7px
+}
+.done-btn{
+    width:100%;margin-top:9px;padding:12px;border:1px solid #292929;background:#111;color:#aaa;font-size:10px
+}
+
+.loading{text-align:center;padding:50px;color:#00ff88;font-size:11px}
+.spin{
+    width:25px;height:25px;border:2px solid #202020;border-top-color:#00ff88;
+    border-radius:50%;margin:0 auto 12px;animation:spinner .8s linear infinite
+}
+@keyframes spinner{to{transform:rotate(360deg)}}
+
+@media(max-width:700px){
+    h1{font-size:30px}.header{padding:50px 0 28px}
+    .catalog{grid-template-columns:1fr}
+    .product-body{padding:17px}.product h2{font-size:16px}
+    .ff-grid{background-size:38px 38px;opacity:.3}.ff-glow{filter:blur(55px);opacity:.08}
+    .modal{padding:10px}.modal-card{max-height:96vh}
+}
+</style>
+</head>
+
+<body>
+
+<div class="ff-bg" aria-hidden="true">
+    <div class="ff-grid"></div>
+    <div class="ff-glow one"></div>
+    <div class="ff-glow two"></div>
+    <div class="ff-scan"></div>
+    <div class="ff-particles">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+</div>
+
+<header class="topbar">
+    <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+    <div class="title"><span>him4@ninj4</span>:/duo-edits$</div>
+</header>
+
+<main class="container">
+
+<section class="header">
+    <div class="command">&gt; cd /editing-resources/duo-edits</div>
+    <h1><span>DUO</span></h1>
+    <p class="description">
+        High-quality duo edit resources for Free Fire creators, cinematic videos and creative editing projects.
+        Watch the preview, choose your resource and place your order.
+    </p>
+</section>
+
+<a href="editing.html" class="back">← BACK TO EDITING RESOURCES</a>
+
+<section id="catalog" class="catalog">
+    <div class="loading" style="grid-column:1/-1">
+        <div class="spin"></div>
+        LOADING DUO EDITS...
+    </div>
+</section>
+
+<section class="terminal">
+    <div class="terminal-head">HIM4 x NINJ4 // DUO EDITS DATABASE</div>
+    <div class="terminal-body">
+        <div><span class="green-text">root@him4-ninj4</span>:~$ open duo-edits</div>
+        <div><span class="green-text">[OK]</span> Preview database connected</div>
+        <div><span class="green-text">[INFO]</span> Orders are verified manually after payment</div>
+        <div><span class="green-text">[INFO]</span> Purchased files are delivered through WhatsApp</div>
+        <div><span class="green-text">root@him4-ninj4</span>:~$</div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="footer-name">HIM4 x NINJ4</div>
+    <p>DUO EDITS // EDITING RESOURCES</p>
+    <p style="margin-top:10px;">© 2026 HIM4 x NINJ4</p>
+</footer>
+
+<!-- ORDER MODAL -->
+<div class="modal" id="orderModal">
+    <div class="modal-card">
+        <div class="modal-head">
+            <h3>PLACE ORDER // DUO</h3>
+            <button class="modal-close" onclick="closeOrder()">✕</button>
+        </div>
+
+        <div class="modal-content">
+            <div class="selected">
+                <img id="selectedThumb" class="selected-thumb" src="" alt="">
+                <div>
+                    <div id="selectedName" class="selected-name">Premium Resource</div>
+                    <div id="selectedPrice" class="selected-price">Rs. 0</div>
+                </div>
+            </div>
+
+            <div class="notice">
+                Transfer the exact amount to the bank account below, then upload your payment slip.
+                After submitting the order, use the WhatsApp button with your Order ID so we can verify the payment.
+                After verification, the actual purchased file will be delivered manually through WhatsApp.
+            </div>
+
+            <div class="bank-box">
+                <div class="bank-title">BANK PAYMENT DETAILS</div>
+                <div class="bank-row"><span>Bank</span><span>Commercial Bank</span></div>
+                <div class="bank-row"><span>Account Name</span><span>K.A.S. KARUNARATHNA</span></div>
+                <div class="bank-row"><span>Account Number</span><span>8031209744</span></div>
+                <div class="bank-row"><span>Branch</span><span>Katubedda</span></div>
+            </div>
+
+            <form id="orderForm">
+                <div class="form-group">
+                    <label>FULL NAME</label>
+                    <input id="customerName" type="text" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label>WHATSAPP NUMBER</label>
+                    <input id="customerWhatsapp" type="tel" required placeholder="07XXXXXXXX">
+                </div>
+
+                <div class="form-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input id="customerEmail" type="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>PAYMENT SLIP</label>
+                    <label class="file-label">
+                        <input id="paymentSlip" type="file" accept="image/*,.pdf" required>
+                        TAP TO SELECT PAYMENT SLIP
+                    </label>
+                    <div id="fileName" class="file-name"></div>
+                </div>
+
+                <div id="orderError" class="error"></div>
+                <button id="submitOrderBtn" class="submit-btn" type="submit">SUBMIT ORDER</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- RECEIPT MODAL -->
+<div class="modal" id="receiptModal">
+    <div class="modal-card">
+        <div class="modal-content receipt">
+            <div class="receipt-icon">✅</div>
+            <h2>ORDER RECEIVED</h2>
+            <p class="receipt-sub">
+                Your order has been submitted successfully.<br>
+                Please send the Order ID to us on WhatsApp for payment verification.
+            </p>
+
+            <div class="order-id" id="receiptOrderId">HN-00000000</div>
+
+            <div class="receipt-details">
+                <div class="detail-row"><span>Product</span><span id="receiptProduct">—</span></div>
+                <div class="detail-row"><span>Amount</span><span id="receiptPrice">—</span></div>
+                <div class="detail-row"><span>Status</span><span style="color:#ffaa00">PENDING</span></div>
+            </div>
+
+            <a id="whatsappBtn" class="whatsapp-btn" href="#" target="_blank" rel="noopener">
+                💬 SEND ORDER ID ON WHATSAPP
+            </a>
+            <button class="done-btn" onclick="closeReceipt()">CLOSE</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const WHATSAPP_NUMBER = '94761024243';
+const PREVIEW_BUCKET = 'previews';
+const PAYMENT_BUCKET = 'payment-slips';
+
+let products = [];
+let selectedProduct = null;
+
+const catalog = document.getElementById('catalog');
+const orderModal = document.getElementById('orderModal');
+const receiptModal = document.getElementById('receiptModal');
+const paymentSlip = document.getElementById('paymentSlip');
+
+function money(value){
+    return 'Rs. ' + Number(value || 0).toLocaleString('en-LK');
+}
+
+function escapeHtml(value){
+    return String(value ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+    }[c]));
+}
+
+function getPreviewUrl(url){
+    return url || '';
+}
+
+async function loadProducts(){
+    catalog.innerHTML = `
+        <div class="loading" style="grid-column:1/-1">
+            <div class="spin"></div>
+            LOADING DUO EDITS...
+        </div>`;
+
+    const { data, error } = await supabaseClient
+        .from('products')
+        .select('id,name,category,description,price,thumbnail_url,preview_url,is_active')
+        .eq('category','Duo Edits')
+        .eq('is_active',true)
+        .order('created_at',{ascending:false});
+
+    if(error){
+        console.error(error);
+        catalog.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">⚠️</div>
+                <h2>DUO EDITS DATABASE ERROR</h2>
+                <p>Unable to load products right now. Please try again later.</p>
+            </div>`;
+        return;
+    }
+
+    products = data || [];
+    renderProducts();
+}
+
+function renderProducts(){
+    if(!products.length){
+        catalog.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">⚡</div>
+                <h2>NO DUO EDITS AVAILABLE</h2>
+                <p>Duo Edits resources will appear here when they are published.</p>
+            </div>`;
+        return;
+    }
+
+    catalog.innerHTML = products.map(product => {
+        const preview = getPreviewUrl(product.preview_url);
+        const thumb = product.thumbnail_url || '';
+        const media = preview
+            ? `<video controls playsinline preload="metadata" poster="${escapeHtml(thumb)}">
+                    <source src="${escapeHtml(preview)}">
+               </video>`
+            : (thumb
+                ? `<img src="${escapeHtml(thumb)}" alt="${escapeHtml(product.name)}">`
+                : `<div class="preview-empty">⚡</div>`);
+
+        return `
+        <article class="product">
+            <div class="preview">
+                ${media}
+                <div class="preview-tag">▶ PREVIEW</div>
+            </div>
+            <div class="product-body">
+                <div class="product-cat">${escapeHtml(product.category || 'DUO EDITS')}</div>
+                <h2>${escapeHtml(product.name)}</h2>
+                <p class="product-desc">${escapeHtml(product.description || 'High-quality duo edit resources for Free Fire creators, cinematic videos and creative editing projects.')}</p>
+                <div class="product-foot">
+                    <div class="price">${money(product.price)} <small>ONLY</small></div>
+                    <button class="order-btn" onclick="openOrder(${Number(product.id)})">ORDER NOW</button>
+                </div>
+            </div>
+        </article>`;
+    }).join('');
+}
+
+function openOrder(id){
+    selectedProduct = products.find(p => Number(p.id) === Number(id));
+    if(!selectedProduct) return;
+
+    document.getElementById('selectedName').textContent = selectedProduct.name;
+    document.getElementById('selectedPrice').textContent = money(selectedProduct.price);
+
+    const thumb = document.getElementById('selectedThumb');
+    thumb.src = selectedProduct.thumbnail_url || '';
+    thumb.style.display = selectedProduct.thumbnail_url ? 'block' : 'none';
+
+    document.getElementById('orderError').textContent = '';
+    document.getElementById('orderForm').reset();
+    document.getElementById('fileName').textContent = '';
+    orderModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeOrder(){
+    orderModal.classList.remove('show');
+    document.body.style.overflow = '';
+    selectedProduct = null;
+}
+
+function closeReceipt(){
+    receiptModal.classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+paymentSlip.addEventListener('change', () => {
+    const file = paymentSlip.files[0];
+    document.getElementById('fileName').textContent = file
+        ? 'Selected: ' + file.name
+        : '';
+});
+
+async function uploadPaymentSlip(file, orderId){
+    const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,'-');
+    const ext = safe.includes('.') ? safe.split('.').pop() : 'bin';
+    const path = `orders/${orderId}-${Date.now()}.${ext}`;
+
+    const { error } = await supabaseClient.storage
+        .from(PAYMENT_BUCKET)
+        .upload(path,file,{
+            upsert:false,
+            contentType:file.type || 'application/octet-stream'
+        });
+
+    if(error) throw error;
+
+    const { data } = supabaseClient.storage
+        .from(PAYMENT_BUCKET)
+        .getPublicUrl(path);
+
+    return data.publicUrl;
+}
+
+function createOrderId(){
+    const now = Date.now().toString();
+    return 'HN-' + now.slice(-8);
+}
+
+document.getElementById('orderForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if(!selectedProduct){
+        return;
+    }
+
+    const name = document.getElementById('customerName').value.trim();
+    const whatsapp = document.getElementById('customerWhatsapp').value.trim();
+    const email = document.getElementById('customerEmail').value.trim();
+    const file = paymentSlip.files[0];
+    const errorBox = document.getElementById('orderError');
+    const btn = document.getElementById('submitOrderBtn');
+
+    if(!file){
+        errorBox.textContent = 'Please upload your payment slip.';
+        return;
+    }
+
+    if(file.size > 10 * 1024 * 1024){
+        errorBox.textContent = 'Payment slip must be smaller than 10MB.';
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'SUBMITTING ORDER...';
+    errorBox.textContent = '';
+
+    const orderId = createOrderId();
+
+    try{
+        const slipUrl = await uploadPaymentSlip(file, orderId);
+
+        const { error } = await supabaseClient
+            .from('orders')
+            .insert({
+                order_id: orderId,
+                customer_name: name,
+                whatsapp: whatsapp,
+                email: email,
+                product_id: Number(selectedProduct.id),
+                package_name: selectedProduct.name,
+                plan: 'ONE-TIME',
+                price: Number(selectedProduct.price || 0),
+                payment_slip_url: slipUrl,
+                status: 'pending'
+            });
+
+        if(error) throw error;
+
+        const productName = selectedProduct.name;
+        const productPrice = money(selectedProduct.price);
+
+        document.getElementById('receiptOrderId').textContent = orderId;
+        document.getElementById('receiptProduct').textContent = productName;
+        document.getElementById('receiptPrice').textContent = productPrice;
+
+        const message =
+            `Hello HIM4 x NINJ4,%0A%0A` +
+            `I have placed an order on the website.%0A%0A` +
+            `Order ID: ${encodeURIComponent(orderId)}%0A` +
+            `Product: ${encodeURIComponent(productName)}%0A` +
+            `Amount: ${encodeURIComponent(productPrice)}%0A` +
+            `Name: ${encodeURIComponent(name)}%0A` +
+            `WhatsApp: ${encodeURIComponent(whatsapp)}%0A%0A` +
+            `Please verify my payment.`;
+
+        document.getElementById('whatsappBtn').href =
+            `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+        closeOrder();
+        receiptModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+
+    }catch(err){
+        console.error(err);
+        errorBox.textContent =
+            err?.message || 'Order could not be submitted. Please try again.';
+    }finally{
+        btn.disabled = false;
+        btn.textContent = 'SUBMIT ORDER';
+    }
+});
+
+orderModal.addEventListener('click', e => {
+    if(e.target === orderModal) closeOrder();
+});
+
+receiptModal.addEventListener('click', e => {
+    if(e.target === receiptModal) closeReceipt();
+});
+
+loadProducts();
+</script>
+
+</body>
+</html>

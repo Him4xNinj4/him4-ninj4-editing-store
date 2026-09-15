@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>HIM4 x NINJ4 | Editing Resources</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:#ffffff;
+    font-family:"Courier New",monospace;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+
+/* =========================
+   ORIGINAL BACKGROUND
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            rgba(0,255,136,0.015) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,255,136,0.015) 1px,
+            transparent 1px
+        );
+
+    background-size:40px 40px;
+
+    pointer-events:none;
+    z-index:-1;
+}
+
+
+/* =========================
+   FREE FIRE ANIMATED BG
+========================= */
+
+.ff-bg{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+    overflow:hidden;
+    pointer-events:none;
+    background:#030504;
+}
+
+.ff-grid{
+    position:absolute;
+    inset:-60%;
+
+    background-image:
+        linear-gradient(
+            rgba(0,255,136,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,255,136,.055) 1px,
+            transparent 1px
+        );
+
+    background-size:55px 55px;
+
+    transform:
+        perspective(500px)
+        rotateX(62deg)
+        translateY(0);
+
+    animation:
+        ffGridMove 8s linear infinite;
+
+    opacity:.42;
+}
+
+
+/* GLOW */
+
+.ff-glow{
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(70px);
+
+    opacity:.12;
+
+    animation:
+        ffGlow 6s ease-in-out infinite;
+}
+
+.ff-glow.one{
+    width:420px;
+    height:420px;
+
+    background:#00ff88;
+
+    top:-180px;
+    left:-120px;
+}
+
+.ff-glow.two{
+    width:380px;
+    height:380px;
+
+    background:#00aa66;
+
+    right:-140px;
+    bottom:-160px;
+
+    animation-delay:2s;
+}
+
+
+/* SCAN LINE */
+
+.ff-scan{
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #00ff88,
+            transparent
+        );
+
+    box-shadow:
+        0 0 18px rgba(0,255,136,.5);
+
+    opacity:.28;
+
+    animation:
+        ffScan 5s linear infinite;
+}
+
+
+/* PARTICLES */
+
+.ff-particles{
+    position:absolute;
+    inset:0;
+}
+
+.ff-particles i{
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:#00ff88;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 8px #00ff88;
+
+    opacity:0;
+
+    animation:
+        ffParticle 5s linear infinite;
+}
+
+
+/* PARTICLE POSITIONS */
+
+.ff-particles i:nth-child(1){
+    left:8%;
+    animation-delay:.2s;
+}
+
+.ff-particles i:nth-child(2){
+    left:19%;
+    animation-delay:1.4s;
+}
+
+.ff-particles i:nth-child(3){
+    left:31%;
+    animation-delay:3s;
+}
+
+.ff-particles i:nth-child(4){
+    left:44%;
+    animation-delay:2s;
+}
+
+.ff-particles i:nth-child(5){
+    left:57%;
+    animation-delay:4s;
+}
+
+.ff-particles i:nth-child(6){
+    left:68%;
+    animation-delay:1s;
+}
+
+.ff-particles i:nth-child(7){
+    left:76%;
+    animation-delay:2.7s;
+}
+
+.ff-particles i:nth-child(8){
+    left:84%;
+    animation-delay:3.6s;
+}
+
+.ff-particles i:nth-child(9){
+    left:92%;
+    animation-delay:.8s;
+}
+
+.ff-particles i:nth-child(10){
+    left:37%;
+    animation-delay:4.5s;
+}
+
+.ff-particles i:nth-child(11){
+    left:63%;
+    animation-delay:1.9s;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes ffGridMove{
+
+    0%{
+        transform:
+            perspective(500px)
+            rotateX(62deg)
+            translateY(0);
+    }
+
+    100%{
+        transform:
+            perspective(500px)
+            rotateX(62deg)
+            translateY(55px);
+    }
+
+}
+
+@keyframes ffGlow{
+
+    0%,100%{
+        transform:scale(1);
+        opacity:.08;
+    }
+
+    50%{
+        transform:scale(1.15);
+        opacity:.16;
+    }
+
+}
+
+@keyframes ffScan{
+
+    0%{
+        top:-5%;
+    }
+
+    100%{
+        top:105%;
+    }
+
+}
+
+@keyframes ffParticle{
+
+    0%{
+        top:105%;
+        opacity:0;
+        transform:translateX(0);
+    }
+
+    15%{
+        opacity:.7;
+    }
+
+    85%{
+        opacity:.25;
+    }
+
+    100%{
+        top:-5%;
+        opacity:0;
+        transform:translateX(35px);
+    }
+
+}
+
+
+/* =========================
+   TOP TERMINAL BAR
+========================= */
+
+.topbar{
+    height:58px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 18px;
+
+    background:#090909;
+
+    border-bottom:1px solid #202020;
+
+    position:sticky;
+    top:0;
+
+    z-index:1000;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.5);
+}
+
+
+.dots{
+    display:flex;
+    gap:8px;
+}
+
+
+.dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+}
+
+
+.dot.red{
+    background:#ff5555;
+}
+
+
+.dot.yellow{
+    background:#ffaa00;
+}
+
+
+.dot.green{
+    background:#00ff88;
+}
+
+
+.terminal-name{
+    margin-left:16px;
+
+    color:#666;
+
+    font-size:12px;
+}
+
+
+.terminal-name span{
+    color:#00ff88;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container{
+    width:92%;
+    max-width:1100px;
+
+    margin:auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    padding:65px 0 35px;
+}
+
+
+.command{
+    color:#00ff88;
+
+    font-size:12px;
+
+    margin-bottom:14px;
+}
+
+
+.header h1{
+    font-size:42px;
+
+    letter-spacing:2px;
+
+    line-height:1.15;
+}
+
+
+.header h1 span{
+    color:#00ff88;
+
+    text-shadow:
+        0 0 15px rgba(0,255,136,.25);
+}
+
+
+.header-description{
+    color:#666;
+
+    font-size:12px;
+
+    line-height:1.8;
+
+    margin-top:14px;
+
+    max-width:600px;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button{
+    display:inline-block;
+
+    text-decoration:none;
+
+    color:#777;
+
+    border:1px solid #242424;
+
+    padding:11px 17px;
+
+    font-size:11px;
+
+    margin-bottom:35px;
+
+    transition:.3s;
+}
+
+
+.back-button:hover{
+    color:#00ff88;
+
+    border-color:#00ff88;
+
+    background:#07100c;
+}
+
+
+/* =========================
+   CATEGORY HEADER
+========================= */
+
+.category-header{
+    margin-bottom:22px;
+}
+
+
+.category-header h2{
+    font-size:20px;
+
+    color:#fff;
+}
+
+
+.category-header p{
+    color:#555;
+
+    font-size:11px;
+
+    margin-top:7px;
+}
+
+
+/* =========================
+   CATEGORY GRID
+========================= */
+
+.categories{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+
+    padding-bottom:20px;
+}
+
+
+/* =========================
+   CATEGORY CARD
+========================= */
+
+.category{
+
+    position:relative;
+
+    min-height:220px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111111,
+            #080808
+        );
+
+    border:1px solid #202020;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:#ffffff;
+
+    overflow:hidden;
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+
+/* TOP GREEN LINE */
+
+.category::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:2px;
+
+    background:#00ff88;
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:.35s;
+}
+
+
+/* GLOW */
+
+.category::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:200px;
+    height:200px;
+
+    right:-100px;
+    bottom:-100px;
+
+    border-radius:50%;
+
+    background:#00ff88;
+
+    opacity:.025;
+
+    transition:.35s;
+}
+
+
+.category:hover{
+
+    transform:translateY(-7px);
+
+    border-color:#00ff88;
+
+    box-shadow:
+        0 0 35px rgba(0,255,136,.10);
+}
+
+
+.category:hover::before{
+
+    transform:scaleX(1);
+}
+
+
+.category:hover::after{
+
+    opacity:.08;
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.icon{
+
+    width:55px;
+    height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#0c0c0c;
+
+    border:1px solid #222;
+
+    border-radius:10px;
+
+    font-size:27px;
+
+    margin-bottom:20px;
+
+    transition:.3s;
+}
+
+
+.category:hover .icon{
+
+    border-color:#00ff88;
+
+    box-shadow:
+        0 0 20px rgba(0,255,136,.08);
+}
+
+
+/* =========================
+   CARD TITLE
+========================= */
+
+.category h3{
+
+    font-size:20px;
+
+    letter-spacing:.5px;
+
+    margin-bottom:10px;
+}
+
+
+.category h3 span{
+
+    color:#00ff88;
+}
+
+
+/* =========================
+   CARD DESCRIPTION
+========================= */
+
+.category p{
+
+    color:#666;
+
+    font-size:11px;
+
+    line-height:1.7;
+
+    max-width:500px;
+}
+
+
+/* =========================
+   OPEN BUTTON
+========================= */
+
+.open{
+
+    display:inline-block;
+
+    color:#00ff88;
+
+    font-size:10px;
+
+    margin-top:20px;
+
+    letter-spacing:.5px;
+}
+
+
+/* =========================
+   TERMINAL STATUS
+========================= */
+
+.terminal-box{
+
+    margin-top:60px;
+
+    background:#080808;
+
+    border:1px solid #1d1d1d;
+
+    border-radius:9px;
+
+    overflow:hidden;
+}
+
+
+.terminal-header{
+
+    padding:12px 16px;
+
+    background:#101010;
+
+    border-bottom:1px solid #1d1d1d;
+
+    color:#555;
+
+    font-size:10px;
+}
+
+
+.terminal-body{
+
+    padding:22px;
+
+    color:#666;
+
+    font-size:11px;
+
+    line-height:2;
+}
+
+
+.green-text{
+    color:#00ff88;
+}
+
+
+.white-text{
+    color:#aaa;
+}
+
+
+.cursor{
+
+    display:inline-block;
+
+    width:7px;
+    height:13px;
+
+    background:#00ff88;
+
+    vertical-align:middle;
+
+    animation:blink 1s infinite;
+}
+
+
+@keyframes blink{
+
+    0%,50%{
+        opacity:1;
+    }
+
+    51%,100%{
+        opacity:0;
+    }
+
+}
+
+
+/* =========================
+   BOTTOM INFO
+========================= */
+
+.info-section{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+}
+
+
+.info-card{
+
+    padding:22px;
+
+    background:#090909;
+
+    border:1px solid #1b1b1b;
+
+    border-radius:8px;
+}
+
+
+.info-icon{
+
+    font-size:25px;
+
+    margin-bottom:13px;
+}
+
+
+.info-card h3{
+
+    font-size:13px;
+
+    margin-bottom:8px;
+}
+
+
+.info-card p{
+
+    color:#555;
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    margin-top:80px;
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    border-top:1px solid #171717;
+
+    color:#444;
+
+    font-size:10px;
+}
+
+
+.footer-brand{
+
+    color:#00ff88;
+
+    font-size:16px;
+
+    letter-spacing:1px;
+
+    margin-bottom:10px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .header h1{
+        font-size:31px;
+    }
+
+
+    .categories{
+        grid-template-columns:1fr;
+    }
+
+
+    .info-section{
+        grid-template-columns:1fr;
+    }
+
+
+    .category{
+        min-height:205px;
+    }
+
+}
+
+
+@media(max-width:400px){
+
+    .header{
+        padding-top:50px;
+    }
+
+
+    .header h1{
+        font-size:27px;
+    }
+
+
+    .category{
+        padding:24px;
+    }
+
+}
+
+
+/* MOBILE BACKGROUND */
+
+@media(max-width:700px){
+
+    .ff-grid{
+        background-size:38px 38px;
+        opacity:.3;
+    }
+
+    .ff-glow{
+        filter:blur(55px);
+        opacity:.08;
+    }
+
+    .ff-scan{
+        opacity:.18;
+    }
+
+}
+
+</style>
+
+
+<!-- ================= LOGIN PROTECTION ================= -->
+<style>
+#loginGuard{
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.94);
+    backdrop-filter:blur(10px);
+}
+#loginGuard.show{display:flex}
+.login-guard-box{
+    width:min(440px,100%);
+    padding:34px 24px;
+    text-align:center;
+    background:linear-gradient(145deg,#111,#070707);
+    border:1px solid #00ff88;
+    border-radius:16px;
+    box-shadow:0 0 55px rgba(0,255,136,.15);
+}
+.login-guard-icon{font-size:42px;margin-bottom:12px}
+.login-guard-cmd{color:#00ff88;font-size:12px;letter-spacing:1px}
+.login-guard-box h2{font-size:25px;margin:10px 0 12px}
+.login-guard-box p{color:#888;font-size:13px;line-height:1.7;margin-bottom:22px}
+.login-guard-btn{
+    display:inline-block;
+    text-decoration:none;
+    color:#00ff88;
+    border:1px solid #00ff88;
+    padding:12px 18px;
+    font-family:"Courier New",monospace;
+    font-size:12px;
+    transition:.3s;
+}
+.login-guard-btn:hover{background:#00ff88;color:#050505}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+
+<body>
+
+<!-- ================= LOGIN REQUIRED SCREEN ================= -->
+<div id="loginGuard" aria-hidden="true">
+    <div class="login-guard-box">
+        <div class="login-guard-icon">🔐</div>
+        <div class="login-guard-cmd">&gt; ACCESS RESTRICTED</div>
+        <h2>LOGIN REQUIRED</h2>
+        <p>
+            You must be logged in to access the Editing Resources.
+            If you don't have an account, create one first and then login.
+        </p>
+        <a href="auth.html" class="login-guard-btn">
+            [ LOGIN / CREATE ACCOUNT ]
+        </a>
+    </div>
+</div>
+
+
+
+<!-- =========================
+     FREE FIRE ANIMATED BACKGROUND
+========================= -->
+
+<div class="ff-bg" aria-hidden="true">
+
+    <div class="ff-grid"></div>
+
+    <div class="ff-glow one"></div>
+
+    <div class="ff-glow two"></div>
+
+    <div class="ff-scan"></div>
+
+    <div class="ff-particles">
+
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<div class="topbar">
+
+    <div class="dots">
+
+        <div class="dot red"></div>
+
+        <div class="dot yellow"></div>
+
+        <div class="dot green"></div>
+
+    </div>
+
+
+    <div class="terminal-name">
+
+        <span>him4@ninj4</span>:/editing$
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+    <!-- HEADER -->
+
+    <section class="header">
+
+        <div class="command">
+            &gt; cd /editing-resources
+        </div>
+
+
+        <h1>
+            EDITING <span>RESOURCES</span>
+        </h1>
+
+
+        <p class="header-description">
+
+            Welcome to the HIM4 x NINJ4 editing
+            resource directory. Select a category
+            to continue.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- BACK -->
+
+    <a href="index.html" class="back-button">
+
+        ← BACK TO HOME
+
+    </a>
+
+
+
+    <!-- CATEGORY TITLE -->
+
+    <div class="category-header">
+
+        <h2>
+            Resource Categories
+        </h2>
+
+        <p>
+            &gt; select_directory_to_continue
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================= -->
+
+    <section class="categories">
+
+
+        <!-- PREMIUM SHAKES -->
+
+        <a href="shakes.html" class="category">
+
+            <div class="icon">
+                ⚡
+            </div>
+
+            <h3>
+                Premium <span>Shakes</span>
+            </h3>
+
+            <p>
+                Premium shake presets for
+                smooth gaming edits, velocity
+                edits and cinematic motion.
+            </p>
+
+            <div class="open">
+                [ OPEN SHAKES → ]
+            </div>
+
+        </a>
+
+
+
+        <!-- PREMIUM CC -->
+
+        <a href="cc.html" class="category">
+
+            <div class="icon">
+                🎨
+            </div>
+
+            <h3>
+                Premium <span>CC</span>
+            </h3>
+
+            <p>
+                High-quality color correction
+                presets for gaming, cinematic
+                and short-form video edits.
+            </p>
+
+            <div class="open">
+                [ OPEN CC → ]
+            </div>
+
+        </a>
+
+
+
+        <!-- FONTS -->
+
+        <a href="fonts.html" class="category">
+
+            <div class="icon">
+                🔤
+            </div>
+
+            <h3>
+                <span>Fonts</span>
+            </h3>
+
+            <p>
+                Gaming, cinematic and stylish
+                fonts for titles, thumbnails,
+                posters and video edits.
+            </p>
+
+            <div class="open">
+                [ OPEN FONTS → ]
+            </div>
+
+        </a>
+
+
+
+        <!-- OVERLAYS -->
+
+        <a href="overlays.html" class="category">
+
+            <div class="icon">
+                ✨
+            </div>
+
+            <h3>
+                <span>Overlays</span>
+            </h3>
+
+            <p>
+                Light leaks, particles, glow,
+                dust, fire, smoke and cinematic
+                overlay resources.
+            </p>
+
+            <div class="open">
+                [ OPEN OVERLAYS → ]
+            </div>
+
+        </a>
+
+
+
+        <!-- SOLO EDITS -->
+
+        <a href="solo.html" class="category">
+
+            <div class="icon">
+                👤
+            </div>
+
+            <h3>
+                Solo <span>Edits</span>
+            </h3>
+
+            <p>
+                Editing resources and presets
+                specially designed for solo
+                character gaming edits.
+            </p>
+
+            <div class="open">
+                [ OPEN SOLO EDITS → ]
+            </div>
+
+        </a>
+
+
+
+        <!-- DUO EDITS -->
+
+        <a href="duo.html" class="category">
+
+            <div class="icon">
+                👥
+            </div>
+
+            <h3>
+                Duo <span>Edits</span>
+            </h3>
+
+            <p>
+                Creative presets and resources
+                designed for two-character
+                gaming edits.
+            </p>
+
+            <div class="open">
+                [ OPEN DUO EDITS → ]
+            </div>
+
+        </a>
+
+
+
+        <!-- SQUAD EDITS -->
+
+        <a href="squad.html" class="category">
+
+            <div class="icon">
+                👨‍👩‍👦
+            </div>
+
+            <h3>
+                Squad <span>Edits</span>
+            </h3>
+
+            <p>
+                Premium resources for squad,
+                team and multi-character
+                gaming edits.
+            </p>
+
+            <div class="open">
+                [ OPEN SQUAD EDITS → ]
+            </div>
+
+        </a>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         TERMINAL
+    ========================= -->
+
+    <div class="terminal-box">
+
+        <div class="terminal-header">
+
+            HIM4 x NINJ4 // RESOURCE TERMINAL
+
+        </div>
+
+
+        <div class="terminal-body">
+
+            <div>
+
+                <span class="green-text">
+                    root@him4-ninj4
+                </span>:~$ scan --resources
+
+            </div>
+
+
+            <div>
+
+                <span class="green-text">
+                    [OK]
+                </span>
+
+                Premium Shakes directory loaded
+
+            </div>
+
+
+            <div>
+
+                <span class="green-text">
+                    [OK]
+                </span>
+
+                Premium CC directory loaded
+
+            </div>
+
+
+            <div>
+
+                <span class="green-text">
+                    [OK]
+                </span>
+
+                Fonts directory loaded
+
+            </div>
+
+
+            <div>
+
+                <span class="green-text">
+                    [OK]
+                </span>
+
+                Overlays directory loaded
+
+            </div>
+
+
+            <div>
+
+                <span class="green-text">
+                    [OK]
+                </span>
+
+                Solo / Duo / Squad directories loaded
+
+            </div>
+
+
+            <div>
+
+                <span class="white-text">
+                    System ready.
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <span class="green-text">
+                    root@him4-ninj4
+                </span>:~$
+
+                <span class="cursor"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         INFO CARDS
+    ========================= -->
+
+    <section class="info-section">
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                🎬
+            </div>
+
+            <h3>
+                Creator Resources
+            </h3>
+
+            <p>
+                Resources made for gaming
+                editors and content creators.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Premium Quality
+            </h3>
+
+            <p>
+                Carefully selected resources
+                for high-quality editing.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                🚀
+            </div>
+
+            <h3>
+                More Coming Soon
+            </h3>
+
+            <p>
+                New presets, packs and editing
+                resources will be added regularly.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-brand">
+        HIM4 x NINJ4
+    </div>
+
+
+    <p>
+        EDITING STORE // CREATOR RESOURCES
+    </p>
+
+
+    <p style="margin-top:10px;">
+        © 2026 HIM4 x NINJ4
+    </p>
+
+</footer>
+
+
+
+<!-- ================= SUPABASE LOGIN GUARD ================= -->
+<script>
+(function(){
+    const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const guard = document.getElementById('loginGuard');
+
+    async function checkAccess(){
+        try{
+            const { data:{ session } } = await client.auth.getSession();
+            if(session && session.user){
+                guard.classList.remove('show');
+                guard.setAttribute('aria-hidden','true');
+                document.body.style.overflow='';
+            }else{
+                guard.classList.add('show');
+                guard.setAttribute('aria-hidden','false');
+                document.body.style.overflow='hidden';
+            }
+        }catch(error){
+            console.error('Auth check failed:', error);
+            guard.classList.add('show');
+            guard.setAttribute('aria-hidden','false');
+            document.body.style.overflow='hidden';
+        }
+    }
+
+    client.auth.onAuthStateChange(function(_event, session){
+        if(session && session.user){
+            guard.classList.remove('show');
+            guard.setAttribute('aria-hidden','true');
+            document.body.style.overflow='';
+        }else{
+            guard.classList.add('show');
+            guard.setAttribute('aria-hidden','false');
+            document.body.style.overflow='hidden';
+        }
+    });
+
+    checkAccess();
+})();
+</script>
+
+</body>
+</html>
