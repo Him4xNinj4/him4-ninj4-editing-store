@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Premium Shakes | HIM4 x NINJ4</title>
+<title>Premium CC | HIM4 x NINJ4</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -234,7 +234,7 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
         <div class="login-guard-icon">🔐</div>
         <h2>LOGIN <span>REQUIRED</span></h2>
         <p>
-            You must be logged in to access Premium Shakes.<br>
+            You must be logged in to access Premium CC.<br>
             If you don't have an account, create one first and then login.
         </p>
         <a href="auth.html" class="login-guard-btn">LOGIN / CREATE ACCOUNT</a>
@@ -255,17 +255,17 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 
 <header class="topbar">
     <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-    <div class="title"><span>him4@ninj4</span>:/premium-shakes$</div>
+    <div class="title"><span>him4@ninj4</span>:/premium-cc$</div>
 </header>
 
 <main class="container">
 
 <section class="header">
-    <div class="command">&gt; cd /editing-resources/premium-shakes</div>
-    <h1>PREMIUM <span>SHAKES</span></h1>
+    <div class="command">&gt; cd /editing-resources/premium-cc</div>
+    <h1>PREMIUM <span>CC</span></h1>
     <p class="description">
-        High-quality shake previews for Free Fire edits, velocity edits, beat syncs and cinematic gaming videos.
-        Watch the preview, choose your shake and place your order.
+        High-quality color correction presets for Free Fire edits, cinematic gaming videos and short-form edits.
+        Watch the preview, choose your CC and place your order.
     </p>
 </section>
 
@@ -274,15 +274,15 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 <section id="catalog" class="catalog">
     <div class="loading" style="grid-column:1/-1">
         <div class="spin"></div>
-        LOADING PREMIUM SHAKES...
+        LOADING PREMIUM CC...
     </div>
 </section>
 
 <section class="terminal">
-    <div class="terminal-head">HIM4 x NINJ4 // SHAKE DATABASE</div>
+    <div class="terminal-head">HIM4 x NINJ4 // CC DATABASE</div>
     <div class="terminal-body">
         <div><span class="green-text">root@him4-ninj4</span>:~$ open shakes</div>
-        <div><span class="green-text">[OK]</span> Preview database connected</div>
+        <div><span class="green-text">[OK]</span> CC preview database connected</div>
         <div><span class="green-text">[INFO]</span> Orders are verified manually after payment</div>
         <div><span class="green-text">[INFO]</span> Purchased files are delivered through WhatsApp</div>
         <div><span class="green-text">root@him4-ninj4</span>:~$</div>
@@ -293,7 +293,7 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 
 <footer>
     <div class="footer-name">HIM4 x NINJ4</div>
-    <p>PREMIUM SHAKES // EDITING RESOURCES</p>
+    <p>PREMIUM CC // EDITING RESOURCES</p>
     <p style="margin-top:10px;">© 2026 HIM4 x NINJ4</p>
 </footer>
 
@@ -301,7 +301,7 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 <div class="modal" id="orderModal">
     <div class="modal-card">
         <div class="modal-head">
-            <h3>PLACE ORDER // SHAKE</h3>
+            <h3>PLACE ORDER // CC</h3>
             <button class="modal-close" onclick="closeOrder()">✕</button>
         </div>
 
@@ -516,13 +516,13 @@ async function loadProducts(){
     catalog.innerHTML = `
         <div class="loading" style="grid-column:1/-1">
             <div class="spin"></div>
-            LOADING PREMIUM SHAKES...
+            LOADING PREMIUM CC...
         </div>`;
 
     const { data, error } = await supabaseClient
         .from('products')
         .select('id,name,category,description,price,thumbnail_url,preview_url,is_active')
-        .eq('category','Premium Shakes')
+        .eq('category','Premium CC')
         .eq('is_active',true)
         .order('created_at',{ascending:false});
 
@@ -531,7 +531,7 @@ async function loadProducts(){
         catalog.innerHTML = `
             <div class="empty">
                 <div class="empty-icon">⚠️</div>
-                <h2>SHAKE DATABASE ERROR</h2>
+                <h2>CC DATABASE ERROR</h2>
                 <p>Unable to load products right now. Please try again later.</p>
             </div>`;
         return;
@@ -546,8 +546,8 @@ function renderProducts(){
         catalog.innerHTML = `
             <div class="empty">
                 <div class="empty-icon">⚡</div>
-                <h2>NO SHAKES AVAILABLE</h2>
-                <p>Premium Shake resources will appear here when they are published.</p>
+                <h2>NO CC AVAILABLE</h2>
+                <p>Premium CC resources will appear here when they are published.</p>
             </div>`;
         return;
     }
@@ -570,9 +570,9 @@ function renderProducts(){
                 <div class="preview-tag">▶ PREVIEW</div>
             </div>
             <div class="product-body">
-                <div class="product-cat">${escapeHtml(product.category || 'PREMIUM SHAKES')}</div>
+                <div class="product-cat">${escapeHtml(product.category || 'PREMIUM CC')}</div>
                 <h2>${escapeHtml(product.name)}</h2>
-                <p class="product-desc">${escapeHtml(product.description || 'Premium shake resource for Free Fire editing.')}</p>
+                <p class="product-desc">${escapeHtml(product.description || 'Premium CC resource for Free Fire editing.')}</p>
                 <div class="product-foot">
                     <div class="price">${money(product.price)} <small>ONLY</small></div>
                     <button class="order-btn" onclick="openOrder(${Number(product.id)})">ORDER NOW</button>
