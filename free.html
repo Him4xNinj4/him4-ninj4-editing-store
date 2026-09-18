@@ -74,7 +74,7 @@ function esc(v){
  return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 }
 
-async function downloadFreeResource(btn, url, baseName){
+function downloadFreeResource(btn, url, baseName){
  const original = btn ? btn.textContent : 'DOWNLOAD FREE ↓';
  try{
    if(btn){
@@ -82,30 +82,16 @@ async function downloadFreeResource(btn, url, baseName){
      btn.textContent = 'DOWNLOADING...';
    }
 
-   // Ask Supabase Storage to return the file as an attachment instead of
+   // Supabase Storage supports ?download=<filename> on public asset URLs.
+   // This makes the Storage server send the file as a download instead of
    // displaying XML/text in the browser.
-   const downloadUrl = url + (url.includes('?') ? '&' : '?') +
-       'download=' + encodeURIComponent(baseName);
+   const sep = url.includes('?') ? '&' : '?';
+   const downloadUrl = url + sep + 'download=' + encodeURIComponent(baseName);
 
-   const response = await fetch(downloadUrl, {cache:'no-store'});
-   if(!response.ok) throw new Error('Download failed (' + response.status + ')');
-
-   const blob = await response.blob();
-   const objectUrl = URL.createObjectURL(blob);
-   const a = document.createElement('a');
-   a.href = objectUrl;
-   a.download = baseName;
-   document.body.appendChild(a);
-   a.click();
-   a.remove();
-   setTimeout(()=>URL.revokeObjectURL(objectUrl), 1500);
+   // Use a real navigation so the browser handles the attachment download.
+   window.location.href = downloadUrl;
  }catch(err){
    console.error('Free resource download failed:', err);
-   // Fallback: open the storage download URL.
-   const fallback = url + (url.includes('?') ? '&' : '?') +
-       'download=' + encodeURIComponent(baseName);
-   window.location.href = fallback;
- }finally{
    if(btn){
      btn.disabled = false;
      btn.textContent = original;
