@@ -3113,7 +3113,7 @@ body:before{
                     <div>
                         <div class="eyebrow">STORE MANAGEMENT</div>
                         <h1 class="page-title">Products</h1>
-                        <p class="page-desc">Manage premium and free resources, upload files, set thumbnails and preview videos.</p>
+                        <p class="page-desc">Create products, set one price, add thumbnails and preview videos.</p>
                     </div>
 
                     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
@@ -3136,8 +3136,6 @@ body:before{
                         <option>Solo Edits</option>
                         <option>Duo Edits</option>
                         <option>Squad Edits</option>
-                        <option>Free Shakes</option>
-                        <option>Free CC</option>
                     </select>
                     <select id="productStatusFilter">
                         <option value="">ALL STATUS</option>
@@ -3247,8 +3245,6 @@ body:before{
                                     <option>Solo Edits</option>
                                     <option>Duo Edits</option>
                                     <option>Squad Edits</option>
-                                    <option>Free Shakes</option>
-                                    <option>Free CC</option>
                                 </select>
                             </div>
 
@@ -3277,7 +3273,7 @@ body:before{
                             <div class="form-field product-full" id="resourceFileField" style="display:none">
                                 <label>FREE RESOURCE FILE</label>
                                 <input id="productResourceFile" type="file">
-                                <small class="file-help">Required for free resources. This is the actual file customers can download from the Free Resources page.</small>
+                                <small class="file-help">Required for Fonts / Overlays. This is the actual file customers can download.</small>
                             </div>
 
                             <div class="form-field product-full active-toggle">
@@ -5363,7 +5359,7 @@ function renderProducts(){
                         ${product.preview_url ? '<span class="product-chip">PREVIEW READY</span>' : '<span class="product-chip off">NO PREVIEW</span>'}
                     </div>
                     <div class="product-desc">${esc(desc)}</div>
-                    <div class="product-price"><span>${(['Fonts','Overlays'].includes(product.category) ? 'FREE DOWNLOAD' : `PRICE <b>LKR ${Number(product.price || 0).toLocaleString()}</b>`)}</span></div>
+                    <div class="product-price"><span>${(['Fonts','Overlays','Free Shakes','Free CC'].includes(product.category) ? 'FREE DOWNLOAD' : `PRICE <b>LKR ${Number(product.price || 0).toLocaleString()}</b>`)}</span></div>
                 </div>
                 <div class="product-actions">
                     <button class="product-action edit" type="button" onclick="editProduct(${Number(product.id)})">EDIT</button>
@@ -5404,11 +5400,7 @@ function resetProductForm(){
 
 function updateResourceFileField(){
     const category = document.getElementById('productCategory').value;
-    const isFree =
-        category === 'Fonts' ||
-        category === 'Overlays' ||
-        category === 'Free Shakes' ||
-        category === 'Free CC';
+    const isFree = ['Fonts','Overlays','Free Shakes','Free CC'].includes(category);
     const field = document.getElementById('resourceFileField');
     const input = document.getElementById('productResourceFile');
     const price = document.getElementById('productPrice');
@@ -5421,13 +5413,6 @@ function updateResourceFileField(){
         price.disabled = true;
     }else{
         price.disabled = false;
-    }
-
-    const help = document.querySelector('#resourceFileField .file-help');
-    if(help){
-        help.textContent = isFree
-            ? 'Required for free resources. This is the actual file customers can download.'
-            : 'This field is used for free downloadable resources.';
     }
 }
 
@@ -5493,7 +5478,7 @@ document.getElementById('productForm').addEventListener('submit',async e => {
     const name = document.getElementById('productName').value.trim();
     const category = document.getElementById('productCategory').value;
     const description = document.getElementById('productDescription').value.trim();
-    const isFree = category === 'Fonts' || category === 'Overlays';
+    const isFree = ['Fonts','Overlays','Free Shakes','Free CC'].includes(category);
     const price = isFree ? 0 : Number(document.getElementById('productPrice').value || 0);
     const active = document.getElementById('productActive').checked;
     const thumbnail = document.getElementById('productThumbnail').files?.[0];
