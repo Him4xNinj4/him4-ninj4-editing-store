@@ -76,20 +76,47 @@ function esc(v){
 
 function downloadFreeResource(btn, url, baseName){
  const original = btn ? btn.textContent : 'DOWNLOAD FREE ↓';
+
  try{
    if(btn){
      btn.disabled = true;
      btn.textContent = 'DOWNLOADING...';
    }
 
-   // Supabase Storage supports ?download=<filename> on public asset URLs.
-   // This makes the Storage server send the file as a download instead of
-   // displaying XML/text in the browser.
-   const sep = url.includes('?') ? '&' : '?';
-   const downloadUrl = url + sep + 'download=' + encodeURIComponent(baseName);
+   /*
+    * Use Supabase Storage's dedicated /object/download endpoint.
+    * This is more reliable on Android/Chrome than the HTML `download`
+    * attribute on a cross-origin public URL.
+    *
+    * Expected public URL:
+    * .../storage/v1/object/public/<bucket>/<path>
+    */
+   const marker = '/storage/v1/object/public/';
+   const pos = url.indexOf(marker);
 
-   // Use a real navigation so the browser handles the attachment download.
-   window.location.href = downloadUrl;
+   if(pos !== -1){
+     const storagePart = url.substring(pos + marker.length);
+     const slash = storagePart.indexOf('/');
+
+     if(slash > 0){
+       const bucket = storagePart.substring(0, slash);
+       const path = storagePart.substring(slash + 1);
+
+       const downloadUrl =
+         'https://ndcrvdbvhswbvahpskhj.supabase.co/storage/v1/object/download/' +
+         encodeURIComponent(bucket) + '/' +
+         path.split('/').map(encodeURIComponent).join('/') +
+         '?download=' + encodeURIComponent(baseName);
+
+       window.location.href = downloadUrl;
+       return;
+     }
+   }
+
+   // Fallback for a non-Supabase URL.
+   const sep = url.includes('?') ? '&' : '?';
+   window.location.href = url + sep + 'download=' + encodeURIComponent(baseName);
+
  }catch(err){
    console.error('Free resource download failed:', err);
    if(btn){
