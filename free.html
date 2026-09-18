@@ -74,8 +74,7 @@ function esc(v){
  return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 }
 
-async function downloadFreeResource(url, baseName){
- const btn = event?.currentTarget;
+async function downloadFreeResource(btn, url, baseName){
  const original = btn ? btn.textContent : 'DOWNLOAD FREE ↓';
  try{
    if(btn){
@@ -123,7 +122,8 @@ function card(p){
    ? `<video class="preview-video" controls playsinline preload="metadata" poster="${esc(p.thumbnail_url||'')}">
         <source src="${esc(preview)}">
       </video>`
-   : `<div class="thumb">${thumb}</div>`;
+   : thumb;
+ const file=p.file_url || '';
  const safeName=(p.name||'free-resource').replace(/[^a-z0-9._-]+/gi,'_');
  return `<article class="card">
    <div class="thumb">${media}</div>
@@ -131,7 +131,7 @@ function card(p){
     <div class="name">${esc(p.name)}</div>
     <div class="desc">${esc(p.description||'Free editing resource')}</div>
     ${file
-      ? `<button class="download" type="button" onclick="downloadFreeResource(${JSON.stringify(file)}, ${JSON.stringify(safeName)})">DOWNLOAD FREE ↓</button>`
+      ? `<button class="download" type="button" onclick="downloadFreeResource(this, ${JSON.stringify(file)}, ${JSON.stringify(safeName)})">DOWNLOAD FREE ↓</button>`
       : `<div class="state error" style="padding:10px;margin-top:12px">File unavailable</div>`}
    </div>
  </article>`;
