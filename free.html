@@ -83,8 +83,6 @@ async function downloadFreeResource(btn, url, baseName){
      btn.textContent = 'DOWNLOADING...';
    }
 
-   // Read the file through the Supabase Storage SDK, then create a
-   // browser Blob download. This avoids opening the XML/file in the tab.
    const marker = '/storage/v1/object/public/';
    const pos = url.indexOf(marker);
    if(pos === -1) throw new Error('Invalid Supabase Storage URL');
@@ -96,27 +94,60 @@ async function downloadFreeResource(btn, url, baseName){
    const bucket = decodeURIComponent(rest.substring(0, slash));
    const path = decodeURIComponent(rest.substring(slash + 1).split('?')[0]);
 
-   const { data, error } = await sb.storage.from(bucket).download(path);
-   if(error) throw error;
-   if(!data) throw new Error('No file data returned');
+   const sourceName = path.split('/').pop() || 'free-resource';
+   let fileName = baseName || sourceName;
 
-   const blobUrl = URL.createObjectURL(data);
-   const a = document.createElement('a');
-   a.href = blobUrl;
+   const sourceExt = sourceName.includes('.')
+     ? sourceName.substring(sourceName.lastIndexOf('.'))
+     : '';
 
-   let fileName = baseName || path.split('/').pop() || 'free-resource';
-   const sourceName = path.split('/').pop() || '';
-   const sourceExt = sourceName.includes('.') ? sourceName.substring(sourceName.lastIndexOf('.')) : '';
    if(sourceExt && !fileName.toLowerCase().endsWith(sourceExt.toLowerCase())){
      fileName += sourceExt;
    }
 
+   /*
+    * IMPORTANT:
+    * First create a Supabase signed URL with download filename.
+    * Then fetch that URL as a Blob and force a local browser download.
+    * This works for every future Free Shakes / Free CC file, not just baila.xml.
+    */
+   const { data: signed, error: signedError } =
+     await sb.storage.from(bucket).createSignedUrl(
+       path,
+       120,
+       { download: fileName }
+     );
+
+   if(signedError || !signed?.signedUrl){
+     throw signedError || new Error('Could not create download URL');
+   }
+
+   const response = await fetch(signed.signedUrl, {
+     method: 'GET',
+     cache: 'no-store'
+   });
+
+   if(!response.ok){
+     throw new Error('File download request failed: HTTP ' + response.status);
+   }
+
+   const blob = await response.blob();
+   if(!blob || blob.size === 0){
+     throw new Error('Downloaded file is empty');
+   }
+
+   const blobUrl = URL.createObjectURL(blob);
+   const a = document.createElement('a');
+   a.href = blobUrl;
    a.download = fileName;
    a.style.display = 'none';
    document.body.appendChild(a);
+
+   // Keep the click synchronous after the fetch completes.
    a.click();
    a.remove();
-   setTimeout(()=>URL.revokeObjectURL(blobUrl),5000);
+
+   setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
 
    if(btn){
      btn.disabled = false;
@@ -124,14 +155,17 @@ async function downloadFreeResource(btn, url, baseName){
    }
 
  }catch(err){
-   console.error('Supabase Storage download failed:', err);
+   console.error('Free resource download failed:', err);
+
    if(btn){
      btn.disabled = false;
      btn.textContent = original;
    }
+
    alert('Download failed. Please try again.');
  }
 }
+
 function card(p){
  const thumb=p.thumbnail_url
    ? `<img src="${esc(p.thumbnail_url)}" alt="${esc(p.name)}">`
