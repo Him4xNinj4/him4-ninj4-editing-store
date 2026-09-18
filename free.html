@@ -83,6 +83,7 @@ async function downloadFreeResource(btn, url, baseName){
      btn.textContent = 'DOWNLOADING...';
    }
 
+   // Convert the saved public Storage URL back into bucket + file path.
    const marker = '/storage/v1/object/public/';
    const pos = url.indexOf(marker);
    if(pos === -1) throw new Error('Invalid Supabase Storage URL');
@@ -93,6 +94,22 @@ async function downloadFreeResource(btn, url, baseName){
 
    const bucket = decodeURIComponent(rest.substring(0, slash));
    const path = decodeURIComponent(rest.substring(slash + 1).split('?')[0]);
+
+   /*
+    * Supabase's getPublicUrl() supports a download option.
+    * This makes Storage send Content-Disposition: attachment instead
+    * of displaying XML/text inline in Chrome.
+    *
+    * This is generic: every future Free Shakes / Free CC file uses
+    * the same bucket/path from products.file_url.
+    */
+   const { data } = sb.storage
+     .from(bucket)
+     .getPublicUrl(path, { download: true });
+
+   if(!data || !data.publicUrl){
+     throw new Error('Could not create download URL');
+   }
 
    const sourceName = path.split('/').pop() || 'free-resource';
    let fileName = baseName || sourceName;
@@ -105,53 +122,22 @@ async function downloadFreeResource(btn, url, baseName){
      fileName += sourceExt;
    }
 
-   /*
-    * IMPORTANT:
-    * First create a Supabase signed URL with download filename.
-    * Then fetch that URL as a Blob and force a local browser download.
-    * This works for every future Free Shakes / Free CC file, not just baila.xml.
-    */
-   const { data: signed, error: signedError } =
-     await sb.storage.from(bucket).createSignedUrl(
-       path,
-       120,
-       { download: fileName }
-     );
-
-   if(signedError || !signed?.signedUrl){
-     throw signedError || new Error('Could not create download URL');
-   }
-
-   const response = await fetch(signed.signedUrl, {
-     method: 'GET',
-     cache: 'no-store'
-   });
-
-   if(!response.ok){
-     throw new Error('File download request failed: HTTP ' + response.status);
-   }
-
-   const blob = await response.blob();
-   if(!blob || blob.size === 0){
-     throw new Error('Downloaded file is empty');
-   }
-
-   const blobUrl = URL.createObjectURL(blob);
+   // The Storage server handles the download header.
+   // Do not fetch the file into a Blob; Android Chrome can block
+   // programmatic Blob downloads from a webview.
    const a = document.createElement('a');
-   a.href = blobUrl;
+   a.href = data.publicUrl;
    a.download = fileName;
    a.style.display = 'none';
    document.body.appendChild(a);
-
-   // Keep the click synchronous after the fetch completes.
    a.click();
    a.remove();
 
-   setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
-
    if(btn){
-     btn.disabled = false;
-     btn.textContent = 'DOWNLOAD FREE ↓';
+     setTimeout(() => {
+       btn.disabled = false;
+       btn.textContent = 'DOWNLOAD FREE ↓';
+     }, 1200);
    }
 
  }catch(err){
