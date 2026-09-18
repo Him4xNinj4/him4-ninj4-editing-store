@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Edits | HIM4 x NINJ4</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    background:#050505;color:#fff;font-family:"Courier New",monospace;
+    min-height:100vh;overflow-x:hidden
+}
+body::before{
+    content:"";position:fixed;inset:0;z-index:-20;pointer-events:none;
+    background:
+      linear-gradient(rgba(0,255,136,.015) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,255,136,.015) 1px,transparent 1px);
+    background-size:40px 40px
+}
+.ff-bg{position:fixed;inset:0;z-index:-10;overflow:hidden;pointer-events:none;background:#030504}
+.ff-grid{
+    position:absolute;inset:-60%;
+    background-image:
+      linear-gradient(rgba(0,255,136,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,255,136,.055) 1px,transparent 1px);
+    background-size:55px 55px;
+    transform:perspective(500px) rotateX(62deg);
+    animation:gridMove 8s linear infinite;opacity:.42
+}
+.ff-glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.12;animation:glow 6s ease-in-out infinite}
+.ff-glow.one{width:420px;height:420px;background:#00ff88;top:-180px;left:-120px}
+.ff-glow.two{width:380px;height:380px;background:#00aa66;right:-140px;bottom:-160px;animation-delay:2s}
+.ff-scan{
+    position:absolute;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,#00ff88,transparent);
+    box-shadow:0 0 18px rgba(0,255,136,.5);opacity:.28;
+    animation:scan 5s linear infinite
+}
+@keyframes gridMove{0%{transform:perspective(500px) rotateX(62deg) translateY(0)}100%{transform:perspective(500px) rotateX(62deg) translateY(55px)}}
+@keyframes glow{0%,100%{transform:scale(1);opacity:.08}50%{transform:scale(1.15);opacity:.16}}
+@keyframes scan{0%{top:-5%}100%{top:105%}}
+
+.topbar{
+    height:58px;display:flex;align-items:center;padding:0 18px;
+    background:#090909;border-bottom:1px solid #202020;position:sticky;top:0;
+    z-index:1000;box-shadow:0 5px 25px rgba(0,0,0,.5)
+}
+.dots{display:flex;gap:8px}
+.dot{width:11px;height:11px;border-radius:50%}
+.red{background:#ff5555}.yellow{background:#ffaa00}.green{background:#00ff88}
+.terminal-name{margin-left:16px;color:#666;font-size:12px}
+.terminal-name span{color:#00ff88}
+
+.container{width:92%;max-width:850px;margin:auto}
+.header{padding:65px 0 35px}
+.command{color:#00ff88;font-size:12px;margin-bottom:14px}
+.header h1{font-size:42px;letter-spacing:2px;line-height:1.15}
+.header h1 span{color:#00ff88;text-shadow:0 0 15px rgba(0,255,136,.25)}
+.header-description{color:#777;font-size:13px;line-height:1.8;margin-top:14px;max-width:680px}
+.back-button{
+    display:inline-block;text-decoration:none;color:#777;border:1px solid #242424;
+    padding:11px 17px;font-size:11px;margin-bottom:35px;transition:.3s
+}
+.back-button:hover{color:#00ff88;border-color:#00ff88;background:#07100c}
+
+.panel{
+    background:linear-gradient(145deg,#111,#070707);
+    border:1px solid #202020;border-radius:14px;padding:28px;
+    box-shadow:0 0 35px rgba(0,0,0,.25)
+}
+.panel-title{font-size:20px;margin-bottom:7px}
+.panel-subtitle{font-size:11px;color:#666;line-height:1.7;margin-bottom:24px}
+
+label{display:block;color:#aaa;font-size:11px;margin:0 0 8px}
+.field{margin-bottom:18px}
+input,select,textarea{
+    width:100%;background:#080808;color:#fff;border:1px solid #292929;
+    border-radius:8px;padding:13px 14px;font:12px "Courier New",monospace;
+    outline:none;transition:.25s
+}
+input:focus,select:focus,textarea:focus{border-color:#00ff88;box-shadow:0 0 15px rgba(0,255,136,.06)}
+select{cursor:pointer}
+textarea{min-height:130px;resize:vertical}
+.price-box{
+    padding:16px;background:#07100c;border:1px solid #164d35;
+    border-radius:9px;margin-bottom:22px
+}
+.price-label{font-size:10px;color:#666}
+.price-value{color:#00ff88;font-size:18px;margin-top:6px}
+.price-note{color:#777;font-size:10px;line-height:1.6;margin-top:6px}
+
+.file-wrap{
+    border:1px dashed #303030;border-radius:8px;padding:15px;
+    background:#080808
+}
+.file-wrap input{padding:0;border:0;background:transparent;box-shadow:none}
+.file-note{color:#555;font-size:9px;margin-top:8px;line-height:1.6}
+
+.order-btn{
+    width:100%;border:1px solid #00ff88;background:#00ff88;color:#050505;
+    padding:15px;border-radius:8px;font:700 12px "Courier New",monospace;
+    cursor:pointer;transition:.25s
+}
+.order-btn:hover{background:#050505;color:#00ff88;box-shadow:0 0 25px rgba(0,255,136,.12)}
+.order-btn:disabled{opacity:.5;cursor:not-allowed}
+
+.status{margin-top:15px;font-size:11px;line-height:1.7;display:none}
+.status.show{display:block}
+.status.success{color:#00ff88}.status.error{color:#ff6666}
+
+.receipt{
+    display:none;margin-top:22px;padding:20px;border:1px solid #1e5d42;
+    border-radius:10px;background:#07100c
+}
+.receipt.show{display:block}
+.receipt h3{font-size:15px;color:#00ff88;margin-bottom:13px}
+.receipt-row{font-size:11px;color:#aaa;margin:7px 0}
+.receipt-row strong{color:#fff}
+.wa-btn{
+    display:inline-block;margin-top:14px;text-decoration:none;color:#050505;
+    background:#00ff88;padding:11px 15px;border-radius:7px;font-size:11px
+}
+
+#loginGuard{
+    position:fixed;inset:0;z-index:999999;display:none;align-items:center;
+    justify-content:center;padding:20px;background:rgba(0,0,0,.94);
+    backdrop-filter:blur(10px)
+}
+#loginGuard.show{display:flex}
+.login-box{
+    width:min(440px,100%);padding:34px 24px;text-align:center;
+    background:linear-gradient(145deg,#111,#070707);border:1px solid #00ff88;
+    border-radius:16px;box-shadow:0 0 55px rgba(0,255,136,.15)
+}
+.login-icon{font-size:42px;margin-bottom:12px}
+.login-cmd{color:#00ff88;font-size:12px;letter-spacing:1px}
+.login-box h2{font-size:25px;margin:10px 0 12px}
+.login-box p{color:#888;font-size:13px;line-height:1.7;margin-bottom:22px}
+.login-btn{
+    display:inline-block;text-decoration:none;color:#00ff88;border:1px solid #00ff88;
+    padding:12px 18px;font-size:12px;transition:.3s
+}
+.login-btn:hover{background:#00ff88;color:#050505}
+
+footer{
+    margin-top:70px;padding:40px 20px;text-align:center;
+    border-top:1px solid #171717;color:#444;font-size:10px
+}
+.footer-brand{color:#00ff88;font-size:16px;letter-spacing:1px;margin-bottom:10px}
+
+@media(max-width:700px){
+    .header h1{font-size:31px}.panel{padding:22px}.header{padding-top:50px}
+}
+@media(max-width:400px){.header h1{font-size:27px}}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+<div id="loginGuard" aria-hidden="true">
+    <div class="login-box">
+        <div class="login-icon">🔐</div>
+        <div class="login-cmd">&gt; ACCESS RESTRICTED</div>
+        <h2>LOGIN REQUIRED</h2>
+        <p>You must be logged in to place a Custom Edit order.</p>
+        <a href="auth.html" class="login-btn">[ LOGIN / CREATE ACCOUNT ]</a>
+    </div>
+</div>
+
+<div class="ff-bg" aria-hidden="true">
+    <div class="ff-grid"></div>
+    <div class="ff-glow one"></div>
+    <div class="ff-glow two"></div>
+    <div class="ff-scan"></div>
+</div>
+
+<div class="topbar">
+    <div class="dots">
+        <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+    </div>
+    <div class="terminal-name"><span>him4@ninj4</span>:/custom-edits$</div>
+</div>
+
+<main class="container">
+    <section class="header">
+        <div class="command">&gt; cd /editing-resources/custom-edits</div>
+        <h1>CUSTOM <span>EDITS</span></h1>
+        <p class="header-description">
+            Request a custom gaming edit made according to your selected edit type,
+            style, quality and requirements.
+        </p>
+    </section>
+
+    <a href="editing.html" class="back-button">← BACK TO EDITING RESOURCES</a>
+
+    <section class="panel">
+        <div class="panel-title">Custom Edit Order</div>
+        <div class="panel-subtitle">
+            Select the edit type and send your requirements. Custom pricing is
+            discussed according to the quality, complexity and requirements of the edit.
+        </div>
+
+        <div class="field">
+            <label for="editType">SELECT EDIT TYPE</label>
+            <select id="editType">
+                <option value="Profile Edit">Profile Edit</option>
+                <option value="Solo Edit">Solo Edit</option>
+                <option value="Duo Edit">Duo Edit</option>
+                <option value="Squad Edit">Squad Edit</option>
+                <option value="Custom Edit">Custom Edit</option>
+            </select>
+        </div>
+
+        <div class="price-box">
+            <div class="price-label">ESTIMATED PRICE</div>
+            <div class="price-value">PRICE VARIES</div>
+            <div class="price-note">
+                Final price depends on the quality, complexity, duration and specific
+                requirements of your edit. We will contact you with the price/details.
+            </div>
+        </div>
+
+        <form id="customOrderForm">
+            <div class="field">
+                <label for="customerName">CUSTOMER NAME</label>
+                <input id="customerName" type="text" placeholder="Enter your name" required>
+            </div>
+
+            <div class="field">
+                <label for="whatsapp">WHATSAPP NUMBER</label>
+                <input id="whatsapp" type="tel" placeholder="07XXXXXXXX" required>
+            </div>
+
+            <div class="field">
+                <label for="email">EMAIL</label>
+                <input id="email" type="email" placeholder="your@email.com" required>
+            </div>
+
+            <div class="field">
+                <label for="requirements">EDIT REQUIREMENTS</label>
+                <textarea id="requirements" placeholder="Describe the edit you want, style, song, effects, duration, references, etc." required></textarea>
+            </div>
+
+            <div class="field">
+                <label for="reference">REFERENCE FILE (OPTIONAL)</label>
+                <div class="file-wrap">
+                    <input id="reference" type="file" accept="image/*,video/*">
+                    <div class="file-note">
+                        You can select an image/video reference. The order will still be submitted
+                        if no reference file is selected.
+                    </div>
+                </div>
+            </div>
+
+            <button class="order-btn" id="submitBtn" type="submit">[ SUBMIT CUSTOM EDIT ORDER ]</button>
+        </form>
+
+        <div id="status" class="status"></div>
+
+        <div id="receipt" class="receipt">
+            <h3>✓ ORDER SUBMITTED</h3>
+            <div class="receipt-row">Order ID: <strong id="receiptId"></strong></div>
+            <div class="receipt-row">Edit Type: <strong id="receiptType"></strong></div>
+            <div class="receipt-row">Customer: <strong id="receiptName"></strong></div>
+            <div class="receipt-row">Price: <strong>To be quoted</strong></div>
+            <a id="whatsappBtn" class="wa-btn" target="_blank" rel="noopener">[ SEND ORDER TO WHATSAPP ]</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-brand">HIM4 x NINJ4</div>
+    <p>CUSTOM EDITS // ORDER SYSTEM</p>
+    <p style="margin-top:10px;">© 2026 HIM4 x NINJ4</p>
+</footer>
+
+<script>
+const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const guard = document.getElementById('loginGuard');
+const form = document.getElementById('customOrderForm');
+const submitBtn = document.getElementById('submitBtn');
+const statusBox = document.getElementById('status');
+const receipt = document.getElementById('receipt');
+
+let currentUser = null;
+
+function showGuard(){
+    guard.classList.add('show');
+    guard.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+}
+function hideGuard(){
+    guard.classList.remove('show');
+    guard.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+}
+function setStatus(message,type){
+    statusBox.textContent=message;
+    statusBox.className='status show '+type;
+}
+
+async function init(){
+    try{
+        const {data:{session}} = await client.auth.getSession();
+        if(session && session.user){
+            currentUser=session.user;
+            hideGuard();
+            return;
+        }
+        showGuard();
+    }catch(err){
+        console.error(err);
+        showGuard();
+    }
+}
+
+client.auth.onAuthStateChange((_event,session)=>{
+    if(session && session.user){
+        currentUser=session.user;
+        hideGuard();
+    }else{
+        currentUser=null;
+        showGuard();
+    }
+});
+
+form.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+
+    if(!currentUser){
+        showGuard();
+        return;
+    }
+
+    const editType=document.getElementById('editType').value;
+    const customerName=document.getElementById('customerName').value.trim();
+    const whatsapp=document.getElementById('whatsapp').value.trim();
+    const email=document.getElementById('email').value.trim();
+    const requirements=document.getElementById('requirements').value.trim();
+    const referenceFile=document.getElementById('reference').files[0];
+
+    if(!customerName || !whatsapp || !email || !requirements){
+        setStatus('Please complete all required fields.','error');
+        return;
+    }
+
+    submitBtn.disabled=true;
+    submitBtn.textContent='[ SUBMITTING... ]';
+    setStatus('Submitting your custom edit order...','success');
+    receipt.classList.remove('show');
+
+    const orderId='CE-'+Date.now().toString(36).toUpperCase()+'-'+Math.floor(100+Math.random()*900);
+
+    let referenceUrl='';
+    if(referenceFile){
+        try{
+            const safeName=referenceFile.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+            const path=`custom-orders/${currentUser.id}/${orderId}-${safeName}`;
+            const {error:uploadError}=await client.storage.from('order-references').upload(path,referenceFile,{upsert:false});
+            if(!uploadError){
+                const {data:publicData}=client.storage.from('order-references').getPublicUrl(path);
+                referenceUrl=publicData?.publicUrl || '';
+            }
+        }catch(uploadErr){
+            console.warn('Reference upload failed:',uploadErr);
+        }
+    }
+
+    const orderData={
+        order_id:orderId,
+        customer_name:customerName,
+        whatsapp:whatsapp,
+        email:email,
+        product_id:null,
+        package_name:`Custom Edit - ${editType}`,
+        plan:'Custom Order',
+        price:0,
+        payment_slip_url:referenceUrl || null,
+        status:'Pending',
+        requirements:requirements,
+        user_id:currentUser.id
+    };
+
+    const {error}=await client.from('orders').insert(orderData);
+
+    if(error){
+        console.error(error);
+        setStatus('Order could not be submitted. Please try again. '+(error.message||''),'error');
+        submitBtn.disabled=false;
+        submitBtn.textContent='[ SUBMIT CUSTOM EDIT ORDER ]';
+        return;
+    }
+
+    document.getElementById('receiptId').textContent=orderId;
+    document.getElementById('receiptType').textContent=editType;
+    document.getElementById('receiptName').textContent=customerName;
+
+    const waText=
+`HIM4 x NINJ4 - CUSTOM EDIT ORDER%0A%0A`+
+`Order ID: ${encodeURIComponent(orderId)}%0A`+
+`Edit Type: ${encodeURIComponent(editType)}%0A`+
+`Customer: ${encodeURIComponent(customerName)}%0A`+
+`WhatsApp: ${encodeURIComponent(whatsapp)}%0A`+
+`Email: ${encodeURIComponent(email)}%0A`+
+`Price: To be quoted%0A%0A`+
+`Requirements:%0A${encodeURIComponent(requirements)}`;
+
+    document.getElementById('whatsappBtn').href=`https://wa.me/94761024243?text=${waText}`;
+
+    receipt.classList.add('show');
+    setStatus('Order submitted successfully. Save your Order ID.','success');
+    form.reset();
+    submitBtn.disabled=false;
+    submitBtn.textContent='[ SUBMIT CUSTOM EDIT ORDER ]';
+    receipt.scrollIntoView({behavior:'smooth',block:'center'});
+});
+
+init();
+</script>
+</body>
+</html>
