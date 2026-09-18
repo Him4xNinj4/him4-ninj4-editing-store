@@ -172,6 +172,89 @@ footer{
     font-size:12px;
 }
 
+/* DYNAMIC FONT CATALOG */
+.font-catalog{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+    text-align:left;
+}
+.font-card{
+    background:#050505;
+    border:1px solid #173d2c;
+    padding:16px;
+    transition:.2s;
+}
+.font-card:hover{
+    border-color:#00ff88;
+    box-shadow:0 0 20px rgba(0,255,136,.08);
+    transform:translateY(-2px);
+}
+.font-preview{
+    height:150px;
+    border:1px dashed #24553e;
+    background:#020202;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+.font-preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+.font-preview-empty{
+    font-size:50px;
+}
+.font-card h3{
+    color:white;
+    font-size:17px;
+    margin-bottom:8px;
+}
+.font-card p{
+    color:#777;
+    font-size:12px;
+    line-height:1.6;
+    min-height:38px;
+}
+.font-free{
+    color:#00ff88;
+    font-size:12px;
+    font-weight:bold;
+    margin:14px 0 10px;
+}
+.font-download{
+    display:block;
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #00ff88;
+    background:#00ff88;
+    color:#000;
+    text-align:center;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:11px;
+    letter-spacing:1px;
+}
+.font-download:hover{
+    background:transparent;
+    color:#00ff88;
+}
+.font-loading,
+.font-empty,
+.font-error{
+    grid-column:1/-1;
+    border:1px dashed #24553e;
+    padding:25px;
+    color:#777;
+    text-align:center;
+    font-size:12px;
+}
+.font-error{color:#ff7777}
+
 /* MOBILE */
 @media(max-width:600px){
 
@@ -312,32 +395,16 @@ footer{
             and cinematic videos.
         </p>
 
-
-        <!-- PREVIEW -->
-        <div class="preview">
-
-            <div class="preview-label">
-                FONT PREVIEW
-            </div>
-
-            <div class="preview-text">
-                HIM4 × NINJ4
-            </div>
-
+        <div class="status" id="fontStatus">
+            <span class="dot"></span>
+            FONT DATABASE : LOADING...
         </div>
 
-
-        <!-- STATUS -->
-        <div class="status">
-
-            <span class="dot"></span>
-
-            FONT DATABASE : COMING SOON
-
+        <div id="fontCatalog" class="font-catalog">
+            <div class="font-loading">Loading fonts...</div>
         </div>
 
     </div>
-
 
     <!-- TERMINAL -->
     <div class="terminal">
@@ -349,12 +416,12 @@ footer{
 
         <div>
             <span class="green">[DATABASE]</span>
-            Premium fonts : READY
+            Premium fonts : ONLINE
         </div>
 
         <div>
             <span class="green">[STATUS]</span>
-            Downloads : COMING SOON
+            Downloads : READY
         </div>
 
         <div>
@@ -422,6 +489,92 @@ footer{
     }
 
     checkLogin();
+})();
+</script>
+
+
+<script id="font-catalog-script">
+(function(){
+    const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
+
+    const catalog = document.getElementById('fontCatalog');
+    const status = document.getElementById('fontStatus');
+
+    function esc(v){
+        return String(v ?? '').replace(/[&<>"']/g, c => ({
+            '&':'&amp;',
+            '<':'&lt;',
+            '>':'&gt;',
+            '"':'&quot;',
+            "'":'&#039;'
+        }[c]));
+    }
+
+    async function loadFonts(){
+        try{
+            if(!window.supabase || !window.supabase.createClient){
+                throw new Error('Supabase library not loaded');
+            }
+
+            const client = window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+            const {data, error} = await client
+                .from('products')
+                .select('id,name,description,thumbnail_url,file_url,is_active,created_at')
+                .eq('category','Fonts')
+                .eq('is_active',true)
+                .order('created_at',{ascending:false});
+
+            if(error) throw error;
+
+            const fonts = data || [];
+
+            if(status){
+                status.innerHTML =
+                    '<span class="dot"></span> FONT DATABASE : ' +
+                    (fonts.length ? 'ONLINE • ' + fonts.length + ' FONT' + (fonts.length === 1 ? '' : 'S') : 'ONLINE • 0 FONTS');
+            }
+
+            if(!fonts.length){
+                catalog.innerHTML =
+                    '<div class="font-empty">NO FONTS AVAILABLE YET<br><br>Fonts added from the Admin Panel will appear here.</div>';
+                return;
+            }
+
+            catalog.innerHTML = fonts.map(font => {
+                const thumb = font.thumbnail_url
+                    ? '<img src="' + esc(font.thumbnail_url) + '" alt="' + esc(font.name) + '" loading="lazy">'
+                    : '<div class="font-preview-empty">🔤</div>';
+
+                const download = font.file_url
+                    ? '<a class="font-download" href="' + esc(font.file_url) + '" download>↓ DOWNLOAD FONT</a>'
+                    : '<div class="font-error">FILE NOT READY</div>';
+
+                return '<article class="font-card">' +
+                    '<div class="font-preview">' + thumb + '</div>' +
+                    '<h3>' + esc(font.name) + '</h3>' +
+                    '<p>' + esc(font.description || 'High quality font resource for your editing projects.') + '</p>' +
+                    '<div class="font-free">FREE</div>' +
+                    download +
+                    '</article>';
+            }).join('');
+
+        }catch(err){
+            console.error('FONT DATABASE ERROR:', err);
+            if(status){
+                status.innerHTML = '<span class="dot"></span> FONT DATABASE : ERROR';
+            }
+            catalog.innerHTML =
+                '<div class="font-error">Could not load fonts right now.<br><br>' +
+                esc(err.message || 'Database error') + '</div>';
+        }
+    }
+
+    loadFonts();
 })();
 </script>
 
