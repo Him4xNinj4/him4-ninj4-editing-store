@@ -74,7 +74,7 @@ function esc(v){
  return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 }
 
-function downloadFreeResource(btn, url, baseName){
+async function downloadFreeResource(btn, url, baseName){
  const original = btn ? btn.textContent : 'DOWNLOAD FREE ↓';
 
  try{
@@ -83,42 +83,45 @@ function downloadFreeResource(btn, url, baseName){
      btn.textContent = 'DOWNLOADING...';
    }
 
-   /*
-    * Use Supabase Storage's dedicated /object/download endpoint.
-    * This is more reliable on Android/Chrome than the HTML `download`
-    * attribute on a cross-origin public URL.
-    *
-    * Expected public URL:
-    * .../storage/v1/object/public/<bucket>/<path>
-    */
+   // Parse a Supabase public Storage URL into bucket + file path.
    const marker = '/storage/v1/object/public/';
    const pos = url.indexOf(marker);
 
-   if(pos !== -1){
-     const storagePart = url.substring(pos + marker.length);
-     const slash = storagePart.indexOf('/');
-
-     if(slash > 0){
-       const bucket = storagePart.substring(0, slash);
-       const path = storagePart.substring(slash + 1);
-
-       const downloadUrl =
-         'https://ndcrvdbvhswbvahpskhj.supabase.co/storage/v1/object/download/' +
-         encodeURIComponent(bucket) + '/' +
-         path.split('/').map(encodeURIComponent).join('/') +
-         '?download=' + encodeURIComponent(baseName);
-
-       window.location.href = downloadUrl;
-       return;
-     }
+   if(pos === -1){
+     throw new Error('This resource does not have a valid Supabase Storage URL.');
    }
 
-   // Fallback for a non-Supabase URL.
-   const sep = url.includes('?') ? '&' : '?';
-   window.location.href = url + sep + 'download=' + encodeURIComponent(baseName);
+   const storagePart = url.substring(pos + marker.length).split('?')[0];
+   const slash = storagePart.indexOf('/');
+
+   if(slash <= 0){
+     throw new Error('Could not detect the Storage bucket/path.');
+   }
+
+   const bucket = storagePart.substring(0, slash);
+   const path = decodeURIComponent(storagePart.substring(slash + 1));
+
+   // Download through the Supabase JS SDK, then save a same-origin Blob.
+   const { data, error } = await sb.storage.from(bucket).download(path);
+
+   if(error) throw error;
+   if(!data) throw new Error('Supabase returned an empty file.');
+
+   const blobUrl = URL.createObjectURL(data);
+   const a = document.createElement('a');
+   a.href = blobUrl;
+   a.download = baseName || (path.split('/').pop() || 'free-resource');
+   a.style.display = 'none';
+   document.body.appendChild(a);
+   a.click();
+   a.remove();
+
+   setTimeout(()=>URL.revokeObjectURL(blobUrl), 3000);
 
  }catch(err){
    console.error('Free resource download failed:', err);
+   alert('Download failed. Please try again.');
+ }finally{
    if(btn){
      btn.disabled = false;
      btn.textContent = original;
