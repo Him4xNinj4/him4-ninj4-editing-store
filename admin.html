@@ -5449,9 +5449,19 @@ async function uploadProductAsset(file, bucket, folder){
 
     const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,'-');
     const path = `${folder}/${Date.now()}-${safe}`;
+    // Resource files must always be served as downloadable binary files.
+    // This prevents XML/JSON/text resources from opening inline in the browser.
+    const uploadContentType =
+        (bucket === 'product-files' && folder === 'resources')
+            ? 'application/octet-stream'
+            : (file.type || 'application/octet-stream');
+
     const {error} = await supabaseClient.storage
         .from(bucket)
-        .upload(path,file,{upsert:false,contentType:file.type || 'application/octet-stream'});
+        .upload(path,file,{
+            upsert:false,
+            contentType:uploadContentType
+        });
 
     if(error) throw error;
 
