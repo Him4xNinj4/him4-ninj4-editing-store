@@ -1012,11 +1012,102 @@ footer{
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
+<style>
+:root{
+  --p:#8b5cf6; --p2:#a855f7; --b:#38bdf8; --bg:#05050b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0!important;background:var(--bg)!important;color:#fff!important;
+  font-family:Inter,Arial,Helvetica,sans-serif!important;overflow-x:hidden;
+}
+body::before{display:none!important}
+.ff-bg{display:none!important}
+
+/* SAME STORE NAV STYLE */
+.store-nav{
+ position:sticky;top:0;z-index:1000;
+ background:rgba(5,5,11,.78);backdrop-filter:blur(18px);
+ border-bottom:1px solid rgba(139,92,246,.18);
+ box-shadow:0 8px 35px rgba(0,0,0,.35);
+}
+.nav-inner{max-width:1280px;margin:auto;height:78px;padding:0 28px;display:flex;align-items:center;gap:28px}
+.brand-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.brand-logo img{width:155px;max-height:52px;object-fit:contain;display:block}
+.store-menu{display:flex;align-items:center;gap:6px;flex:1;justify-content:center}
+.store-menu a{color:#aaa;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.4px;padding:11px 12px;border-radius:10px;transition:.25s}
+.store-menu a:hover,.store-menu a.active{color:#fff;background:rgba(139,92,246,.12);box-shadow:inset 0 0 0 1px rgba(139,92,246,.12)}
+.nav-actions{display:flex;align-items:center;gap:9px}
+.icon-btn{width:38px;height:38px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.03);color:#ddd;cursor:pointer}
+.login-btn{height:38px;padding:0 13px;border:1px solid rgba(139,92,246,.4);border-radius:10px;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(56,189,248,.08));color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700}
+.account-avatar{width:24px;height:24px;border-radius:50%;display:none;object-fit:cover}
+
+/* HERO */
+.edit-hero{
+ min-height:390px;position:relative;overflow:hidden;
+ display:flex;align-items:center;
+ background:
+ linear-gradient(90deg,rgba(5,5,11,.97) 0%,rgba(5,5,11,.82) 43%,rgba(5,5,11,.35) 100%),
+ url('a_dramatic_high_energy_3d_neon_gaming_style_graph.png') center/cover no-repeat;
+ border-bottom:1px solid rgba(139,92,246,.18);
+}
+.edit-hero:after{content:"";position:absolute;inset:auto 0 0;height:130px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.hero-inner{width:min(1180px,92%);margin:auto;position:relative;z-index:2;padding:70px 0}
+.eyebrow{color:#a78bfa;font-size:11px;letter-spacing:2.5px;font-weight:800}
+.edit-hero h1{font-size:clamp(38px,6vw,72px);line-height:.95;margin:16px 0 18px;font-weight:900;letter-spacing:-2px}
+.edit-hero h1 em{font-style:normal;color:#a78bfa;text-shadow:0 0 30px rgba(139,92,246,.35)}
+.edit-hero p{max-width:650px;color:#aaa;line-height:1.8;font-size:14px;margin:0 0 25px}
+.hero-back{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:12px;font-weight:800;padding:11px 16px;border-radius:9px;border:1px solid rgba(139,92,246,.35);background:rgba(139,92,246,.1)}
+.hero-back:hover{background:rgba(139,92,246,.2)}
+
+/* CONTENT */
+.store-section{max-width:1180px;width:92%;margin:0 auto;padding:72px 0}
+.section-heading-new{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:30px}
+.section-heading-new h2{margin:8px 0 0;font-size:32px;letter-spacing:-1px}
+.section-heading-new h2 em{font-style:normal;color:#a78bfa}
+.section-heading-new p{color:#666;font-size:10px;letter-spacing:1px}
+.resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.resource-card{
+ position:relative;min-height:225px;padding:28px;border-radius:18px;
+ text-decoration:none;color:#fff;overflow:hidden;
+ background:linear-gradient(145deg,rgba(20,18,32,.96),rgba(8,8,14,.98));
+ border:1px solid rgba(255,255,255,.07);
+ transition:.3s;
+}
+.resource-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 100% 0,rgba(139,92,246,.18),transparent 45%);opacity:.8}
+.resource-card:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.5);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 35px rgba(139,92,246,.1)}
+.resource-card h3{position:relative;margin:0 0 10px;font-size:18px}
+.resource-card h3 span{color:#a78bfa}
+.resource-card p{position:relative;margin:0;color:#777;font-size:12px;line-height:1.7}
+.card-open{position:relative;display:block;margin-top:22px;color:#b9a2ff;font-size:10px;font-weight:800;letter-spacing:1px}
+
+/* INFO STRIP */
+.resource-note{margin-top:10px;padding:24px 26px;border:1px solid rgba(56,189,248,.14);border-radius:16px;background:linear-gradient(100deg,rgba(56,189,248,.06),rgba(139,92,246,.06))}
+.resource-note strong{display:block;font-size:13px;margin-bottom:6px}
+.resource-note span{color:#777;font-size:11px;line-height:1.7}
+
+/* FOOTER */
+.store-footer{border-top:1px solid rgba(255,255,255,.06);padding:45px 20px;text-align:center;color:#555;font-size:11px}
+.store-footer strong{display:block;color:#a78bfa;font-size:15px;letter-spacing:1px;margin-bottom:8px}
+@media(max-width:900px){
+ .store-menu{display:none}.nav-inner{justify-content:space-between}
+ .resource-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+ .nav-inner{height:68px;padding:0 16px}.brand-logo img{width:130px}
+ .edit-hero{min-height:430px}.hero-inner{padding:60px 0}
+ .edit-hero h1{font-size:43px}
+ .section-heading-new{display:block}.section-heading-new p{margin-top:12px}
+ .resource-grid{grid-template-columns:1fr}
+ .store-section{padding:55px 0}
+}
+</style>
 </head>
 
 
 <body>
-
 <!-- ================= LOGIN REQUIRED SCREEN ================= -->
 <div id="loginGuard" aria-hidden="true">
     <div class="login-guard-box">
@@ -1035,629 +1126,129 @@ footer{
 
 
 
-<!-- =========================
-     FREE FIRE ANIMATED BACKGROUND
-========================= -->
 
-<div class="ff-bg" aria-hidden="true">
-
-    <div class="ff-grid"></div>
-
-    <div class="ff-glow one"></div>
-
-    <div class="ff-glow two"></div>
-
-    <div class="ff-scan"></div>
-
-    <div class="ff-particles">
-
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-
+<header class="store-nav">
+  <div class="nav-inner">
+    <a class="brand-logo" href="index.html"><img src="HIM4 x NINJ4 Neon Edit Store(2).png" alt="HIM4 x NINJ4"></a>
+    <nav class="store-menu">
+      <a href="index.html">⌂ <span>Home</span></a>
+      <a class="active" href="#resources">✥ <span>Resources</span></a>
+      <a href="optimize.html">◉ <span>Optimization</span></a>
+      <a href="custom.html">♡ <span>Request</span></a>
+      <a href="index.html#reviews">☆ <span>Reviews</span></a>
+      <a href="index.html#contact">▣ <span>Contact</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search">⌕</button>
+      <button class="icon-btn" aria-label="Cart">🛒</button>
+      <a href="auth.html" class="login-btn account-link" id="accountLink"><img class="account-avatar" id="accountAvatar" src="" alt="Profile"><span class="account-label" id="accountLabel">Login</span></a>
     </div>
-
-</div>
-
-
-<!-- =========================
-     TOP BAR
-========================= -->
-
-<div class="topbar">
-
-    <div class="dots">
-
-        <div class="dot red"></div>
-
-        <div class="dot yellow"></div>
-
-        <div class="dot green"></div>
-
-    </div>
-
-
-    <div class="terminal-name">
-
-        <span>him4@ninj4</span>:/editing$
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<main class="container">
-
-
-    <!-- HEADER -->
-
-    <section class="header">
-
-        <div class="command">
-            &gt; cd /editing-resources
-        </div>
-
-
-        <h1>
-            EDITING <span>RESOURCES</span>
-        </h1>
-
-
-        <p class="header-description">
-
-            Welcome to the HIM4 x NINJ4 editing
-            resource directory. Select a category
-            to continue.
-
-        </p>
-
-    </section>
-
-
-
-    <!-- BACK -->
-
-    <a href="index.html" class="back-button">
-
-        ← BACK TO HOME
-
-    </a>
-
-
-
-    <!-- CATEGORY TITLE -->
-
-    <div class="category-header">
-
-        <h2>
-            Resource Categories
-        </h2>
-
-        <p>
-            &gt; select_directory_to_continue
-        </p>
-
-    </div>
-
-
-
-    <!-- =========================
-         CATEGORIES
-    ========================= -->
-
-    <section class="categories">
-
-
-        <!-- PREMIUM SHAKES -->
-
-        <a href="shakes.html" class="category">
-
-            <div class="icon">
-                ⚡
-            </div>
-
-            <h3>
-                Premium <span>Shakes</span>
-            </h3>
-
-            <p>
-                Premium shake presets for
-                smooth gaming edits, velocity
-                edits and cinematic motion.
-            </p>
-
-            <div class="open">
-                [ OPEN SHAKES → ]
-            </div>
-
-        </a>
-
-
-
-        <!-- PREMIUM CC -->
-
-        <a href="cc.html" class="category">
-
-            <div class="icon">
-                🎨
-            </div>
-
-            <h3>
-                Premium <span>CC</span>
-            </h3>
-
-            <p>
-                High-quality color correction
-                presets for gaming, cinematic
-                and short-form video edits.
-            </p>
-
-            <div class="open">
-                [ OPEN CC → ]
-            </div>
-
-        </a>
-
-
-
-        <!-- FONTS -->
-
-        <a href="fonts.html" class="category">
-
-            <div class="icon">
-                🔤
-            </div>
-
-            <h3>
-                <span>Fonts</span>
-            </h3>
-
-            <p>
-                Gaming, cinematic and stylish
-                fonts for titles, thumbnails,
-                posters and video edits.
-            </p>
-
-            <div class="open">
-                [ OPEN FONTS → ]
-            </div>
-
-        </a>
-
-
-
-        <!-- OVERLAYS -->
-
-        <a href="overlays.html" class="category">
-
-            <div class="icon">
-                ✨
-            </div>
-
-            <h3>
-                <span>Overlays</span>
-            </h3>
-
-            <p>
-                Light leaks, particles, glow,
-                dust, fire, smoke and cinematic
-                overlay resources.
-            </p>
-
-            <div class="open">
-                [ OPEN OVERLAYS → ]
-            </div>
-
-        </a>
-
-
-
-        <!-- SOLO EDITS -->
-
-        <a href="solo.html" class="category">
-
-            <div class="icon">
-                👤
-            </div>
-
-            <h3>
-                Solo <span>Edits</span>
-            </h3>
-
-            <p>
-                Editing resources and presets
-                specially designed for solo
-                character gaming edits.
-            </p>
-
-            <div class="open">
-                [ OPEN SOLO EDITS → ]
-            </div>
-
-        </a>
-
-
-
-        <!-- DUO EDITS -->
-
-        <a href="duo.html" class="category">
-
-            <div class="icon">
-                👥
-            </div>
-
-            <h3>
-                Duo <span>Edits</span>
-            </h3>
-
-            <p>
-                Creative presets and resources
-                designed for two-character
-                gaming edits.
-            </p>
-
-            <div class="open">
-                [ OPEN DUO EDITS → ]
-            </div>
-
-        </a>
-
-
-
-        <!-- SQUAD EDITS -->
-
-        <a href="squad.html" class="category">
-
-            <div class="icon">
-                👨‍👩‍👦
-            </div>
-
-            <h3>
-                Squad <span>Edits</span>
-            </h3>
-
-            <p>
-                Premium resources for squad,
-                team and multi-character
-                gaming edits.
-            </p>
-
-            <div class="open">
-                [ OPEN SQUAD EDITS → ]
-            </div>
-
-        </a>
-
-
-
-
-        <!-- =========================
-             CUSTOM EDITS
-        ========================= -->
-
-        <a href="custom.html" class="category">
-
-            <div class="icon">🛠️</div>
-
-            <h3>Custom <span>Edits</span></h3>
-
-            <p>
-                Order a custom gaming edit made
-                to your requirements. Choose your
-                edit type and submit your request.
-                Price varies depending on the quality,
-                complexity and requirements of the edit.
-            </p>
-
-            <div class="open">
-                [ OPEN CUSTOM EDITS → ]
-            </div>
-
-        </a>
-
-
-        <!-- =========================
-             FREE RESOURCES
-        ========================= -->
-
-        <a href="free.html" class="category">
-
-            <div class="icon">🆓</div>
-
-            <h3>Free <span>Resources</span></h3>
-
-            <p>
-                Free editing resources including
-                Free Shakes and Free CC. Browse
-                available resources and download
-                them directly from the website.
-            </p>
-
-            <div class="open">
-                [ OPEN FREE RESOURCES → ]
-            </div>
-
-        </a>
-
-
-    </section>
-
-
-
-    <!-- =========================
-         TERMINAL
-    ========================= -->
-
-    <div class="terminal-box">
-
-        <div class="terminal-header">
-
-            HIM4 x NINJ4 // RESOURCE TERMINAL
-
-        </div>
-
-
-        <div class="terminal-body">
-
-            <div>
-
-                <span class="green-text">
-                    root@him4-ninj4
-                </span>:~$ scan --resources
-
-            </div>
-
-
-            <div>
-
-                <span class="green-text">
-                    [OK]
-                </span>
-
-                Premium Shakes directory loaded
-
-            </div>
-
-
-            <div>
-
-                <span class="green-text">
-                    [OK]
-                </span>
-
-                Premium CC directory loaded
-
-            </div>
-
-
-            <div>
-
-                <span class="green-text">
-                    [OK]
-                </span>
-
-                Fonts directory loaded
-
-            </div>
-
-
-            <div>
-
-                <span class="green-text">
-                    [OK]
-                </span>
-
-                Overlays directory loaded
-
-            </div>
-
-
-            <div>
-
-                <span class="green-text">
-                    [OK]
-                </span>
-
-                Solo / Duo / Squad directories loaded
-
-            </div>
-
-
-            <div>
-
-                <span class="green-text">
-                    [OK]
-                </span>
-
-                Custom Edits order system loaded
-
-            </div>
-
-
-            <div>
-
-                <span class="green-text">
-                    [OK]
-                </span>
-
-                Free Resources directory loaded
-
-            </div>
-
-
-            <div>
-
-                <span class="white-text">
-                    System ready.
-                </span>
-
-            </div>
-
-
-            <div>
-
-                <span class="green-text">
-                    root@him4-ninj4
-                </span>:~$
-
-                <span class="cursor"></span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =========================
-         INFO CARDS
-    ========================= -->
-
-    <section class="info-section">
-
-
-        <div class="info-card">
-
-            <div class="info-icon">
-                🎬
-            </div>
-
-            <h3>
-                Creator Resources
-            </h3>
-
-            <p>
-                Resources made for gaming
-                editors and content creators.
-            </p>
-
-        </div>
-
-
-        <div class="info-card">
-
-            <div class="info-icon">
-                ⚡
-            </div>
-
-            <h3>
-                Premium Quality
-            </h3>
-
-            <p>
-                Carefully selected resources
-                for high-quality editing.
-            </p>
-
-        </div>
-
-
-        <div class="info-card">
-
-            <div class="info-icon">
-                🚀
-            </div>
-
-            <h3>
-                More Coming Soon
-            </h3>
-
-            <p>
-                New presets, packs and editing
-                resources will be added regularly.
-            </p>
-
-        </div>
-
-
-    </section>
-
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="footer-brand">
-        HIM4 x NINJ4
-    </div>
-
-
-    <p>
-        EDITING STORE // CREATOR RESOURCES
-    </p>
-
-
-    <p style="margin-top:10px;">
-        © 2026 HIM4 x NINJ4
-    </p>
-
+  </div>
+</header>
+
+<section class="edit-hero">
+  <div class="hero-inner">
+    <div class="eyebrow">— &nbsp; HIM4 × NINJ4 / RESOURCES</div>
+    <h1>EDITING <em>RESOURCES</em></h1>
+    <p>Premium resources built for gaming editors — shakes, color correction, fonts, overlays, edit packs and custom editing services.</p>
+    <a class="hero-back" href="index.html">← &nbsp; BACK TO HOME</a>
+  </div>
+</section>
+
+<section class="store-section" id="resources">
+  <div class="section-heading-new">
+    <div><div class="eyebrow">— &nbsp; EXPLORE</div><h2>RESOURCE <em>CATEGORIES</em></h2></div>
+    <p>→ &nbsp; CHOOSE A CATEGORY TO CONTINUE</p>
+  </div>
+
+  <div class="resource-grid">
+    <a href="shakes.html" class="resource-card"><h3>PREMIUM <span>SHAKES</span></h3><p>Premium shake presets for smooth gaming edits, velocity edits and cinematic motion.</p><span class="card-open">OPEN SHAKES →</span></a>
+    <a href="cc.html" class="resource-card"><h3>PREMIUM <span>CC</span></h3><p>High-quality color correction presets for gaming, cinematic and short-form video edits.</p><span class="card-open">OPEN CC →</span></a>
+    <a href="fonts.html" class="resource-card"><h3><span>FONTS</span></h3><p>Gaming, cinematic and stylish fonts for titles, thumbnails, posters and video edits.</p><span class="card-open">OPEN FONTS →</span></a>
+    <a href="overlays.html" class="resource-card"><h3><span>OVERLAYS</span></h3><p>Light leaks, particles, glow, dust, fire, smoke and cinematic overlay resources.</p><span class="card-open">OPEN OVERLAYS →</span></a>
+    <a href="solo.html" class="resource-card"><h3>SOLO <span>EDITS</span></h3><p>Editing resources and presets specially designed for solo character gaming edits.</p><span class="card-open">OPEN SOLO EDITS →</span></a>
+    <a href="duo.html" class="resource-card"><h3>DUO <span>EDITS</span></h3><p>Creative presets and resources designed for two-character gaming edits.</p><span class="card-open">OPEN DUO EDITS →</span></a>
+    <a href="squad.html" class="resource-card"><h3>SQUAD <span>EDITS</span></h3><p>Premium resources for squad, team and multi-character gaming edits.</p><span class="card-open">OPEN SQUAD EDITS →</span></a>
+    <a href="custom.html" class="resource-card"><h3>CUSTOM <span>EDITS</span></h3><p>Order a custom gaming edit made to your requirements. Choose your edit type and submit your request.</p><span class="card-open">OPEN CUSTOM EDITS →</span></a>
+    <a href="free.html" class="resource-card"><h3>FREE <span>RESOURCES</span></h3><p>Free editing resources including Free Shakes and Free CC. Browse and download available resources.</p><span class="card-open">OPEN FREE RESOURCES →</span></a>
+  </div>
+
+  <div class="resource-note">
+    <strong>⚡ PREMIUM EDITING ECOSYSTEM</strong>
+    <span>Everything is organized in one place so you can quickly find the resource you need for your next gaming edit.</span>
+  </div>
+</section>
+
+<footer class="store-footer">
+  <strong>HIM4 × NINJ4</strong>
+  <div>EDITING STORE // CREATOR RESOURCES</div>
+  <div style="margin-top:9px;">© 2026 HIM4 × NINJ4</div>
 </footer>
 
-
-
-<!-- ================= SUPABASE LOGIN GUARD ================= -->
+<!-- ================= SHARED SUPABASE SESSION ================= -->
 <script>
 (function(){
     const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
-    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    const guard = document.getElementById('loginGuard');
+    const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_qm3m3F30PUg_V6C0OSaW';
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+        auth: {
+            storage: window.localStorage,
+            storageKey: 'sb-ndcrvdbvhswbvahpskhj-auth-token',
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+        }
+    });
 
-    async function checkAccess(){
-        try{
-            const { data:{ session } } = await client.auth.getSession();
-            if(session && session.user){
-                guard.classList.remove('show');
-                guard.setAttribute('aria-hidden','true');
-                document.body.style.overflow='';
-            }else{
-                guard.classList.add('show');
-                guard.setAttribute('aria-hidden','false');
-                document.body.style.overflow='hidden';
-            }
-        }catch(error){
-            console.error('Auth check failed:', error);
-            guard.classList.add('show');
-            guard.setAttribute('aria-hidden','false');
-            document.body.style.overflow='hidden';
+    const guard = document.getElementById('loginGuard');
+    const accountLink = document.getElementById('accountLink');
+    const accountLabel = document.getElementById('accountLabel');
+    const accountAvatar = document.getElementById('accountAvatar');
+
+    function showLoggedIn(session){
+        if(guard){
+            guard.classList.remove('show');
+            guard.setAttribute('aria-hidden','true');
+        }
+        document.body.style.overflow = '';
+        if(accountLink) accountLink.href = 'account.html';
+        if(accountLabel) accountLabel.textContent = 'MY ACCOUNT';
+        if(accountAvatar && session?.user?.user_metadata?.avatar_url){
+            accountAvatar.src = session.user.user_metadata.avatar_url;
+            accountAvatar.style.display = 'block';
         }
     }
 
-    client.auth.onAuthStateChange(function(_event, session){
-        if(session && session.user){
-            guard.classList.remove('show');
-            guard.setAttribute('aria-hidden','true');
-            document.body.style.overflow='';
-        }else{
+    function showLoggedOut(){
+        if(guard){
             guard.classList.add('show');
             guard.setAttribute('aria-hidden','false');
-            document.body.style.overflow='hidden';
         }
+        document.body.style.overflow = 'hidden';
+        if(accountLink) accountLink.href = 'auth.html';
+        if(accountLabel) accountLabel.textContent = 'LOGIN';
+        if(accountAvatar) accountAvatar.style.display = 'none';
+    }
+
+    async function checkAccess(){
+        try{
+            const {data:{session}, error} = await client.auth.getSession();
+            if(error) throw error;
+            if(session?.user) showLoggedIn(session);
+            else showLoggedOut();
+        }catch(error){
+            console.error('Auth check failed:', error);
+            showLoggedOut();
+        }
+    }
+
+    client.auth.onAuthStateChange((_event, session) => {
+        if(session?.user) showLoggedIn(session);
+        else showLoggedOut();
     });
 
     checkAccess();
 })();
 </script>
-
 </body>
 </html>

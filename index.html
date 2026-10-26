@@ -1119,6 +1119,103 @@ footer{
 .access-cancel:hover{border-color:#00ff88;color:#00ff88}
 </style>
 
+
+<style>
+:root{--p:#8b3dff;--b:#1678ff;--bg:#05060c;--text:#f6f3ff;--muted:#9ca3bb;--line:rgba(122,82,255,.28)}
+html{scroll-behavior:smooth}body{background:radial-gradient(circle at 50% 0%,#17102d 0,#05060c 42%,#03040a 100%);color:var(--text);font-family:Inter,Arial,sans-serif}.topbar{display:none!important}
+.store-nav{position:fixed;top:0;left:0;right:0;height:76px;z-index:5000;background:rgba(3,5,13,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(118,80,255,.38);box-shadow:0 8px 35px rgba(0,0,0,.35)}
+.nav-inner{max-width:1450px;height:100%;margin:auto;display:flex;align-items:center;gap:28px;padding:0 24px}.brand-logo{width:145px;flex:0 0 145px;display:flex;align-items:center}.brand-logo img{width:100%;max-height:52px;height:auto;object-fit:contain;display:block;filter:drop-shadow(0 0 10px rgba(139,61,255,.45))}.store-menu{display:flex;align-items:center;justify-content:center;gap:7px;flex:1}.store-menu a{color:#eeeafc;text-decoration:none;font-size:13px;font-weight:700;padding:13px 16px;border-radius:13px;letter-spacing:.2px;transition:.25s}.store-menu a:hover,.store-menu a.active{background:linear-gradient(135deg,rgba(124,53,255,.35),rgba(30,111,255,.18));box-shadow:0 0 20px rgba(112,61,255,.2);color:#fff}.nav-actions{display:flex;align-items:center;gap:10px}.icon-btn{width:42px;height:42px;border:1px solid rgba(104,76,255,.38);border-radius:13px;background:rgba(7,9,20,.75);color:#fff;cursor:pointer;font-size:20px;position:relative}.login-btn{min-width:104px;height:42px;padding:0 15px;border:1px solid #7c42ff;border-radius:13px;background:linear-gradient(135deg,#6432ff,#2a6eff);box-shadow:0 0 22px rgba(100,50,255,.3);color:#fff!important;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:800}.login-btn .account-avatar{display:none;width:27px;height:27px;border-radius:50%;object-fit:cover}.login-btn .account-avatar.visible{display:block}.login-btn.logged-in{min-width:145px}.login-btn.logged-in .account-label{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.store-hero{min-height:650px;height:calc(100vh - 30px);max-height:820px;margin-top:76px;position:relative;overflow:hidden;background:#03050d}.hero-bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;pointer-events:none;background:#03050d}.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(3,5,13,.86) 0%,rgba(3,5,13,.58) 34%,rgba(3,5,13,.06) 72%),linear-gradient(0deg,rgba(3,4,10,.82) 0%,transparent 40%)}.hero-content-new{position:relative;z-index:2;max-width:650px;padding:120px 0 80px max(7vw,70px)}.hero-kicker,.eyebrow{font-size:12px;letter-spacing:4px;font-weight:800;color:#c77cff}.hero-kicker span{display:inline-block;width:24px;height:2px;background:#a44cff;vertical-align:middle;margin-right:9px;box-shadow:0 0 12px #a44cff}.hero-brand-logo{width:min(620px,58vw);height:185px;max-width:100%;display:block;margin:12px 0 4px;object-fit:cover;object-position:left center;filter:drop-shadow(0 0 22px rgba(129,49,255,.45))}.hero-lead{font-size:15px;font-weight:800;letter-spacing:2.5px;margin:14px 0 8px;color:#fff}.hero-sub{font-size:11px;letter-spacing:3px;color:#c5c4d7}.hero-sub i{color:#9c54ff;font-style:normal}.hero-actions-new{display:flex;gap:15px;margin-top:26px;flex-wrap:wrap}.glow-btn,.ghost-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 28px;border-radius:13px;text-decoration:none;font-weight:800;font-size:12px;letter-spacing:1px;transition:.25s}.glow-btn{color:#fff;background:linear-gradient(100deg,#7c2cff,#356cff);border:1px solid #a06cff;box-shadow:0 0 28px rgba(124,44,255,.4)}.ghost-btn{color:#fff;border:1px solid #285dff;background:rgba(4,8,22,.5);box-shadow:inset 0 0 18px rgba(35,91,255,.08)}.glow-btn:hover,.ghost-btn:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(103,62,255,.55)}
+.stats-new{max-width:1250px;margin:-52px auto 0;position:relative;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:0 22px}.stat-new{min-height:80px;border:1px solid rgba(92,64,255,.4);border-radius:17px;background:linear-gradient(120deg,rgba(11,13,28,.96),rgba(7,10,21,.86));box-shadow:0 15px 35px rgba(0,0,0,.32),inset 0 0 30px rgba(72,42,255,.06);display:flex;align-items:center;gap:14px;padding:13px 20px}.stat-icon{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#5134bb,#15112f);box-shadow:0 0 20px rgba(89,55,255,.35);font-size:21px;color:#fff}.stat-new strong{display:block;font-size:21px}.stat-new small{display:block;margin-top:4px;font-size:10px;color:#b5b5c7;font-weight:800;letter-spacing:1px}
+.store-section{max-width:1250px;margin:0 auto;padding:66px 22px 0}.section-heading-new{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:24px}.section-heading-new h2,.compact-about h2,.optimization-strip h2{font-size:31px;margin:7px 0 0;letter-spacing:.5px}.section-heading-new h2 em,.compact-about h2 em,.optimization-strip h2 em{font-style:normal;background:linear-gradient(90deg,#8d39ff,#168aff);-webkit-background-clip:text;background-clip:text;color:transparent}.section-heading-new>p{font-size:10px;color:#8f94ae;letter-spacing:1.5px}.category-grid-new{display:grid;grid-template-columns:repeat(6,1fr);gap:13px}.cat-card{min-height:130px;border-radius:16px;position:relative;overflow:hidden;text-decoration:none;color:#fff;padding:18px 15px;border:1px solid var(--card);background:linear-gradient(145deg,rgba(18,18,34,.9),rgba(6,8,16,.96));box-shadow:inset 0 0 35px var(--glow),0 10px 24px rgba(0,0,0,.2);transition:.28s}.cat-card:hover{transform:translateY(-5px);box-shadow:inset 0 0 45px var(--glow),0 14px 35px rgba(0,0,0,.4)}.cat-card:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--glow),transparent 45%);opacity:.14;pointer-events:none}.cat-icon{font-size:27px;font-weight:900;color:var(--card);margin-bottom:16px;text-shadow:0 0 15px var(--card)}.cat-card h3{font-size:12px;margin:0 0 6px;letter-spacing:.2px}.cat-card p{font-size:8px;color:#aeb0c2;margin:0;letter-spacing:.4px;line-height:1.5}.cat-card>span{position:absolute;right:11px;bottom:10px;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:var(--card);color:#fff;font-size:12px;box-shadow:0 0 15px var(--card)}.cat-purple{--card:#8d3cff;--glow:#6d2aff}.cat-blue{--card:#1e8cff;--glow:#125eff}.cat-pink{--card:#ff2bbd;--glow:#d51aa0}.cat-orange{--card:#ffae18;--glow:#e97c00}.cat-green{--card:#19dc8d;--glow:#00a96c}.cat-red{--card:#ff303c;--glow:#d90016}
+.popular-body b{font-size:14px}.popular-body small{font-size:9px;color:#898da5;letter-spacing:1px;margin-top:5px}.popular-body strong{font-size:10px;color:#9c66ff;margin-top:13px}
+.optimization-strip{margin-top:65px;padding:34px 28px;display:flex;align-items:center;justify-content:space-between;gap:25px;border:1px solid rgba(63,112,255,.32);border-radius:20px;background:linear-gradient(120deg,rgba(10,16,35,.95),rgba(16,7,34,.8));box-shadow:inset 0 0 50px rgba(59,67,255,.08)}.optimization-strip p{color:#9ca0b5;font-size:13px}.compact-about{padding-bottom:20px}.about-modern{display:flex;justify-content:space-between;align-items:center;gap:30px;padding:30px;border-radius:20px;background:linear-gradient(120deg,rgba(13,9,28,.9),rgba(6,9,20,.9));border:1px solid rgba(120,70,255,.22)}.about-modern p{max-width:680px;color:#9fa3b8;line-height:1.7;font-size:13px}
+#team,#reviews,#contact{max-width:1250px;margin-left:auto;margin-right:auto}.brand-section .section-title .cmd,.brand-section .section-title h2{color:#fff}.brand-section .cmd{color:#a661ff}.brand-section{padding-top:55px}
+.access-box{background:linear-gradient(145deg,#111020,#060711)!important;border-color:#8b4cff!important;box-shadow:0 0 50px rgba(125,63,255,.25)!important}.access-cmd{color:#a966ff!important}.access-close:hover{color:#b36cff!important}.access-backdrop{background:rgba(0,0,0,.84)!important}
+@media(max-width:1050px){.store-menu{gap:0}.store-menu a{padding:11px 9px;font-size:11px}.brand-logo{width:145px;flex-basis:145px}.category-grid-new{grid-template-columns:repeat(3,1fr)}.stats-new{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.store-nav{height:auto}.nav-inner{padding:10px 14px;flex-wrap:wrap;gap:10px}.brand-logo{width:125px;flex-basis:125px}.store-menu{order:3;width:100%;overflow-x:auto;justify-content:flex-start;padding-bottom:3px}.store-menu a{white-space:nowrap}.store-menu a span{display:none}.nav-actions{margin-left:auto}.icon-btn{width:36px;height:36px}.login-btn{min-width:75px;height:36px}.store-hero{margin-top:108px;min-height:590px;height:590px;background-position:center}.hero-content-new{padding:100px 24px 50px;max-width:560px}.hero-brand-logo{width:100%;max-width:500px;height:150px}.hero-lead{font-size:11px;line-height:1.5}.hero-sub{font-size:8px;line-height:2}.stats-new{margin-top:-30px;padding:0 14px;grid-template-columns:1fr 1fr;gap:10px}.stat-new{padding:10px 12px;min-height:70px}.stat-new strong{font-size:17px}.stat-new small{font-size:8px}.stat-icon{width:37px;height:37px}.store-section{padding-left:14px;padding-right:14px}.section-heading-new{align-items:flex-start;flex-direction:column}.section-heading-new h2{font-size:25px}.section-heading-new>p{display:none}.category-grid-new{grid-template-columns:1fr 1fr}.cat-card{min-height:125px}.popular-grid{grid-template-columns:1fr 1fr}.optimization-strip,.about-modern{flex-direction:column;align-items:flex-start}.carousel-actions{width:100%}.carousel-actions a{margin-left:auto}}
+@media(max-width:480px){.brand-logo{width:115px;flex-basis:115px}.hero-brand-logo{width:110%;height:125px;margin-left:-5%}.hero-content-new{padding-top:80px}.hero-actions-new{flex-direction:column}.hero-actions-new a{width:100%}.category-grid-new,.popular-grid{grid-template-columns:1fr 1fr}.cat-card{padding:14px 11px}.cat-card h3{font-size:10px}.cat-card p{font-size:7px}.popular-art{height:125px}.popular-body b{font-size:12px}}
+</style>
+
+
+<style id="full-storefront-theme">
+/* ===== FULL STOREFRONT CONSISTENCY ===== */
+:root{--violet:#8b4dff;--blue:#2378ff;--cyan:#35a7ff;--pink:#d83cff;--panel:rgba(8,9,22,.78);--line:rgba(120,76,255,.32)}
+body{background:#03040b;color:#fff;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 15% 15%,rgba(91,38,255,.15),transparent 28%),radial-gradient(circle at 85% 35%,rgba(23,101,255,.12),transparent 30%),linear-gradient(#02030a,#050510 60%,#02030a)}
+.ff-bg{opacity:.16!important}
+/* all lower sections use the same premium storefront language */
+.store-section,.section.brand-section{width:min(1280px,94%);margin:0 auto;padding:82px 0 28px;background:transparent}
+.section.brand-section .container{width:100%;max-width:none;margin:0}
+.section.brand-section .section-title{margin:0 0 30px;padding:0 4px}
+.section.brand-section .section-title .cmd{display:none}
+.section.brand-section .section-title h2,.section.brand-section .about-modern h2{font-size:clamp(28px,3vw,42px);font-weight:950;letter-spacing:-1px;text-transform:uppercase;line-height:1.05;color:#fff;text-shadow:0 0 18px rgba(124,66,255,.18)}
+.section.brand-section .section-title h2::before{content:"—  ";color:#8b4dff;font-weight:900}
+.section.brand-section .section-title p{color:#8d8da4;font-size:12px;letter-spacing:1px;line-height:1.7;margin-top:10px}
+.section.brand-section .about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.section.brand-section .about-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(18,15,39,.92),rgba(5,7,18,.92));box-shadow:0 15px 50px rgba(0,0,0,.35),inset 0 0 30px rgba(111,61,255,.04);transition:.3s}
+.section.brand-section .about-card:hover{transform:translateY(-6px);border-color:#7c4dff;box-shadow:0 20px 60px rgba(91,42,255,.2),0 0 30px rgba(80,100,255,.08)}
+.section.brand-section .about-photo{width:100%;height:330px;display:block;object-fit:cover;object-position:center 20%;filter:saturate(1.08) contrast(1.04)}
+.section.brand-section .about-body{padding:24px}
+.section.brand-section .about-role{color:#a879ff;font-size:10px;letter-spacing:2px;font-weight:900;margin-bottom:8px}
+.section.brand-section .about-body h3{font-size:22px;letter-spacing:.5px;margin:0;color:#fff}
+.section.brand-section .about-age{font-size:10px;color:#6fa9ff;letter-spacing:1.5px;margin-top:7px}
+.section.brand-section .about-body p{font-size:12px;line-height:1.85;color:#9b9bb0;margin:16px 0}
+.section.brand-section .skill-list{display:flex;gap:7px;flex-wrap:wrap}
+.section.brand-section .skill{font-size:8px;letter-spacing:1px;color:#c9c9d8;border:1px solid rgba(139,77,255,.32);background:rgba(109,66,255,.08);border-radius:999px;padding:7px 10px}
+/* reviews */
+.section.brand-section .reviews-wrap{padding:4px 0 12px}
+.section.brand-section .review-track{gap:18px}
+.section.brand-section .review-card{width:330px;flex:0 0 330px;border:1px solid rgba(105,71,255,.3);border-radius:16px;background:linear-gradient(145deg,rgba(15,14,31,.94),rgba(5,7,17,.94));box-shadow:0 12px 40px rgba(0,0,0,.3);padding:22px}
+.section.brand-section .review-card:hover{border-color:#7c4dff}
+.section.brand-section .stars{color:#9d65ff}
+.section.brand-section .review-text{color:#b5b5c5;line-height:1.75}
+.section.brand-section .review-action{text-align:left;margin-top:12px}
+.section.brand-section .review-form{max-width:680px;margin:24px 0 0;border-radius:16px;border:1px solid rgba(113,75,255,.35);background:rgba(8,9,20,.9)}
+.section.brand-section .review-form input,.section.brand-section .review-form textarea,.section.brand-section .review-form select{border-radius:10px;border:1px solid #292344;background:#070814;color:#fff}
+.section.brand-section .review-form .btn,.section.brand-section .review-action .btn{border-radius:11px;border:1px solid #8650ff;background:linear-gradient(100deg,#702cff,#236eff);color:#fff;box-shadow:0 0 24px rgba(112,50,255,.25)}
+/* contact */
+.section.brand-section .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.section.brand-section .contact-card{border:1px solid rgba(111,72,255,.3);border-radius:18px;padding:28px;background:linear-gradient(145deg,rgba(17,14,35,.95),rgba(5,7,17,.95));box-shadow:0 15px 45px rgba(0,0,0,.3)}
+.section.brand-section .contact-card h3{font-size:18px;margin:0;color:#fff}
+.section.brand-section .contact-role{font-size:9px;color:#a46aff;letter-spacing:2px;margin:7px 0 20px}
+.section.brand-section .contact-item{display:block;padding:13px 14px;margin:8px 0;border:1px solid rgba(109,74,255,.18);border-radius:10px;background:rgba(255,255,255,.02);color:#bcbccc;text-decoration:none;font-size:11px;transition:.25s}
+.section.brand-section .contact-item:hover{color:#fff;border-color:#784dff;background:rgba(113,67,255,.09);transform:translateX(4px)}
+/* brand strip */
+.compact-about .about-modern{border:1px solid rgba(111,72,255,.34);border-radius:20px;padding:34px 38px;background:linear-gradient(100deg,rgba(22,13,46,.95),rgba(7,10,27,.9));box-shadow:0 20px 55px rgba(0,0,0,.3)}
+.compact-about .about-modern p{color:#9999ad;max-width:700px;line-height:1.8;font-size:12px}
+/* optimization */
+.optimization-strip{margin-top:20px!important;border:1px solid rgba(50,112,255,.32);border-radius:20px;padding:34px 38px!important;background:linear-gradient(100deg,rgba(13,18,45,.95),rgba(7,8,23,.94));box-shadow:0 20px 60px rgba(0,0,0,.3);display:flex;justify-content:space-between;align-items:center;gap:30px}
+.optimization-strip h2{font-size:clamp(25px,3vw,38px);margin:8px 0;color:#fff}.optimization-strip h2 em{font-style:normal;color:#5d9bff}.optimization-strip p{font-size:12px;color:#9292a8}
+/* footer */
+footer{margin-top:70px!important;border-top:1px solid rgba(112,73,255,.25)!important;background:linear-gradient(180deg,#060615,#02030a)!important;padding:55px 20px 32px!important;text-align:center!important}
+footer .brand{font-size:30px!important;font-weight:950!important;letter-spacing:2px!important;color:#fff!important;text-shadow:0 0 22px rgba(125,65,255,.7)!important}
+footer p{color:#77768e!important;letter-spacing:2px!important;font-size:9px!important}
+/* make navigation feel like screenshot */
+.store-nav .nav-inner{max-width:1360px}.store-menu a{border-radius:12px}.store-menu a.active,.store-menu a:hover{background:linear-gradient(100deg,rgba(115,48,255,.3),rgba(30,90,255,.18));box-shadow:inset 0 0 18px rgba(111,58,255,.1),0 0 20px rgba(94,54,255,.1)}
+/* responsive */
+@media(max-width:800px){.store-section,.section.brand-section{width:calc(100% - 28px);padding-top:60px}.section.brand-section .about-grid,.section.brand-section .contact-grid{grid-template-columns:1fr}.section.brand-section .about-photo{height:280px}.section.brand-section .review-card{width:280px;flex-basis:280px}.compact-about .about-modern,.optimization-strip{padding:25px 20px!important}.optimization-strip{align-items:flex-start!important}.optimization-strip .glow-btn{width:100%}}
+</style>
+
+<style>
+/* Only two homepage categories */
+.category-grid-new.category-grid-two{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:820px;
+  margin:0 auto;
+  gap:20px;
+}
+.category-grid-new.category-grid-two .cat-card{
+  min-height:165px;
+  padding:24px;
+}
+@media(max-width:760px){
+  .category-grid-new.category-grid-two{
+    grid-template-columns:1fr;
+    max-width:none;
+  }
+}
+</style>
 </head>
 
 
@@ -1156,594 +1253,74 @@ footer{
 </div>
 
 
-<!-- ================= TOP BAR ================= -->
-
-<header class="topbar">
-
-    <div class="dots">
-
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-
-    </div>
-
-    <div class="terminal-title">
-        him4@ninj4:~$
-    </div>
-
-    <nav class="menu">
-
-        <a href="#home">HOME</a>
-
-        <a href="#resources">RESOURCES</a>
-
-        <a href="#tools">TOOLS</a>
-
-        <a href="#about">ABOUT</a>
-
-        <a href="auth.html" class="account-link" id="accountLink">
-    <img class="account-avatar" id="accountAvatar" src="" alt="Profile">
-    <span class="account-label" id="accountLabel">[ LOGIN / CREATE ACCOUNT ]</span>
-</a>
-
+<!-- ================= PREMIUM STOREFRONT ================= -->
+<header class="store-nav">
+  <div class="nav-inner">
+    <a class="brand-logo" href="#home" aria-label="HIM4 x NINJ4 Home">
+      <img src="HIM4 x NINJ4 Neon Edit Store(2).png" alt="HIM4 x NINJ4 Editing Store">
+    </a>
+    <nav class="store-menu" aria-label="Main navigation">
+      <a class="active" href="#home">⌂ <span>Home</span></a>
+      <a href="#resources">✥ <span>Resources</span></a>
+      <a href="#tools">◉ <span>Optimization</span></a>
+      <a href="#contact">♡ <span>Request</span></a>
+      <a href="#reviews">☆ <span>Reviews</span></a>
+      <a href="#contact">▣ <span>Contact</span></a>
     </nav>
-
+    <div class="nav-actions">
+      <button class="icon-btn" type="button" onclick="document.getElementById('resources').scrollIntoView({behavior:'smooth'})" aria-label="Search resources">⌕</button>
+      <a href="auth.html" class="login-btn account-link" id="accountLink">
+        <img class="account-avatar" id="accountAvatar" src="" alt="Profile">
+        <span class="account-label" id="accountLabel">Login</span>
+      </a>
+    </div>
+  </div>
 </header>
 
-
-<!-- ================= HERO ================= -->
-
-<section class="hero" id="home">
-
-    <div class="hero-content">
-
-        <div class="system">
-            &gt; SYSTEM ONLINE // ACCESS GRANTED
-        </div>
-
-        <h1>
-            HIM4 <span>x</span> NINJ4
-        </h1>
-
-        <div class="subtitle">
-
-            EDITING STORE // GAMING RESOURCES // VIDEO TOOLS
-
-            <span class="cursor"></span>
-
-        </div>
-
-        <div class="hero-buttons">
-
-            <a href="#resources" class="btn">
-                [ EXPLORE RESOURCES ]
-            </a>
-
-            <a href="#tools" class="btn secondary">
-                [ VIEW TOOLS ]
-            </a>
-
-        </div>
-
+<section class="store-hero" id="home">
+  <video class="hero-bg-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="a_dramatic_high_energy_3d_neon_gaming_style_graph.png" aria-hidden="true">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content-new">
+    <div class="hero-kicker"><span></span> WELCOME TO</div>
+    <img class="hero-brand-logo" src="hero-feature.png" alt="HIM4 x NINJ4">
+    <p class="hero-lead">PREMIUM EDITING RESOURCES FOR NEXT LEVEL CREATORS</p>
+    <p class="hero-sub">SHAKES <i>•</i> CC <i>•</i> OVERLAYS <i>•</i> FONTS <i>•</i> OPTIMIZATION <i>•</i> AND MORE</p>
+    <div class="hero-actions-new">
+      <a href="#resources" class="glow-btn">▣ &nbsp; BROWSE RESOURCES</a>
+      <a href="#tools" class="ghost-btn">▷ &nbsp; WATCH PREVIEW</a>
     </div>
+  </div>
+</section>
 
+<section class="stats-new">
+  <div class="stat-new"><div class="stat-icon">♛</div><div><strong>500+</strong><small>PREMIUM RESOURCES</small></div></div>
+  <div class="stat-new"><div class="stat-icon">♟</div><div><strong>100+</strong><small>HAPPY CUSTOMERS</small></div></div>
+  <div class="stat-new"><div class="stat-icon">⇩</div><div><strong>200+</strong><small>TOTAL DOWNLOADS</small></div></div>
+  <div class="stat-new"><div class="stat-icon">★</div><div><strong>10/10</strong><small>USER RATING</small></div></div>
+</section>
+
+<section class="store-section" id="resources">
+  <div class="section-heading-new">
+    <div><span class="eyebrow">— &nbsp; EXPLORE</span><h2>OUR <em>CATEGORIES</em></h2></div>
+    <p>→ &nbsp; FIND THE PERFECT RESOURCES FOR YOUR EDITS</p>
+  </div>
+  <div class="category-grid-new category-grid-two">
+    <a class="cat-card cat-purple" href="editing.html"><div class="cat-icon">▰</div><h3>EDITING RESOURCES</h3><p>SHAKES, CC, PRESETS &amp; MORE</p><span>→</span></a>
+    <a class="cat-card cat-blue" href="optimize.html"><div class="cat-icon">▷</div><h3>VIDEO OPTIMIZATION</h3><p>QUALITY, FPS &amp; SETTINGS</p><span>→</span></a>
+  </div>
 </section>
 
 
-<!-- ================= STATS ================= -->
-
-<section class="stats">
-
-<div class="container">
-
-<div class="stats-grid">
-
-    <div class="stat">
-
-        <div class="stat-number">
-            ∞
-        </div>
-
-        <div class="stat-label">
-            CREATIVE POSSIBILITIES
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-number">
-            4K
-        </div>
-
-        <div class="stat-label">
-            QUALITY RESOURCES
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-number">
-            120
-        </div>
-
-        <div class="stat-label">
-            FPS OPTIMIZATION
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-number">
-            24/7
-        </div>
-
-        <div class="stat-label">
-            CREATOR ACCESS
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
+<section class="store-section optimization-strip" id="tools">
+  <div><span class="eyebrow">— &nbsp; PERFORMANCE</span><h2>VIDEO <em>OPTIMIZATION</em></h2><p>Enhance FPS, smoothness and output quality for your edits.</p></div>
+  <a class="glow-btn" href="optimize.html">OPEN OPTIMIZATION →</a>
 </section>
 
-
-<!-- ================= MAIN CATEGORIES ================= -->
-
-<section class="section" id="resources">
-
-<div class="container">
-
-<div class="section-title">
-
-    <div class="cmd">
-        &gt; cd /resources
-    </div>
-
-    <h2>
-        Resource Categories
-    </h2>
-
-    <p>
-        Select a directory to access creator resources.
-    </p>
-
-</div>
-
-
-<div class="categories">
-
-
-<a href="editing.html" class="category">
-
-    <div class="icon">
-        🎬
-    </div>
-
-    <h3>
-        Editing Resources
-    </h3>
-
-    <p>
-        CC presets, XML files, overlays, transitions,
-        effects, fonts and editing assets for mobile editors.
-    </p>
-
-    <div class="open">
-        [ OPEN DIRECTORY → ]
-    </div>
-
-</a>
-
-
-<a href="optimize.html" class="category">
-
-    <div class="icon">
-        ⚡
-    </div>
-
-    <h3>
-        Video Optimization
-    </h3>
-
-    <p>
-        FPS enhancement, smoothening, quality improvement,
-        compression and video optimization resources.
-    </p>
-
-    <div class="open">
-        [ OPEN DIRECTORY → ]
-    </div>
-
-</a>
-
-
-</div>
-
-</div>
-
+<section class="store-section brand-section compact-about" id="about">
+  <div class="about-modern"><div><span class="eyebrow">— &nbsp; THE BRAND</span><h2>CREATE. <em>EDIT.</em> DOMINATE.</h2><p>HIM4 × NINJ4 is a creator-focused editing store built for gamers, editors and next-level digital creators.</p></div><a class="ghost-btn" href="#team">MEET THE CHIEFS →</a></div>
 </section>
-
-
-<!-- ================= FEATURED ================= -->
-
-<section class="section">
-
-<div class="container">
-
-<div class="section-title">
-
-    <div class="cmd">
-        &gt; loading /featured
-    </div>
-
-    <h2>
-        Featured Resources
-    </h2>
-
-    <p>
-        Popular tools and resources for editors.
-    </p>
-
-</div>
-
-
-<div class="resource-grid">
-
-
-<div class="resource">
-
-    <div class="resource-icon">
-        🎨
-    </div>
-
-    <h3>
-        Color Presets
-    </h3>
-
-    <p>
-        Cinematic color presets and CC packs
-        for your editing projects.
-    </p>
-
-    <span class="tag">
-        CC / XML
-    </span>
-
-</div>
-
-
-<div class="resource">
-
-    <div class="resource-icon">
-        ✨
-    </div>
-
-    <h3>
-        Effects & Overlays
-    </h3>
-
-    <p>
-        Glitch, particles, light leaks,
-        shakes and cinematic overlays.
-    </p>
-
-    <span class="tag">
-        EFFECTS
-    </span>
-
-</div>
-
-
-<div class="resource">
-
-    <div class="resource-icon">
-        🔤
-    </div>
-
-    <h3>
-        Fonts Collection
-    </h3>
-
-    <p>
-        Gaming, cinematic and stylish fonts
-        for titles and thumbnails.
-    </p>
-
-    <span class="tag">
-        FONTS
-    </span>
-
-</div>
-
-
-<div class="resource">
-
-    <div class="resource-icon">
-        🎞️
-    </div>
-
-    <h3>
-        Transitions
-    </h3>
-
-    <p>
-        Smooth transitions for gaming edits,
-        reels and short-form videos.
-    </p>
-
-    <span class="tag">
-        TRANSITIONS
-    </span>
-
-</div>
-
-
-<div class="resource">
-
-    <div class="resource-icon">
-        🎵
-    </div>
-
-    <h3>
-        Audio Resources
-    </h3>
-
-    <p>
-        Sound effects, cinematic sounds
-        and editing audio assets.
-    </p>
-
-    <span class="tag">
-        AUDIO
-    </span>
-
-</div>
-
-
-<div class="resource">
-
-    <div class="resource-icon">
-        🔥
-    </div>
-
-    <h3>
-        Free Fire Packs
-    </h3>
-
-    <p>
-        Gaming assets and resources
-        designed for Free Fire creators.
-    </p>
-
-    <span class="tag">
-        GAMING
-    </span>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= TOOLS ================= -->
-
-<section class="section" id="tools">
-
-<div class="container">
-
-<div class="section-title">
-
-    <div class="cmd">
-        &gt; execute /optimization_tools
-    </div>
-
-    <h2>
-        Video Optimization
-    </h2>
-
-    <p>
-        Tools and resources to improve your video output.
-    </p>
-
-</div>
-
-
-<div class="features">
-
-
-<div class="feature">
-
-    <h3>
-        ⚡ FPS Enhancement
-    </h3>
-
-    <p>
-        Improve motion smoothness and prepare
-        videos for high-frame-rate editing.
-    </p>
-
-</div>
-
-
-<div class="feature">
-
-    <h3>
-        💎 Quality Boost
-    </h3>
-
-    <p>
-        Resources for sharpening, upscaling
-        and improving final video quality.
-    </p>
-
-</div>
-
-
-<div class="feature">
-
-    <h3>
-        📦 File Optimization
-    </h3>
-
-    <p>
-        Compression and export resources
-        for better quality with smaller sizes.
-    </p>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= SYSTEM CONSOLE ================= -->
-
-<section class="section">
-
-<div class="container">
-
-<div class="console">
-
-    <div class="console-head">
-        HIM4 x NINJ4 TERMINAL
-    </div>
-
-    <div class="console-body">
-
-        <div>
-            <span class="green">
-                root@him4-ninj4
-            </span>:~$ system-check
-        </div>
-
-        <div class="gray">
-            Checking resource database...
-        </div>
-
-        <div>
-            <span class="green">
-                [OK]
-            </span>
-            Resource system online
-        </div>
-
-        <div>
-            <span class="green">
-                [OK]
-            </span>
-            Editing directory loaded
-        </div>
-
-        <div>
-            <span class="green">
-                [OK]
-            </span>
-            Optimization tools loaded
-        </div>
-
-        <div>
-            <span class="yellow">
-                [!]
-            </span>
-            More resources coming soon...
-        </div>
-
-        <div>
-
-            <span class="green">
-                root@him4-ninj4
-            </span>:~$
-
-            <span class="cursor"></span>
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= CTA ================= -->
-
-<section class="section">
-
-<div class="container">
-
-<div class="cta">
-
-<div class="cta-content">
-
-    <h2>
-        CREATE. EDIT. DOMINATE.
-    </h2>
-
-    <p>
-        Everything you need to level up your edits.
-    </p>
-
-    <a href="#resources" class="btn">
-        [ START EDITING ]
-    </a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section class="section" id="about">
-
-<div class="container">
-
-<div class="section-title">
-
-    <div class="cmd">
-        &gt; cat /about
-    </div>
-
-    <h2>
-        HIM4 x NINJ4 Editing Store
-    </h2>
-
-    <p>
-        A creator-focused resource hub for gaming editors,
-        video creators and mobile editing enthusiasts.
-    </p>
-
-</div>
-
-</div>
-
-</section>
-
-
 
 <!-- ===== TEAM ABOUT ===== -->
 <section class="section brand-section" id="team">
@@ -1815,10 +1392,17 @@ footer{
 (function(){
   // Apply the scroll-reveal animation to existing homepage elements too — not only the new sections.
   const selectors = [
-    '.hero-content > *', '.stats .stat', '.section-title', '.category', '.resource',
-    '.console', '.feature', '.cta-content', '#about > .container > *',
-    '#team .about-card', '#reviews .reviews-wrap', '#reviews .review-action',
-    '#contact .contact-card', 'footer > *'
+    '.hero-content-new > *',
+    '.stats-new .stat-new',
+    '.section-heading-new',
+    '.category-grid-new > *',
+    '.optimization-strip > *',
+    '.about-modern > *',
+    '#team .section-title', '#team .about-card',
+    '#reviews .section-title', '#reviews .reviews-wrap',
+    '#reviews .review-action', '#reviews .review-form',
+    '#contact .section-title', '#contact .contact-card',
+    'footer > *'
   ];
   const targets = new Set();
   selectors.forEach(sel => document.querySelectorAll(sel).forEach(el => targets.add(el)));
@@ -1826,7 +1410,7 @@ footer{
   const els=[...document.querySelectorAll('.reveal,.reveal-left,.reveal-right')];
   const ob=new IntersectionObserver(entries=>entries.forEach(e=>{
     e.target.classList.toggle('visible',e.isIntersecting);
-  }),{threshold:.12,rootMargin:'0px 0px -45px 0px'});
+  }),{threshold:.08,rootMargin:'0px 0px -35px 0px'});
   els.forEach(e=>ob.observe(e));
 
   const b=document.getElementById('reviewBtn'),f=document.getElementById('reviewForm');
@@ -2078,6 +1662,25 @@ document.addEventListener('DOMContentLoaded', function(){
 .access-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 .access-actions .btn{cursor:pointer;font-family:inherit;background:transparent}
 @media(max-width:450px){.access-box{padding:28px 18px}.access-box h2{font-size:21px}.access-box p{font-size:13px}}
+
+/* ===== CHIEFS PHOTO SIZE FIX ===== */
+.section.brand-section .about-photo{
+    width:100%;
+    height:430px;
+    aspect-ratio:auto;
+    object-fit:cover;
+    object-position:center center;
+}
+@media(max-width:800px){
+    .section.brand-section .about-photo{
+        height:360px;
+    }
+}
+@media(max-width:480px){
+    .section.brand-section .about-photo{
+        height:330px;
+    }
+}
 </style>
 
 

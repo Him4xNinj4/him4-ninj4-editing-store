@@ -237,9 +237,78 @@ footer{
     }
 }
 </style>
+
+<style id="storefront-theme-navbar">
+:root{color-scheme:dark}
+body{background:#050611!important;color:#f7f5ff!important;font-family:Inter,Arial,sans-serif!important;padding-top:76px}
+.topbar{display:none!important}
+.store-nav{position:fixed;top:0;left:0;right:0;height:76px;z-index:5000;background:rgba(3,5,13,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(118,80,255,.38);box-shadow:0 8px 35px rgba(0,0,0,.35)}
+.nav-inner{max-width:1450px;height:100%;margin:auto;display:flex;align-items:center;gap:28px;padding:0 24px}
+.brand-logo{width:145px;flex:0 0 145px;display:flex;align-items:center}
+.brand-logo img{width:100%;max-height:52px;height:auto;object-fit:contain;display:block;filter:drop-shadow(0 0 10px rgba(139,61,255,.45))}
+.store-menu{display:flex;align-items:center;justify-content:center;gap:7px;flex:1}
+.store-menu a{color:#eeeafc;text-decoration:none;font-size:13px;font-weight:700;padding:13px 16px;border-radius:13px;letter-spacing:.2px;transition:.25s}
+.store-menu a:hover,.store-menu a.active{background:linear-gradient(135deg,rgba(124,53,255,.35),rgba(30,111,255,.18));box-shadow:0 0 20px rgba(112,61,255,.2);color:#fff}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{width:42px;height:42px;border:1px solid rgba(104,76,255,.38);border-radius:13px;background:rgba(7,9,20,.75);color:#fff;cursor:pointer;font-size:20px;position:relative}
+.login-btn{min-width:104px;height:42px;padding:0 15px;border:1px solid #7c42ff;border-radius:13px;background:linear-gradient(135deg,#6432ff,#2a6eff);box-shadow:0 0 22px rgba(100,50,255,.3);color:#fff!important;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:800}
+.login-btn .account-avatar{display:none;width:27px;height:27px;border-radius:50%;object-fit:cover}.login-btn .account-avatar.visible{display:block}
+.login-btn.logged-in{min-width:145px}.login-btn.logged-in .account-label{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body{background:#050611!important}
+.container{max-width:1180px}
+.title{padding-top:35px}
+.command,.green,.status,.dot{color:#a78bfa!important}
+.title h1{color:#c4b5fd!important;text-shadow:0 0 15px rgba(139,92,246,.35)!important}
+.title p,.overlay-box p{color:#a6a1b8!important}
+.overlay-box{background:linear-gradient(145deg,#111326,#080a17)!important;border-color:rgba(139,92,246,.28)!important;border-radius:16px;box-shadow:0 0 25px rgba(91,33,182,.12)!important}
+.preview{border-color:rgba(139,92,246,.45)!important;border-radius:12px;background:#080a17!important}
+.preview-label{color:#c4b5fd!important}
+.overlay-preview{border-color:rgba(139,92,246,.3)!important;border-radius:8px}
+.overlay-preview span{color:#ddd6fe!important;text-shadow:0 0 16px rgba(139,92,246,.5)}
+.product-card{background:linear-gradient(145deg,#111326,#080a17)!important;border-color:rgba(139,92,246,.22)!important;border-radius:12px}
+.product-card:hover{border-color:rgba(139,92,246,.65)!important;box-shadow:0 12px 35px rgba(76,29,149,.18)!important}
+.price{color:#c4b5fd!important}
+.download{border:1px solid #8b5cf6!important;background:linear-gradient(135deg,#7c3aed,#2563eb)!important;color:#fff!important;border-radius:9px}
+.download:hover{background:transparent!important;color:#c4b5fd!important}
+.not-ready,.message{border-color:rgba(139,92,246,.35)!important;border-radius:10px}
+.terminal{background:linear-gradient(145deg,#111326,#080a17)!important;border-color:rgba(139,92,246,.22)!important;border-radius:12px}
+.back{border-color:rgba(139,92,246,.4)!important;color:#c4b5fd!important;border-radius:10px}
+.back:hover{color:#fff!important;border-color:#8b5cf6!important;background:rgba(139,92,246,.12)}
+footer{border-top-color:rgba(139,92,246,.2)!important;color:#888!important}
+@media(max-width:1050px){.store-menu{gap:0}.store-menu a{padding:11px 9px;font-size:11px}.brand-logo{width:145px;flex-basis:145px}}
+@media(max-width:760px){
+ .store-nav{height:auto}.nav-inner{padding:10px 14px;flex-wrap:wrap;gap:10px}
+ .brand-logo{width:125px;flex-basis:125px}.store-menu{order:3;width:100%;overflow-x:auto;justify-content:flex-start;padding-bottom:3px}
+ .store-menu a{white-space:nowrap}.store-menu a span{display:none}
+ .nav-actions{margin-left:auto}.icon-btn{width:36px;height:36px}.login-btn{min-width:75px;height:36px}
+ body{padding-top:108px}.container{padding-top:28px!important}.title{margin-bottom:28px}
+ .title h1{font-size:27px;letter-spacing:2px}.overlay-box{padding:30px 16px}
+}
+</style>
+
 </head>
 
 <body>
+
+<!-- STORE NAVBAR -->
+<header class="store-nav">
+  <div class="nav-inner">
+    <a class="brand-logo" href="index.html"><img src="HIM4 x NINJ4 Neon Edit Store(2).png" alt="HIM4 x NINJ4"></a>
+    <nav class="store-menu">
+      <a href="index.html">⌂ <span>Home</span></a>
+      <a class="active" href="index.html#resources">✥ <span>Resources</span></a>
+      <a href="optimize.html">◉ <span>Optimization</span></a>
+      <a href="custom.html">♡ <span>Request</span></a>
+      <a href="index.html#reviews">☆ <span>Reviews</span></a>
+      <a href="index.html#contact">▣ <span>Contact</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" type="button" aria-label="Search" onclick="window.location.href='index.html#resources'">⌕</button>
+      <button class="icon-btn" type="button" aria-label="Cart" onclick="window.location.href='index.html#resources'">🛒</button>
+      <a href="auth.html" class="login-btn account-link" id="accountLink"><img class="account-avatar" id="accountAvatar" src="" alt="Profile"><span class="account-label" id="accountLabel">Login</span></a>
+    </div>
+  </div>
+</header>
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -410,6 +479,28 @@ async function loadOverlays(){
     }
 }
 loadOverlays();
+</script>
+
+<script id="navbar-session-script">
+(function(){
+  const SUPABASE_URL='https://ndcrvdbvhswbvahpskhj.supabase.co';
+  const SUPABASE_KEY='sb_publishable_dZ-D3SU2fkw_qm3m3F30PUg_V6C0OSaW';
+  if(!window.supabase || !window.supabase.createClient) return;
+  const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{storage:window.localStorage,storageKey:'sb-ndcrvdbvhswbvahkhj-auth-token',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+  async function update(session){
+    const link=document.getElementById('accountLink'), label=document.getElementById('accountLabel'), avatar=document.getElementById('accountAvatar');
+    if(!link||!label||!avatar) return;
+    if(!session?.user){label.textContent='Login';link.classList.remove('logged-in');avatar.classList.remove('visible');avatar.removeAttribute('src');link.href='auth.html';return;}
+    let profile=null;
+    try{const {data}=await client.from('profiles').select('username,full_name,avatar_url').eq('id',session.user.id).maybeSingle();profile=data; }catch(e){console.warn('Profile lookup:',e);}
+    label.textContent=profile?.username||profile?.full_name||session.user.user_metadata?.full_name||session.user.email?.split('@')[0]||'Account';
+    link.classList.add('logged-in');link.href='account.html';
+    const image=profile?.avatar_url||session.user.user_metadata?.avatar_url;
+    if(image){avatar.src=image;avatar.classList.add('visible');}else{avatar.classList.remove('visible');avatar.removeAttribute('src');}
+  }
+  client.auth.getSession().then(({data})=>update(data?.session||null)).catch(()=>update(null));
+  client.auth.onAuthStateChange((_event,session)=>update(session));
+})();
 </script>
 
 </body>

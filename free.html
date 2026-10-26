@@ -2,192 +2,88 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Free Resources | HIM4 x NINJ4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090817">
+<title>Free Resources | HIM4 × NINJ4</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#07090d;color:#f5f7fb;min-height:100vh}
-a{text-decoration:none;color:inherit}
-.header{position:sticky;top:0;z-index:20;background:rgba(7,9,13,.94);backdrop-filter:blur(16px);border-bottom:1px solid #1b2230}
-.nav{max-width:1200px;margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-weight:900;letter-spacing:1px;font-size:19px}.logo span{color:#7c5cff}
-.back{border:1px solid #293245;border-radius:10px;padding:9px 14px;color:#b9c2d4;font-size:13px}
-.hero{max-width:1200px;margin:auto;padding:55px 22px 30px}
-.badge{display:inline-block;border:1px solid #2b3548;color:#8ea0bc;padding:7px 11px;border-radius:999px;font-size:11px;letter-spacing:1.5px}
-h1{font-size:clamp(35px,7vw,65px);line-height:.95;margin:17px 0 14px;letter-spacing:-2px}
-h1 span{color:#7c5cff}
-.hero p{color:#8e99ab;max-width:650px;line-height:1.7;font-size:15px}
-.wrap{max-width:1200px;margin:auto;padding:10px 22px 60px}
-.section{margin-top:30px}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:14px}
-.section h2{font-size:23px}.section-head small{color:#68758b}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:15px}
-.card{background:#0c1017;border:1px solid #1b2432;border-radius:16px;overflow:hidden;transition:.2s}
-.card:hover{transform:translateY(-3px);border-color:#39465d}
-.thumb{height:auto;aspect-ratio:9/16;background:#111722;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.thumb img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:42px;color:#39465d}
-.info{padding:16px}.name{font-size:16px;font-weight:800;margin-bottom:7px}.desc{font-size:12px;color:#78859a;min-height:34px;line-height:1.45}
-.preview-video{width:100%;height:100%;display:block;object-fit:cover;background:#05070b}
-.download{border:0;cursor:pointer;display:block;margin-top:14px;text-align:center;background:#7c5cff;color:#fff;padding:11px;border-radius:9px;font-weight:800;font-size:13px}
-.download:hover{filter:brightness(1.12)}
-.state{padding:35px;text-align:center;color:#68758b;border:1px dashed #263044;border-radius:14px}
-.loading{display:none}.error{color:#ff8f8f}
-footer{border-top:1px solid #171e29;text-align:center;color:#566176;padding:25px;font-size:11px}
-@media(max-width:600px){.nav{padding:14px}.hero,.wrap{padding-left:15px;padding-right:15px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.thumb{height:auto;aspect-ratio:9/16}.info{padding:12px}.section-head{align-items:center}.section h2{font-size:19px}}
+:root{--bg:#090817;--panel:#121128;--panel2:#171632;--purple:#9b6cff;--blue:#55a7ff;--muted:#a6a3c4;--line:rgba(169,135,255,.18);--gradient:linear-gradient(110deg,#a56bff 0%,#5a8dff 100%)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{min-height:100vh;overflow-x:hidden;background:var(--bg);color:#f7f5ff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{text-decoration:none;color:inherit}button{font:inherit}
+body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 12% 5%,rgba(133,83,255,.19),transparent 35%),radial-gradient(ellipse at 88% 28%,rgba(49,123,255,.15),transparent 34%),linear-gradient(180deg,#090817 0%,#0b0b1d 55%,#090817 100%)}
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.16}.orb.a{width:360px;height:360px;background:#874dff;top:12%;left:-180px}.orb.b{width:420px;height:420px;background:#267bff;right:-220px;top:48%}
+.navbar{height:78px;position:sticky;top:0;z-index:1000;background:rgba(10,9,27,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(164,132,255,.16)}.nav-inner{width:min(1160px,92%);height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;font-size:17px;font-weight:850;letter-spacing:.4px;white-space:nowrap}.brand-mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--gradient);color:#fff;font-size:16px;box-shadow:0 5px 22px rgba(125,91,255,.3)}.brand-name span{background:var(--gradient);background-clip:text;-webkit-background-clip:text;color:transparent}.nav-right{display:flex;align-items:center;gap:30px}.nav-links{display:flex;align-items:center;gap:28px}.nav-links a{font-size:13px;color:#c4c0df;transition:.2s}.nav-links a:hover,.nav-links a.active{color:#fff}.nav-links a.active:after{content:"";display:block;height:2px;margin-top:7px;border-radius:5px;background:var(--gradient)}.nav-login{padding:10px 20px;border-radius:10px;background:var(--gradient);color:#fff;font-size:12px;font-weight:750;box-shadow:0 5px 20px rgba(121,91,255,.23);transition:.2s}.nav-login:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(121,91,255,.35)}.account-chip{display:none;align-items:center;gap:9px;padding:7px 12px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.045);font-size:11px;color:#e4ddff;max-width:210px}.account-chip.show{display:flex}.account-avatar{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:var(--gradient);font-weight:800;color:white}.account-email{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.menu-btn{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04);color:#fff;font-size:21px;cursor:pointer}
+.container{width:min(1100px,92%);margin:auto}.hero{padding:72px 0 38px}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#c6b4ff;font-size:11px;font-weight:750;letter-spacing:1.7px;text-transform:uppercase}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:#9c75ff;box-shadow:0 0 13px #9c75ff}.hero h1{font-size:clamp(35px,5vw,54px);line-height:1.08;letter-spacing:-1.8px;margin-top:17px;font-weight:850}.hero h1 span{background:var(--gradient);background-clip:text;-webkit-background-clip:text;color:transparent}.hero p{max-width:670px;color:var(--muted);font-size:14px;line-height:1.8;margin-top:17px}.hero-line{height:1px;width:100%;margin-top:35px;background:linear-gradient(90deg,rgba(161,111,255,.5),rgba(86,153,255,.13),transparent)}
+.back-link{display:inline-flex;align-items:center;gap:9px;color:#c7c2e4;font-size:12px;margin:4px 0 38px;transition:.2s}.back-link:hover{color:#fff;transform:translateX(-3px)}.section{margin:0 0 42px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.section-title{display:flex;align-items:center;gap:12px}.section-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,rgba(161,105,255,.2),rgba(74,142,255,.16));border:1px solid var(--line);font-size:17px}.section h2{font-size:19px;font-weight:800;letter-spacing:-.3px}.section-head small{color:#aaa5c9;font-size:11px;padding:7px 11px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.025)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:17px}.card{overflow:hidden;border:1px solid rgba(164,139,255,.17);border-radius:17px;background:linear-gradient(145deg,rgba(27,24,57,.96),rgba(15,17,42,.96));box-shadow:0 12px 35px rgba(0,0,0,.18);transition:transform .25s,border-color .25s,box-shadow .25s}.card:hover{transform:translateY(-5px);border-color:rgba(151,117,255,.55);box-shadow:0 16px 38px rgba(81,67,180,.18)}.thumb{height:158px;background:linear-gradient(135deg,#211744,#13274b);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid rgba(164,139,255,.14)}.thumb img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:43px;color:#b99aff;text-shadow:0 0 24px rgba(156,117,255,.6)}.info{padding:17px}.name{font-size:14px;font-weight:800;color:#f7f4ff;margin-bottom:8px}.desc{font-size:12px;line-height:1.65;color:#aaa7c7;min-height:39px}.download{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:15px;padding:11px 13px;border-radius:10px;background:var(--gradient);color:#fff;font-size:11px;font-weight:800;letter-spacing:.3px;box-shadow:0 6px 18px rgba(115,96,255,.2);transition:.2s}.download:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 9px 22px rgba(115,96,255,.3)}.state{grid-column:1/-1;padding:28px;text-align:center;color:#aaa6c7;border:1px dashed rgba(164,139,255,.25);border-radius:14px;font-size:12px;background:rgba(255,255,255,.025)}.error{color:#ff999f}
+footer{margin-top:70px;padding:35px 20px;text-align:center;border-top:1px solid rgba(164,139,255,.13);color:#777493;font-size:11px}.footer-brand{font-size:17px;font-weight:850;letter-spacing:.5px;color:#eeeaff;margin-bottom:9px}.footer-brand span{background:var(--gradient);background-clip:text;-webkit-background-clip:text;color:transparent}
+@media(max-width:760px){.navbar{height:70px}.nav-right{gap:14px}.menu-btn{display:block}.nav-links{display:none;position:absolute;top:70px;left:0;right:0;padding:18px 5% 22px;background:rgba(12,11,31,.98);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:13px 4px}.nav-links a.active:after{display:none}.nav-login{display:block;text-align:center;margin-top:8px}.nav-links .nav-login{padding:12px}.account-chip{max-width:145px}.hero{padding-top:55px}}
+@media(max-width:520px){.brand{font-size:14px;gap:8px}.brand-mark{width:34px;height:34px}.nav-inner{width:90%}.nav-right{gap:9px}.account-chip{max-width:112px;padding:6px 8px}.account-email{max-width:65px}.container{width:90%}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.thumb{height:118px}.info{padding:12px}.name{font-size:12px}.desc{font-size:11px;min-height:50px}.download{font-size:10px;padding:10px 6px}.section h2{font-size:16px}.section-icon{width:33px;height:33px}.section-head small{font-size:10px}.hero p{font-size:13px}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}.thumb{height:155px}.account-chip{display:none!important}}
 </style>
 </head>
 <body>
-
-<header class="header">
-<nav class="nav">
-<div class="logo">HIM4 <span>×</span> NINJ4</div>
-<a class="back" href="index.html">← HOME</a>
-</nav>
+<div class="ambient" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div></div>
+<header class="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="HIM4 x NINJ4 Home"><span class="brand-mark">H×N</span><span class="brand-name">HIM4 <span>× NINJ4</span></span></a>
+    <div class="nav-right">
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="editing.html" class="active">Resources</a>
+        <a class="nav-login" id="loginLink" href="auth.html">Login</a>
+      </nav>
+      <div class="account-chip" id="accountChip"><span class="account-avatar" id="accountAvatar">U</span><span class="account-email" id="accountEmail">Account active</span></div>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </div>
+  </div>
 </header>
-
-<section class="hero">
-<div class="badge">FREE EDITING RESOURCES</div>
-<h1>FREE <span>RESOURCES</span></h1>
-<p>Download free editing resources from HIM4 × NINJ4. New shakes and color correction resources can be added directly from the Admin Panel.</p>
-</section>
-
-<main class="wrap">
-<section class="section">
-<div class="section-head"><h2>🔥 Free Shakes</h2><small id="shakeCount">Loading...</small></div>
-<div id="shakes" class="grid"><div class="state loading" style="display:block">Loading free shakes...</div></div>
-</section>
-
-<section class="section">
-<div class="section-head"><h2>🎨 Free CC</h2><small id="ccCount">Loading...</small></div>
-<div id="cc" class="grid"><div class="state loading" style="display:block">Loading free CC...</div></div>
-</section>
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">HIM4 × NINJ4 · Creator Resources</div>
+    <h1>FREE <span>RESOURCES</span></h1>
+    <p>Explore and download free editing resources. Fresh shakes and color correction packs are added here by the team — ready for your next edit.</p>
+    <div class="hero-line"></div>
+  </section>
+  <a href="editing.html" class="back-link">← <span>Back to Editing Resources</span></a>
+  <section class="section">
+    <div class="section-head"><div class="section-title"><span class="section-icon">✦</span><h2>Free Shakes</h2></div><small id="shakeCount">Loading...</small></div>
+    <div id="shakes" class="grid"><div class="state">Loading free shakes...</div></div>
+  </section>
+  <section class="section">
+    <div class="section-head"><div class="section-title"><span class="section-icon">◈</span><h2>Free CC</h2></div><small id="ccCount">Loading...</small></div>
+    <div id="cc" class="grid"><div class="state">Loading free CC...</div></div>
+  </section>
 </main>
-
-<footer>HIM4 × NINJ4 EDITING STORE • FREE RESOURCES</footer>
-
+<footer><div class="footer-brand">HIM4 <span>× NINJ4</span></div><p>FREE RESOURCES · CREATOR DOWNLOADS</p><p style="margin-top:10px">© 2026 HIM4 × NINJ4. All rights reserved.</p></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL='https://ndcrvdbvhswbvahpskhj.supabase.co';
 const SUPABASE_KEY='sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
-function esc(v){
- return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-}
-
-async function downloadFreeResource(btn, url, baseName){
- const original = btn ? btn.textContent : 'DOWNLOAD FREE ↓';
-
- try{
-   if(btn){
-     btn.disabled = true;
-     btn.textContent = 'DOWNLOADING...';
-   }
-
-   // Read the file through the Supabase Storage SDK, then create a
-   // browser Blob download. This avoids opening the XML/file in the tab.
-   const marker = '/storage/v1/object/public/';
-   const pos = url.indexOf(marker);
-   if(pos === -1) throw new Error('Invalid Supabase Storage URL');
-
-   const rest = url.substring(pos + marker.length);
-   const slash = rest.indexOf('/');
-   if(slash <= 0) throw new Error('Invalid Supabase Storage path');
-
-   const bucket = decodeURIComponent(rest.substring(0, slash));
-   const path = decodeURIComponent(rest.substring(slash + 1).split('?')[0]);
-
-   const { data, error } = await sb.storage.from(bucket).download(path);
-   if(error) throw error;
-   if(!data) throw new Error('No file data returned');
-
-   const blobUrl = URL.createObjectURL(data);
-   const a = document.createElement('a');
-   a.href = blobUrl;
-
-   let fileName = baseName || path.split('/').pop() || 'free-resource';
-   const sourceName = path.split('/').pop() || '';
-   const sourceExt = sourceName.includes('.') ? sourceName.substring(sourceName.lastIndexOf('.')) : '';
-   if(sourceExt && !fileName.toLowerCase().endsWith(sourceExt.toLowerCase())){
-     fileName += sourceExt;
-   }
-
-   a.download = fileName;
-   a.style.display = 'none';
-   document.body.appendChild(a);
-   a.click();
-   a.remove();
-   setTimeout(()=>URL.revokeObjectURL(blobUrl),5000);
-
-   if(btn){
-     btn.disabled = false;
-     btn.textContent = 'DOWNLOAD FREE ↓';
-   }
-
- }catch(err){
-   console.error('Supabase Storage download failed:', err);
-   if(btn){
-     btn.disabled = false;
-     btn.textContent = original;
-   }
-   alert('Download failed. Please try again.');
- }
-}
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 function card(p){
- const thumb=p.thumbnail_url
-   ? `<img src="${esc(p.thumbnail_url)}" alt="${esc(p.name)}">`
-   : `<div class="placeholder">✦</div>`;
- const preview=p.preview_url || '';
- const media = preview
-   ? `<video class="preview-video" controls playsinline preload="metadata" poster="${esc(p.thumbnail_url||'')}">
-        <source src="${esc(preview)}">
-      </video>`
-   : thumb;
- const file=p.file_url || '';
- const safeName=(p.name||'free-resource').replace(/[^a-z0-9._-]+/gi,'_');
- return `<article class="card">
-   <div class="thumb">${media}</div>
-   <div class="info">
-    <div class="name">${esc(p.name)}</div>
-    <div class="desc">${esc(p.description||'Free editing resource')}</div>
-    ${file
-      ? `<button class="download" type="button" data-file-url="${esc(file)}" data-file-name="${esc(safeName)}">DOWNLOAD FREE ↓</button>`
-      : `<div class="state error" style="padding:10px;margin-top:12px">File unavailable</div>`}
-   </div>
- </article>`;
+ const thumb=p.thumbnail_url?`<img src="${esc(p.thumbnail_url)}" alt="${esc(p.name)}">`:'<div class="placeholder">✦</div>';
+ return `<article class="card"><div class="thumb">${thumb}</div><div class="info"><div class="name">${esc(p.name)}</div><div class="desc">${esc(p.description||'Free editing resource')}</div>${p.file_url?`<a class="download" href="${esc(p.file_url)}" target="_blank" rel="noopener">DOWNLOAD FREE <span>↓</span></a>`:'<div class="state error" style="padding:10px;margin-top:12px">File unavailable</div>'}</div></article>`;
 }
-
 async function loadCategory(category,id,countId,label){
- const box=document.getElementById(id), count=document.getElementById(countId);
- const {data,error}=await sb.from('products')
-   .select('id,name,description,thumbnail_url,preview_url,file_url,is_active,created_at')
-   .eq('category',category)
-   .eq('is_active',true)
-   .order('created_at',{ascending:false});
-
- if(error){
-   box.innerHTML='<div class="state error">Could not load resources.</div>';
-   count.textContent='Error';
-   console.error(error);
-   return;
- }
+ const box=document.getElementById(id),count=document.getElementById(countId);
+ const {data,error}=await sb.from('products').select('id,name,description,thumbnail_url,file_url,is_active,created_at').eq('category',category).eq('is_active',true).order('created_at',{ascending:false});
+ if(error){box.innerHTML='<div class="state error">Could not load resources. Please refresh the page.</div>';count.textContent='Error';console.error(error);return;}
  count.textContent=`${data.length} resource${data.length===1?'':'s'}`;
- box.innerHTML=data.length ? data.map(card).join('') :
-   `<div class="state">No ${label} available yet.</div>`;
+ box.innerHTML=data.length?data.map(card).join(''):`<div class="state">No ${label} available yet.</div>`;
 }
-
-document.addEventListener('DOMContentLoaded',()=>{
- loadCategory('Free Shakes','shakes','shakeCount','free shakes');
- loadCategory('Free CC','cc','ccCount','free CC');
-});
-
-// Use event delegation so every dynamically-created download button works reliably.
-document.addEventListener('click', event => {
- const btn = event.target.closest('.download[data-file-url]');
- if(!btn) return;
- event.preventDefault();
- event.stopPropagation();
- downloadFreeResource(btn, btn.dataset.fileUrl, btn.dataset.fileName);
-});
+// Keep the shared Supabase login session; show account status without interrupting the page.
+async function syncAccount(){
+ const login=document.getElementById('loginLink'),chip=document.getElementById('accountChip'),email=document.getElementById('accountEmail'),avatar=document.getElementById('accountAvatar');
+ const {data:{session}}=await sb.auth.getSession();
+ const user=session?.user;
+ if(user){login.style.display='none';chip.classList.add('show');const label=user.user_metadata?.full_name||user.email||'Account active';email.textContent=label;avatar.textContent=(label.trim()[0]||'U').toUpperCase();}
+ else{login.style.display='inline-flex';chip.classList.remove('show');}
+}
+sb.auth.onAuthStateChange(()=>{syncAccount().catch(console.error)});
+const menuBtn=document.getElementById('menuBtn'),navLinks=document.getElementById('navLinks');
+menuBtn.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'×':'☰';});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰';}));
+document.addEventListener('DOMContentLoaded',()=>{syncAccount().catch(console.error);loadCategory('Free Shakes','shakes','shakeCount','free shakes');loadCategory('Free CC','cc','ccCount','free CC');});
 </script>
 </body>
 </html>

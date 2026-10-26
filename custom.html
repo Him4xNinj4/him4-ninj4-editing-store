@@ -15,27 +15,27 @@ body{
 body::before{
     content:"";position:fixed;inset:0;z-index:-20;pointer-events:none;
     background:
-      linear-gradient(rgba(0,255,136,.015) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(0,255,136,.015) 1px,transparent 1px);
+      linear-gradient(rgba(139,92,246,.015) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(139,92,246,.015) 1px,transparent 1px);
     background-size:40px 40px
 }
 .ff-bg{position:fixed;inset:0;z-index:-10;overflow:hidden;pointer-events:none;background:#030504}
 .ff-grid{
     position:absolute;inset:-60%;
     background-image:
-      linear-gradient(rgba(0,255,136,.055) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(0,255,136,.055) 1px,transparent 1px);
+      linear-gradient(rgba(139,92,246,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(139,92,246,.055) 1px,transparent 1px);
     background-size:55px 55px;
     transform:perspective(500px) rotateX(62deg);
     animation:gridMove 8s linear infinite;opacity:.42
 }
 .ff-glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.12;animation:glow 6s ease-in-out infinite}
-.ff-glow.one{width:420px;height:420px;background:#00ff88;top:-180px;left:-120px}
-.ff-glow.two{width:380px;height:380px;background:#00aa66;right:-140px;bottom:-160px;animation-delay:2s}
+.ff-glow.one{width:420px;height:420px;background:#a78bfa;top:-180px;left:-120px}
+.ff-glow.two{width:380px;height:380px;background:#397fe9;right:-140px;bottom:-160px;animation-delay:2s}
 .ff-scan{
     position:absolute;left:0;right:0;height:2px;
-    background:linear-gradient(90deg,transparent,#00ff88,transparent);
-    box-shadow:0 0 18px rgba(0,255,136,.5);opacity:.28;
+    background:linear-gradient(90deg,transparent,#a78bfa,transparent);
+    box-shadow:0 0 18px rgba(139,92,246,.5);opacity:.28;
     animation:scan 5s linear infinite
 }
 @keyframes gridMove{0%{transform:perspective(500px) rotateX(62deg) translateY(0)}100%{transform:perspective(500px) rotateX(62deg) translateY(55px)}}
@@ -49,21 +49,21 @@ body::before{
 }
 .dots{display:flex;gap:8px}
 .dot{width:11px;height:11px;border-radius:50%}
-.red{background:#ff5555}.yellow{background:#ffaa00}.green{background:#00ff88}
+.red{background:#ff5555}.yellow{background:#ffaa00}.green{background:#a78bfa}
 .terminal-name{margin-left:16px;color:#666;font-size:12px}
-.terminal-name span{color:#00ff88}
+.terminal-name span{color:#a78bfa}
 
 .container{width:92%;max-width:850px;margin:auto}
 .header{padding:65px 0 35px}
-.command{color:#00ff88;font-size:12px;margin-bottom:14px}
+.command{color:#a78bfa;font-size:12px;margin-bottom:14px}
 .header h1{font-size:42px;letter-spacing:2px;line-height:1.15}
-.header h1 span{color:#00ff88;text-shadow:0 0 15px rgba(0,255,136,.25)}
+.header h1 span{color:#a78bfa;text-shadow:0 0 15px rgba(139,92,246,.25)}
 .header-description{color:#777;font-size:13px;line-height:1.8;margin-top:14px;max-width:680px}
 .back-button{
     display:inline-block;text-decoration:none;color:#777;border:1px solid #242424;
     padding:11px 17px;font-size:11px;margin-bottom:35px;transition:.3s
 }
-.back-button:hover{color:#00ff88;border-color:#00ff88;background:#07100c}
+.back-button:hover{color:#a78bfa;border-color:#a78bfa;background:#100d1b}
 
 .panel{
     background:linear-gradient(145deg,#111,#070707);
@@ -80,15 +80,15 @@ input,select,textarea{
     border-radius:8px;padding:13px 14px;font:12px "Courier New",monospace;
     outline:none;transition:.25s
 }
-input:focus,select:focus,textarea:focus{border-color:#00ff88;box-shadow:0 0 15px rgba(0,255,136,.06)}
+input:focus,select:focus,textarea:focus{border-color:#a78bfa;box-shadow:0 0 15px rgba(139,92,246,.06)}
 select{cursor:pointer}
 textarea{min-height:130px;resize:vertical}
 .price-box{
-    padding:16px;background:#07100c;border:1px solid #164d35;
+    padding:16px;background:#100d1b;border:1px solid #164d35;
     border-radius:9px;margin-bottom:22px
 }
 .price-label{font-size:10px;color:#666}
-.price-value{color:#00ff88;font-size:18px;margin-top:6px}
+.price-value{color:#a78bfa;font-size:18px;margin-top:6px}
 .price-note{color:#777;font-size:10px;line-height:1.6;margin-top:6px}
 
 .file-wrap{
@@ -99,56 +99,35 @@ textarea{min-height:130px;resize:vertical}
 .file-note{color:#555;font-size:9px;margin-top:8px;line-height:1.6}
 
 .order-btn{
-    width:100%;border:1px solid #00ff88;background:#00ff88;color:#050505;
+    width:100%;border:1px solid #a78bfa;background:#a78bfa;color:#050505;
     padding:15px;border-radius:8px;font:700 12px "Courier New",monospace;
     cursor:pointer;transition:.25s
 }
-.order-btn:hover{background:#050505;color:#00ff88;box-shadow:0 0 25px rgba(0,255,136,.12)}
+.order-btn:hover{background:#050505;color:#a78bfa;box-shadow:0 0 25px rgba(139,92,246,.12)}
 .order-btn:disabled{opacity:.5;cursor:not-allowed}
 
 .status{margin-top:15px;font-size:11px;line-height:1.7;display:none}
 .status.show{display:block}
-.status.success{color:#00ff88}.status.error{color:#ff6666}
+.status.success{color:#a78bfa}.status.error{color:#ff6666}
 
 .receipt{
     display:none;margin-top:22px;padding:20px;border:1px solid #1e5d42;
-    border-radius:10px;background:#07100c
+    border-radius:10px;background:#100d1b
 }
 .receipt.show{display:block}
-.receipt h3{font-size:15px;color:#00ff88;margin-bottom:13px}
+.receipt h3{font-size:15px;color:#a78bfa;margin-bottom:13px}
 .receipt-row{font-size:11px;color:#aaa;margin:7px 0}
 .receipt-row strong{color:#fff}
 .wa-btn{
     display:inline-block;margin-top:14px;text-decoration:none;color:#050505;
-    background:#00ff88;padding:11px 15px;border-radius:7px;font-size:11px
+    background:#a78bfa;padding:11px 15px;border-radius:7px;font-size:11px
 }
-
-#loginGuard{
-    position:fixed;inset:0;z-index:999999;display:none;align-items:center;
-    justify-content:center;padding:20px;background:rgba(0,0,0,.94);
-    backdrop-filter:blur(10px)
-}
-#loginGuard.show{display:flex}
-.login-box{
-    width:min(440px,100%);padding:34px 24px;text-align:center;
-    background:linear-gradient(145deg,#111,#070707);border:1px solid #00ff88;
-    border-radius:16px;box-shadow:0 0 55px rgba(0,255,136,.15)
-}
-.login-icon{font-size:42px;margin-bottom:12px}
-.login-cmd{color:#00ff88;font-size:12px;letter-spacing:1px}
-.login-box h2{font-size:25px;margin:10px 0 12px}
-.login-box p{color:#888;font-size:13px;line-height:1.7;margin-bottom:22px}
-.login-btn{
-    display:inline-block;text-decoration:none;color:#00ff88;border:1px solid #00ff88;
-    padding:12px 18px;font-size:12px;transition:.3s
-}
-.login-btn:hover{background:#00ff88;color:#050505}
 
 footer{
     margin-top:70px;padding:40px 20px;text-align:center;
     border-top:1px solid #171717;color:#444;font-size:10px
 }
-.footer-brand{color:#00ff88;font-size:16px;letter-spacing:1px;margin-bottom:10px}
+.footer-brand{color:#a78bfa;font-size:16px;letter-spacing:1px;margin-bottom:10px}
 
 @media(max-width:700px){
     .header h1{font-size:31px}.panel{padding:22px}.header{padding-top:50px}
@@ -156,19 +135,78 @@ footer{
 @media(max-width:400px){.header h1{font-size:27px}}
 </style>
 
+<style>
+:root{--p:#8b5cf6;--p2:#a855f7;--b:#38bdf8;--bg:#05050b}
+html{scroll-behavior:smooth}
+body{background:var(--bg)!important;color:#fff!important;font-family:Inter,Arial,Helvetica,sans-serif!important}
+body::before,.ff-bg,.topbar{display:none!important}
+.store-nav{position:sticky!important;top:0!important;z-index:5000!important;height:auto!important;background:rgba(5,5,11,.82)!important;backdrop-filter:blur(18px);border-bottom:1px solid rgba(139,92,246,.2)!important;box-shadow:0 8px 35px rgba(0,0,0,.35)!important}
+.nav-inner{max-width:1280px!important;margin:auto!important;height:78px!important;padding:0 28px!important;display:flex!important;align-items:center!important;gap:28px!important}
+.brand-logo{display:flex!important;align-items:center!important;text-decoration:none!important;flex-shrink:0!important;width:auto!important;flex-basis:auto!important}
+.brand-logo img{width:155px!important;max-height:52px!important;height:auto!important;object-fit:contain!important;display:block!important}
+.store-menu{display:flex!important;align-items:center!important;gap:6px!important;flex:1!important;justify-content:center!important;order:initial!important;width:auto!important;overflow:visible!important;padding:0!important}
+.store-menu a{color:#aaa!important;text-decoration:none!important;font-size:12px!important;font-weight:700!important;letter-spacing:.4px!important;padding:11px 12px!important;border-radius:10px!important;white-space:nowrap!important;background:transparent!important;box-shadow:none!important}
+.store-menu a:hover,.store-menu a.active{color:#fff!important;background:rgba(139,92,246,.12)!important;box-shadow:inset 0 0 0 1px rgba(139,92,246,.12)!important}
+.nav-actions{display:flex!important;align-items:center!important;gap:9px!important;margin-left:0!important}
+.icon-btn{width:38px!important;height:38px!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:10px!important;background:rgba(255,255,255,.03)!important;color:#ddd!important;font-size:18px!important}
+.login-btn{height:38px!important;min-width:0!important;padding:0 13px!important;border:1px solid rgba(139,92,246,.4)!important;border-radius:10px!important;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(56,189,248,.08))!important;color:#fff!important;text-decoration:none!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;font-size:12px!important;font-weight:700!important}
+.account-avatar{width:24px!important;height:24px!important;border-radius:50%!important;display:none;object-fit:cover}
+.account-avatar.visible{display:block!important}
+.login-btn.logged-in{min-width:0!important}
+.container{width:92%!important;max-width:1000px!important;margin:0 auto!important}
+.header{padding:65px 0 30px!important}
+.command{color:#a78bfa!important;font-size:11px!important;letter-spacing:2px!important}
+.header h1{font-family:Inter,Arial,sans-serif!important;font-size:clamp(36px,5vw,64px)!important;letter-spacing:-1.8px!important;font-weight:900!important}
+.header h1 span{color:#a78bfa!important;text-shadow:0 0 30px rgba(139,92,246,.3)!important}
+.header-description{color:#999!important;font-family:Inter,Arial,sans-serif!important;font-size:13px!important;line-height:1.8!important}
+.back-button{color:#c4b5fd!important;border:1px solid rgba(139,92,246,.35)!important;border-radius:9px!important;background:rgba(139,92,246,.08)!important;font-family:Inter,Arial,sans-serif!important;font-weight:700!important}
+.back-button:hover{color:#fff!important;border-color:#a78bfa!important;background:rgba(139,92,246,.18)!important}
+.panel{background:linear-gradient(145deg,rgba(20,18,32,.96),rgba(8,8,14,.98))!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:18px!important;box-shadow:0 12px 35px rgba(0,0,0,.18)!important}
+.panel-title{font-family:Inter,Arial,sans-serif!important;font-size:20px!important;font-weight:800!important}
+.panel-subtitle{font-family:Inter,Arial,sans-serif!important;color:#999!important;font-size:12px!important}
+.field label{font-family:Inter,Arial,sans-serif!important;color:#c4b5fd!important;font-size:10px!important;font-weight:800!important;letter-spacing:1px!important}
+input,select,textarea{font-family:Inter,Arial,sans-serif!important;background:#100e1a!important;border-color:rgba(255,255,255,.1)!important;border-radius:9px!important}
+input:focus,select:focus,textarea:focus{border-color:#8b5cf6!important;box-shadow:0 0 0 3px rgba(139,92,246,.1)!important}
+.price-box{background:rgba(139,92,246,.07)!important;border-color:rgba(139,92,246,.28)!important;border-radius:11px!important}
+.price-label{font-family:Inter,Arial,sans-serif!important;color:#999!important}
+.price-value{color:#c4b5fd!important;font-family:Inter,Arial,sans-serif!important;font-weight:900!important}
+.price-note{color:#aaa!important;font-family:Inter,Arial,sans-serif!important}
+.file-wrap{background:#100e1a!important;border-color:rgba(139,92,246,.35)!important;border-radius:9px!important}
+.file-note{font-family:Inter,Arial,sans-serif!important;color:#888!important}
+.order-btn{border:0!important;border-radius:9px!important;background:linear-gradient(135deg,#8b5cf6,#397fe9)!important;color:#fff!important;font-family:Inter,Arial,sans-serif!important;font-weight:800!important}
+.order-btn:hover{box-shadow:0 0 25px rgba(139,92,246,.25)!important}
+.status,.receipt{font-family:Inter,Arial,sans-serif!important}
+.status.success{color:#a78bfa!important}.status.error{color:#ff667a!important}
+.receipt{background:rgba(139,92,246,.07)!important;border-color:rgba(139,92,246,.3)!important;border-radius:12px!important}
+.receipt h3{color:#c4b5fd!important}.wa-btn{border-radius:9px!important;font-family:Inter,Arial,sans-serif!important;font-weight:800!important}
+footer{border-top:1px solid rgba(255,255,255,.07)!important;color:#666!important;font-family:Inter,Arial,sans-serif!important}
+.footer-brand{color:#a78bfa!important;font-family:Inter,Arial,sans-serif!important}
+@media(max-width:900px){.store-menu{display:none!important}.nav-inner{justify-content:space-between!important}}
+@media(max-width:700px){.header{padding:55px 0 28px!important}.panel{padding:22px!important}}
+@media(max-width:600px){.nav-inner{height:68px!important;padding:0 16px!important}.brand-logo img{width:130px!important}}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
-<div id="loginGuard" aria-hidden="true">
-    <div class="login-box">
-        <div class="login-icon">🔐</div>
-        <div class="login-cmd">&gt; ACCESS RESTRICTED</div>
-        <h2>LOGIN REQUIRED</h2>
-        <p>You must be logged in to place a Custom Edit order.</p>
-        <a href="auth.html" class="login-btn">[ LOGIN / CREATE ACCOUNT ]</a>
+<header class="store-nav">
+  <div class="nav-inner">
+    <a class="brand-logo" href="index.html"><img src="HIM4 x NINJ4 Neon Edit Store(2).png" alt="HIM4 x NINJ4"></a>
+    <nav class="store-menu">
+      <a href="index.html">⌂ <span>Home</span></a>
+      <a href="editing.html">✥ <span>Resources</span></a>
+      <a href="optimize.html">◉ <span>Optimization</span></a>
+      <a class="active" href="custom.html">♡ <span>Request</span></a>
+      <a href="index.html#reviews">☆ <span>Reviews</span></a>
+      <a href="custom.html">▣ <span>Contact</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" type="button" aria-label="Search" onclick="window.location.href='index.html#resources'">⌕</button>
+      <button class="icon-btn" type="button" aria-label="Cart" onclick="window.location.href='index.html#resources'">🛒</button>
+      <a href="auth.html" class="login-btn account-link" id="accountLink"><img class="account-avatar" id="accountAvatar" src="" alt="Profile"><span class="account-label" id="accountLabel">Login</span></a>
     </div>
-</div>
+  </div>
+</header>
 
 <div class="ff-bg" aria-hidden="true">
     <div class="ff-grid"></div>
@@ -177,12 +215,6 @@ footer{
     <div class="ff-scan"></div>
 </div>
 
-<div class="topbar">
-    <div class="dots">
-        <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
-    </div>
-    <div class="terminal-name"><span>him4@ninj4</span>:/custom-edits$</div>
-</div>
 
 <main class="container">
     <section class="header">
@@ -280,61 +312,62 @@ footer{
 <script>
 const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
-const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{storage:window.localStorage,storageKey:'sb-ndcrvdbvhswbvahpskhj-auth-token',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 
-const guard = document.getElementById('loginGuard');
 const form = document.getElementById('customOrderForm');
 const submitBtn = document.getElementById('submitBtn');
 const statusBox = document.getElementById('status');
 const receipt = document.getElementById('receipt');
+const accountLink = document.getElementById('accountLink');
+const accountLabel = document.getElementById('accountLabel');
+const accountAvatar = document.getElementById('accountAvatar');
 
 let currentUser = null;
 
-function showGuard(){
-    guard.classList.add('show');
-    guard.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
+function showLoggedIn(session){
+    currentUser = session && session.user ? session.user : null;
+    if(accountLink){ accountLink.href='account.html'; accountLink.classList.add('logged-in'); }
+    const user = currentUser;
+    const metadata = user && user.user_metadata ? user.user_metadata : {};
+    const displayName = metadata.full_name || metadata.name || metadata.username ||
+        (user && user.email ? user.email.split('@')[0] : '') || 'My Account';
+    if(accountLabel) accountLabel.textContent = displayName;
+    const avatarUrl = metadata.avatar_url || metadata.picture || '';
+    if(accountAvatar){
+        if(avatarUrl){ accountAvatar.src=avatarUrl; accountAvatar.classList.add('visible'); }
+        else { accountAvatar.removeAttribute('src'); accountAvatar.classList.remove('visible'); }
+    }
 }
-function hideGuard(){
-    guard.classList.remove('show');
-    guard.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
+function showLoggedOut(){
+    currentUser = null;
+    if(accountLink){ accountLink.href='auth.html'; accountLink.classList.remove('logged-in'); }
+    if(accountLabel) accountLabel.textContent='Login';
+    if(accountAvatar){ accountAvatar.removeAttribute('src'); accountAvatar.classList.remove('visible'); }
 }
+async function syncAccount(){
+    try{
+        const {data,error}=await client.auth.getSession();
+        if(error) throw error;
+        if(data && data.session && data.session.user) showLoggedIn(data.session);
+        else showLoggedOut();
+    }catch(err){ console.error('Session check failed:',err); showLoggedOut(); }
+}
+client.auth.onAuthStateChange((_event,session)=>{
+    if(session && session.user) showLoggedIn(session);
+    else showLoggedOut();
+});
+syncAccount();
+
 function setStatus(message,type){
     statusBox.textContent=message;
     statusBox.className='status show '+type;
 }
 
-async function init(){
-    try{
-        const {data:{session}} = await client.auth.getSession();
-        if(session && session.user){
-            currentUser=session.user;
-            hideGuard();
-            return;
-        }
-        showGuard();
-    }catch(err){
-        console.error(err);
-        showGuard();
-    }
-}
-
-client.auth.onAuthStateChange((_event,session)=>{
-    if(session && session.user){
-        currentUser=session.user;
-        hideGuard();
-    }else{
-        currentUser=null;
-        showGuard();
-    }
-});
-
 form.addEventListener('submit',async(e)=>{
     e.preventDefault();
 
     if(!currentUser){
-        showGuard();
+        setStatus('Please log in using the navbar before submitting a custom edit request.','error');
         return;
     }
 
@@ -421,7 +454,6 @@ form.addEventListener('submit',async(e)=>{
     receipt.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
-init();
 </script>
 </body>
 </html>

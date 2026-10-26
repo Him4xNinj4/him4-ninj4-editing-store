@@ -52,9 +52,27 @@ radial-gradient(circle at 80% 75%,rgba(34,211,238,.2),transparent 30%)}
 @media(max-width:760px){
 html,body{overflow:auto}.page{min-height:100%;height:auto;padding:70px 18px 25px}.shell{grid-template-columns:1fr;gap:22px}.brand{text-align:center}.brand p{margin-left:auto;margin-right:auto}.choice{margin-top:22px}.card-wrap{min-height:0}.card{padding:23px}.logo{letter-spacing:-2px}.status{margin-top:18px}
 }
+
+/* PREMIUM STORE AUTH OVERRIDES */
+:root{--pink:#b84cff;--purple:#6d28d9;--blue:#2563eb;--cyan:#22d3ee}
+.bg:after{background:linear-gradient(120deg,rgba(5,3,15,.88),rgba(31,10,58,.48),rgba(3,12,28,.82)),radial-gradient(circle at 18% 18%,rgba(130,55,255,.25),transparent 34%),radial-gradient(circle at 82% 78%,rgba(34,211,238,.18),transparent 30%)}
+.bg video{filter:brightness(.38) saturate(1.2)}
+.shell{width:min(1100px,94vw);grid-template-columns:1fr 430px;gap:60px}
+.logo{background:linear-gradient(90deg,#fff,#c084fc,#818cf8,#67e8f9);-webkit-background-clip:text;color:transparent}
+.status{border-color:rgba(139,92,246,.3);background:rgba(124,58,237,.08)}
+.status i{background:#a78bfa;box-shadow:0 0 15px #a78bfa}
+.choice button:hover{border-color:#a855f7;box-shadow:0 15px 45px rgba(124,58,237,.2)}
+.choice button.active{background:linear-gradient(135deg,rgba(168,85,247,.28),rgba(37,99,235,.22));border-color:rgba(192,132,252,.65)}
+.card{border-color:rgba(255,255,255,.12);background:linear-gradient(145deg,rgba(17,10,32,.88),rgba(5,9,20,.78));box-shadow:0 30px 100px rgba(0,0,0,.6),0 0 70px rgba(109,40,217,.16)}
+.field input:focus{border-color:#a855f7;box-shadow:0 0 0 4px rgba(124,58,237,.1)}
+.submit{background:linear-gradient(100deg,#9333ea,#6d28d9,#2563eb);box-shadow:0 12px 35px rgba(109,40,217,.32)}
+.switch button{color:#c084fc}.back:hover{border-color:#8b5cf6}
+@media(max-width:760px){.shell{width:min(520px,94vw);grid-template-columns:1fr;gap:24px}}
+</style><style>.store-nav{position:fixed;top:0;left:0;right:0;z-index:20;height:76px;background:rgba(5,3,10,.72);border-bottom:1px solid rgba(255,255,255,.10);backdrop-filter:blur(18px)}.nav-inner{height:100%;max-width:1400px;margin:auto;padding:0 28px;display:flex;align-items:center;gap:28px}.brand-logo img{width:145px;max-height:52px;object-fit:contain}.store-menu{display:flex;align-items:center;justify-content:center;gap:25px;flex:1}.store-menu a{color:#aaa0b5;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:.4px;transition:.25s}.store-menu a:hover{color:#fff}.nav-actions{display:flex;align-items:center;gap:10px}.icon-btn,.login-btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;border-radius:11px;height:38px;padding:0 13px;text-decoration:none;font-size:11px;cursor:pointer}.icon-btn b{font-size:9px;margin-left:3px;color:#ff6cc4}.login-btn{display:flex;align-items:center}.login-btn.active{background:linear-gradient(100deg,#ff3cac,#7c3aed);border-color:transparent;box-shadow:0 8px 25px rgba(124,58,237,.25)}.auth-page{padding-top:76px;min-height:100vh;position:relative;z-index:3}.shell{max-height:calc(100vh - 76px)}@media(max-width:900px){.store-menu{gap:12px}.store-menu a span{display:none}.brand-logo img{width:125px}}@media(max-width:650px){.store-nav{height:64px}.nav-inner{padding:0 14px}.store-menu{display:none}.nav-actions{margin-left:auto}.icon-btn{display:none}.auth-page{padding-top:64px}.shell{max-height:none}}
 </style>
 </head>
 <body>
+<header class="store-nav"><div class="nav-inner"><a class="brand-logo" href="index.html"><img src="HIM4 x NINJ4 Neon Edit Store(2).png" alt="HIM4 x NINJ4"></a><nav class="store-menu"><a href="index.html#home">⌂ <span>Home</span></a><a href="index.html#resources">✥ <span>Resources</span></a><a href="index.html#tools">◉ <span>Optimization</span></a><a href="index.html#contact">♡ <span>Request</span></a><a href="index.html#reviews">☆ <span>Reviews</span></a><a href="index.html#contact">▣ <span>Contact</span></a></nav><div class="nav-actions"><button class="icon-btn">⌕</button><button class="icon-btn">🛒<b>0</b></button><a class="login-btn active" href="auth.html">LOGIN</a></div></div></header>
 
 <div class="bg">
   <video autoplay muted loop playsinline preload="auto">
@@ -65,7 +83,7 @@ html,body{overflow:auto}.page{min-height:100%;height:auto;padding:70px 18px 25px
 
 <a class="back" href="index.html">← BACK TO STORE</a>
 
-<main class="page">
+<main class="page auth-page">
 <section class="shell">
 
   <div class="brand">

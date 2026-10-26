@@ -150,12 +150,12 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 .form-group label{
     display:block;color:#888;font-size:9px;font-weight:bold;letter-spacing:1px;margin-bottom:6px
 }
-.form-group input,.form-group textarea,.form-group select{
+.form-group input,.form-group textarea{
     width:100%;border:1px solid #262626;outline:none;background:#111;color:#fff;
     border-radius:8px;padding:11px 12px;font-size:11px
 }
 .form-group textarea{min-height:75px;resize:vertical}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#00ff88;box-shadow:0 0 0 3px rgba(0,255,136,.06)}
+.form-group input:focus,.form-group textarea:focus{border-color:#00ff88;box-shadow:0 0 0 3px rgba(0,255,136,.06)}
 .bank-box{
     margin:18px 0;padding:16px;border:1px solid rgba(0,255,136,.18);
     background:rgba(0,255,136,.035);border-radius:9px
@@ -224,10 +224,131 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 .login-guard-btn{display:block;width:100%;padding:13px;border:1px solid #00ff88;background:#00ff88;color:#000;text-decoration:none;font-weight:bold;font-size:10px;letter-spacing:1px}
 .login-guard-btn:hover{box-shadow:0 0 25px rgba(0,255,136,.2)}
 .login-guard-back{display:block;margin-top:10px;padding:12px;border:1px solid #292929;color:#aaa;text-decoration:none;font-size:10px}
+
+/* ===== HOMEPAGE MATCHING STOREFRONT NAVBAR ===== */
+.topbar{display:none!important}
+.store-nav{position:fixed;top:0;left:0;right:0;height:76px;z-index:5000;background:rgba(3,5,13,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(118,80,255,.38);box-shadow:0 8px 35px rgba(0,0,0,.35)}
+.nav-inner{max-width:1450px;height:100%;margin:auto;display:flex;align-items:center;gap:28px;padding:0 24px}.brand-logo{width:145px;flex:0 0 145px;display:flex;align-items:center}.brand-logo img{width:100%;max-height:52px;height:auto;object-fit:contain;display:block;filter:drop-shadow(0 0 10px rgba(139,61,255,.45))}.store-menu{display:flex;align-items:center;justify-content:center;gap:7px;flex:1}.store-menu a{color:#eeeafc;text-decoration:none;font-size:13px;font-weight:700;padding:13px 16px;border-radius:13px;letter-spacing:.2px;transition:.25s}.store-menu a:hover,.store-menu a.active{background:linear-gradient(135deg,rgba(124,53,255,.35),rgba(30,111,255,.18));box-shadow:0 0 20px rgba(112,61,255,.2);color:#fff}.nav-actions{display:flex;align-items:center;gap:10px}.icon-btn{width:42px;height:42px;border:1px solid rgba(104,76,255,.38);border-radius:13px;background:rgba(7,9,20,.75);color:#fff;cursor:pointer;font-size:20px;position:relative}.cart-btn b{position:absolute;right:-5px;top:-6px;width:17px;height:17px;border-radius:50%;background:#7d39ff;font-size:10px;display:grid;place-items:center}.login-btn{min-width:104px;height:42px;padding:0 15px;border:1px solid #7c42ff;border-radius:13px;background:linear-gradient(135deg,#6432ff,#2a6eff);box-shadow:0 0 22px rgba(100,50,255,.3);color:#fff!important;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:800}.login-btn .account-avatar{display:none;width:27px;height:27px;border-radius:50%;object-fit:cover}.login-btn .account-avatar.visible{display:block}.login-btn.logged-in{min-width:145px}.login-btn.logged-in .account-label{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:1050px){.store-menu{gap:0}.store-menu a{padding:11px 9px;font-size:11px}.brand-logo{width:145px;flex-basis:145px}.category-grid-new{grid-template-columns:repeat(3,1fr)}.stats-new{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.store-nav{height:auto}.nav-inner{padding:10px 14px;flex-wrap:wrap;gap:10px}.brand-logo{width:125px;flex-basis:125px}.store-menu{order:3;width:100%;overflow-x:auto;justify-content:flex-start;padding-bottom:3px}.store-menu a{white-space:nowrap}.store-menu a span{display:none}.nav-actions{margin-left:auto}.icon-btn{width:36px;height:36px}.login-btn{min-width:75px;height:36px}.store-hero{margin-top:108px;min-height:590px;height:590px;background-position:center}.hero-content-new{padding:100px 24px 50px;max-width:560px}.hero-brand-logo{width:100%;max-width:500px;height:150px}.hero-lead{font-size:11px;line-height:1.5}.hero-sub{font-size:8px;line-height:2}.stats-new{margin-top:-30px;padding:0 14px;grid-template-columns:1fr 1fr;gap:10px}.stat-new{padding:10px 12px;min-height:70px}.stat-new strong{font-size:17px}.stat-new small{font-size:8px}.stat-icon{width:37px;height:37px}.store-section{padding-left:14px;padding-right:14px}.section-heading-new{align-items:flex-start;flex-direction:column}.section-heading-new h2{font-size:25px}.section-heading-new>p{display:none}.category-grid-new{grid-template-columns:1fr 1fr}.cat-card{min-height:125px}.popular-grid{grid-template-columns:1fr 1fr}.optimization-strip,.about-modern{flex-direction:column;align-items:flex-start}.carousel-actions{width:100%}.carousel-actions a{margin-left:auto}}
+@media(max-width:480px){.brand-logo{width:115px;flex-basis:115px}.hero-brand-logo{width:110%;height:125px;margin-left:-5%}.hero-content-new{padding-top:80px}.hero-actions-new{flex-direction:column}.hero-actions-new a{width:100%}.category-grid-new,.popular-grid{grid-template-columns:1fr 1fr}.cat-card{padding:14px 11px}.cat-card h3{font-size:10px}.cat-card p{font-size:7px}.popular-art{height:125px}.popular-body b{font-size:12px}}
+
+@media(max-width:760px){.header{padding-top:135px!important}}
+@media(min-width:761px){.header{padding-top:105px!important}}
+
+</style>
+<style>
+
+/* ===== EDITING PAGE THEME MATCH ===== */
+:root{--p:#8b5cf6;--p2:#a855f7;--b:#38bdf8;--bg:#05050b}
+html{scroll-behavior:smooth}
+body{background:var(--bg)!important;color:#fff!important;font-family:Inter,Arial,Helvetica,sans-serif!important}
+body::before,.ff-bg,.topbar{display:none!important}
+.store-nav{position:sticky!important;top:0!important;z-index:5000!important;height:auto!important;background:rgba(5,5,11,.82)!important;backdrop-filter:blur(18px);border-bottom:1px solid rgba(139,92,246,.2)!important;box-shadow:0 8px 35px rgba(0,0,0,.35)!important}
+.nav-inner{max-width:1280px!important;margin:auto!important;height:78px!important;padding:0 28px!important;display:flex!important;align-items:center!important;gap:28px!important}
+.brand-logo{display:flex!important;align-items:center!important;text-decoration:none!important;flex-shrink:0!important;width:auto!important;flex-basis:auto!important}
+.brand-logo img{width:155px!important;max-height:52px!important;height:auto!important;object-fit:contain!important;display:block!important}
+.store-menu{display:flex!important;align-items:center!important;gap:6px!important;flex:1!important;justify-content:center!important;order:initial!important;width:auto!important;overflow:visible!important;padding:0!important}
+.store-menu a{color:#aaa!important;text-decoration:none!important;font-size:12px!important;font-weight:700!important;letter-spacing:.4px!important;padding:11px 12px!important;border-radius:10px!important;white-space:nowrap!important;background:transparent!important;box-shadow:none!important}
+.store-menu a:hover,.store-menu a.active{color:#fff!important;background:rgba(139,92,246,.12)!important;box-shadow:inset 0 0 0 1px rgba(139,92,246,.12)!important}
+.nav-actions{display:flex!important;align-items:center!important;gap:9px!important;margin-left:0!important}
+.icon-btn{width:38px!important;height:38px!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:10px!important;background:rgba(255,255,255,.03)!important;color:#ddd!important;font-size:18px!important}
+.login-btn{height:38px!important;min-width:0!important;padding:0 13px!important;border:1px solid rgba(139,92,246,.4)!important;border-radius:10px!important;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(56,189,248,.08))!important;color:#fff!important;text-decoration:none!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;font-size:12px!important;font-weight:700!important}
+.account-avatar{width:24px!important;height:24px!important;border-radius:50%!important;display:none;object-fit:cover}
+.account-avatar.visible{display:block!important}
+.login-btn.logged-in{min-width:0!important}
+.container{width:92%!important;max-width:1180px!important;margin:0 auto!important}
+.header{padding:65px 0 30px!important}
+.command{color:#a78bfa!important;font-size:11px!important;letter-spacing:2px!important}
+h1{font-family:Inter,Arial,sans-serif!important;font-size:clamp(36px,5vw,64px)!important;letter-spacing:-1.8px!important;font-weight:900!important}
+h1 span{color:#a78bfa!important;text-shadow:0 0 30px rgba(139,92,246,.3)!important}
+.description{color:#999!important;font-family:Inter,Arial,sans-serif!important;font-size:13px!important;line-height:1.8!important}
+.back{color:#c4b5fd!important;border:1px solid rgba(139,92,246,.35)!important;border-radius:9px!important;background:rgba(139,92,246,.08)!important;font-family:Inter,Arial,sans-serif!important;font-weight:700!important}
+.back:hover{color:#fff!important;border-color:#a78bfa!important;background:rgba(139,92,246,.18)!important}
+.catalog{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important;margin-top:24px!important}
+.product{background:linear-gradient(145deg,rgba(20,18,32,.96),rgba(8,8,14,.98))!important;border:1px solid rgba(255,255,255,.07)!important;border-radius:18px!important;box-shadow:0 12px 35px rgba(0,0,0,.18)!important}
+.product:hover{border-color:rgba(139,92,246,.5)!important;box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 35px rgba(139,92,246,.1)!important;transform:translateY(-5px)!important}
+.preview{background:#080811!important}
+.preview-tag{background:rgba(5,5,11,.78)!important;border:1px solid rgba(139,92,246,.4)!important;color:#c4b5fd!important;border-radius:7px!important}
+.product-cat{color:#a78bfa!important;font-family:Inter,Arial,sans-serif!important}
+.product h2{font-family:Inter,Arial,sans-serif!important;font-size:17px!important}
+.product-desc{font-family:Inter,Arial,sans-serif!important;color:#999!important;font-size:11px!important}
+.product-foot{border-top:1px solid rgba(255,255,255,.08)!important}
+.price{font-family:Inter,Arial,sans-serif!important}
+.price small{color:#888!important}
+.order-btn{border:1px solid rgba(139,92,246,.65)!important;background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(56,189,248,.08))!important;color:#d8caff!important;border-radius:9px!important;font-family:Inter,Arial,sans-serif!important;font-weight:800!important}
+.order-btn:hover{background:linear-gradient(135deg,#8b5cf6,#397fe9)!important;color:#fff!important;box-shadow:0 0 25px rgba(139,92,246,.25)!important}
+.empty,.terminal{background:linear-gradient(145deg,rgba(20,18,32,.96),rgba(8,8,14,.98))!important;border:1px solid rgba(255,255,255,.07)!important;border-radius:16px!important}
+.terminal-head{background:rgba(255,255,255,.03)!important;border-bottom:1px solid rgba(255,255,255,.07)!important;color:#a78bfa!important;font-family:Inter,Arial,sans-serif!important}
+.terminal-body{font-family:Inter,Arial,sans-serif!important;color:#999!important}
+.green-text{color:#a78bfa!important}
+footer{border-top:1px solid rgba(255,255,255,.07)!important;color:#666!important;font-family:Inter,Arial,sans-serif!important}
+.footer-name{color:#a78bfa!important}
+.modal{background:rgba(2,2,8,.82)!important}
+.modal-card{background:#0b0a14!important;border:1px solid rgba(139,92,246,.28)!important;border-radius:16px!important}
+.modal-head{background:#100e1b!important;border-bottom:1px solid rgba(255,255,255,.08)!important}
+.modal-head h3{font-family:Inter,Arial,sans-serif!important}
+.modal-close{border-color:rgba(255,255,255,.12)!important;background:#151322!important;border-radius:8px!important}
+.selected{background:#090812!important;border-color:rgba(255,255,255,.08)!important;border-radius:10px!important}
+.selected-name,.form-group label{font-family:Inter,Arial,sans-serif!important}
+.selected-price,.bank-title{color:#a78bfa!important}
+.form-group input,.form-group textarea{background:#100e1a!important;border-color:rgba(255,255,255,.1)!important;border-radius:9px!important;font-family:Inter,Arial,sans-serif!important}
+.form-group input:focus,.form-group textarea:focus{border-color:#8b5cf6!important;box-shadow:0 0 0 3px rgba(139,92,246,.1)!important}
+.bank-box{border-color:rgba(139,92,246,.25)!important;background:rgba(139,92,246,.06)!important;border-radius:11px!important}
+.notice{border-left-color:#8b5cf6!important;background:rgba(139,92,246,.07)!important;color:#aaa!important;border-radius:0 8px 8px 0!important}
+.submit-btn{border:0!important;border-radius:9px!important;background:linear-gradient(135deg,#8b5cf6,#397fe9)!important;color:#fff!important;font-family:Inter,Arial,sans-serif!important}
+.file-label{border-color:rgba(139,92,246,.35)!important;border-radius:9px!important;font-family:Inter,Arial,sans-serif!important}
+.file-label:hover{border-color:#a78bfa!important;color:#c4b5fd!important}
+.file-name{color:#c4b5fd!important}
+.receipt h2,.receipt-sub{font-family:Inter,Arial,sans-serif!important}
+.order-id{border-color:rgba(139,92,246,.3)!important;background:rgba(139,92,246,.07)!important;color:#c4b5fd!important;border-radius:10px!important}
+.whatsapp-btn{border-radius:9px!important;font-family:Inter,Arial,sans-serif!important}
+.done-btn{border-radius:9px!important}
+.login-guard{background:rgba(3,3,10,.92)!important}
+.login-guard-card{background:linear-gradient(145deg,#151124,#080811)!important;border:1px solid rgba(139,92,246,.55)!important;border-radius:16px!important}
+.login-guard-card h2 span{color:#a78bfa!important}
+.login-guard-btn{border:0!important;border-radius:9px!important;background:linear-gradient(135deg,#8b5cf6,#397fe9)!important;color:#fff!important;font-family:Inter,Arial,sans-serif!important}
+.login-guard-back{border-color:rgba(255,255,255,.12)!important;border-radius:9px!important;font-family:Inter,Arial,sans-serif!important}
+@media(max-width:900px){
+ .store-menu{display:none!important}
+ .nav-inner{justify-content:space-between!important}
+ .catalog{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+ .header{padding:55px 0 28px!important}
+ .catalog{grid-template-columns:1fr!important}
+ .product-body{padding:18px!important}
+ .modal{padding:10px!important}
+ .modal-card{max-height:96vh!important}
+}
+@media(max-width:600px){
+ .nav-inner{height:68px!important;padding:0 16px!important}
+ .brand-logo img{width:130px!important}
+}
+
 </style>
 </head>
 
 <body>
+<header class="store-nav">
+  <div class="nav-inner">
+    <a class="brand-logo" href="index.html"><img src="HIM4 x NINJ4 Neon Edit Store(2).png" alt="HIM4 x NINJ4"></a>
+    <nav class="store-menu">
+      <a href="index.html">⌂ <span>Home</span></a>
+      <a class="active" href="#resources">✥ <span>Resources</span></a>
+      <a href="optimize.html">◉ <span>Optimization</span></a>
+      <a href="custom.html">♡ <span>Request</span></a>
+      <a href="index.html#reviews">☆ <span>Reviews</span></a>
+      <a href="custom.html">▣ <span>Contact</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" type="button" aria-label="Search" onclick="window.location.href='index.html#resources'">⌕</button>
+      <button class="icon-btn" type="button" aria-label="Cart" onclick="window.location.href='index.html#resources'">🛒</button>
+      <a href="auth.html" class="login-btn account-link" id="accountLink"><img class="account-avatar" id="accountAvatar" src="" alt="Profile"><span class="account-label" id="accountLabel">Login</span></a>
+    </div>
+  </div>
+</header>
+
 <!-- LOGIN REQUIRED GUARD -->
 <div class="login-guard" id="loginGuard">
     <div class="login-guard-card">
@@ -320,21 +441,12 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
                 After verification, the actual purchased file will be delivered manually through WhatsApp.
             </div>
 
-            <div class="form-group">
-                <label>SELECT PAYMENT ACCOUNT</label>
-                <select id="paymentAccount" required onchange="updateBankDetails()">
-                    <option value="">-- Select Payment Account --</option>
-                    <option value="ninj4">NINJ4 — Commercial Bank</option>
-                    <option value="him4">HIM4 — Bank of Ceylon (BOC)</option>
-                </select>
-            </div>
-
-            <div class="bank-box" id="bankDetails" style="display:none;">
+            <div class="bank-box">
                 <div class="bank-title">BANK PAYMENT DETAILS</div>
-                <div class="bank-row"><span>Bank</span><span id="bankName">---</span></div>
-                <div class="bank-row"><span>Account Name</span><span id="bankAccountName">---</span></div>
-                <div class="bank-row"><span>Account Number</span><span id="bankAccountNumber">---</span></div>
-                <div class="bank-row"><span>Branch</span><span id="bankBranch">---</span></div>
+                <div class="bank-row"><span>Bank</span><span>Commercial Bank</span></div>
+                <div class="bank-row"><span>Account Name</span><span>K.A.S. KARUNARATHNA</span></div>
+                <div class="bank-row"><span>Account Number</span><span>8031209744</span></div>
+                <div class="bank-row"><span>Branch</span><span>Katubedda</span></div>
             </div>
 
             <form id="orderForm">
@@ -385,7 +497,6 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
             <div class="receipt-details">
                 <div class="detail-row"><span>Product</span><span id="receiptProduct">—</span></div>
                 <div class="detail-row"><span>Amount</span><span id="receiptPrice">—</span></div>
-                <div class="detail-row"><span>Payment Account</span><span id="receiptPaymentAccount">—</span></div>
                 <div class="detail-row"><span>Status</span><span style="color:#ffaa00">PENDING</span></div>
             </div>
 
@@ -400,49 +511,87 @@ footer{margin-top:80px;padding:35px 20px;text-align:center;border-top:1px solid 
 <script>
 const SUPABASE_URL = 'https://ndcrvdbvhswbvahpskhj.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_dZ-D3SU2fkw_q3m3F30PUg_V6C0OSaW';
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+    auth: {
+        storage: window.localStorage,
+        storageKey: 'sb-ndcrvdbvhswbvahpskhj-auth-token',
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true
+    }
+});
+// Shared login session guard (same Supabase localStorage key as index.html)
 (function(){
     const guard = document.getElementById('loginGuard');
-    if(!guard) return;
+    const accountLink = document.getElementById('accountLink');
+    const accountLabel = document.getElementById('accountLabel');
+    const accountAvatar = document.getElementById('accountAvatar');
 
-    function showGuard(){
-        document.querySelectorAll('body > *:not(#loginGuard)').forEach(el => el.style.display='none');
-        guard.classList.remove('hidden');
-        document.body.style.overflow='hidden';
+    function showLoggedIn(session){
+        if(guard) guard.classList.add('hidden');
+        document.body.style.overflow = '';
+
+        if(accountLink){
+            accountLink.href = 'account.html';
+            accountLink.classList.add('logged-in');
+        }
+
+        const user = session?.user;
+        const metadata = user?.user_metadata || {};
+        const displayName =
+            metadata.full_name ||
+            metadata.name ||
+            metadata.username ||
+            user?.email?.split('@')[0] ||
+            'My Account';
+
+        if(accountLabel) accountLabel.textContent = displayName;
+
+        const avatarUrl = metadata.avatar_url || metadata.picture || '';
+        if(accountAvatar){
+            if(avatarUrl){
+                accountAvatar.src = avatarUrl;
+                accountAvatar.classList.add('visible');
+            }else{
+                accountAvatar.removeAttribute('src');
+                accountAvatar.classList.remove('visible');
+            }
+        }
     }
 
-    function hideGuard(){
-        guard.classList.add('hidden');
-        document.querySelectorAll('body > *:not(#loginGuard)').forEach(el => el.style.display='');
-        document.body.style.overflow='';
+    function showLoggedOut(){
+        if(guard) guard.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        if(accountLink){
+            accountLink.href = 'auth.html';
+            accountLink.classList.remove('logged-in');
+        }
+        if(accountLabel) accountLabel.textContent = 'Login';
+        if(accountAvatar){
+            accountAvatar.removeAttribute('src');
+            accountAvatar.classList.remove('visible');
+        }
     }
 
     async function checkAccess(){
         try{
-            const { data, error } = await supabaseClient.auth.getSession();
-
-            if(error || !data?.session){
-                showGuard();
-                return;
-            }
-
-            hideGuard();
-        }catch(err){
-            console.error('Login guard error:', err);
-            showGuard();
+            const {data, error} = await supabaseClient.auth.getSession();
+            if(error) throw error;
+            if(data?.session?.user) showLoggedIn(data.session);
+            else showLoggedOut();
+        }catch(error){
+            console.error('Login session check failed:', error);
+            showLoggedOut();
         }
     }
 
-    checkAccess();
-
     supabaseClient.auth.onAuthStateChange((_event, session) => {
-        if(session){
-            hideGuard();
-        }else{
-            showGuard();
-        }
+        if(session?.user) showLoggedIn(session);
+        else showLoggedOut();
     });
+
+    checkAccess();
 })();
 
 
@@ -457,46 +606,6 @@ const catalog = document.getElementById('catalog');
 const orderModal = document.getElementById('orderModal');
 const receiptModal = document.getElementById('receiptModal');
 const paymentSlip = document.getElementById('paymentSlip');
-
-const bankAccounts = {
-    ninj4: {
-        label: 'NINJ4 — Commercial Bank',
-        bank: 'Commercial Bank',
-        name: 'K.A.S. KARUNARATHNA',
-        number: '8031209744',
-        branch: 'Katubedda'
-    },
-    him4: {
-        label: 'HIM4 — Bank of Ceylon (BOC)',
-        bank: 'Bank of Ceylon (BOC)',
-        name: 'SMCI RANJITH',
-        number: '96553543',
-        branch: 'Hatton'
-    }
-};
-
-function updateBankDetails(){
-    const selected = document.getElementById('paymentAccount')?.value;
-    const box = document.getElementById('bankDetails');
-
-    if(!selected || !bankAccounts[selected]){
-        if(box) box.style.display = 'none';
-        return;
-    }
-
-    const account = bankAccounts[selected];
-    document.getElementById('bankName').textContent = account.bank;
-    document.getElementById('bankAccountName').textContent = account.name;
-    document.getElementById('bankAccountNumber').textContent = account.number;
-    document.getElementById('bankBranch').textContent = account.branch;
-
-    if(box) box.style.display = 'block';
-}
-
-function getSelectedPaymentAccount(){
-    const select = document.getElementById('paymentAccount');
-    return select?.value && bankAccounts[select.value] ? bankAccounts[select.value] : null;
-}
 
 function money(value){
     return 'Rs. ' + Number(value || 0).toLocaleString('en-LK');
@@ -596,7 +705,6 @@ function openOrder(id){
     document.getElementById('orderError').textContent = '';
     document.getElementById('orderForm').reset();
     document.getElementById('fileName').textContent = '';
-    updateBankDetails();
     orderModal.classList.add('show');
     document.body.style.overflow = 'hidden';
 }
@@ -655,15 +763,9 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
     const name = document.getElementById('customerName').value.trim();
     const whatsapp = document.getElementById('customerWhatsapp').value.trim();
     const email = document.getElementById('customerEmail').value.trim();
-    const paymentAccount = getSelectedPaymentAccount();
     const file = paymentSlip.files[0];
     const errorBox = document.getElementById('orderError');
     const btn = document.getElementById('submitOrderBtn');
-
-    if(!paymentAccount){
-        errorBox.textContent = 'Please select the payment account you paid to.';
-        return;
-    }
 
     if(!file){
         errorBox.textContent = 'Please upload your payment slip.';
@@ -704,7 +806,6 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
                 plan: 'ONE-TIME',
                 price: Number(selectedProduct.price || 0),
                 payment_slip_url: slipUrl,
-                payment_account: paymentAccount.label,
                 status: 'pending'
             });
 
@@ -716,7 +817,6 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
         document.getElementById('receiptOrderId').textContent = orderId;
         document.getElementById('receiptProduct').textContent = productName;
         document.getElementById('receiptPrice').textContent = productPrice;
-        document.getElementById('receiptPaymentAccount').textContent = paymentAccount.label;
 
         const message =
             `Hello HIM4 x NINJ4,%0A%0A` +
@@ -724,7 +824,6 @@ document.getElementById('orderForm').addEventListener('submit', async (e) => {
             `Order ID: ${encodeURIComponent(orderId)}%0A` +
             `Product: ${encodeURIComponent(productName)}%0A` +
             `Amount: ${encodeURIComponent(productPrice)}%0A` +
-            `Payment Account: ${encodeURIComponent(paymentAccount.label)}%0A` +
             `Name: ${encodeURIComponent(name)}%0A` +
             `WhatsApp: ${encodeURIComponent(whatsapp)}%0A%0A` +
             `Please verify my payment.`;
