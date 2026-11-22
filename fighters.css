@@ -1,0 +1,15 @@
+[data-fighter]{--rim:#5added;--tempo:4.4s;--drift:6px;--tilt:1.1deg}
+[data-fighter=morse],[data-fighter=suzy]{--rim:#e7a660;--tempo:3.9s;--drift:-5px}
+[data-fighter=kairos],[data-fighter=nero]{--rim:#bd85ff;--tempo:4.8s;--tilt:-1.6deg}
+[data-fighter=ignis],[data-fighter=orion]{--rim:#ff7452;--tempo:3.1s;--drift:9px}
+[data-fighter=kassie],[data-fighter=rin]{--rim:#fa99d0;--tempo:5s;--drift:-7px}
+[data-fighter=ryden],[data-fighter=oscar]{--rim:#68edae;--tempo:3.6s;--tilt:-1.4deg}
+[data-fighter=sonia],[data-fighter=ray]{--rim:#b1eaff;--tempo:4.6s}
+.duo img[data-fighter],.v4-cast img[data-fighter]{transform-origin:50% 85%;filter:drop-shadow(-2px 0 2px var(--rim)) drop-shadow(0 8px 12px #04142588);animation:fighter-entry .65s cubic-bezier(.17,.84,.29,1) both,fighter-idle var(--tempo) ease-in-out .65s infinite alternate}
+.duo img[data-fighter]+img,.v4-cast img[data-fighter]+img{animation-delay:.09s,.76s}
+@keyframes fighter-entry{from{opacity:0;translate:18px 30px;scale:.94}to{opacity:1;translate:0 0;scale:1}}
+@keyframes fighter-idle{from{transform:translate(0,1px) rotate(0)}to{transform:translate(var(--drift),-8px) rotate(var(--tilt))}}
+.squad-switch{position:absolute;z-index:4;bottom:calc(5% + 62px);left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.65rem;border:1px solid #54809a;background:#041421ee;border-radius:24px;color:#edfdff;font:900 1rem Barlow,sans-serif;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.squad-switch[hidden]{display:none}.squad-switch button{background:transparent;color:#71e9ff;border:0;min-width:44px;height:44px;font-size:1.5rem;cursor:pointer}.squad-switch span{min-width:8rem;text-align:center}
+@media(max-width:760px){.squad-switch{position:relative;inset:auto;transform:none;justify-self:center;grid-row:2;margin:-54px 0 10px;align-self:end}}
+@media(prefers-reduced-motion:reduce){.duo img[data-fighter],.v4-cast img[data-fighter]{animation:none!important}}

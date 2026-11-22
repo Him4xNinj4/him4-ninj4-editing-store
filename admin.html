@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>HIM4 × NINJ4 — Admin Panel</title>
 
@@ -22,20 +22,20 @@
 }
 
 :root{
-    --bg:#07070b;
-    --panel:#0e0d14;
-    --panel2:#12101a;
+    --bg:#070a0b;
+    --panel:#0d1214;
+    --panel2:#10171a;
     --line:rgba(255,255,255,.08);
 
-    --purple:#8b5cf6;
-    --violet:#a855f7;
+    --purple:#60cbf2;
+    --violet:#5ac9f2;
     --pink:#ec4899;
     --cyan:#22d3ee;
     --green:#34d399;
     --yellow:#facc15;
     --red:#fb7185;
 
-    --text:#f8f7fb;
+    --text:#f7fafb;
     --muted:#8e8999;
 
     --sidebar:258px;
@@ -78,7 +78,7 @@ button{
 
     z-index:9999;
 
-    background:#020205;
+    background:#020405;
 
     overflow:hidden;
 
@@ -98,7 +98,7 @@ button{
 
     object-fit:cover;
 
-    background:#020205;
+    background:#020405;
 
     z-index:0;
 }
@@ -114,8 +114,8 @@ button{
             180deg,
             rgba(0,0,0,.10),
             rgba(0,0,0,.18) 35%,
-            rgba(2,1,7,.72) 72%,
-            rgba(2,1,7,.97)
+            rgba(1,5,7,.72) 72%,
+            rgba(1,5,7,.97)
         );
 }
 
@@ -129,7 +129,7 @@ button{
 
     border-radius:50%;
 
-    background:#7c3aed;
+    background:#3abded;
 
     filter:blur(150px);
 
@@ -158,7 +158,7 @@ button{
 
     letter-spacing:4px;
 
-    color:#c4b5fd;
+    color:#b9e8f9;
 
     margin-bottom:12px;
 
@@ -179,8 +179,8 @@ button{
     background:
         linear-gradient(
             90deg,
-            #a78bfa,
-            #f472b6,
+            #8fdaf6,
+            #72d1f4,
             #67e8f9
         );
 
@@ -193,7 +193,7 @@ button{
 .intro-sub{
     margin:9px 0 22px;
 
-    color:#aaa4b4;
+    color:#a4b0b4;
 
     font-size:9px;
 
@@ -241,15 +241,15 @@ button{
     background:
         linear-gradient(
             135deg,
-            rgba(139,92,246,.35),
+            rgba(96,203,242,.35),
             rgba(236,72,153,.25)
         );
 
     border-color:
-        rgba(196,181,253,.55);
+        rgba(185,232,249,.55);
 
     box-shadow:
-        0 15px 55px rgba(124,58,237,.28);
+        0 15px 55px rgba(58,189,237,.28);
 }
 
 .enter-dot{
@@ -296,7 +296,7 @@ button{
 
     padding:20px;
 
-    background:#05040a;
+    background:#04080a;
 
     overflow:hidden;
 }
@@ -308,7 +308,7 @@ button{
     background:
         radial-gradient(
             circle at 15% 15%,
-            rgba(139,92,246,.22),
+            rgba(96,203,242,.22),
             transparent 28%
         ),
         radial-gradient(
@@ -318,9 +318,9 @@ button{
         ),
         linear-gradient(
             135deg,
-            #05040a,
-            #0c0714 55%,
-            #05040a
+            #04080a,
+            #071014 55%,
+            #04080a
         );
 }
 
@@ -338,7 +338,7 @@ button{
 }
 
 .auth-orb.a{
-    background:#7c3aed;
+    background:#3abded;
 
     top:-170px;
     left:-150px;
@@ -360,12 +360,12 @@ button{
 
     border:
         1px solid
-        rgba(196,181,253,.20);
+        rgba(185,232,249,.20);
 
     border-radius:26px;
 
     background:
-        rgba(13,11,20,.78);
+        rgba(11,18,20,.78);
 
     backdrop-filter:blur(25px);
 
@@ -409,8 +409,8 @@ button{
     background:
         linear-gradient(
             135deg,
-            #7c3aed,
-            #a855f7,
+            #3abded,
+            #5ac9f2,
             #ec4899
         );
 
@@ -420,7 +420,7 @@ button{
 
     box-shadow:
         0 0 35px
-        rgba(168,85,247,.25);
+        rgba(90,201,242,.25);
 }
 
 .auth-title{
@@ -434,7 +434,7 @@ button{
 }
 
 .auth-title span{
-    color:#f472b6;
+    color:#72d1f4;
 }
 
 .auth-sub{
@@ -460,7 +460,7 @@ button{
         linear-gradient(
             90deg,
             transparent,
-            #8b5cf6,
+            #60cbf2,
             #ec4899,
             transparent
         );
@@ -475,7 +475,7 @@ button{
 
     margin-bottom:6px;
 
-    color:#9991a7;
+    color:#91a1a7;
 
     font-size:7px;
 
@@ -508,11 +508,11 @@ button{
 }
 
 .field input:focus{
-    border-color:#9b5cf6;
+    border-color:#60cbf2;
 
     box-shadow:
         0 0 0 3px
-        rgba(139,92,246,.09);
+        rgba(96,203,242,.09);
 }
 
 .auth-submit{
@@ -525,8 +525,8 @@ button{
     background:
         linear-gradient(
             100deg,
-            #7c3aed,
-            #a855f7,
+            #3abded,
+            #5ac9f2,
             #ec4899
         );
 
@@ -542,7 +542,7 @@ button{
 
     box-shadow:
         0 12px 35px
-        rgba(139,92,246,.18);
+        rgba(96,203,242,.18);
 
     transition:.2s;
 }
@@ -594,7 +594,7 @@ button{
     background:
         radial-gradient(
             circle at 75% 10%,
-            rgba(124,58,237,.10),
+            rgba(58,189,237,.10),
             transparent 25%
         ),
         radial-gradient(
@@ -602,7 +602,7 @@ button{
             rgba(34,211,238,.05),
             transparent 25%
         ),
-        #07070b;
+        #070a0b;
 }
 
 
@@ -620,7 +620,7 @@ button{
     padding:22px 14px;
 
     background:
-        rgba(10,9,14,.94);
+        rgba(9,13,14,.94);
 
     border-right:
         1px solid var(--line);
@@ -664,14 +664,14 @@ button{
     background:
         linear-gradient(
             135deg,
-            #6d28d9,
-            #a855f7,
+            #28a9d9,
+            #5ac9f2,
             #ec4899
         );
 
     box-shadow:
         0 0 30px
-        rgba(168,85,247,.2);
+        rgba(90,201,242,.2);
 }
 
 .brand strong{
@@ -739,7 +739,7 @@ button{
 
 .nav-item:hover{
     background:
-        rgba(139,92,246,.07);
+        rgba(96,203,242,.07);
 
     color:#fff;
 }
@@ -748,14 +748,14 @@ button{
     background:
         linear-gradient(
             90deg,
-            rgba(124,58,237,.20),
+            rgba(58,189,237,.20),
             rgba(236,72,153,.06)
         );
 
     color:#fff;
 
     box-shadow:
-        inset 3px 0 #9b5cff;
+        inset 3px 0 #68cdf3;
 }
 
 .nav-icon{
@@ -793,7 +793,7 @@ button{
         1px solid var(--line);
 
     background:
-        rgba(7,7,11,.72);
+        rgba(7,10,11,.72);
 
     backdrop-filter:blur(20px);
 
@@ -885,7 +885,7 @@ button{
     color:#fff;
 
     border-color:
-        rgba(168,85,247,.35);
+        rgba(90,201,242,.35);
 }
 
 
@@ -925,7 +925,7 @@ button{
 
     letter-spacing:2px;
 
-    color:#8b5cf6;
+    color:#60cbf2;
 
     font-weight:900;
 }
@@ -953,7 +953,7 @@ button{
 
     font-size:7px;
 
-    color:#9b8bb0;
+    color:#8ba6b0;
 
     border:
         1px solid var(--line);
@@ -980,7 +980,7 @@ button{
     background:
         linear-gradient(
             135deg,
-            rgba(124,58,237,.12),
+            rgba(58,189,237,.12),
             rgba(236,72,153,.04)
         );
 
@@ -1028,7 +1028,7 @@ button{
     border-radius:15px;
 
     background:
-        rgba(16,14,22,.75);
+        rgba(14,20,22,.75);
 }
 
 .stat:after{
@@ -1044,7 +1044,7 @@ button{
     right:-40px;
     top:-45px;
 
-    background:#8b5cf6;
+    background:#60cbf2;
 
     filter:blur(40px);
 
@@ -1102,7 +1102,7 @@ button{
     border-radius:16px;
 
     background:
-        rgba(14,13,20,.76);
+        rgba(13,18,20,.76);
 
     overflow:hidden;
 }
@@ -1131,7 +1131,7 @@ button{
 }
 
 .panel-link{
-    color:#a78bfa;
+    color:#8fdaf6;
 
     font-size:7px;
 
@@ -1174,7 +1174,7 @@ button{
 .order-id{
     font-family:monospace;
 
-    color:#9b7bd4;
+    color:#7bbcd4;
 
     font-size:7px;
 }
@@ -1274,10 +1274,10 @@ button{
     transform:translateY(-2px);
 
     border-color:
-        rgba(168,85,247,.28);
+        rgba(90,201,242,.28);
 
     background:
-        rgba(139,92,246,.06);
+        rgba(96,203,242,.06);
 }
 
 .quick b{
@@ -1327,7 +1327,7 @@ button{
     border-radius:18px;
 
     background:
-        rgba(14,13,20,.76);
+        rgba(13,18,20,.76);
 }
 
 .avatar-big{
@@ -1342,18 +1342,18 @@ button{
 
     border:
         2px solid
-        rgba(168,85,247,.30);
+        rgba(90,201,242,.30);
 
     background:
         linear-gradient(
             135deg,
-            #6d28d9,
+            #28a9d9,
             #ec4899
         );
 
     box-shadow:
         0 0 45px
-        rgba(139,92,246,.15);
+        rgba(96,203,242,.15);
 }
 
 .profile-card h2{
@@ -1403,13 +1403,13 @@ button{
     border-radius:9px;
 
     background:
-        rgba(139,92,246,.08);
+        rgba(96,203,242,.08);
 
     border:
         1px solid
-        rgba(168,85,247,.16);
+        rgba(90,201,242,.16);
 
-    color:#b9a1ff;
+    color:#a8e2f8;
 
     font-size:7px;
 
@@ -1431,7 +1431,7 @@ button{
     border-radius:18px;
 
     background:
-        rgba(14,13,20,.76);
+        rgba(13,18,20,.76);
 }
 
 .section-title{
@@ -1494,7 +1494,7 @@ button{
 
 .form-field input:focus,
 .form-field select:focus{
-    border-color:#8b5cf6;
+    border-color:#60cbf2;
 }
 
 .save-btn{
@@ -1509,8 +1509,8 @@ button{
     background:
         linear-gradient(
             100deg,
-            #7c3aed,
-            #a855f7,
+            #3abded,
+            #5ac9f2,
             #ec4899
         );
 
@@ -1535,7 +1535,7 @@ button{
     border-radius:17px;
 
     background:
-        rgba(14,13,20,.76);
+        rgba(13,18,20,.76);
 }
 
 .module-grid{
@@ -1607,7 +1607,7 @@ button{
     border-radius:10px;
     background:rgba(255,255,255,.035);
 }
-.product-search-wrap span{color:#a855f7;font-size:18px}
+.product-search-wrap span{color:#5ac9f2;font-size:18px}
 .product-search-wrap input{
     width:100%;
     border:0;
@@ -1627,8 +1627,8 @@ button{
     font-weight:900;
     letter-spacing:.6px;
 }
-.ghost-btn{cursor:pointer;color:#c8b9ff}
-.ghost-btn:hover{border-color:rgba(168,85,247,.55);background:rgba(168,85,247,.08)}
+.ghost-btn{cursor:pointer;color:#beeafa}
+.ghost-btn:hover{border-color:rgba(90,201,242,.55);background:rgba(90,201,242,.08)}
 
 .products-list{display:grid;gap:10px}
 .product-card{
@@ -1639,31 +1639,31 @@ button{
     padding:12px;
     border:1px solid var(--line);
     border-radius:14px;
-    background:linear-gradient(120deg,rgba(255,255,255,.035),rgba(168,85,247,.025));
+    background:linear-gradient(120deg,rgba(255,255,255,.035),rgba(90,201,242,.025));
 }
 .product-thumb{
     width:78px;height:78px;border-radius:11px;overflow:hidden;
-    border:1px solid rgba(168,85,247,.22);
-    background:linear-gradient(135deg,#171221,#09080d);
+    border:1px solid rgba(90,201,242,.22);
+    background:linear-gradient(135deg,#121d21,#080c0d);
     display:flex;align-items:center;justify-content:center;
 }
 .product-thumb img{width:100%;height:100%;object-fit:cover}
-.product-thumb span{font-size:20px;font-weight:900;color:#a855f7}
+.product-thumb span{font-size:20px;font-weight:900;color:#5ac9f2}
 .product-main{min-width:0}
 .product-name{font-size:11px;font-weight:900;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .product-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.product-chip{padding:4px 7px;border-radius:999px;font-size:6px;font-weight:900;letter-spacing:.7px;background:rgba(168,85,247,.09);border:1px solid rgba(168,85,247,.18);color:#c4b5fd}
+.product-chip{padding:4px 7px;border-radius:999px;font-size:6px;font-weight:900;letter-spacing:.7px;background:rgba(90,201,242,.09);border:1px solid rgba(90,201,242,.18);color:#b9e8f9}
 .product-chip.active{color:#86efac;background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2)}
 .product-chip.off{color:#fb7185;background:rgba(244,63,94,.08);border-color:rgba(244,63,94,.2)}
 .product-desc{color:#77707f;font-size:7px;margin-top:6px;line-height:1.5;max-width:680px}
-.product-price{display:flex;gap:8px;margin-top:7px;font-size:7px;color:#aaa1b3}
-.product-price b{color:#e9d5ff}
+.product-price{display:flex;gap:8px;margin-top:7px;font-size:7px;color:#a1aeb3}
+.product-price b{color:#d8f2fc}
 .product-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .product-action{height:34px;padding:0 10px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#fff;font-size:7px;font-weight:900;cursor:pointer}
-.product-action.edit{border-color:rgba(168,85,247,.35);color:#d8b4fe}
+.product-action.edit{border-color:rgba(90,201,242,.35);color:#b9e8f9}
 .product-action.danger{border-color:rgba(244,63,94,.25);color:#fb7185}
-.product-action:hover{background:rgba(168,85,247,.09)}
-.empty-products{padding:45px 20px;text-align:center;border:1px dashed rgba(168,85,247,.2);border-radius:14px;color:#625c69;font-size:8px}
+.product-action:hover{background:rgba(90,201,242,.09)}
+.empty-products{padding:45px 20px;text-align:center;border:1px dashed rgba(90,201,242,.2);border-radius:14px;color:#625c69;font-size:8px}
 
 .modal-backdrop{
     position:fixed;inset:0;z-index:180;display:none;align-items:center;justify-content:center;
@@ -1672,8 +1672,8 @@ button{
 .modal-backdrop.show{display:flex}
 .product-modal{
     width:min(760px,100%);max-height:92vh;overflow:auto;padding:22px;
-    border:1px solid rgba(168,85,247,.25);border-radius:18px;
-    background:linear-gradient(145deg,#100d18,#09080d);
+    border:1px solid rgba(90,201,242,.25);border-radius:18px;
+    background:linear-gradient(145deg,#0d1518,#080c0d);
     box-shadow:0 30px 100px rgba(0,0,0,.7);
 }
 .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
@@ -1685,16 +1685,16 @@ button{
     width:100%;min-height:105px;padding:11px;border-radius:9px;border:1px solid var(--line);
     background:rgba(255,255,255,.035);color:#fff;outline:none;resize:vertical;font-size:9px;font-family:inherit;
 }
-.form-field textarea:focus{border-color:#8b5cf6}
+.form-field textarea:focus{border-color:#60cbf2}
 .form-field input[type=file]{padding:8px 10px;height:auto;font-size:8px}
 .file-help{display:block;margin-top:5px;color:#625c69;font-size:6px}
 .active-toggle{padding-top:2px}
-.switch-line{display:flex;align-items:center;gap:9px;height:43px;color:#b9b0c2;font-size:8px;cursor:pointer}
+.switch-line{display:flex;align-items:center;gap:9px;height:43px;color:#b0bdc2;font-size:8px;cursor:pointer}
 .switch-line input{position:absolute;opacity:0;pointer-events:none}
-.switch-ui{width:42px;height:23px;border-radius:999px;background:#292531;border:1px solid var(--line);position:relative;transition:.2s}
+.switch-ui{width:42px;height:23px;border-radius:999px;background:#252e31;border:1px solid var(--line);position:relative;transition:.2s}
 .switch-ui:after{content:"";position:absolute;top:3px;left:3px;width:15px;height:15px;border-radius:50%;background:#77707f;transition:.2s}
-.switch-line input:checked + .switch-ui{background:rgba(168,85,247,.25);border-color:#a855f7}
-.switch-line input:checked + .switch-ui:after{left:22px;background:#c084fc}
+.switch-line input:checked + .switch-ui{background:rgba(90,201,242,.25);border-color:#5ac9f2}
+.switch-line input:checked + .switch-ui:after{left:22px;background:#8ad9f6}
 .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 
 @media(max-width:760px){
@@ -1712,16 +1712,16 @@ button{
 ========================================================= */
 .review-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .review-tab{height:38px;padding:0 13px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.035);color:#8e8999;font-size:7px;font-weight:900;cursor:pointer}
-.review-tab.active{color:#fff;border-color:rgba(168,85,247,.45);background:linear-gradient(90deg,rgba(124,58,237,.18),rgba(236,72,153,.08))}
+.review-tab.active{color:#fff;border-color:rgba(90,201,242,.45);background:linear-gradient(90deg,rgba(58,189,237,.18),rgba(236,72,153,.08))}
 .review-list{display:grid;gap:10px}
 .review-row{display:grid;grid-template-columns:48px minmax(150px,1fr) minmax(180px,1.7fr) 95px auto;gap:12px;align-items:center;padding:13px 15px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);transition:.2s}
-.review-row:hover{transform:translateY(-2px);border-color:rgba(168,85,247,.24);box-shadow:0 15px 45px rgba(0,0,0,.18)}
-.review-avatar{width:42px;height:42px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#6d28d9,#ec4899);font-size:13px;font-weight:900;border:1px solid rgba(196,181,253,.3)}
+.review-row:hover{transform:translateY(-2px);border-color:rgba(90,201,242,.24);box-shadow:0 15px 45px rgba(0,0,0,.18)}
+.review-avatar{width:42px;height:42px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#28a9d9,#ec4899);font-size:13px;font-weight:900;border:1px solid rgba(185,232,249,.3)}
 .review-avatar img{width:100%;height:100%;object-fit:cover}
-.review-user b{display:block;font-size:9px;font-weight:900}.review-user small{display:block;margin-top:4px;color:#a78bfa;font-size:6px}
-.review-text{color:#aaa1b3;font-size:8px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.review-user b{display:block;font-size:9px;font-weight:900}.review-user small{display:block;margin-top:4px;color:#8fdaf6;font-size:6px}
+.review-text{color:#a1aeb3;font-size:8px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .review-stars{color:#facc15;letter-spacing:1px;font-size:10px;white-space:nowrap}.review-date{color:#625c69;font-size:6px;margin-top:4px}
-.review-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}.review-action{height:32px;padding:0 9px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#fff;font-size:6px;font-weight:900;cursor:pointer}.review-action.approve{color:#86efac;border-color:rgba(52,211,153,.3)}.review-action.reject,.review-action.delete{color:#fb7185;border-color:rgba(251,113,133,.25)}.review-action:hover{transform:translateY(-1px);background:rgba(168,85,247,.08)}
+.review-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}.review-action{height:32px;padding:0 9px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#fff;font-size:6px;font-weight:900;cursor:pointer}.review-action.approve{color:#86efac;border-color:rgba(52,211,153,.3)}.review-action.reject,.review-action.delete{color:#fb7185;border-color:rgba(251,113,133,.25)}.review-action:hover{transform:translateY(-1px);background:rgba(90,201,242,.08)}
 .review-status{display:inline-flex;padding:4px 7px;border-radius:999px;font-size:5px;font-weight:900;letter-spacing:.7px}.review-status.pending{color:#facc15;background:rgba(250,204,21,.08)}.review-status.approved{color:#34d399;background:rgba(52,211,153,.08)}
 @media(max-width:900px){.review-row{grid-template-columns:45px 1fr auto}.review-text{grid-column:2/-1}.review-actions{grid-column:2/-1;justify-content:flex-start}}
 @media(max-width:600px){.review-row{grid-template-columns:42px 1fr}.review-actions{grid-column:1/-1}.review-text{grid-column:1/-1}.review-avatar{width:38px;height:38px}}
@@ -1742,11 +1742,11 @@ button{
 
     border-radius:10px;
 
-    background:#16121f;
+    background:#121b1f;
 
     border:
         1px solid
-        rgba(168,85,247,.25);
+        rgba(90,201,242,.25);
 
     box-shadow:
         0 15px 50px
@@ -1925,7 +1925,7 @@ button{
    ADVANCED ADMIN UI
 ========================================================= */
 :root{
-    --glow:rgba(168,85,247,.28);
+    --glow:rgba(90,201,242,.28);
 }
 
 body:before{
@@ -1955,7 +1955,7 @@ body:before{
     content:"";
     position:absolute;
     inset:-4px;
-    border:1px solid rgba(168,85,247,.2);
+    border:1px solid rgba(90,201,242,.2);
     border-radius:16px;
     animation:ringPulse 2.8s ease-out infinite;
 }
@@ -1992,7 +1992,7 @@ body:before{
     align-items:center;
     gap:8px;
     padding:5px 8px 5px 5px;
-    border:1px solid rgba(168,85,247,.22);
+    border:1px solid rgba(90,201,242,.22);
     border-radius:999px;
     background:rgba(255,255,255,.035);
     cursor:pointer;
@@ -2001,18 +2001,18 @@ body:before{
 .admin-profile-mini:hover{
     transform:translateY(-1px);
     border-color:rgba(236,72,153,.45);
-    box-shadow:0 8px 28px rgba(139,92,246,.13);
+    box-shadow:0 8px 28px rgba(96,203,242,.13);
 }
 .admin-profile-mini img{
     width:30px;height:30px;border-radius:50%;
     object-fit:cover;
-    border:1px solid rgba(196,181,253,.55);
-    background:#171221;
+    border:1px solid rgba(185,232,249,.55);
+    background:#121d21;
 }
 .admin-profile-mini .mini-name{
     max-width:100px;
     overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-    font-size:7px;font-weight:900;color:#eee9f6;
+    font-size:7px;font-weight:900;color:#e9f2f6;
 }
 .admin-profile-mini .mini-role{
     margin-top:2px;
@@ -2032,7 +2032,7 @@ body:before{
 }
 .stat:hover,.quick:hover,.product-card:hover{
     transform:translateY(-3px);
-    border-color:rgba(168,85,247,.25);
+    border-color:rgba(90,201,242,.25);
     box-shadow:0 22px 65px rgba(0,0,0,.22);
 }
 .welcome-card{
@@ -2057,7 +2057,7 @@ body:before{
     content:"";
     position:absolute;left:0;top:0;
     width:100%;height:1px;
-    background:linear-gradient(90deg,transparent,#8b5cf6,#ec4899,transparent);
+    background:linear-gradient(90deg,transparent,#60cbf2,#ec4899,transparent);
     opacity:.35;
 }
 
@@ -2068,7 +2068,7 @@ body:before{
     transition:.22s;
 }
 .order:hover{
-    background:linear-gradient(90deg,rgba(139,92,246,.07),rgba(236,72,153,.025),transparent);
+    background:linear-gradient(90deg,rgba(96,203,242,.07),rgba(236,72,153,.025),transparent);
     transform:translateX(3px);
 }
 .order-new{
@@ -2099,10 +2099,10 @@ body:before{
 .order-detail-modal{
     width:min(720px,100%);
     max-height:90vh;overflow:auto;
-    border:1px solid rgba(168,85,247,.25);
+    border:1px solid rgba(90,201,242,.25);
     border-radius:20px;
     padding:22px;
-    background:linear-gradient(145deg,#100d18,#09080d);
+    background:linear-gradient(145deg,#0d1518,#080c0d);
     box-shadow:0 35px 110px rgba(0,0,0,.75);
     animation:modalIn .28s ease both;
 }
@@ -2122,13 +2122,13 @@ body:before{
     color:#686171;font-size:6px;font-weight:900;letter-spacing:1px;
 }
 .detail-value{
-    color:#f5f1fa;font-size:9px;font-weight:800;margin-top:5px;
+    color:#f1f8fa;font-size:9px;font-weight:800;margin-top:5px;
     word-break:break-word;
 }
 .slip-preview{
     width:100%;max-height:310px;object-fit:contain;
-    border-radius:12px;border:1px solid rgba(168,85,247,.2);
-    background:#05040a;margin-top:8px;
+    border-radius:12px;border:1px solid rgba(90,201,242,.2);
+    background:#04080a;margin-top:8px;
 }
 .detail-actions{
     display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;
@@ -2141,7 +2141,7 @@ body:before{
 }
 .detail-btn.approve{border-color:rgba(52,211,153,.3);color:#86efac}
 .detail-btn.reject{border-color:rgba(251,113,133,.3);color:#fb7185}
-.detail-btn:hover{transform:translateY(-1px);background:rgba(168,85,247,.08)}
+.detail-btn:hover{transform:translateY(-1px);background:rgba(90,201,242,.08)}
 
 .live-refresh{
     display:inline-flex;align-items:center;gap:5px;
@@ -2168,23 +2168,23 @@ body:before{
 ========================================================= */
 .users-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
 .users-search{flex:1;min-width:220px;height:42px;padding:0 13px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);color:#fff;outline:none;font-size:9px}
-.users-search:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,.08)}
+.users-search:focus{border-color:#5ac9f2;box-shadow:0 0 0 3px rgba(90,201,242,.08)}
 .users-count{color:#6f6877;font-size:7px;font-weight:900;letter-spacing:1px}
 .user-row{display:grid;grid-template-columns:52px minmax(140px,1.1fr) minmax(120px,1fr) 100px 80px;gap:12px;align-items:center;padding:12px 17px;border-bottom:1px solid rgba(255,255,255,.055);cursor:pointer;transition:.2s}
-.user-row:hover{background:linear-gradient(90deg,rgba(139,92,246,.08),transparent);transform:translateX(2px)}
-.user-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#6d28d9,#ec4899);color:#fff;font-size:12px;font-weight:900;border:1px solid rgba(196,181,253,.3)}
+.user-row:hover{background:linear-gradient(90deg,rgba(96,203,242,.08),transparent);transform:translateX(2px)}
+.user-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#28a9d9,#ec4899);color:#fff;font-size:12px;font-weight:900;border:1px solid rgba(185,232,249,.3)}
 .user-avatar img{width:100%;height:100%;object-fit:cover}
 .user-main b{font-size:9px;font-weight:900}.user-main small{display:block;margin-top:3px;color:#77707f;font-size:7px}
 .user-bio{color:#6f6877;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.user-rank{color:#c4b5fd;font-size:7px;font-weight:900}.user-points{color:#22d3ee;font-family:Orbitron;font-size:7px;font-weight:900;text-align:right}
+.user-rank{color:#b9e8f9;font-size:7px;font-weight:900}.user-points{color:#22d3ee;font-family:Orbitron;font-size:7px;font-weight:900;text-align:right}
 .customer-modal{position:fixed;inset:0;z-index:190;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(12px)}
 .customer-modal.show{display:flex}
-.customer-modal-box{width:min(650px,100%);max-height:90vh;overflow:auto;padding:23px;border:1px solid rgba(168,85,247,.28);border-radius:20px;background:linear-gradient(145deg,#100d18,#09080d);box-shadow:0 35px 110px rgba(0,0,0,.75);animation:modalIn .28s ease both}
+.customer-modal-box{width:min(650px,100%);max-height:90vh;overflow:auto;padding:23px;border:1px solid rgba(90,201,242,.28);border-radius:20px;background:linear-gradient(145deg,#0d1518,#080c0d);box-shadow:0 35px 110px rgba(0,0,0,.75);animation:modalIn .28s ease both}
 .customer-modal-head{display:flex;align-items:center;justify-content:space-between}
 .customer-profile-head{display:flex;align-items:center;gap:15px;margin-top:18px}
-.customer-big-avatar{width:82px;height:82px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#6d28d9,#ec4899);font-size:25px;font-weight:900;border:2px solid rgba(196,181,253,.35)}
+.customer-big-avatar{width:82px;height:82px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#28a9d9,#ec4899);font-size:25px;font-weight:900;border:2px solid rgba(185,232,249,.35)}
 .customer-big-avatar img{width:100%;height:100%;object-fit:cover}
-.customer-public-name{font-family:Orbitron;font-size:16px;font-weight:900}.customer-public-username{margin-top:4px;color:#c084fc;font-size:8px}.customer-public-rank{margin-top:7px;color:#22d3ee;font-size:7px;font-weight:900}
+.customer-public-name{font-family:Orbitron;font-size:16px;font-weight:900}.customer-public-username{margin-top:4px;color:#8ad9f6;font-size:8px}.customer-public-rank{margin-top:7px;color:#22d3ee;font-size:7px;font-weight:900}
 .customer-public-bio{margin-top:16px;color:#8e8999;font-size:8px;line-height:1.6}
 .customer-socials{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.customer-socials a{color:#ddd;text-decoration:none;padding:7px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.025);font-size:7px;font-weight:800}
 .customer-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.customer-detail{padding:11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025)}.customer-detail label{display:block;color:#625c69;font-size:6px;font-weight:900;letter-spacing:1px}.customer-detail span{display:block;margin-top:5px;color:#eee;font-size:8px;font-weight:800;word-break:break-word}
@@ -2241,7 +2241,7 @@ body:before{
 }
 .customer-action-btn:hover{
     transform:translateY(-1px);
-    background:rgba(168,85,247,.08)
+    background:rgba(90,201,242,.08)
 }
 .analytics-panel{margin-top:16px}
 .analytics-toolbar{
@@ -2283,11 +2283,11 @@ body:before{
     width:min(34px,70%);
     min-height:3px;
     border-radius:7px 7px 2px 2px;
-    background:linear-gradient(180deg,#a855f7,#7c3aed);
-    box-shadow:0 0 18px rgba(168,85,247,.15)
+    background:linear-gradient(180deg,#5ac9f2,#3abded);
+    box-shadow:0 0 18px rgba(90,201,242,.15)
 }
 .analytics-bar-label{color:#625c69;font-size:5px;white-space:nowrap}
-.analytics-bar-value{color:#c4b5fd;font-size:6px;font-weight:900}
+.analytics-bar-value{color:#b9e8f9;font-size:6px;font-weight:900}
 .analytics-list{display:grid;gap:8px}
 .analytics-list-row{
     display:flex;
@@ -2300,26 +2300,81 @@ body:before{
     background:rgba(255,255,255,.02)
 }
 .analytics-list-row span:first-child{
-    color:#aaa1b3;
+    color:#a1aeb3;
     font-size:7px;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap
 }
-.analytics-list-row b{color:#e9d5ff;font-family:Orbitron;font-size:7px}
+.analytics-list-row b{color:#d8f2fc;font-family:Orbitron;font-size:7px}
 @media(max-width:900px){
     .analytics-grid{grid-template-columns:1fr}
 }
 
 .rank-admin-list{display:grid;gap:10px}.rank-admin-row{display:grid;grid-template-columns:minmax(120px,1fr) 100px minmax(160px,1.5fr) 58px;gap:8px;align-items:center;padding:11px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025)}
-.rank-admin-row input{width:100%;height:36px;padding:0 9px;border:1px solid var(--line);border-radius:8px;background:#0a0810;color:#fff;outline:none;font-size:8px}.rank-admin-row input:focus{border-color:#8b5cf6}.rank-save{height:36px;border-radius:8px;background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;font-size:7px;font-weight:900;cursor:pointer}.rank-save:disabled{opacity:.55}
+.rank-admin-row input{width:100%;height:36px;padding:0 9px;border:1px solid var(--line);border-radius:8px;background:#080e10;color:#fff;outline:none;font-size:8px}.rank-admin-row input:focus{border-color:#60cbf2}.rank-save{height:36px;border-radius:8px;background:linear-gradient(90deg,#3abded,#ec4899);color:#fff;font-size:7px;font-weight:900;cursor:pointer}.rank-save:disabled{opacity:.55}
 @media(max-width:850px){.user-row{grid-template-columns:48px 1fr 85px 65px}.user-bio{display:none}.user-points{text-align:left}}
 @media(max-width:700px){.customer-detail-grid{grid-template-columns:1fr}.rank-admin-row{grid-template-columns:1fr 90px}.rank-admin-row input:nth-child(3){grid-column:1/-1}.rank-admin-row button{grid-column:2}}
 
-</style>
-</head>
 
-<body>
+/* =========================================================
+   PURPLE / BLUE ADMIN REBUILD - readability + ambient effects
+========================================================= */
+:root{--admin-font:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+body{font-family:var(--admin-font)!important;font-size:14px!important;background:#071317!important}
+body:after{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 15% 20%,rgba(58,189,237,.20),transparent 36%),radial-gradient(ellipse at 82% 16%,rgba(37,99,235,.17),transparent 34%),radial-gradient(ellipse at 65% 85%,rgba(90,201,242,.13),transparent 38%);animation:adminAurora 18s ease-in-out infinite alternate}
+@keyframes adminAurora{to{transform:translate3d(2%, -1%,0) scale(1.05);filter:hue-rotate(18deg)}}
+#app,.sidebar,.main,.topbar,.content{position:relative;z-index:1}
+.sidebar{background:linear-gradient(180deg,rgba(15,33,39,.98),rgba(9,22,27,.98))!important;border-right:1px solid rgba(96,203,242,.24)!important;backdrop-filter:blur(18px)}
+.topbar{background:rgba(12,28,34,.86)!important;border-bottom:1px solid rgba(129,140,248,.18)!important;backdrop-filter:blur(20px)}
+.panel,.module-card,.welcome-card,.stat,.profile-card,.profile-form,.product-card,.module-tile{background:linear-gradient(145deg,rgba(24,49,58,.88),rgba(13,15,37,.92))!important;border-color:rgba(129,140,248,.20)!important;backdrop-filter:blur(14px)}
+.page-title{font-size:clamp(27px,3vw,36px)!important;letter-spacing:-.7px!important}
+.page-desc{font-size:14px!important;line-height:1.6!important;color:#aaaed0!important}
+.nav-item{font-size:14px!important;padding:13px 15px!important;border-radius:12px!important}
+.nav-label{font-size:10px!important;letter-spacing:1.5px!important}
+.brand strong{font-size:15px!important}.brand small{font-size:10px!important}
+.panel-title,.module-tile b{font-size:14px!important}
+.panel-head{padding:17px 20px!important}
+.stat-value{font-size:27px!important}.stat-label,.stat small{font-size:12px!important}
+input,select,textarea,.users-search{font-size:14px!important;min-height:42px}
+button{font-family:inherit}
+.top-btn,.command,.live-refresh{font-size:11px!important}
+.order-id,.order-name,.order-meta,.order-price,.file-help,.form-field label,.field label{font-size:12px!important}
+.order{font-size:13px!important}
+.order-badge,.status,.detail-label,.detail-value{font-size:11px!important}
+.user-main b{font-size:14px!important}.user-main small,.user-bio,.user-rank,.user-points,.users-count{font-size:12px!important}
+.rank-admin-row input{font-size:13px!important}
+.brand-mark{background:linear-gradient(135deg,#3abded,#2563eb)!important;box-shadow:0 0 32px rgba(99,203,241,.35)}
+.nav-item.active{background:linear-gradient(100deg,rgba(58,189,237,.27),rgba(37,99,235,.16))!important;border:1px solid rgba(96,203,242,.28)!important;color:#fff!important}
+.nav-item:hover{background:rgba(99,203,241,.12)!important}
+button:not(.auth-close):hover{filter:brightness(1.1)}
+.admin-role-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border:1px solid rgba(129,140,248,.25);border-radius:999px;background:rgba(99,203,241,.10);color:#c7d2fe;font-size:11px;font-weight:800}
+.super-admin-panel{margin-top:16px;padding:20px;border:1px solid rgba(96,203,242,.28);border-radius:16px;background:linear-gradient(145deg,rgba(29,68,83,.55),rgba(15,20,51,.72));box-shadow:0 18px 55px rgba(0,0,0,.2)}
+.super-admin-panel h3{margin:0 0 8px;font-size:18px;color:#d8f2fc}.super-admin-panel p{margin:0 0 16px;color:#a5add2;font-size:13px;line-height:1.55}
+.super-admin-form{display:grid;grid-template-columns:minmax(180px,1fr) minmax(140px,.7fr) auto;gap:10px;align-items:end}
+.super-admin-form label{display:block;color:#a5add2;font-size:11px;font-weight:800;margin-bottom:6px}
+.super-admin-form input,.super-admin-form select{width:100%;height:44px;border-radius:10px;border:1px solid rgba(129,140,248,.25);background:#0b1028;color:white;padding:0 12px}
+.super-admin-form button,.super-action{height:44px;padding:0 16px;border:0;border-radius:10px;color:white;font-weight:800;background:linear-gradient(100deg,#3abded,#2563eb);cursor:pointer}
+.staff-admin-row{display:grid;grid-template-columns:minmax(160px,1fr) minmax(100px,.5fr) auto;gap:12px;align-items:center;padding:14px 18px;border-bottom:1px solid rgba(129,140,248,.12)}
+.staff-admin-row b{font-size:14px}.staff-admin-row small{display:block;color:#969cbe;font-size:12px;margin-top:4px}.staff-admin-row .role-label{color:#b9e8f9;font-size:12px;font-weight:800}
+.staff-remove{border:1px solid rgba(248,113,113,.28);background:rgba(248,113,113,.09);color:#fda4af;padding:9px 12px;border-radius:9px;font-weight:800;cursor:pointer}
+.super-only-note{padding:13px 15px;border:1px solid rgba(129,140,248,.18);border-radius:12px;color:#a5add2;background:rgba(99,203,241,.06);font-size:12px}
+@media(max-width:700px){.super-admin-form{grid-template-columns:1fr}.staff-admin-row{grid-template-columns:1fr auto}.staff-admin-row .role-label{grid-column:1}.staff-admin-row button{grid-column:2;grid-row:1/3}.page-title{font-size:27px!important}}
+
+</style>
+<link rel="stylesheet" href="inside.css"><link rel="stylesheet" href="studio.css"><link rel="stylesheet" href="fighters.css"><style>
+.desk-hero h2,.desk-actions{position:relative;z-index:2}
+.desk-actions,.queue-tools{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.desk-actions{margin-top:18px}
+.desk-actions button,.queue-tools input,.queue-tools select{font:inherit;font-size:14px;color:#e6f7ff;background:#10212d;border:1px solid #486375;border-radius:9px;padding:11px 14px}
+.desk-actions button{cursor:pointer;font-weight:700}
+.desk-actions button:first-child{background:#a4ebff;color:#09212c}
+.queue-tools{padding:16px}.queue-tools label{display:grid;gap:6px;font-size:13px;color:#b9d0da}
+.queue-tools input,.queue-tools select{min-height:42px;max-width:100%}
+@media(max-width:600px){.queue-tools label,.desk-actions{width:100%}.desk-hero .v4-cast{opacity:.25}}
+</style><link rel="stylesheet" href="admin-studio.css"></head>
+
+<body data-studio="admin" data-cast="both">
 
 
 <!-- =========================================================
@@ -2328,37 +2383,24 @@ body:before{
 
 <section id="introScreen">
 
-    <video
-        class="intro-video"
-        id="introVideo"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-    >
-        <source
-            src="./loginpage.mp4"
-            type="video/mp4"
-        >
-    </video>
+    
 
     <div class="intro-shade"></div>
 
     <div class="intro-glow"></div>
 
-    <div class="intro-content">
+    <span class="v4-cast" aria-hidden="true"><img src="art/morse.webp" data-fighter="morse" alt=""><img src="art/kairos.webp" data-fighter="kairos" alt=""></span><div class="intro-content">
 
         <div class="intro-mini">
-            PRIVATE ADMIN SYSTEM
+            HIM4 × NINJ4 EDITING STORE
         </div>
 
         <div class="intro-title">
-            <span>HIM4 × NINJ4</span>
+            <span>STAFF STUDIO</span>
         </div>
 
         <div class="intro-sub">
-            Editing Store • Control Center
+            Manage the store
         </div>
 
         <button
@@ -2389,7 +2431,7 @@ body:before{
 
     <div class="auth-orb b"></div>
 
-    <div class="auth-card">
+    <span class="v4-cast" aria-hidden="true"><img src="art/orion.webp" data-fighter="orion" alt=""><img src="art/kairos.webp" data-fighter="kairos" alt=""></span><div class="auth-card">
 
         <button
             class="auth-close"
@@ -2407,7 +2449,7 @@ body:before{
         </div>
 
         <div class="auth-sub">
-            SECURE CONTROL CENTER
+            HIM4 × NINJ4 STAFF STUDIO
         </div>
 
         <div class="auth-line"></div>
@@ -2490,8 +2532,8 @@ body:before{
 
         <div class="brand">
 
-            <div class="brand-mark">
-                HN
+            <div class="brand-mark" style="overflow:hidden;display:grid;place-items:center">
+                <img src="HIM4 x NINJ4 Neon Edit Store(2).png" alt="HIM4 × NINJ4" onerror="this.style.display='none';this.parentElement.textContent='HN'" style="width:100%;height:100%;object-fit:contain;border-radius:inherit">
             </div>
 
             <div>
@@ -2705,11 +2747,12 @@ body:before{
 
                 <button
                     class="top-btn website"
-                    onclick="window.open('../index.html','_blank')"
+                    onclick="window.open('index.html','_blank')"
                 >
                     OPEN WEBSITE
                 </button>
 
+                <span class="admin-role-chip" id="adminRoleBadge">ADMIN</span>
                 <span class="live-refresh"><i></i> LIVE</span>
 
                 <button
@@ -2746,7 +2789,7 @@ body:before{
                 id="page-dashboard"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/morse.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -2765,26 +2808,16 @@ body:before{
                     </div>
 
 
-                    <div class="command">
-                        root@hn:~$ system_status
                     </div>
-
+                <div class="welcome-card desk-hero">
+                    <span class="v4-cast" aria-hidden="true"><img src="art/orion.webp" alt=""><img src="art/kairos.webp" alt=""></span>
+                    <h2>Store operations</h2>
+                    <div class="desk-actions">
+                        <button type="button" onclick="openPendingOrders()">Review pending orders</button>
+                        <button type="button" onclick="openPage('products')">Manage products</button>
+                        <button type="button" onclick="openPage('pricing')">Edit pricing</button>
+                    </div>
                 </div>
-
-
-                <div class="welcome-card">
-
-                    <h2>
-                        Everything is under control.
-                    </h2>
-
-                    <p>
-                        Products, prices, uploads, customer orders and staff management are organized here.
-                    </p>
-
-                </div>
-
-
                 <!-- STATS -->
 
                 <div class="stats">
@@ -3109,7 +3142,7 @@ body:before{
                 id="page-products"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/nero.webp" alt="" aria-hidden="true">
                     <div>
                         <div class="eyebrow">STORE MANAGEMENT</div>
                         <h1 class="page-title">Products</h1>
@@ -3307,7 +3340,7 @@ body:before{
                 id="page-pricing"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/sonia.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -3421,7 +3454,7 @@ body:before{
                 id="page-uploads"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/ignis.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -3518,7 +3551,7 @@ body:before{
                 id="page-orders"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/ryden.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -3561,6 +3594,10 @@ body:before{
                     </div>
 
 
+                    <div class="queue-tools">
+                        <label>Search latest 100 orders<input id="queueSearch" type="search" placeholder="Order ID, customer or product"></label>
+                        <label>Status<select id="queueStatus"><option value="">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select></label>
+                    </div>
                     <div
                         class="orders"
                         id="fullOrders"
@@ -3592,7 +3629,7 @@ body:before{
                 id="page-customers"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/kassie.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -3702,7 +3739,7 @@ body:before{
                 id="page-staff"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/suzy.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -3758,6 +3795,18 @@ body:before{
 
                 </div>
 
+                <div class="super-admin-panel" id="superAdminManager" style="display:none">
+                    <h3>Super Admin · Team Access</h3>
+                    <p>Only the Super Admin can grant or revoke admin access. Enter the UUID of an existing registered account. New accounts must first register through the website.</p>
+                    <div class="super-admin-form">
+                        <div><label for="staffUserId">EXISTING USER UUID</label><input id="staffUserId" placeholder="Supabase Auth user UUID"></div>
+                        <div><label for="staffRoleSelect">ACCESS LEVEL</label><select id="staffRoleSelect"><option value="Admin">Normal Admin</option><option value="Super Admin">Super Admin</option></select></div>
+                        <button type="button" id="grantStaffBtn">GRANT ACCESS</button>
+                    </div>
+                    <div class="super-only-note" style="margin-top:12px">Normal Admins can manage store products only. Pricing, ranks, database controls, website details and staff permissions are reserved for Super Admin.</div>
+                    <div id="staffAdminList" style="margin-top:14px"></div>
+                </div>
+
             </section>
 
 
@@ -3770,7 +3819,7 @@ body:before{
                 id="page-profile"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/kairos.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -3922,7 +3971,7 @@ body:before{
 
             <section class="page" id="page-reviews">
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/ray.webp" alt="" aria-hidden="true">
                     <div>
                         <div class="eyebrow">CUSTOMER FEEDBACK</div>
                         <h1 class="page-title">Reviews</h1>
@@ -3963,7 +4012,7 @@ body:before{
                 id="page-rank-settings"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/oscar.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -4056,7 +4105,7 @@ body:before{
                 id="page-settings"
             >
 
-                <div class="page-head">
+                <div class="page-head"><img class="section-fighter" src="art/orion.webp" alt="" aria-hidden="true">
 
                     <div>
 
@@ -4315,7 +4364,34 @@ const supabaseClient =
 
 let currentUser = null;
 let currentProfile = null;
-let ordersCache = [];
+let isSuperAdmin = false;
+let isAuthorizedAdmin = false;
+let recentOrders = [];
+let queueOrders = [];
+let queueReady = false;
+let queueRequest = 0;
+
+function openPendingOrders(){
+    document.getElementById('queueSearch').value = '';
+    document.getElementById('queueStatus').value = 'pending';
+    openPage('orders');
+}
+
+function renderOrderQueue(){
+    if(!queueReady) return;
+    const query = document.getElementById('queueSearch').value.trim().toLowerCase();
+    const status = document.getElementById('queueStatus').value;
+    const visible = queueOrders.filter(order => {
+        if(status && (order.status || 'pending').toLowerCase() !== status) return false;
+        return [order.order_id, '#' + order.id, order.customer_name, order.products?.name, order.package_name]
+            .some(value => String(value ?? '').toLowerCase().includes(query));
+    });
+    document.getElementById('fullOrders').innerHTML = visible.length
+        ? visible.map(order => orderRow(order, order === queueOrders[0])).join('')
+        : '<p style="padding:20px">No orders match this view.</p>';
+}
+document.getElementById('queueSearch').addEventListener('input', renderOrderQueue);
+document.getElementById('queueStatus').addEventListener('change', renderOrderQueue);
 let activeOrderDetail = null;
 let orderRealtimeChannel = null;
 
@@ -4589,30 +4665,86 @@ async function checkSession(){
    SHOW APP
 ========================================================= */
 
-function showApp(){
-
-    currentUser = null;
-
-    introScreen.style.display =
-        'none';
-
-    authScreen.style.display =
-        'none';
-
-    app.style.display =
-        'block';
-
-    loadDashboard();
-    startOrderRealtime();
-
+async function showApp(){
+    const {data:{user},error} = await supabaseClient.auth.getUser();
+    if(error || !user) return;
+    currentUser = user;
+    const staff = await supabaseClient.from('staff_profiles').select('*').eq('user_id',user.id).maybeSingle();
+    if(staff.error || !staff.data || staff.data.is_active === false){
+        await supabaseClient.auth.signOut();
+        document.getElementById('loginError').textContent='This account does not have active admin access.';
+        app.style.display='none'; introScreen.style.display='none'; authScreen.style.display='flex'; return;
+    }
+    currentProfile = staff.data;
+    const role = String(staff.data.role || '').trim().toLowerCase();
+    isSuperAdmin = ['super admin','super_admin','owner'].includes(role);
+    isAuthorizedAdmin = isSuperAdmin || ['admin','administrator'].includes(role);
+    if(!isAuthorizedAdmin){ await supabaseClient.auth.signOut(); return; }
+    introScreen.style.display='none'; authScreen.style.display='none'; app.style.display='block';
+    applyAdminPermissions();
+    if(isSuperAdmin){ await loadDashboard(); startOrderRealtime(); }
+    else { openPage('products'); await loadProductsFull(); }
 }
 
+
+/* =========================================================
+   ROLE CONTROL - UI ONLY; enforce the same rules with Supabase RLS
+========================================================= */
+function applyAdminPermissions(){
+    const restrictedPages = ['dashboard','pricing','uploads','orders','customers','reviews','staff','profile','settings','rank-settings'];
+    document.querySelectorAll('.nav-item[data-page]').forEach(btn=>{
+        const page=btn.dataset.page;
+        if(!isSuperAdmin && restrictedPages.includes(page)) btn.style.display='none';
+        else btn.style.display='flex';
+    });
+    const staffPanel=document.getElementById('superAdminManager');
+    if(staffPanel) staffPanel.style.display=isSuperAdmin?'block':'none';
+    const roleEl=document.getElementById('topProfileRole');
+    if(roleEl) roleEl.textContent=isSuperAdmin?'SUPER ADMIN':'ADMIN';
+    const roleBadge=document.getElementById('adminRoleBadge');
+    if(roleBadge) roleBadge.textContent=isSuperAdmin?'SUPER ADMIN':'ADMIN';
+}
+
+async function loadStaffAdminList(){
+    if(!isSuperAdmin) return;
+    const box=document.getElementById('staffAdminList'); if(!box) return;
+    box.innerHTML='<div class="super-only-note">Loading admin accounts…</div>';
+    const {data,error}=await supabaseClient.from('staff_profiles').select('id,user_id,full_name,role,is_active,created_at').order('created_at',{ascending:false}).limit(300);
+    if(error){box.innerHTML='<div class="super-only-note">Unable to load staff list: '+esc(error.message)+'</div>';return;}
+    if(!data?.length){box.innerHTML='<div class="super-only-note">No admin accounts found.</div>';return;}
+    box.innerHTML=data.map(m=>`<div class="staff-admin-row"><div><b>${esc(m.full_name||'Admin')}</b><small>${esc(m.user_id||'')}</small></div><div class="role-label">${esc(m.role||'Admin')} · ${m.is_active===false?'DISABLED':'ACTIVE'}</div>${m.user_id===currentUser?.id?'<span class="role-label">YOU</span>':`<button class="staff-remove" onclick="revokeStaffAccess('${String(m.user_id).replace(/[^a-f0-9-]/gi,'')}')">REMOVE ACCESS</button>`}</div>`).join('');
+}
+
+async function grantStaffAccess(){
+    if(!isSuperAdmin){toast('Super Admin permission required');return;}
+    const userId=document.getElementById('staffUserId').value.trim();
+    const role=document.getElementById('staffRoleSelect').value;
+    if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(userId)){toast('Enter a valid existing user UUID');return;}
+    if(userId===currentUser?.id && role!=='Super Admin'){toast('You cannot remove your own Super Admin role');return;}
+    const {error}=await supabaseClient.from('staff_profiles').upsert({user_id:userId,role,is_active:true},{onConflict:'user_id'});
+    if(error){toast('Could not grant access: '+error.message);return;}
+    document.getElementById('staffUserId').value='';toast('Admin access updated');loadStaffAdminList();loadStaffFull();
+}
+
+async function revokeStaffAccess(userId){
+    if(!isSuperAdmin){toast('Super Admin permission required');return;}
+    if(!userId || userId===currentUser?.id)return;
+    if(!confirm('Remove this account’s admin access?'))return;
+    const {error}=await supabaseClient.from('staff_profiles').delete().eq('user_id',userId);
+    if(error){toast('Could not remove access: '+error.message);return;}
+    toast('Admin access removed');loadStaffAdminList();loadStaffFull();
+}
+window.revokeStaffAccess=revokeStaffAccess;
+document.getElementById('grantStaffBtn')?.addEventListener('click',grantStaffAccess);
 
 /* =========================================================
    PAGE NAVIGATION
 ========================================================= */
 
 function openPage(page){
+    if(!isSuperAdmin && page!=='products'){
+        toast('This section is available to Super Admin only'); return;
+    }
 
     document
     .querySelectorAll(
@@ -5754,7 +5886,7 @@ async function loadRecentOrders(){
     const box = document.getElementById('recentOrders');
     try{
         const data = await fetchOrders(6);
-        ordersCache = data;
+        recentOrders = data;
         box.innerHTML = data.length
             ? data.map((o,i)=>orderRow(o,i===0)).join('')
             : `<div style="padding:25px;text-align:center;color:#625c69;font-size:8px">No orders yet.</div>`;
@@ -5767,16 +5899,19 @@ async function loadRecentOrders(){
 }
 
 async function loadOrdersFull(){
+    const request = ++queueRequest;
+    queueReady = false;
     const box = document.getElementById('fullOrders');
     box.innerHTML = `<div style="padding:25px;text-align:center;color:#625c69;font-size:8px">Loading orders...</div>`;
 
     try{
         const data = await fetchOrders(100);
-        ordersCache = data;
-        box.innerHTML = data.length
-            ? data.map((o,i)=>orderRow(o,i===0)).join('')
-            : `<div style="padding:25px;text-align:center;color:#625c69;font-size:8px">No orders found.</div>`;
+        if(request !== queueRequest) return;
+        queueOrders = data;
+        queueReady = true;
+        renderOrderQueue();
     }catch(error){
+        if(request !== queueRequest) return;
         console.error(error);
         box.innerHTML = `<div style="padding:25px;text-align:center;color:#fb7185;font-size:8px">
             UNABLE TO LOAD ORDERS<br><small>${esc(error.message || '')}</small>
@@ -5811,7 +5946,7 @@ function orderRow(order,isNewest=false){
 }
 
 function openOrderDetail(id){
-    const order = ordersCache.find(x => Number(x.id) === Number(id));
+    const order = (document.getElementById('page-orders').classList.contains('active') ? queueOrders : recentOrders).find(x => Number(x.id) === Number(id));
     if(!order) return;
 
     activeOrderDetail = order;
@@ -5923,6 +6058,8 @@ document.getElementById('topProfileBtn').addEventListener('click',()=>openPage('
 ========================================================= */
 
 async function loadStaffFull(){
+    if(!isSuperAdmin){toast('Super Admin permission required');return;}
+    loadStaffAdminList();
 
     const box =
         document
@@ -7637,5 +7774,5 @@ checkSession();
 
 </script>
 
-</body>
+<script src="studio.js" defer></script></body>
 </html>

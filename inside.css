@@ -1,0 +1,12 @@
+@font-face{font-family:StoreDisplay;src:url(art/display.ttf) format('truetype');font-weight:700 900;font-display:swap}
+:root{--p:#23caff;--p2:#0c92c6;--b:#67e3ff;--bg:#060b12;--accent:#49ddff;--cyan:#49ddff}
+body{background-color:#060b12;color:#edfaff}
+.store-nav,.topbar{background:#050c14f5!important;border-bottom:1px solid #254451!important}
+.store-mark{font:italic 900 2rem StoreDisplay,Impact,sans-serif;letter-spacing:-.1em;color:#e5fbff}.store-mark i{color:#16cfff}
+.store-menu a,.eyebrow,.command,.nav-actions .login-btn{font-family:StoreDisplay,Impact,sans-serif;letter-spacing:.06em}
+h1,h2,.page-title,.hero-title,.section-title,.section-heading-new h2{font-family:StoreDisplay,Impact,sans-serif;letter-spacing:.025em}
+body .ff-bg,body .ambient{background:linear-gradient(180deg,#04141bc9,#050a11f7 72%),url(art/city1.webp) center top/cover fixed}
+.edit-hero,.hero:not(#home){background-image:linear-gradient(90deg,#04111aef,#06101cb5),url(art/city0.webp);background-size:cover;background-position:center}
+.modal-card,.login-guard-card,.resource-card,.select-panel,.panel,.contact-card,.store-section .resource-grid>a{border-color:#264957;background-color:#091720}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #67e3ff;outline-offset:3px}
+@media(max-width:700px){.store-menu{max-width:100%;overflow-x:auto}.modal-card{max-width:96vw}}

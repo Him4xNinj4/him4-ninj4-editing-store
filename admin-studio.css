@@ -1,0 +1,25 @@
+/* The store's condensed type, skyline and fighter roster carry into the staff workspace. */
+body[data-studio=admin] #introScreen{align-items:center;padding:clamp(24px,7vw,110px)}
+body[data-studio=admin] .intro-content{width:min(700px,70%);text-align:left}
+body[data-studio=admin] .intro-title span{color:#83eeff!important;text-shadow:1px 2px #30bad7,3px 5px #1185ab,5px 8px #054761}
+body[data-studio=admin] .intro-mini,.intro-sub{font:800 16px/1.35 var(--v4-font);letter-spacing:.12em;color:#d3f6ff}
+body[data-studio=admin] :is(.enter-btn,.auth-submit){border-radius:4px;background:#72e6ff;color:#061722;font:900 18px var(--v4-font)}
+body[data-studio=admin] .auth-card{background:#071621f5;border:1px solid #397c98;border-top:4px solid #61deff;border-radius:8px;padding:32px}
+.auth-card .field label{font-size:11px;color:#bed5df}
+body[data-studio=admin] .auth-mark{border-radius:5px;background:#0b3447;color:#7feaff;font:italic 900 28px var(--v4-font)}
+body[data-studio=admin] .sidebar{background:linear-gradient(170deg,#0a202c,#061019 55%)!important}
+body[data-studio=admin] .nav-item{border-radius:5px;font-size:14px}
+body[data-studio=admin] .nav-item.active{box-shadow:inset 3px 0 #63e8ff}
+body[data-studio=admin] .nav-label{letter-spacing:.14em;color:#93b9c9}
+body[data-studio=admin] .page-head{position:relative;isolation:isolate;overflow:hidden;border:1px solid #254d62;border-radius:8px;min-height:140px;padding:24px clamp(18px,3vw,44px);background:linear-gradient(90deg,#05131cf5 12%,#072237ce 60%,#04364a44),url(art/city1.webp) center 50%/cover}
+.page-head .section-fighter{position:absolute;right:2%;top:-12%;height:290%;z-index:-1;pointer-events:none;filter:drop-shadow(0 0 6px #4fdbfd77)}
+body[data-studio=admin] .page-title{font:900 clamp(2.4rem,5vw,4.3rem)/1 var(--v4-font);text-transform:uppercase;color:#a7efff;text-shadow:2px 3px #125a78}
+body[data-studio=admin] .page-desc{max-width:76%;font-size:14px;color:#d3e7ef}
+body[data-studio=admin] .desk-hero{display:grid;align-content:center;min-height:185px;border-radius:8px}
+body[data-studio=admin] .desk-hero h2{font:900 clamp(2rem,4vw,3rem)/1 var(--v4-font);text-transform:uppercase}
+body[data-studio=admin] .stat{border-top:2px solid #449fba!important;border-radius:6px}
+body[data-studio=admin] .stat-value{font:900 clamp(2.1rem,4vw,3.4rem) var(--v4-font)}
+body[data-studio=admin] .panel{border-radius:8px}
+body[data-studio=admin] .panel-title{font:900 19px var(--v4-font);letter-spacing:.05em}
+@media(prefers-reduced-motion:no-preference){.page.active .section-fighter{animation:staff-arrive .45s ease-out both}@keyframes staff-arrive{from{opacity:0;translate:22px 8px}to{opacity:1;translate:0}}}
+@media(max-width:700px){body[data-studio=admin] .intro-content{width:100%}.page-head .section-fighter{right:-8%;opacity:.45}body[data-studio=admin] .desk-hero{padding:20px}.desk-actions button{flex:1 1 135px}.page-head>div{z-index:1}}
